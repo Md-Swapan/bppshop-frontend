@@ -1,0 +1,113 @@
+.product-card {
+  height: auto;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.product-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.product-card-body {
+  height: 100%;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.product-card-body img {
+  height: 200px;
+}
+
+.product-card-body-content {
+  height: 30%;
+  text-align: center;
+}
+.product-card-body-content-unit-price{
+  text-align: center;
+}
+.quickView_AddToCart_overlay {
+  position: absolute;
+  background: #000000be;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  transition: all 0.3s;
+}
+.product-card-body:hover .quickView_AddToCart_overlay {
+  display: block;
+}
+.overlayAddToCartBtn {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 46px;
+}
+.overlayAddToCartBtn img {
+  height: 133px;
+}
+.overlayAddToCartBtn i {
+  font-size: 35px;
+}
+.quickView_AddToCart_overlay button {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 8px 0px;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  background: gainsboro;
+  color: #666666;
+  border-bottom: 1px solid #b9b9b9;
+  margin-top: 66px;
+  font-family: "DM Sans", sans-serif;
+}
+.quickView_AddToCart_overlay button:hover {
+  color: #ef8341;
+}
+.quickView_AddToCart_overlay button i {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.product-card-footer {
+  height: 20%;
+  font-size: 14px;
+}
+.product-card-footer button {
+  border: none;
+  outline: none;
+  background: #ef8341;
+  color: #ffffff;
+  padding: 6px 20px;
+  border-radius: 5px;
+  transition: all 0.3s;
+  font-family: "DM Sans", sans-serif;
+}
+.product-card-footer button:hover {
+  background: #7e7e7e;
+}
+.product-card-footer button i {
+  font-size: 17px;
+}
+.ReactModal__Overlay--after-open {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(58, 58, 58, 0.664) !important;
+}
+
+.modalCloseBtn {
+  cursor: pointer;
+  color: #474747;
+  font-weight: 900;
+  font-size: 20px;
+  display: flex;
+  justify-content: end;
+}

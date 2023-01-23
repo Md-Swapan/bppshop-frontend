@@ -1,0 +1,132 @@
+.modal-container {
+  width: 1000px;
+  font-family: "DM Sans", sans-serif;
+  color: #303030;
+}
+.imageView {
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.imageView img {
+  width: 100%;
+}
+.productName_wishlist,
+.pc-size-color,
+.price_Stock_Code,
+.quantity-content {
+  border: .3px solid gainsboro;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.productName_wishlist span i {
+  color: #f82828;
+  font-size: 24px;
+  cursor: pointer;
+}
+.prices {
+  color: #ef8341;
+  font-weight: 700;
+}
+.price_Stock_Code p strong {
+  color: rgb(0, 165, 0);
+  font-size: 17px;
+}
+.price_Stock_Code p span {
+  margin-left: 40px;
+}
+
+.size1{
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 5px;
+  background: rgb(231, 231, 231);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 3px;
+}
+
+.color h5, .size h5{
+  font-size: 17px;
+ margin-top: 8px;
+ margin-right: 10px;
+}
+.color1{
+  width: 40px;
+  height: 40px;
+  border: .5px solid gainsboro;
+  border-radius: 5px;
+  background: rgb(53, 53, 53);
+}
+.color2{
+  width: 40px;
+  height: 40px;
+  border: .5px solid gainsboro;
+  border-radius: 5px;
+  background: rgb(207, 127, 8);
+  margin-left: 6px;
+}
+.quantity {
+  width: 200px;
+  border: 0.5px solid gainsboro;
+  /* border-radius: 30px; */
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 23px;
+  margin-left: 20px;
+}
+.plus,
+.minus {
+  cursor: pointer;
+  font-size: 24px;
+  background: gainsboro;
+  padding: 0px 15px;
+  color: #000000;
+}
+.plus:hover,
+.minus:hover {
+  color: #ef8341;
+}
+
+
+.img-carousel-item img{
+  margin: 10px 7px 0px 0px;
+  border: .2px solid gainsboro;
+}
+
+.buyNowBtn_addToCartBtn_container button{
+  width: 140px;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-align: center;
+  background: rgb(70, 70, 70);
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  margin: 20px 20px 0px 0px;
+}
+.buyNowBtn_addToCartBtn_container button:last-child{
+  background: #ef8341;
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  margin: 20px 20px 0px 0px;
+}
+.buyNowBtn_addToCartBtn_container button:first-child:hover{
+  background: rgb(100, 100, 100);
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  margin: 20px 20px 0px 0px;
+}
+.buyNowBtn_addToCartBtn_container button:last-child:hover{
+  background: #c25715;
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  margin: 20px 20px 0px 0px;
+}

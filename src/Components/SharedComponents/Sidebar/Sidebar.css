@@ -1,0 +1,112 @@
+#sidebarMenu {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin-top: 60px;
+  background: #f2f2f2;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transform: translateX(-300px);
+  transition: transform 250ms ease-in-out;
+}
+
+#openSidebarMenu {
+  display: none;
+}
+
+.sidebarIconToggle {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  z-index: 20;
+  top: 20px;
+  left: 30px;
+  cursor: pointer;
+}
+
+.spinner {
+  height: 2px;
+  background: #fff;
+  transition: all 0.3s;
+}
+
+.middle,
+.bottom {
+  margin-top: 5px;
+}
+
+#openSidebarMenu:checked ~ .sidebarIconToggle > .middle {
+  opacity: 0;
+}
+
+#openSidebarMenu:checked ~ .sidebarIconToggle > .top {
+  transform: rotate(135deg);
+  margin-top: 8px;
+}
+
+#openSidebarMenu:checked ~ .sidebarIconToggle > .bottom {
+  transform: rotate(-135deg);
+  margin-top: -9px;
+}
+
+#openSidebarMenu:checked ~ #sidebarMenu {
+  transform: translateX(0px);
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.homeIcon {
+  justify-content: center !important;
+}
+
+.homeIcon:hover a {
+  margin-left: 0px !important;
+}
+.homeIcon i {
+  text-align: center;
+  border-radius: 50px ;
+  padding: 5px 9px ;
+  color: #fd7e14;
+  background: #fff;
+  font-size: 22px;
+}
+.menu li {
+  padding: 7px 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(224, 224, 224);
+
+}
+.menu li a {
+  color: rgb(65, 65, 65);
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  transition: all 0.3s;
+}
+.menu li:hover a {
+  margin-left: 5px;
+}
+.menu li img {
+  width: 35px;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 5px;
+  background: #fff;
+}
+.menu li span {
+  font-size: 15px;
+  margin: 7px 2px 0px 0px !important;
+}
+
+
+
+.sidebar-Icon {
+  border-radius: 2px;
+}

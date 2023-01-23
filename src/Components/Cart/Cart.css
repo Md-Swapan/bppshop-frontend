@@ -1,0 +1,23 @@
+.cart {
+  position: fixed;
+  bottom: 420px;
+  margin-left: 94.5%;
+  width: 100px;
+  cursor: pointer;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  border: 1px solid gainsboro;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.cart i{
+  font-size: 25px;
+  color: #ef8341;
+}
+
+.cartDetailsView-container{
+  display: none;
+}

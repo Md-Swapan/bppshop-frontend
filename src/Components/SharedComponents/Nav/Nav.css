@@ -1,0 +1,382 @@
+/* nav css start */
+.nav {
+  background: #ef8341;
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  transition: all 1s;
+  z-index: 9999;
+}
+.nav-content {
+  width: 100%;
+  margin: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bpshopsLogo {
+  width: 11em;
+  cursor: pointer;
+  transition: all 1s;
+  margin-left: 35px;
+  border-radius: 30px;
+}
+
+.bpshopsIcon {
+  display: none;
+  transition: all 1s;
+  /* margin-left: 50px; */
+}
+
+.searchInput {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+}
+
+.search {
+  width: 500px;
+  background: #fff;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-family: "Space Grotesk", sans-serif;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  transition: all 0.3s;
+  margin-left: 29.5%;
+}
+
+.searchIcon {
+  position: absolute;
+  margin-left: -30px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.user-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.user-profile img {
+  width: 100%;
+}
+
+/* responsive css */
+@media only screen and (max-width: 1400px) {
+  .search {
+    margin-left: 17.5%;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .bpshopsLogo {
+    margin-left: 75px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .search {
+    margin-left: 14.2%;
+  }
+  .bpshopsLogo {
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .search {
+    margin-left: 10%;
+  }
+  .bpshopsLogo {
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .search {
+    width: 450px;
+    margin-left: 8%;
+  }
+  .bpshopsLogo {
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .search {
+    width: 380px;
+    margin-left: 6.5%;
+  }
+  .bpshopsLogo {
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .search {
+    width: 380px;
+    margin-left: 16.3%;
+  }
+  .bpshopsLogo {
+    display: none;
+  }
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 892px) {
+  .search {
+    margin-left: 15.5%;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .search {
+    margin-left: 10.1%;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 75px;
+  }
+  .sidebarIconToggle {
+    left: 37px;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .search {
+    margin-left: 8%;
+  }
+  .sidebarIconToggle {
+    top: 32px;
+    left: 37px;
+  }
+  .bpshopsLogo {
+    display: none;
+  }
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 75px;
+  }
+
+  .login h6 {
+    display: none;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 668px) {
+  .search {
+    width: 300px;
+    margin-left: 7.5%;
+  }
+  .sidebarIconToggle {
+    top: 32px;
+    left: 37px;
+  }
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 75px;
+  }
+
+  .login h6 {
+    display: none;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .login {
+    margin-right: 37px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .search {
+    width: 250px;
+    margin-left: 6%;
+    font-size: 14px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .login h6 {
+    display: none;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .login {
+    margin-right: 25px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .search {
+    width: 220px;
+    margin-left: -7%;
+    font-size: 12px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .login h6 {
+    display: none;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .login {
+    margin-right: 25px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .search {
+    width: 180px;
+    margin-left: -28%;
+    font-size: 10.5px;
+    padding: 8px 10px;
+  }
+  .searchIcon {
+    margin-top: 10px;
+    font-size: 10px;
+    padding-left: 10px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .login h6 {
+    display: none;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .login {
+    margin-right: 25px;
+  }
+}

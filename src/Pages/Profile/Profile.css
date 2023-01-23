@@ -1,0 +1,102 @@
+.profile_container {
+    min-height: 40vh;
+}
+
+.profile_heading {
+    margin: 20px 10px;
+}
+
+/* ----profile left----- */
+.profile_left_container, .profile_right_container {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.sidebar_left {
+    border-bottom: 1px solid #ffdede;
+    padding: 5px 8px;
+}
+
+.sidebar_left a {
+    text-decoration: none;
+    font-size: 22px;
+    color: #9dd362;
+    font-weight: bold;
+}
+
+.sidebar_left a:hover {
+    color: #82cc33;
+}
+
+/* ----profile right----- */
+/* .profile_right_container{
+    background: #82cc33;
+} */
+.profile_img_section {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.profile_img {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(209, 209, 247);
+    margin: 10px;
+}
+
+.profile_name {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.change_profile_header {
+    cursor: pointer;
+    color: #ef8341;
+}
+
+.change_profile_ratio {
+    color: red;
+    font-size: 10px;
+
+}
+
+.hidden_input_file {
+    visibility: hidden;
+}
+
+.account_info_header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.custom-control-input {
+    display: none;
+}
+
+.profile_form_btn_section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile_delete_btn {
+    background: rgb(47, 126, 47);
+    border: none;
+    padding: 10px 20px ;
+    border-radius: 5px;
+    color: white;
+}
+
+.profile_update_btn {
+    background: rgb(232, 119, 119);
+    border: none;
+    padding: 10px 20px ;
+    border-radius: 5px;
+    color: white;
+}

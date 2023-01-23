@@ -1,0 +1,78 @@
+.layout_container {
+  width: 65%;
+  margin: auto;
+  min-height: 30vh;
+}
+
+@media screen and (max-width: 1400px){
+  .layout_container {
+    width: 70%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1350px){
+  .layout_container {
+    width: 72%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1300px){
+  .layout_container {
+    width: 74%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1350px){
+  .layout_container {
+    width: 76%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1200px){
+  .layout_container {
+    width: 78%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 992px){
+  .layout_container {
+    width: 80%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 868px){
+  .layout_container {
+    width: 84%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 768px){
+  .layout_container {
+    width: 86%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 576px){
+  .layout_container {
+    width: 88%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 476px){
+  .layout_container {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 360px){
+  .layout_container {
+    width: 93%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 300px){
+  .layout_container {
+    width: 95%;
+    margin: auto;
+  }
+}
