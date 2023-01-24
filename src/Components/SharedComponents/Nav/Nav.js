@@ -6,6 +6,10 @@ import bppShopsLogo from "../../../Assets/Images/bppshopslogo.png";
 import Sidebar from "../Sidebar/Sidebar";
 
 const Nav = () => {
+  const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
 
   return (
     <>
@@ -60,7 +64,7 @@ const Nav = () => {
                     className="d-flex mx-3"
                     style={{
                       borderBottom: "1px solid gray",
-                      padding: "10px 0px",
+                      padding: "10px ",
                       marginBottom: "10px",
                     }}
                   >
@@ -85,8 +89,14 @@ const Nav = () => {
                   <Link to="/profile">
                     <li className="dropdown-item">View Profile</li>
                   </Link>
+                  <Link to="/login">
+                    <li className="dropdown-item">Login</li>
+                  </Link>
+                  <Link to="/sign-up">
+                    <li className="dropdown-item">Sign-Up</li>
+                  </Link>
                   {/* <li onClick={handleLogout} className="dropdown-item"> */}
-                  <li className="dropdown-item">Logout</li>
+                  <li onClick={handleLogout} className="dropdown-item">Logout</li>
                 </div>
               </div>
             </div>

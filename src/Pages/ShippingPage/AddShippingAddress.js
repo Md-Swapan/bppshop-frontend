@@ -4,7 +4,6 @@ import Modal from "react-modal";
 // import ShippingModal from "../../Components/ShippingModal/ShippingModal";
 import axios from "axios";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
-import { token } from "../../BaseUrl/BaseUrl";
 import { useNavigate } from "react-router-dom";
 import ShippingModal from "../../Components/ShippingModal/ShippingModal";
 Modal.setAppElement("#root");
@@ -23,6 +22,7 @@ const customStyles = {
 };
 
 const AddShippingAddress = () => {
+  const token = localStorage.getItem("token");
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [shippingAddressList, setShippingAddressList] = useState([]);
   // console.log(shippingAddress);
@@ -63,7 +63,7 @@ const AddShippingAddress = () => {
     <>
       <div className="shipping_container">
         <div className="shipping_content">
-          <div className="shipping_header">Shipping Address</div>
+          <div className="shipping_header">Delivery Address</div>
         </div>
         <hr className="shipping_line" />
         <div className="address_content">

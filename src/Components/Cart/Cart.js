@@ -22,7 +22,7 @@ const Cart = () => {
         <div>
           <i className="bi bi-cart-plus"></i>
           <br />
-          <span>{cartItems?.length} Items</span>
+          <span> {cartItems?.length} Items</span>
         </div>
         <div className="cartTotalPrice">
         <small>৳{" "}

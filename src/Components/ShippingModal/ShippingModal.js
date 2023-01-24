@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { baseUrl, token } from "../../BaseUrl/BaseUrl";
+import { baseUrl} from "../../BaseUrl/BaseUrl";
 import "./ShippingModal.css";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ const ShippingModal = ({
   setShippingAdd,
   setShippingAddressList,
 }) => {
+  const token = localStorage.getItem("token");
   const { register, handleSubmit } = useForm();
 
   const [districtDataOptions, setDistrictDataOptions] = useState([]);
@@ -18,6 +19,7 @@ const ShippingModal = ({
   const [districtId, setDistrictId] = useState(null);
   const [thanaId, setThanatId] = useState(null);
   const navigate = useNavigate();
+  
   useEffect(() => {
     axios
       .get(baseUrl + "/location/districts", {

@@ -8,7 +8,7 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import ShippingModal from "../../Components/ShippingModal/ShippingModal";
 import axios from "axios";
-import { baseUrl, token } from "../../BaseUrl/BaseUrl";
+import { baseUrl } from "../../BaseUrl/BaseUrl";
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -25,6 +25,7 @@ const customStyles = {
 };
 
 const Shipping = () => {
+  const token = localStorage.getItem("token");
   const [shippingAdd, setShippingAdd] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -56,7 +57,7 @@ const Shipping = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="shiping-heading">
-                SHIPPING AND BILLING ADDRESS
+                Delivery ADDRESS
               </div>
               <hr className="shippin_billing_header_line" />
               <div class="progress_container">
@@ -70,7 +71,7 @@ const Shipping = () => {
               </div>
               <div className="shiping_container">
                 <div className="shiping-address-heading">
-                  Choose shipping address
+                  Choose Delivery address
                 </div>
                 {defaultShippingAddress?.is_billing === 1 ? (
                   <div className="shiping_address_box">

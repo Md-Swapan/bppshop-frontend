@@ -1,0 +1,40 @@
+.signup_card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: .4375rem;
+    box-shadow: 0 0.25rem 0.5625rem -0.0625rem rgba(0, 0, 0, 0.03), 0 0.275rem 1.25rem -0.0625rem rgba(0, 0, 0, 0.05);
+    border: none;
+    min-height: 400px;
+    padding: 20px;
+}
+.signup_card_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #333333;
+    font-size: 16px;
+    text-align: center;
+    padding: 15px;
+}
+.sign_up_btn button {
+    background: #f7d4d4;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+.sign_in_path a {
+    color: #fff;
+    background: #ef8341;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    text-decoration: none;
+}

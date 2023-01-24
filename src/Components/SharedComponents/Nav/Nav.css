@@ -66,7 +66,13 @@
 .user-profile img {
   width: 100%;
 }
-
+.dropdown-item{
+  cursor: pointer;
+  /* border-top: 1px solid gainsboro; */
+}
+.profile_dropdown a{
+  /* text-decoration: none; */
+}
 /* responsive css */
 @media only screen and (max-width: 1400px) {
   .search {
