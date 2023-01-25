@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import defaultAvatar from "../../../Assets/Images/default-avatar.jpg";
@@ -7,16 +7,11 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Redux/Actions/UserAction";
 import { ClearCart } from './../../../Redux/Actions/CartAction';
-import { loadUser } from './../../../Redux/Actions/UserAction';
 
 
 const Nav = () => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user);
-  
-  useEffect(() => {
-    dispatch(loadUser());
-  })
 
   const handleLogout = () => {
     localStorage.removeItem("token");

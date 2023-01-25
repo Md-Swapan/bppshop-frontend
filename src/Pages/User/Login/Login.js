@@ -3,8 +3,9 @@ import "./Login.css";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { userLogin } from './../../../Redux/Actions/UserAction';
+import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
+import store from "../../../Redux/Store";
 
 const Login = () => {
   const dispatch = useDispatch();
