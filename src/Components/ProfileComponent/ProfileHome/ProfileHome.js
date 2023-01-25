@@ -3,12 +3,11 @@ import React, { useEffect } from "react";
 import "./ProfileHome.css";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const ProfileHome = () => {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
 
   const { register, handleSubmit } = useForm();

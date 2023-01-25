@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./OrderHome.css";
-import ProfileHeader from "./../ProfileHeader/ProfileHeader";
 import { useSelector } from 'react-redux';
 
 const OrderHome = () => {
