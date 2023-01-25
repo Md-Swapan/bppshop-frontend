@@ -17,7 +17,6 @@ import ProfileHome from "./Components/ProfileComponent/ProfileHome/ProfileHome";
 import OrderHome from "./Components/ProfileComponent/OrderHome/OrderHome";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
-import { useSelector } from 'react-redux';
 import { loadUser } from './Redux/Actions/UserAction';
 import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
 import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';
@@ -53,35 +52,21 @@ function App() {
     .then((res) => {
       setShippingAddressList(res?.data?.data);
     });
-  },[])
+  },[token])
 
   return (
     <div className="App">
       <Layout>
         <Routes>
-          <Route
-            path="/"
-            element={<Home allCategory={allCategory} loading={loading} />}
-          />
-          <Route
-            path="/:slug"
-            element={
-              <SubCategory allCategory={allCategory} loading={loading} />
-            }
-          />
-          <Route
-            path="/:slug/:subSlug"
-            element={
-              <SubSubCategory allCategory={allCategory} loading={loading} />
-            }
-          />
-          <Route
-            path="/:slug/:subSlug/:subSubSlug"
-            element={<Product allCategory={allCategory} />}
-          />
+          <Route path="/" element={<Home allCategory={allCategory} loading={loading} />}/>
+          <Route path="/:slug" element={<SubCategory allCategory={allCategory} loading={loading} />}/>
+          <Route path="/:slug/:subSlug" element={<SubSubCategory allCategory={allCategory} loading={loading} />}/>
+          <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />}/>
+
           <Route path="/shipping-details" element={<ShippingDetails shippingAddressList={shippingAddressList}/>}/>
           <Route path="/add-shipping-address" element={<AddShipping/>}/>
           <Route path="/shipping-address" element={<ShippingAddressList shippingAddressList={shippingAddressList}/>}/>
+
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>
             <Route path="my-order" element={<OrderHome />}></Route>
@@ -89,6 +74,7 @@ function App() {
             <Route path="account-address" element={<AddressHome/>}></Route>
             <Route path="add-new-address" element={<AddNewAddress/>}></Route>
           </Route>
+
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
           <Route path="/recover-password" element={<ForgetPassWord />}></Route>

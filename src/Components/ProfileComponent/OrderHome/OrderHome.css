@@ -10,8 +10,9 @@
   text-align: center;
   padding: 15px 0px;
 }
-.order_cancel_status{
+.order_status{
   background: #f34770;
+  padding: 1px 6px;
   border: none;
   border-radius: 3px;
   color: white;

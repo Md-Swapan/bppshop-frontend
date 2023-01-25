@@ -32,7 +32,7 @@ const ProfileHome = () => {
       .then((res) => {
         setUserProfile(res?.data?.data);
       });
-  }, []);
+  }, [token]);
 
 
   const { register, handleSubmit } = useForm();
