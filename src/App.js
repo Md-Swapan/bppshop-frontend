@@ -9,8 +9,6 @@ import SubSubCategory from "./Pages/CategoryPage/SubSubCategory/SubSubCategory";
 import Product from "./Pages/ProductPage/Product";
 import axios from "axios";
 import { baseUrl } from "./BaseUrl/BaseUrl";
-import Shipping from "./Pages/ShippingPage/Shipping";
-import AddShippingAddress from "./Pages/ShippingPage/AddShippingAddress";
 import Profile from "./Pages/Profile/Profile";
 import Login from './Pages/User/Login/Login';
 import ForgetPassWord from "./Pages/ForgetPassword/ForgetPassWord";
@@ -21,10 +19,18 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
 import { useSelector } from 'react-redux';
 import { loadUser } from './Redux/Actions/UserAction';
+import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
+import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';
+import AddNewAddress from './Components/ProfileComponent/AddNewAddress/AddNewAddress';
+import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/ShippingDetails';
+import AddShipping from './Pages/ShippingAddressPage/AddShipping/AddShipping';
+import ShippingAddressList from './Pages/ShippingAddressPage/ShippingAddressList/ShippingAddressList';
 
 function App() {
+  const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
+  const [shippingAddressList, setShippingAddressList] = useState([]);
   // const { isAuthenticated, user } = useSelector((state) => state.user);
 
   // console.log(user)
@@ -38,6 +44,16 @@ function App() {
     });
 
   }, []);
+
+  useEffect(()=>{
+    axios
+    .get(baseUrl + "/shipping-address", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((res) => {
+      setShippingAddressList(res?.data?.data);
+    });
+  },[])
 
   return (
     <div className="App">
@@ -63,21 +79,15 @@ function App() {
             path="/:slug/:subSlug/:subSubSlug"
             element={<Product allCategory={allCategory} />}
           />
-          <Route
-            path="/shipping-details"
-            element={
-              <ProtectedRoute>
-                <Shipping />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route
-            path="/add-shipping-address"
-            element={<AddShippingAddress></AddShippingAddress>}
-          ></Route>
+          <Route path="/shipping-details" element={<ShippingDetails shippingAddressList={shippingAddressList}/>}/>
+          <Route path="/add-shipping-address" element={<AddShipping/>}/>
+          <Route path="/shipping-address" element={<ShippingAddressList shippingAddressList={shippingAddressList}/>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>
             <Route path="my-order" element={<OrderHome />}></Route>
+            <Route path="track-order" element={<TrackOrder/>}></Route>
+            <Route path="account-address" element={<AddressHome/>}></Route>
+            <Route path="add-new-address" element={<AddNewAddress/>}></Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>

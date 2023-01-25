@@ -15,11 +15,11 @@
     margin: 10px auto;
     padding: 10px 0px;
     cursor: pointer;
+}
+.add_shipping_address_btn a{
+    text-decoration: none;
     color: #ef8341;
     font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .progress_container {

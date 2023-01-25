@@ -1,55 +1,15 @@
-import React, { useEffect, useState } from "react";
-import "./Shipping.css";
-import delivery from "../../Assets/Images/shiping-icons/delivery.png";
-import money from "../../Assets/Images/shiping-icons/money.png";
-import Genuine from "../../Assets/Images/shiping-icons/Genuine.png";
-import Payment from "../../Assets/Images/shiping-icons/Payment.png";
-import Modal from "react-modal";
+import React from "react";
+import "./ShippingDetails.css";
+import delivery from "../../../Assets/Images/shiping-icons/delivery.png";
+import money from "../../../Assets/Images/shiping-icons/money.png";
+import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
+import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
 import { Link } from "react-router-dom";
-import ShippingModal from "../../Components/ShippingModal/ShippingModal";
-import axios from "axios";
-import { baseUrl } from "../../BaseUrl/BaseUrl";
-Modal.setAppElement("#root");
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
-    paddingBottom: "20px",
-  },
-};
-
-const Shipping = () => {
-  const token = localStorage.getItem("token");
-  const [shippingAdd, setShippingAdd] = useState([]);
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const defaultShippingAddress = shippingAdd.find(
-    (item) => item.is_billing === 1
+const ShippingDetails = ({ shippingAddressList }) => {
+  const defaultShippingAddress = shippingAddressList.find(
+    (item) => item?.is_billing === 1
   );
-
-  useEffect(() => {
-    axios
-      .get(baseUrl + "/shipping-address", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setShippingAdd(res.data.data);
-      });
-  }, []);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   return (
     <>
       <div className="shiping-view-section">
@@ -57,7 +17,7 @@ const Shipping = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="shiping-heading">
-                Delivery ADDRESS
+                SHIPPING AND BILLING ADDRESS
               </div>
               <hr className="shippin_billing_header_line" />
               <div class="progress_container">
@@ -71,7 +31,7 @@ const Shipping = () => {
               </div>
               <div className="shiping_container">
                 <div className="shiping-address-heading">
-                  Choose Delivery address
+                  Choose shipping address
                 </div>
                 {defaultShippingAddress?.is_billing === 1 ? (
                   <div className="shiping_address_box">
@@ -83,7 +43,7 @@ const Shipping = () => {
                       <span className="home_text"> home </span>
                       {defaultShippingAddress?.phone} |{" "}
                       {defaultShippingAddress?.address}{" "}
-                      <Link to="/add-shipping-address">
+                      <Link to="/shipping-address">
                         <span className="change_text">
                           <i class="bi bi-pencil-fill"></i> Change
                         </span>
@@ -91,11 +51,15 @@ const Shipping = () => {
                     </div>
                   </div>
                 ) : (
-                  <div onClick={openModal} class="add_shipping_address_btn">
-                    <div>
-                      <i class="bi bi-plus"></i>
-                    </div>
-                    <div>Add Shipping Address</div>
+                  <div class="add_shipping_address_btn">
+                    <Link to="/add-shipping-address">
+                      <div className="d-flex justify-content-center align-items-center">
+                        <div>
+                          <i class="bi bi-plus"></i>
+                        </div>
+                        <div>Add Shipping Address</div>
+                      </div>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -185,19 +149,8 @@ const Shipping = () => {
           </div>
         </div>
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <ShippingModal
-          closeModal={closeModal}
-          setShippingAdd={setShippingAdd}
-        ></ShippingModal>
-      </Modal>
     </>
   );
 };
 
-export default Shipping;
+export default ShippingDetails;

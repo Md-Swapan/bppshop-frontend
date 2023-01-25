@@ -1,0 +1,82 @@
+.shipping_content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.shipping_header {
+    font-weight: 600;
+    font-size: 20px;
+    color: rgb(29, 25, 25);
+}
+
+.shipping_line {
+    height: 1px;
+    margin: 50px 0px;
+    padding: 0px;
+}
+
+.shipping_address_box {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 14px;
+    margin: 20px;
+}
+
+.shipped_person {
+    display: flex;
+    justify-content: space-between;
+}
+
+.default_btn {
+    color: #41efb2;
+    font-weight: 600;
+    cursor: pointer;
+
+
+}
+
+.set_default_btn {
+    color: #ef8341;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.add_more_address_btn {
+    text-align: center;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+.add_more_address_btn a {
+    text-decoration: none;
+    color: #ef8341;
+    font-weight: bold;
+}
+
+.add_more_address_btn i {
+    font-size: 24px;
+}
+
+.add_more_address_btn span {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.shipping_close {
+    display: flex;
+    justify-content: end;
+    width: 98%;
+}
+
+.shipping_close_btn {
+    background: #ef8341;
+    margin: 40px 0px 0px 0px;
+    padding: 5px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
