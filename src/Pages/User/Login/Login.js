@@ -16,16 +16,6 @@ const Login = () => {
   const onSubmit = (data) => {
     dispatch(userLogin(data));
 
-    // axios.post(baseUrl + "/auth/login", data).then((res) => {
-    //   if (res?.data?.token) {
-    //     localStorage.setItem("token", res.data.token);
-    //     alert(res?.data?.message);
-    //     // navigate("/");
-    //   } else {
-    //     setErrorMessage(res?.data?.message);
-    //     document.getElementById("invalid-feedback").style.display = "block";
-    //   }
-    // });
   };
   if(isAuthenticated === true){
     let from = location?.state?.from?.pathname || "/";
