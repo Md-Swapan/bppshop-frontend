@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./OrderHome.css";
 import ProfileHeader from "./../ProfileHeader/ProfileHeader";
-import axios from "axios";
-import { baseUrl } from "../../../BaseUrl/BaseUrl";
+import { useDispatch } from 'react-redux';
+import { loadUserOrders } from './../../../Redux/Actions/UserOrderAction';
+import { useSelector } from 'react-redux';
 
 const OrderHome = () => {
-  const token = localStorage.getItem("token");
-  const [orderList, setOrderList] = useState([]);
+  const dispatch = useDispatch();
+  const { userOrders } = useSelector((state) => state.userOrders);
+
+  console.log(userOrders)
+
   useEffect(() => {
-    axios
-      .get(baseUrl + "/customer/order/list", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setOrderList(res?.data?.data);
-      });
-  }, [token]);
+    dispatch(loadUserOrders())
+  }, [dispatch]);
 
   return (
     <div>
@@ -42,7 +40,7 @@ const OrderHome = () => {
         </thead>
 
         <tbody className="order_table_body">
-          {orderList?.map((list) => (
+          {userOrders?.map((list) => (
             <tr key={list?.id}>
               <td class="fw-bold">ID: {list?.id}</td>
               <td>{list?.created_at?.slice(0, 10)}</td>
