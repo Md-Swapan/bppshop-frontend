@@ -10,7 +10,7 @@ const OrderHome = () => {
 
   return (
     <div>
-      <ProfileHeader>My Order</ProfileHeader>
+      <h3>My Order</h3>
       <table class="table">
         <thead className="order_table_head">
           <tr>
