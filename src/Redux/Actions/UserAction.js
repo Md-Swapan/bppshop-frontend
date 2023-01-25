@@ -70,7 +70,7 @@ export const loadUser = () => async (dispatch) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+    dispatch({ type: LOAD_USER_SUCCESS, payload: data.data });
   } catch (error) {
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
   }
@@ -124,6 +124,7 @@ export const logout = () => async (dispatch) => {
 //     });
 //   }
 // };
+
 
 
 // Clearing Errors

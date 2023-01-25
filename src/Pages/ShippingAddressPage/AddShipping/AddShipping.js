@@ -71,7 +71,7 @@ const AddShipping = () => {
               name="contact_person_name"
               className="shipping_address_input"
               type="text"
-              placeholder="Md-Shuvo-miah"
+              placeholder="Enter Your Name"
             />
           </div>
           <div className="form-group">
@@ -81,7 +81,7 @@ const AddShipping = () => {
               name="phone"
               className="shipping_address_input"
               type="text"
-              placeholder="01676667145"
+              placeholder="Enter Your Phone Number"
             />
           </div>
           <div className="form-group">

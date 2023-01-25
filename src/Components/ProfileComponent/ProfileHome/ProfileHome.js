@@ -1,39 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./ProfileHome.css";
-import { baseUrl, token } from "../../../BaseUrl/BaseUrl";
+import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { clearErrors, loadUser } from "./../../../Redux/Actions/UserAction";
+
 
 const ProfileHome = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
-
-  // const { loading, error, user } = useSelector((state) => state.user);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (error) {
-  //     dispatch(clearErrors());
-  //   }
-  //   dispatch(loadUser());
-  // }, [dispatch, error]);
-
-  // console.log(user)
-
-  const [userProfile, setUserProfile] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(baseUrl + "/customer/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setUserProfile(res?.data?.data);
-      });
-  }, []);
-
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -87,7 +63,7 @@ const ProfileHome = () => {
               type="text"
               class="input_field"
               name="name"
-              defaultValue={userProfile?.name}
+              defaultValue={user?.name}
             />
           </div>
           <div className="row my-3">
@@ -101,7 +77,7 @@ const ProfileHome = () => {
                   type="text"
                   class="input_field"
                   name="phone"
-                  value={userProfile?.phone}
+                  value={user?.phone}
                   disabled
                 />
               </div>
@@ -114,7 +90,7 @@ const ProfileHome = () => {
                   type="email"
                   class="input_field"
                   name="email"
-                  defaultValue={userProfile?.email}
+                  defaultValue={user?.email}
                 />
               </div>
             </div>
