@@ -31,3 +31,10 @@
   border: none;
   border-radius: 5px;
 }
+.blank_order{
+  margin: 60px 0px;
+}
+.blank_order h5{
+  color: red;
+  text-align: center;
+}

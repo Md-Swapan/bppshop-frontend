@@ -25,6 +25,7 @@ import AddNewAddress from './Components/ProfileComponent/AddNewAddress/AddNewAdd
 import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/ShippingDetails';
 import AddShipping from './Pages/ShippingAddressPage/AddShipping/AddShipping';
 import ShippingAddressList from './Pages/ShippingAddressPage/ShippingAddressList/ShippingAddressList';
+import OrderDetails from "./Components/ProfileComponent/OrdersDetails/OrderDetails";
 
 
 function App() {
@@ -70,7 +71,8 @@ function App() {
           <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>
-            <Route path="my-order" element={<OrderHome />}></Route>
+            <Route path="orders" element={<OrderHome />}></Route>
+            <Route path="orders-detail/:id" element={<OrderDetails />}></Route>
             <Route path="track-order" element={<TrackOrder/>}></Route>
             <Route path="account-address" element={<AddressHome/>}></Route>
             <Route path="add-new-address" element={<AddNewAddress/>}></Route>
