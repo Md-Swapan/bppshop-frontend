@@ -1,19 +1,12 @@
 import React, { useEffect } from "react";
 import "./OrderHome.css";
 import ProfileHeader from "./../ProfileHeader/ProfileHeader";
-import { useDispatch } from 'react-redux';
-import { loadUserOrders } from './../../../Redux/Actions/UserOrderAction';
 import { useSelector } from 'react-redux';
 
 const OrderHome = () => {
-  const dispatch = useDispatch();
   const { userOrders } = useSelector((state) => state.userOrders);
 
   console.log(userOrders)
-
-  useEffect(() => {
-    dispatch(loadUserOrders())
-  }, [dispatch]);
 
   return (
     <div>
