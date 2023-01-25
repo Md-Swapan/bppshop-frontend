@@ -19,7 +19,7 @@ export const loadUserOrders = () => async (dispatch) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    dispatch({ type: LOAD_USER_ORDERS_SUCCESS, payload: data });
+    dispatch({ type: LOAD_USER_ORDERS_SUCCESS, payload: data.data });
   } catch (error) {
     dispatch({ type: LOAD_USER_ORDERS_FAIL, payload: error.response.data.message });
   }

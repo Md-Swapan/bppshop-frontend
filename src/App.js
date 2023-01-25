@@ -19,12 +19,14 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
 import { useSelector } from 'react-redux';
 import { loadUser } from './Redux/Actions/UserAction';
+import { loadUserOrders } from './Redux/Actions/UserOrderAction';
 import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
 import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';
 import AddNewAddress from './Components/ProfileComponent/AddNewAddress/AddNewAddress';
 import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/ShippingDetails';
 import AddShipping from './Pages/ShippingAddressPage/AddShipping/AddShipping';
 import ShippingAddressList from './Pages/ShippingAddressPage/ShippingAddressList/ShippingAddressList';
+
 
 function App() {
   const token = localStorage.getItem("token");
@@ -37,6 +39,7 @@ function App() {
 
   useEffect(() => {
     store.dispatch(loadUser());
+    store.dispatch(loadUserOrders())
 
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res.data.data);
