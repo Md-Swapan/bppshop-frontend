@@ -1,13 +1,16 @@
 import React from "react";
 import "./OrderDetails.css";
 import productImg from "../../../Assets/Images/categoryImg/download (1).png";
+import { Link } from "react-router-dom";
 
 const OrderDetails = () => {
   return (
     <div>
-      <button class="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
-        <i class="bi bi-arrow-left-circle mr-2"></i> Back
-      </button>
+      <Link to="/profile/orders">
+        <button class="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
+          <i class="bi bi-arrow-left-circle mr-2"></i> Back
+        </button>
+      </Link>
       <div class="order_detail_card">
         <div class="payment mb-3  table-responsive">
           <table class="table table-borderless">

@@ -46,7 +46,7 @@ const OrderHome = () => {
                 </td>
                 <td>৳{order.order_amount}</td>
                 <td>
-                  <Link to={`/profile/orders-detail/${order.id}`}>
+                  <Link to={`/profile/orders-detail/${order?.id}`}>
                     <button className="my_order_view_btn">
                       <i class="bi bi-eye-fill"></i> View
                     </button>
