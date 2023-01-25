@@ -33,14 +33,14 @@ const OrderHome = () => {
         </thead>
 
         <tbody className="order_table_body">
-          {userOrders?.map((list) => (
-            <tr key={list?.id}>
-              <td class="fw-bold">ID: {list?.id}</td>
-              <td>{list?.created_at?.slice(0, 10)}</td>
+          {userOrders?.map((order) => (
+            <tr key={order?.id}>
+              <td class="fw-bold">ID: {order?.id}</td>
+              <td>{order?.created_at?.slice(0, 10)}</td>
               <td>
-                <span className="order_status">{list.order_status}</span>
+                <span className="order_status">{order.order_status}</span>
               </td>
-              <td>৳{list.order_amount}</td>
+              <td>৳{order.order_amount}</td>
               <td>
                 <button className="my_order_view_btn">
                   <i class="bi bi-eye-fill"></i> View
