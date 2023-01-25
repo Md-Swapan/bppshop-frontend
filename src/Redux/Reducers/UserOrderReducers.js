@@ -5,7 +5,7 @@ import {
   CLEAR_ERRORS,
 } from "../Constants/UserConstants.js";
 
-export const userOrderReducers = (state = { userOrders: {} }, action) => {
+export const userOrderReducers = (state = { userOrders: [] }, action) => {
   switch (action.type) {
     case LOAD_USER_ORDERS_REQUEST:
       return {

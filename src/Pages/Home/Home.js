@@ -7,7 +7,7 @@ const Home = ({ allCategory, loading }) => {
   return (
     <>
       <div className="home_container">
-      <MetaData title="BPPShop Home" />
+      <MetaData title="BPPShop" />
         <Category allCategory={allCategory} loading={loading} />
       </div>
     </>

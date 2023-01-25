@@ -17,7 +17,6 @@ import ProfileHome from "./Components/ProfileComponent/ProfileHome/ProfileHome";
 import OrderHome from "./Components/ProfileComponent/OrderHome/OrderHome";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
-import { useSelector } from 'react-redux';
 import { loadUser } from './Redux/Actions/UserAction';
 import { loadUserOrders } from './Redux/Actions/UserOrderAction';
 import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
@@ -56,7 +55,7 @@ function App() {
     .then((res) => {
       setShippingAddressList(res?.data?.data);
     });
-  },[])
+  },[token])
 
   return (
     <div className="App">
@@ -76,6 +75,7 @@ function App() {
             <Route path="account-address" element={<AddressHome/>}></Route>
             <Route path="add-new-address" element={<AddNewAddress/>}></Route>
           </Route>
+
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
           <Route path="/recover-password" element={<ForgetPassWord />}></Route>

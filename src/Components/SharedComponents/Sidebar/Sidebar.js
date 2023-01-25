@@ -48,7 +48,7 @@ const Sidebar = () => {
               <span><i className="bi bi-caret-right-fill"></i></span>
             </li>
             <li>
-              <Link to="/grocery">
+              <Link to="/grocery-only-dhaka-city">
                 <img
                   width="15"
                   className="sidebar-Icon"
