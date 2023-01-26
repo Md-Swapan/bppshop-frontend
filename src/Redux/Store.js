@@ -3,8 +3,8 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import CartReducers from "./Reducers/CartReducers";
 import { userReducer } from './Reducers/UserReducers';
-import { userOrderReducers } from './Reducers/UserOrderReducers';
-import { addShippingAddressReducers, loadAllShippingAddressReducers, setDefaultShippingAddressReducers, } from "./Reducers/ShippingAddressReducers";
+import { userOrderDetailReducers, userOrderReducers } from './Reducers/UserOrderReducers';
+import { addShippingAddressReducers, loadAllShippingAddressReducers, } from "./Reducers/ShippingAddressReducers";
 import PriceVariantReducers from './Reducers/PriceVariantReducers';
 
 
@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
   cart: CartReducers,
   user: userReducer,
   userOrders: userOrderReducers,
+  userOrderDetails:userOrderDetailReducers,
   shippingInfo: addShippingAddressReducers,
   allShippingInfo: loadAllShippingAddressReducers,
   priceVariant: PriceVariantReducers

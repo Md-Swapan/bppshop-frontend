@@ -6,6 +6,7 @@ import "./AddressHome.css";
 const AddressHome = () => {
   const { userOrders } = useSelector((state) => state.userOrders);
   const shipping_address_data = userOrders.map(order => order.shipping_address_data);
+  // console.log(shipping_address_data);
 
   return (
     <div>
