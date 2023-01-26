@@ -29,10 +29,8 @@ import OrderDetails from './Components/ProfileComponent/OrdersDetails/OrderDetai
 
 
 function App() {
-  const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
-  const [shippingAddressList, setShippingAddressList] = useState([]);
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -45,15 +43,6 @@ function App() {
 
   }, []);
 
-  useEffect(()=>{
-    axios.get(baseUrl + "/shipping-address", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      setShippingAddressList(res?.data?.data);
-    });
-  },[token])
-
   return (
     <div className="App">
       <Layout>
@@ -62,9 +51,9 @@ function App() {
           <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
-          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
+          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails /></ProtectedRoute>}/>
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>
-          <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
+          <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>
             <Route path="orders" element={<OrderHome />}></Route>

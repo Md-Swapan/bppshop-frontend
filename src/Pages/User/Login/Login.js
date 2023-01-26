@@ -18,6 +18,7 @@ const Login = () => {
     dispatch(userLogin(data));
 
   };
+  
   if(isAuthenticated === true){
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });

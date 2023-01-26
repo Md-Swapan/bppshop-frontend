@@ -5,11 +5,17 @@ import money from "../../../Assets/Images/shiping-icons/money.png";
 import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
 import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
-const ShippingDetails = ({ shippingAddressList }) => {
-  const defaultShippingAddress = shippingAddressList.find(
-    (item) => item?.is_billing === 1
-  );
+const ShippingDetails = () => {
+  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+  // const shippingAddressInfoData = shippingAddressInfo?.data
+
+  // console.log(shippingAddressInfoData)
+
+  // const defaultShippingAddress = shippingAddressInfoData.find(
+  //   (item) => item?.is_billing === 1
+  // );
   return (
     <>
       <div className="shiping-view-section">
@@ -33,16 +39,16 @@ const ShippingDetails = ({ shippingAddressList }) => {
                 <div className="shiping-address-heading">
                   Choose shipping address
                 </div>
-                {defaultShippingAddress?.is_billing === 1 ? (
+                {shippingAddressInfo?.data?.is_billing === "1" ? (
                   <div className="shiping_address_box">
                     <div className="shiped_name">
                       Delivery to :{" "}
-                      {defaultShippingAddress?.contact_person_name}
+                      {shippingAddressInfo?.data?.contact_person_name}
                     </div>
                     <div className="shiped_address">
                       <span className="home_text"> home </span>
-                      {defaultShippingAddress?.phone} |{" "}
-                      {defaultShippingAddress?.address}{" "}
+                      {shippingAddressInfo?.data?.phone} |{" "}
+                      {shippingAddressInfo?.data?.address}{" "}
                       <Link to="/shipping-address">
                         <span className="change_text">
                           <i class="bi bi-pencil-fill"></i> Change
@@ -50,7 +56,7 @@ const ShippingDetails = ({ shippingAddressList }) => {
                       </Link>
                     </div>
                   </div>
-                ) : (
+                 ) : (
                   <div class="add_shipping_address_btn">
                     <Link to="/add-shipping-address">
                       <div className="d-flex justify-content-center align-items-center">
@@ -61,7 +67,7 @@ const ShippingDetails = ({ shippingAddressList }) => {
                       </div>
                     </Link>
                   </div>
-                )}
+                )} 
               </div>
               <div className="shop_payment_btn_content">
                 <div className="shop_payment_btn">

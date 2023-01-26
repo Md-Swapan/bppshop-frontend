@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { baseUrl} from "../../../BaseUrl/BaseUrl";
 import "./AddShipping.css";
+import { useDispatch } from 'react-redux';
+import { addShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
+import { useSelector } from 'react-redux';
 
 const AddShipping = () => {
   const token = localStorage.getItem("token");
@@ -11,8 +14,12 @@ const AddShipping = () => {
   const [thanaDataOptions, setThanaDataOptions] = useState([]);
   const [areaDataOptions, setAreaDataOptions] = useState([]);
   const [districtId, setDistrictId] = useState(null);
-  const [thanaId, setThanatId] = useState(null);
+  const [thanaId, setThanaId] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+
+
   useEffect(() => {
     axios
       .get(baseUrl + "/location/districts", {
@@ -31,10 +38,11 @@ const AddShipping = () => {
       .get(baseUrl + `/location/thanas/${districtId}`)
       .then((res) => setThanaDataOptions(res.data.data));
   };
+
   const handleThanaChange = (e) => {
     e.preventDefault();
     const thanaId = e.target.value;
-    setThanatId(e.target.value);
+    setThanaId(e.target.value);
     axios
       .get(baseUrl + `/location/areas/${thanaId}`)
       .then((res) => setAreaDataOptions(res.data.data));
@@ -45,16 +53,15 @@ const AddShipping = () => {
     const district_id = districtId;
     const upazila_id = thanaId;
     const newData = { ...data, district_id, upazila_id };
-    axios
-      .post(baseUrl + "/shipping-address/add", newData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        if (res?.data?.status === "success") {
-          navigate("/shipping-details")
-        }
-      });
+    
+    dispatch(addShippingAddress(newData))
+
+    if(shippingAddressInfo?.status === "success"){
+      navigate("/shipping-details")
+    }
+    
   };
+
   return (
     <div className="shipping_Add_container">
       <form onSubmit={handleSubmit(onSubmit)}>
