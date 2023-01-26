@@ -26,6 +26,7 @@ import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/Shippin
 import AddShipping from './Pages/ShippingAddressPage/AddShipping/AddShipping';
 import ShippingAddressList from './Pages/ShippingAddressPage/ShippingAddressList/ShippingAddressList';
 import OrderDetails from "./Components/ProfileComponent/OrdersDetails/OrderDetails";
+import CheckoutPayment from "./Pages/ShippingAddressPage/CheckoutPayment/CheckoutPayment";
 
 
 function App() {
@@ -66,7 +67,15 @@ function App() {
           <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
-          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
+          {/* <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails shippingAddressList={shippingAddressList}/></ProtectedRoute>}/> */}
+
+
+          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails shippingAddressList={shippingAddressList}></ShippingDetails></ProtectedRoute>}>
+              <Route path="checkout-payment" element={<CheckoutPayment></CheckoutPayment>}></Route>
+          </Route>
+
+
+
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>
           <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>

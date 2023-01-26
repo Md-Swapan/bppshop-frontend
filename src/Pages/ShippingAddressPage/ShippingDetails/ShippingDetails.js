@@ -4,7 +4,7 @@ import delivery from "../../../Assets/Images/shiping-icons/delivery.png";
 import money from "../../../Assets/Images/shiping-icons/money.png";
 import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
 import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const ShippingDetails = ({ shippingAddressList }) => {
   const defaultShippingAddress = shippingAddressList.find(
@@ -16,11 +16,16 @@ const ShippingDetails = ({ shippingAddressList }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
+
+            <Outlet></Outlet>
+
+
+
               <div className="shiping-heading">
-                SHIPPING AND BILLING ADDRESS
+              DELIVERY ADDRESS
               </div>
               <hr className="shippin_billing_header_line" />
-              <div class="progress_container">
+              {/* <div class="progress_container">
                 <div
                   class="progress_content"
                   role="progressbar"
@@ -28,10 +33,10 @@ const ShippingDetails = ({ shippingAddressList }) => {
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
-              </div>
+              </div> */}
               <div className="shiping_container">
                 <div className="shiping-address-heading">
-                  Choose shipping address
+                  Choose Delivery address
                 </div>
                 {defaultShippingAddress?.is_billing === 1 ? (
                   <div className="shiping_address_box">
@@ -69,7 +74,7 @@ const ShippingDetails = ({ shippingAddressList }) => {
                     <i class="bi bi-chevron-left"></i> Shop cart
                   </div>
                   <div className="proceed_payment_btn">
-                    Proceed payment <i class="bi bi-chevron-right"></i>
+                    <Link to="/shipping-details/checkout-payment">Proceed payment <i class="bi bi-chevron-right"></i></Link>
                   </div>
                 </div>
               </div>

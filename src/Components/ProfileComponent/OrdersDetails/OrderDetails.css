@@ -12,10 +12,13 @@
     overflow: hidden;
     transition: all 0.3s;
 }
-
+.order_table_info_div{
+    text-align: end;
+}
 .order_detail_list {
     border: 1px solid #ececfb;
 }
+
 
 .for-tab-img img {
     height: 60px;
@@ -27,6 +30,7 @@
     text-align: center;
     cursor: pointer;
 }
+
 
 .view_invoice_btn, .track_order_btn{
 color: white;

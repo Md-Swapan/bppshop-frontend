@@ -100,11 +100,14 @@ margin: 40px 0px;
 }
 .proceed_payment_btn{
     background: rgb(88, 154, 27);
-    color: white;
-    border-radius: 8px;
     padding: 10px;
+    border-radius: 8px;
     text-align: center;
     cursor: pointer;
+}
+.proceed_payment_btn a{
+    color: white;
+    text-decoration: none;
 }
 .shiping_amount_container{
     margin-top: 45px;
