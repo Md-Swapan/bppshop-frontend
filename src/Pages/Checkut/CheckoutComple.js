@@ -30,14 +30,13 @@ const CheckoutComple = () => {
 
               <div class="row mt-4">
                 <div class="col-6">
-                  <a href="https://bppshop.com.bd" class="btn btn-primary">
+                  <a class="btn btn-primary">
                     Go to shopping
                   </a>
                 </div>
 
                 <div class="col-6">
                   <a
-                    href="https://bppshop.com.bd/account-oder"
                     class="btn btn-secondary pull-right"
                   >
                     Check orders
