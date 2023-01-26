@@ -18,10 +18,16 @@ const ShippingAddressList = () => {
     dispatch(loadAllShippingAddress());
   }, [dispatch]);
 
-  const handleSetDefaultAddress = (address_id) => {
-    dispatch(setDefaultShippingAddress(address_id))
+  
 
-    if(shippingAddressInfo.status === "success"){
+  const handleSetDefaultAddress = (address_id) => {
+    const addressId = {
+      address_id : address_id
+    }
+
+    dispatch(setDefaultShippingAddress(addressId))
+
+    if(shippingAddressInfo?.status === "success"){
       navigate("/shipping-details");
     }
   };
@@ -30,7 +36,7 @@ const ShippingAddressList = () => {
     <div>
       <div className="shipping_container">
         <div className="shipping_content">
-          <div className="shipping_header">Shipping Address</div>
+          <div className="shipping_header">Delivery Address</div>
         </div>
         <hr className="shipping_line" />
         <div className="address_content">
@@ -55,7 +61,7 @@ const ShippingAddressList = () => {
                           }
                           className="set_default_btn"
                         >
-                          <i class="bi bi-check"></i> Set default
+                          <i class="bi bi-check"></i> Choose
                         </div>
                       )}
                     </div>

@@ -4,12 +4,18 @@ import delivery from "../../../Assets/Images/shiping-icons/delivery.png";
 import money from "../../../Assets/Images/shiping-icons/money.png";
 import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
 import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 const ShippingDetails = () => {
+  const navigate = useNavigate()
   const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
 
+  const changeShippingInfo = () => {
+    navigate("/shipping-address")
+
+    window.location.reload(true);
+  }
   
   return (
     <>
@@ -18,7 +24,7 @@ const ShippingDetails = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="shiping-heading">
-                SHIPPING AND BILLING ADDRESS
+                Delivery Address
               </div>
               <hr className="shippin_billing_header_line" />
               <div class="progress_container">
@@ -32,7 +38,7 @@ const ShippingDetails = () => {
               </div>
               <div className="shiping_container">
                 <div className="shiping-address-heading">
-                  Choose shipping address
+                  Choose Delivery Address
                 </div>
                 {shippingAddressInfo?.data?.is_billing === "1" ? (
                   <div className="shiping_address_box">
@@ -44,21 +50,22 @@ const ShippingDetails = () => {
                       <span className="home_text"> home </span>
                       {shippingAddressInfo?.data?.phone} |{" "}
                       {shippingAddressInfo?.data?.address}{" "}
-                      <Link to="/shipping-address">
-                        <span className="change_text">
-                          <i class="bi bi-pencil-fill"></i> Change
+                      
+                      {/* <Link to="/shipping-address"> */}
+                        <span onClick={()=> changeShippingInfo()} className="change_text">
+                          <i className="bi bi-pencil-fill"></i> Change
                         </span>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                   </div>
                  ) : (
                   <div class="add_shipping_address_btn">
-                    <Link to="/add-shipping-address">
+                    <Link to="/shipping-address">
                       <div className="d-flex justify-content-center align-items-center">
                         <div>
                           <i class="bi bi-plus"></i>
                         </div>
-                        <div>Add Shipping Address</div>
+                        <div>Choose Address</div>
                       </div>
                     </Link>
                   </div>

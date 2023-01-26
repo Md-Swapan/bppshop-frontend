@@ -8,11 +8,13 @@ import {
   SET_DEFAULT_SHIPPING_ADDRESS_REQUEST,
   SET_DEFAULT_SHIPPING_ADDRESS_SUCCESS,
   SET_DEFAULT_SHIPPING_ADDRESS_FAIL,
-} from "../Constants/ShippingAddressConstants.js"
-
+} from "../Constants/ShippingAddressConstants.js";
 
 // Add shipping address & Set default shipping address reducers
-export const addShippingAddressReducers = (state = { shippingAddressInfo: {} }, action) => {
+export const addShippingAddressReducers = (
+  state = { shippingAddressInfo: {} },
+  action
+) => {
   switch (action.type) {
     case ADD_SHIPPING_ADDRESS_REQUEST:
     case SET_DEFAULT_SHIPPING_ADDRESS_REQUEST:
@@ -33,18 +35,21 @@ export const addShippingAddressReducers = (state = { shippingAddressInfo: {} }, 
         shippingAddressInfo: null,
         error: action.payload,
       };
-      case "CLEAR_SHIPPING_ADDRESS": 
-        return {
-          shippingAddressInfo: {}
-        };
-      
+    case "CLEAR_SHIPPING_ADDRESS":
+      return {
+        shippingAddressInfo: {},
+      };
+
     default:
       return state;
   }
 };
 
-// Load shipping address reducers
-export const loadAllShippingAddressReducers = (state = { allShippingAddressInfo: {} }, action) => {
+// Load all shipping address reducers
+export const loadAllShippingAddressReducers = (
+  state = { allShippingAddressInfo: {} },
+  action
+) => {
   switch (action.type) {
     case LOAD_SHIPPING_ADDRESS_REQUEST:
       return {
@@ -67,6 +72,4 @@ export const loadAllShippingAddressReducers = (state = { allShippingAddressInfo:
       return state;
   }
 };
-
-
 
