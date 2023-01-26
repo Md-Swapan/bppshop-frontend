@@ -9,13 +9,8 @@ import { useSelector } from 'react-redux';
 
 const ShippingDetails = () => {
   const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
-  // const shippingAddressInfoData = shippingAddressInfo?.data
 
-  // console.log(shippingAddressInfoData)
-
-  // const defaultShippingAddress = shippingAddressInfoData.find(
-  //   (item) => item?.is_billing === 1
-  // );
+  
   return (
     <>
       <div className="shiping-view-section">

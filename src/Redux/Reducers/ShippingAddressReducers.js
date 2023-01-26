@@ -11,7 +11,7 @@ import {
 } from "../Constants/ShippingAddressConstants.js"
 
 
-// Add shipping address
+// Add shipping address & Set default shipping address reducers
 export const addShippingAddressReducers = (state = { shippingAddressInfo: {} }, action) => {
   switch (action.type) {
     case ADD_SHIPPING_ADDRESS_REQUEST:
@@ -68,6 +68,5 @@ export const loadAllShippingAddressReducers = (state = { allShippingAddressInfo:
   }
 };
 
-// Set default shipping address reducers
 
 
