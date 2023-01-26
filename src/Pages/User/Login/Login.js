@@ -3,8 +3,9 @@ import "./Login.css";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { userLogin } from './../../../Redux/Actions/UserAction';
+import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
+import store from "../../../Redux/Store";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -16,17 +17,8 @@ const Login = () => {
   const onSubmit = (data) => {
     dispatch(userLogin(data));
 
-    // axios.post(baseUrl + "/auth/login", data).then((res) => {
-    //   if (res?.data?.token) {
-    //     localStorage.setItem("token", res.data.token);
-    //     alert(res?.data?.message);
-    //     // navigate("/");
-    //   } else {
-    //     setErrorMessage(res?.data?.message);
-    //     document.getElementById("invalid-feedback").style.display = "block";
-    //   }
-    // });
   };
+  
   if(isAuthenticated === true){
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });

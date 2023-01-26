@@ -4,15 +4,23 @@ import "./Nav.css";
 import defaultAvatar from "../../../Assets/Images/default-avatar.jpg";
 import bppShopsLogo from "../../../Assets/Images/bppshopslogo.png";
 import Sidebar from "../Sidebar/Sidebar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../Redux/Actions/UserAction";
+import { ClearCart } from './../../../Redux/Actions/CartAction';
+import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 
 
 const Nav = () => {
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
+
+    dispatch(logout())
+    dispatch(ClearCart())
+    dispatch(clearShippingAddress())
   };
 
   return (

@@ -14,19 +14,16 @@ export const userOrderReducers = (state = { userOrders: [] }, action) => {
     case LOAD_USER_ORDERS_REQUEST:
       return {
         loading: true,
-        // isAuthenticated: false,
       };
     case LOAD_USER_ORDERS_SUCCESS:
       return {
         ...state,
         loading: false,
-        // isAuthenticated: true,
         userOrders: action.payload,
       };
     case LOAD_USER_ORDERS_FAIL:
       return {
         loading: false,
-        // isAuthenticated: false,
         userOrders: null,
         error: action.payload,
       };

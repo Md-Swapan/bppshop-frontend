@@ -15,9 +15,9 @@ const Profile = () => {
               <div class="sidebar_left">
                 <Link to="/profile/orders"> My order</Link>
               </div>
-              <div class="sidebar_left">
+              {/* <div class="sidebar_left">
                 <Link to="/profile/track-order"> Track your order</Link>
-              </div>
+              </div> */}
               <div class="sidebar_left">
                 <Link to="/profile/account-address"> Address</Link>
               </div>
