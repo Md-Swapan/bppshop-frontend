@@ -209,12 +209,12 @@ const OrderDetails = () => {
         </div>
       </div>
       <div class="row">
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <div className="view_invoice_btn"> View Invoice</div>
-        </div>
+        </div> */}
         <div className="col-md-6">
           {" "}
-          <div className="track_order_btn">Track Order</div>
+          <div className="track_order_btn text-center">Track Order</div>
         </div>
       </div>
     </div>

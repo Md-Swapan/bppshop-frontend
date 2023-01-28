@@ -83,7 +83,7 @@ const ShippingAddressList = () => {
                 <div>
                   <i class="bi bi-plus"></i>
                 </div>
-                <div>Add More </div>
+                <div>Add Delivary Address </div>
               </div>
             </Link>
           </div>

@@ -11,6 +11,7 @@ const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
+  console.log(productDetail);
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
@@ -136,9 +137,9 @@ const QuickViewModal = ({ pid }) => {
                       {productDetail.colors?.map((color) => (
                         <>
                           <div
-                          onClick={() => priceVariantHandlerByColor(color.code)}
+                          onClick={() => priceVariantHandlerByColor(color?.code)}
                             style={{
-                              background: `${color.code}`,
+                              background: `${color?.code}`,
                               margin: "0px 2px",
                             }}
                             className="color1"

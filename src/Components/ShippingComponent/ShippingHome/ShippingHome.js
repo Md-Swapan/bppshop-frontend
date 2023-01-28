@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ShippingHome = () => {
   const navigate = useNavigate()
-  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+  const {shippingAddressInfo} = useSelector((state) => state?.shippingInfo);
 
   const changeShippingInfo = () => {
     navigate("/shipping-address")
@@ -29,7 +29,9 @@ const ShippingHome = () => {
                 ></div>
               </div> */}
               <div className="shiping_container">
-                
+              <div className="shiping-address-heading">
+                Choose Delivery address
+              </div>
                 {shippingAddressInfo?.data?.is_billing === "1" ? (
                   <div className="shiping_address_box">
                     <div className="shiped_name">
@@ -52,10 +54,7 @@ const ShippingHome = () => {
                         <div>
                           <i class="bi bi-plus"></i>
                         </div>
-                        {/* <div>Add Shipping Address</div> */}
-                        <div className="shiping-address-heading">
-                          Choose Delivery address
-                        </div>
+                        <div>Choose Delivery Address</div>
                       </div>
                     </Link>
                   </div>
