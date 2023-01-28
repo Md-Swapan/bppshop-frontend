@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import prodimg from "../../Assets/Images/categoryImg/download (5).png";
 import "./QuickViewModal.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
-import { useDispatch } from 'react-redux';
-import { addItemsToCart } from './../../Redux/Actions/CartAction';
-import { getPriceVariant } from './../../Redux/Actions/PriceVariantAction';
+import { useDispatch } from "react-redux";
+import { addItemsToCart } from "./../../Redux/Actions/CartAction";
+import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
-  console.log(productDetail);
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
@@ -19,51 +18,42 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  const priceVariantHandlerByColor = (color) => {
-    console.log(color)
+
+
+  const defaultOptions = productDetail?.choice_options?.map(choice_option=>(console.log(choice_option?.options[0])))
+  // const defaultOption=defaultOptions[0]
+  const colors = productDetail?.colors?.map((color) => (color?.code))
+ const defaultColor=colors[0];
+ console.log(defaultColor,defaultOptions);
+
+
+
+
+
+
+  const priceVariantHandlerByColor = ( color ) => {
+    // console.log(color)
     const priceVariantData = {
-      // "product_id": pid,
-      // "color": color,
-      // "quantity": quantityCount
-
-      "product_id": "7160",
-      "color": "#9966CC",
-      "choice_19": "200",
-      "quantity": 2
-    }
-    dispatch(getPriceVariant(priceVariantData))
-  }
-
-  const priceVariantHandlerByChoice = ( option) => {
-    console.log(option)
-    const choiceOption = parseInt(option);
-
+      product_id: pid,
+      color: color,
+    };
+    dispatch(getPriceVariant(priceVariantData));
+  };
+  const priceVariantHandlerByChoice = (choiceOption) => {
     const priceVariantData = {
-      // "product_id": pid,
-      // "choice_19": choiceOption,
-      // "quantity": quantityCount
-
-      "product_id": "7160",
-      "color": "#9966CC",
-      "choice_19": "200",
-      "quantity": 2
-    }
-    dispatch(getPriceVariant(priceVariantData))
-  }
-  const priceVariantHandlerByQty = () => {
+      product_id: pid,
+      choice_19: choiceOption,
+    };
+    dispatch(getPriceVariant(priceVariantData));
+  };
+  const priceVariantHandlerByQty = (qty) => {
     const priceVariantData = {
-      // "product_id": pid,
-      // "quantity": quantityCount
+      product_id: pid,
+      quantity: qty,
+    };
+    dispatch(getPriceVariant(priceVariantData));
+  };
 
-      "product_id": "7160",
-      "color": "#9966CC",
-      "choice_19": "200",
-      "quantity": 1
-    }
-    dispatch(getPriceVariant(priceVariantData))
-  }
- 
- 
   return (
     <>
       <div className="modal-container">
@@ -115,10 +105,10 @@ const QuickViewModal = ({ pid }) => {
                   >
                     {productDetail?.choice_options?.map((list) => (
                       <>
-                        <h5>{list?.title }: </h5>
-                        <div  className="d-flex">
+                        <h5>{list?.title}: </h5>
+                        <div className="d-flex">
                           {list?.options?.map((option) => (
-                            <span onClick={() => priceVariantHandlerByChoice(option)} className="size1">{option}</span>
+                            <span className="size1">{option}</span>
                           ))}
                         </div>
                       </>
@@ -137,9 +127,11 @@ const QuickViewModal = ({ pid }) => {
                       {productDetail.colors?.map((color) => (
                         <>
                           <div
-                          onClick={() => priceVariantHandlerByColor(color?.code)}
+                            onClick={() =>
+                              priceVariantHandlerByColor(color.code)
+                            }
                             style={{
-                              background: `${color?.code}`,
+                              background: `${color.code}`,
                               margin: "0px 2px",
                             }}
                             className="color1"
@@ -155,12 +147,11 @@ const QuickViewModal = ({ pid }) => {
                     <div className="quantity">
                       <span
                         onClick={() =>
-                          // setQuantityCount(
-                          //   quantityCount > 1
-                          //     ? quantityCount - 1
-                          //     : quantityCount
-                          // )
-                          priceVariantHandlerByQty()
+                          setQuantityCount(
+                            quantityCount > 1
+                              ? quantityCount - 1
+                              : quantityCount
+                          )
                         }
                         className="minus"
                       >
@@ -168,7 +159,13 @@ const QuickViewModal = ({ pid }) => {
                       </span>
                       <span className="count-number">{quantityCount}</span>
                       <span
-                        onClick={() => setQuantityCount(quantityCount + 1)}
+                        onClick={() =>
+                          setQuantityCount(
+                            productDetail.current_stock > quantityCount
+                              ? quantityCount + 1
+                              : quantityCount
+                          )
+                        }
                         className="plus"
                       >
                         +
@@ -203,7 +200,14 @@ const QuickViewModal = ({ pid }) => {
             </div>
             <div className="col-md-8 buyNowBtn_addToCartBtn_container">
               <button type="">Buy Now</button>
-              <button onClick={() => dispatch(addItemsToCart(productDetail, quantityCount))} type="">Add To Cart</button>
+              <button
+                onClick={() =>
+                  dispatch(addItemsToCart(productDetail, quantityCount))
+                }
+                type=""
+              >
+                Add To Cart
+              </button>
             </div>
           </div>
         </div>
