@@ -18,7 +18,7 @@ const PriceVariantReducers = (state = { priceVariant: {} }, action) => {
       return {
         ...state,
         loading: false,
-        priceVariant: action.payload.products,
+        priceVariant: action.payload,
       };
     case PRICE_VARIANT_FAIL:
       return {

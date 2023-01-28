@@ -29,9 +29,7 @@ const ShippingHome = () => {
                 ></div>
               </div> */}
               <div className="shiping_container">
-                <div className="shiping-address-heading">
-                  Choose Delivery address
-                </div>
+                
                 {shippingAddressInfo?.data?.is_billing === "1" ? (
                   <div className="shiping_address_box">
                     <div className="shiped_name">
@@ -49,12 +47,15 @@ const ShippingHome = () => {
                   </div>
                  ) : (
                   <div class="add_shipping_address_btn">
-                    <Link to="/add-shipping-address">
+                    <Link to="/shipping-address">
                       <div className="d-flex justify-content-center align-items-center">
                         <div>
                           <i class="bi bi-plus"></i>
                         </div>
-                        <div>Add Shipping Address</div>
+                        {/* <div>Add Shipping Address</div> */}
+                        <div className="shiping-address-heading">
+                          Choose Delivery address
+                        </div>
                       </div>
                     </Link>
                   </div>

@@ -18,27 +18,48 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  const priceVariantHandlerByColor = ({color}) => {
+  const priceVariantHandlerByColor = (color) => {
     console.log(color)
     const priceVariantData = {
-      "product_id": pid,
-      "color": color
+      // "product_id": pid,
+      // "color": color,
+      // "quantity": quantityCount
+
+      "product_id": "7160",
+      "color": "#9966CC",
+      "choice_19": "200",
+      "quantity": 2
     }
     dispatch(getPriceVariant(priceVariantData))
   }
-  const priceVariantHandlerByChoice = ( choiceOption) => {
+
+  const priceVariantHandlerByChoice = ( option) => {
+    console.log(option)
+    const choiceOption = parseInt(option);
+
     const priceVariantData = {
-      "product_id": pid,
-      "choice_19": choiceOption
+      // "product_id": pid,
+      // "choice_19": choiceOption,
+      // "quantity": quantityCount
+
+      "product_id": "7160",
+      "color": "#9966CC",
+      "choice_19": "200",
+      "quantity": 2
     }
-    dispatch(getPriceVariant())
+    dispatch(getPriceVariant(priceVariantData))
   }
-  const priceVariantHandlerByQty = ( qty) => {
+  const priceVariantHandlerByQty = () => {
     const priceVariantData = {
-      "product_id": pid,
-      "quantity": qty
+      // "product_id": pid,
+      // "quantity": quantityCount
+
+      "product_id": "7160",
+      "color": "#9966CC",
+      "choice_19": "200",
+      "quantity": 1
     }
-    dispatch(getPriceVariant())
+    dispatch(getPriceVariant(priceVariantData))
   }
  
  
@@ -93,10 +114,10 @@ const QuickViewModal = ({ pid }) => {
                   >
                     {productDetail?.choice_options?.map((list) => (
                       <>
-                        <h5>{list?.title}: </h5>
-                        <div className="d-flex">
+                        <h5>{list?.title }: </h5>
+                        <div  className="d-flex">
                           {list?.options?.map((option) => (
-                            <span className="size1">{option}</span>
+                            <span onClick={() => priceVariantHandlerByChoice(option)} className="size1">{option}</span>
                           ))}
                         </div>
                       </>
@@ -133,11 +154,12 @@ const QuickViewModal = ({ pid }) => {
                     <div className="quantity">
                       <span
                         onClick={() =>
-                          setQuantityCount(
-                            quantityCount > 1
-                              ? quantityCount - 1
-                              : quantityCount
-                          )
+                          // setQuantityCount(
+                          //   quantityCount > 1
+                          //     ? quantityCount - 1
+                          //     : quantityCount
+                          // )
+                          priceVariantHandlerByQty()
                         }
                         className="minus"
                       >
