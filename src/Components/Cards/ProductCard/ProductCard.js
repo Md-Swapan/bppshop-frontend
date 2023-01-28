@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
 import Modal from "react-modal";
@@ -45,7 +45,6 @@ const ProductCard = ({ product }) => {
   //   dispatch(addItemsToCart(product, quantity));
   //   alert.success("Item Added To Cart");
   // };
-
 
   return (
     <>

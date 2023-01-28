@@ -39,6 +39,11 @@ const CartDetailsView = () => {
     document.querySelector(".cart").style.display = "none";
   };
 
+  const CartEmptyAlert = () => {
+    document.querySelector(".cartEmptyAlert").innerHTML="Please add product in cart first."
+    document.querySelector(".cartEmptyAlert").style.color = "red"
+  }
+
   return (
     <div className="cartDetailsView-container">
       <div className="cartDetailsView-header">
@@ -49,7 +54,7 @@ const CartDetailsView = () => {
       </div>
       <div className="cartDetailsView-content">
         {cartItems?.length < 1 ? (
-          <h4 className="mt-4 text-center">You have no items in your cart!</h4>
+          <h4 className="mt-4 text-center cartEmptyAlert">You have no items in your cart!</h4>
         ) : (
           cartItems?.map((item) => (
             <div className="cartDetails">
@@ -116,9 +121,12 @@ const CartDetailsView = () => {
             )}`}
           </h6>
         </div>
-        <Link to="shipping-details">
+        {
+          cartItems.length < 1? <button onClick={CartEmptyAlert} type="">Place Order</button> :
+          <Link to="shipping-details">
           <button onClick={CartDetailsCloseHandlerAfterPlaceOrder} type="">Place Order</button>
         </Link>
+        }
       </div>
     </div>
   );
