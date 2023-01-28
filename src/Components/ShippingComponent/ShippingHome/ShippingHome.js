@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ShippingHome = () => {
   const navigate = useNavigate()
-  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+  const {shippingAddressInfo} = useSelector((state) => state?.shippingInfo);
 
   const changeShippingInfo = () => {
     navigate("/shipping-address")
@@ -49,12 +49,12 @@ const ShippingHome = () => {
                   </div>
                  ) : (
                   <div class="add_shipping_address_btn">
-                    <Link to="/add-shipping-address">
+                    <Link to="/shipping-address">
                       <div className="d-flex justify-content-center align-items-center">
                         <div>
                           <i class="bi bi-plus"></i>
                         </div>
-                        <div>Add Shipping Address</div>
+                        <div>Choose Delevary Address</div>
                       </div>
                     </Link>
                   </div>

@@ -28,7 +28,7 @@ const AddShipping = () => {
       .then((res) => {
         setDistrictDataOptions(res.data.data);
       });
-  }, []);
+  }, [token]);
 
   const handleDistrictChange = (e) => {
     e.preventDefault();

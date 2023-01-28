@@ -6,22 +6,24 @@ import {
 } from "../Constants/PriceVariantConstants";
 
 
-const PriceVariantReducers = (state = { priceVariant: [] }, action) => {
+const PriceVariantReducers = (state = { priceVariant: {} }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case PRICE_VARIANT_REQUEST:
       return {
         loading: true,
-        priceVariant: [],
+        priceVariant: {},
       };
     case PRICE_VARIANT_SUCCESS:
       return {
+        ...state,
         loading: false,
         priceVariant: action.payload.products,
       };
     case PRICE_VARIANT_FAIL:
       return {
         loading: false,
+        priceVariant: null,
         error: action.payload,
       };
     case CLEAR_PRICE_VARIANT_ERROR:
