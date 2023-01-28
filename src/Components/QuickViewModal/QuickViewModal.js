@@ -5,6 +5,7 @@ import "./QuickViewModal.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch } from 'react-redux';
 import { addItemsToCart } from './../../Redux/Actions/CartAction';
+import { getPriceVariant } from './../../Redux/Actions/PriceVariantAction';
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -17,10 +18,29 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  const choiceOptions = productDetail?.choice_options?.map((item) => item);
-
-  // const option = choiceOptions?.options?.map(item => item)
-  // console.log(option)
+  const priceVariantHandlerByColor = ({color}) => {
+    console.log(color)
+    const priceVariantData = {
+      "product_id": pid,
+      "color": color
+    }
+    dispatch(getPriceVariant(priceVariantData))
+  }
+  const priceVariantHandlerByChoice = ( choiceOption) => {
+    const priceVariantData = {
+      "product_id": pid,
+      "choice_19": choiceOption
+    }
+    dispatch(getPriceVariant())
+  }
+  const priceVariantHandlerByQty = ( qty) => {
+    const priceVariantData = {
+      "product_id": pid,
+      "quantity": qty
+    }
+    dispatch(getPriceVariant())
+  }
+ 
  
   return (
     <>
@@ -95,6 +115,7 @@ const QuickViewModal = ({ pid }) => {
                       {productDetail.colors?.map((color) => (
                         <>
                           <div
+                          onClick={() => priceVariantHandlerByColor(color.code)}
                             style={{
                               background: `${color.code}`,
                               margin: "0px 2px",
