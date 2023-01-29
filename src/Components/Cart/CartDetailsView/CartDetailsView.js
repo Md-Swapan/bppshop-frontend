@@ -15,7 +15,6 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  console.log(cartItems);
 
   const increaseQuantity = (id, quantity, stock) => {
     console.log(stock);
@@ -84,7 +83,9 @@ const CartDetailsView = () => {
                   {item?.product?.discount > 0 ? (
                     <del>
                       {" "}
-                      <span style={{fontSize:"11px"}}>৳ {item?.product?.unit_price}</span>
+                      <span style={{ fontSize: "11px" }}>
+                        ৳ {item?.product?.unit_price}
+                      </span>
                     </del>
                   ) : (
                     <span>৳ {item?.product?.unit_price}</span>
@@ -92,7 +93,9 @@ const CartDetailsView = () => {
 
                   <div className="cartTitleQty">
                     {item?.product?.discount > 0 ? (
-                      <small>৳ {item.product.unit_price - item.product.discount} </small>
+                      <small>
+                        ৳ {item.product.unit_price - item.product.discount}{" "}
+                      </small>
                     ) : (
                       ""
                     )}
@@ -122,7 +125,9 @@ const CartDetailsView = () => {
                     </div>
                     {item.product.discount > 0 ? (
                       <span className="mx-2">
-                        Total : {item?.quantity * (item.product.unit_price - item.product.discount)}
+                        Total :{" "}
+                        {item?.quantity *
+                          (item.product.unit_price - item.product.discount)}
                       </span>
                     ) : (
                       <span className="mx-2">
