@@ -58,7 +58,7 @@ const ProductCard = ({ product }) => {
               alt=""
             />
             <div className="product-card-body-content">
-              <small>{name.toString().substring(0, 25)}...</small>
+              <small>{name.toString().substring(0, 20)}...</small>
               <br />
               <div className="product-card-body-content-unit-price">
                 <span>

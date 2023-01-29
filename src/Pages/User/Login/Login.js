@@ -5,13 +5,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
-import store from "../../../Redux/Store";
-import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
+// import store from "../../../Redux/Store";
+// import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { isAuthenticated, error} = useSelector((state) => state.user);
+  // const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,7 +26,7 @@ const Login = () => {
   } 
 
   const addToCartWithLoginHandler = () => {
-    // if(isAuthenticated === true){
+    // if(isAuthenticated === true ){
     //   dispatch(addItemsToCartWithLogin())
     // } 
     
