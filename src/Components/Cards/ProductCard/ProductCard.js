@@ -6,6 +6,8 @@ import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import { useDispatch } from "react-redux";
 import { addItemsToCart } from "./../../../Redux/Actions/CartAction";
+import { imgBaseUrl } from "../../../BaseUrl/BaseUrl";
+import { imgThumbnailBaseUrl } from './../../../BaseUrl/BaseUrl';
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -22,7 +24,9 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
-  const { id, name, images, unit_price, choice_options } = product;
+  const { id, name, images, unit_price, choice_options, thumbnail} = product;
+
+  console.log(product)
 
   const [pid, setPid] = useState(null);
 
@@ -53,12 +57,12 @@ const ProductCard = ({ product }) => {
         <div className=" product-card">
           <div className=" product-card-body">
             <img
-              src={!images[0] ? images[0] : defaultProImg}
+              src={imgThumbnailBaseUrl+`/${thumbnail}`}
               className="card-img-top"
               alt=""
             />
             <div className="product-card-body-content">
-              <small>{name.toString().substring(0, 25)}...</small>
+              <small>{name.toString().substring(0, 20)}...</small>
               <br />
               <div className="product-card-body-content-unit-price">
                 <span>

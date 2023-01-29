@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import prodimg from "../../Assets/Images/categoryImg/download (5).png";
 import "./QuickViewModal.css";
-import { baseUrl } from "../../BaseUrl/BaseUrl";
+import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemsToCart } from './../../Redux/Actions/CartAction';
 import { getPriceVariant } from './../../Redux/Actions/PriceVariantAction';
@@ -93,7 +93,7 @@ const QuickViewModal = ({ pid }) => {
             <div className="col-sm-4">
               <div className="imageView">
                 <div className="detailImgCarousel">
-                  <img src={prodimg} alt="img" />
+                  <img src={imgBaseUrl+`/${productDetail?.images}`} alt="img" />
                 </div>
               </div>
             </div>
@@ -225,10 +225,10 @@ const QuickViewModal = ({ pid }) => {
           </div>
           <div className="row">
             <div className="col-md-4 img-carousel-item">
-              <img width={70} src={prodimg} alt="img" />
-              <img width={70} src={prodimg} alt="img" />
-              <img width={70} src={prodimg} alt="img" />
-              <img width={70} src={prodimg} alt="img" />
+              {
+                 productDetail?.images?.map(img=><img width={70} src={imgBaseUrl+`/${img}`} alt="img" />)
+              }
+
             </div>
             <div className="col-md-8 buyNowBtn_addToCartBtn_container">
               <button type="">Buy Now</button>
