@@ -15,9 +15,9 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
+  // console.log(cartItems);
 
   const increaseQuantity = (id, quantity, stock) => {
-    console.log(stock);
     const newQty = quantity + 1;
     if (stock <= quantity) {
       return;
@@ -94,7 +94,7 @@ const CartDetailsView = () => {
                   <div className="cartTitleQty">
                     {item?.product?.discount > 0 ? (
                       <small>
-                        ৳ {item.product.unit_price - item.product.discount}{" "}
+                        ৳ {item?.product?.unit_price - item?.product?.discount}{" "}
                       </small>
                     ) : (
                       ""
@@ -103,7 +103,7 @@ const CartDetailsView = () => {
                     <div className="quantity-set">
                       <span
                         onClick={() =>
-                          decreaseQuantity(item.product, item.quantity)
+                          decreaseQuantity(item?.product, item?.quantity)
                         }
                         className="minusBtn"
                       >
@@ -113,9 +113,9 @@ const CartDetailsView = () => {
                       <span
                         onClick={() =>
                           increaseQuantity(
-                            item.product,
-                            item.quantity,
-                            item.product.current_stock
+                            item?.product,
+                            item?.quantity,
+                            item?.product?.current_stock
                           )
                         }
                         className="plusBtn"
@@ -123,11 +123,11 @@ const CartDetailsView = () => {
                         +
                       </span>
                     </div>
-                    {item.product.discount > 0 ? (
+                    {item?.product?.discount > 0 ? (
                       <span className="mx-2">
                         Total :{" "}
                         {item?.quantity *
-                          (item.product.unit_price - item.product.discount)}
+                          (item?.product?.unit_price - item?.product?.discount)}
                       </span>
                     ) : (
                       <span className="mx-2">
@@ -154,7 +154,7 @@ const CartDetailsView = () => {
             )}`}
           </h6>
         </div>
-        {cartItems.length < 1 ? (
+        {cartItems?.length < 1 ? (
           <button onClick={CartEmptyAlert} type="">
             Place Order
           </button>

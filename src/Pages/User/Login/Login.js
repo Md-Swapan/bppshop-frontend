@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
 import store from "../../../Redux/Store";
+import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,13 @@ const Login = () => {
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
   } 
+
+  const addToCartWithLoginHandler = () => {
+    // if(isAuthenticated === true){
+    //   dispatch(addItemsToCartWithLogin())
+    // } 
+    
+  }
 
   return (
     <div class="row justify-content-center">
@@ -71,7 +79,7 @@ const Login = () => {
                   <Link to="/recover-password">Forgot password?</Link>
                 </div>
               </div>
-              <button class="signin_btn" type="submit">
+              <button onClick={() => addToCartWithLoginHandler()} class="signin_btn" type="submit">
                 Sign in
               </button>
             </form>
