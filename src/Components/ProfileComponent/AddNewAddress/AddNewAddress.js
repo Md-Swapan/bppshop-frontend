@@ -6,7 +6,7 @@ const AddNewAddress = () => {
     <div>
       <h4>Add new address</h4>
       <form>
-        <div class="row">
+        {/* <div class="row">
           <div class="col-md-6 d-flex">
             <ul class="donate-now">
               <li>
@@ -77,7 +77,7 @@ const AddNewAddress = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-4">
           <div class="row">

@@ -127,7 +127,7 @@ const ProfileHome = () => {
             </small>
           </div>
           <div className="profile_form_btn_section">
-            <button className="profile_delete_btn">Delete</button>
+            <button className="profile_delete_btn">Delete Account</button>
             <input
               type="submit"
               className="profile_update_btn"
