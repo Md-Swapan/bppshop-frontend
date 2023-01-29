@@ -16,7 +16,6 @@ const Login = () => {
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-
   };
   
   if(isAuthenticated === true){

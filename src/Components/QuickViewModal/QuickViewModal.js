@@ -3,57 +3,88 @@ import React, { useEffect, useState } from "react";
 import prodimg from "../../Assets/Images/categoryImg/download (5).png";
 import "./QuickViewModal.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
-import { useDispatch } from "react-redux";
-import { addItemsToCart } from "./../../Redux/Actions/CartAction";
-import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemsToCart } from './../../Redux/Actions/CartAction';
+import { getPriceVariant } from './../../Redux/Actions/PriceVariantAction';
+// import { getProductDetails } from "../../Redux/Actions/ProductsAction";
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
 
+  const {priceVariant} = useSelector((state) => state?.priceVariant);
+
+  const variantPrice = priceVariant?.data?.price
+
   useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
+    axios.get(`${baseUrl}/products/details/${pid}`)
+    .then((res) => {
       setProductDetail(res.data.data);
     });
   }, [pid]);
 
 
+  const choiceOptions = productDetail?.choice_options?.map((list) => list?.options)
+  const defaultOption = choiceOptions?.map(option => (option[0]))
+  const colors = productDetail?.colors?.map((color) => color?.code)
 
-  const defaultOptions = productDetail?.choice_options?.map(choice_option=>(console.log(choice_option?.options[0])))
-  // const defaultOption=defaultOptions[0]
-  const colors = productDetail?.colors?.map((color) => (color?.code))
- const defaultColor=colors[0];
- console.log(defaultColor,defaultOptions);
-
-
-
-
-
-
-  const priceVariantHandlerByColor = ( color ) => {
-    // console.log(color)
+  const priceVariantHandlerByChoiceOption = (option) => {
+    const priceVariantDefaultOptionData = {
+      "product_id": `${pid}`,
+      "choice_19": `${defaultOption[0]}`,
+      "color": `${colors[0]}`,
+      "quantity": `${quantityCount}`
+    }
     const priceVariantData = {
-      product_id: pid,
-      color: color,
-    };
-    dispatch(getPriceVariant(priceVariantData));
-  };
-  const priceVariantHandlerByChoice = (choiceOption) => {
+      "product_id": `${pid}`,
+      "choice_19": `${option}`,
+      "color": `${colors[0]}`,
+      "quantity": `${quantityCount}`
+    }
+    option ? dispatch(getPriceVariant(priceVariantData)) : dispatch(getPriceVariant(priceVariantDefaultOptionData))
+  }
+  const priceVariantHandlerByColor = (selectedColor) => {
+    const priceVariantDefaultColorData = {
+      "product_id": `${pid}`,
+      "choice_19": `${defaultOption[0]}`,
+      "color": `${colors[0]}`,
+      "quantity": `${quantityCount}`
+    }
     const priceVariantData = {
-      product_id: pid,
-      choice_19: choiceOption,
-    };
-    dispatch(getPriceVariant(priceVariantData));
-  };
-  const priceVariantHandlerByQty = (qty) => {
-    const priceVariantData = {
-      product_id: pid,
-      quantity: qty,
-    };
-    dispatch(getPriceVariant(priceVariantData));
-  };
+      "product_id": `${pid}`,
+      "choice_19": `${defaultOption[0]}`,
+      "color": `${selectedColor}`,
+      "quantity": `${quantityCount}`
+    }
+    selectedColor ? dispatch(getPriceVariant(priceVariantData)) : dispatch(getPriceVariant(priceVariantDefaultColorData))
+  }
+  const priceVariantHandlerByQty = () => {
+    const priceVariantDefaultColorData = {
+      "product_id": `${pid}`,
+      "choice_19": `${defaultOption[0]}`,
+      "color": `${colors[0]}`,
+      "quantity": `${quantityCount}`
+    }
+    // const priceVariantData = {
+    //   "product_id": `${pid}`,
+    //   "choice_19": `${defaultOption[0]}`,
+    //   "color": `${selectedColor}`,
+    //   "quantity": `${quantityCount}`
+    // }
+    dispatch(getPriceVariant(priceVariantDefaultColorData))
+  }
 
+
+  // const priceVariantHandlerByQty = () => {
+  //   const priceVariantData = {
+  //     "product_id": pid,
+  //     "quantity": quantityCount
+  //   }
+  //   dispatch(getPriceVariant(priceVariantData))
+  // }
+ 
+ 
   return (
     <>
       <div className="modal-container">
@@ -108,7 +139,10 @@ const QuickViewModal = ({ pid }) => {
                         <h5>{list?.title}: </h5>
                         <div className="d-flex">
                           {list?.options?.map((option) => (
-                            <span className="size1">{option}</span>
+                            <span 
+                            style={{cursor: "pointer"}}
+                            onClick={() => priceVariantHandlerByChoiceOption(option)} 
+                            className="size1">{option}</span>
                           ))}
                         </div>
                       </>
@@ -133,6 +167,7 @@ const QuickViewModal = ({ pid }) => {
                             style={{
                               background: `${color.code}`,
                               margin: "0px 2px",
+                              cursor: "pointer"
                             }}
                             className="color1"
                           ></div>
@@ -152,6 +187,7 @@ const QuickViewModal = ({ pid }) => {
                               ? quantityCount - 1
                               : quantityCount
                           )
+                          // priceVariantHandlerByQty()
                         }
                         className="minus"
                       >
@@ -159,13 +195,9 @@ const QuickViewModal = ({ pid }) => {
                       </span>
                       <span className="count-number">{quantityCount}</span>
                       <span
-                        onClick={() =>
-                          setQuantityCount(
-                            productDetail.current_stock > quantityCount
-                              ? quantityCount + 1
-                              : quantityCount
-                          )
-                        }
+                        onClick={() => setQuantityCount(productDetail.current_stock > quantityCount
+                          ? quantityCount + 1
+                          : quantityCount)}
                         className="plus"
                       >
                         +
@@ -174,7 +206,7 @@ const QuickViewModal = ({ pid }) => {
                   </div>
                   <div className="totalPrice">
                     <h5>
-                      Total Price: ৳ {quantityCount * productDetail.unit_price}
+                      Total Price: ৳  {variantPrice? variantPrice * quantityCount : quantityCount * productDetail?.unit_price}
                     </h5>
                   </div>
                 </div>

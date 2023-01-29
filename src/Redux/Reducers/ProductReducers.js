@@ -2,11 +2,14 @@ import {
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
   ALL_PRODUCT_FAIL,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
   CLEAR_PRODUCT_ERROR,
 } from "../Constants/ProductConstants";
 
 
-const ProductReducers = (state = { product: [] }, action) => {
+export const ProductReducers = (state = { product: [] }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
@@ -34,4 +37,28 @@ const ProductReducers = (state = { product: [] }, action) => {
       return  state
   }
 };
-export default ProductReducers;
+
+export const productDetailsReducers = (state = { productDetails: {} }, action) => {
+  // eslint-disable-next-line default-case
+  switch (action.type) {
+    case PRODUCT_DETAILS_REQUEST:
+      return {
+        loading: true,
+        product: [],
+      };
+    case PRODUCT_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        product: action.payload,
+      };
+    case PRODUCT_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+      default:
+      return  state
+  }
+};
+

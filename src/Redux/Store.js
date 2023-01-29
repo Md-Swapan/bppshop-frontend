@@ -6,6 +6,7 @@ import { userReducer } from './Reducers/UserReducers';
 import { userOrderDetailReducers, userOrderReducers } from './Reducers/UserOrderReducers';
 import { addShippingAddressReducers, loadAllShippingAddressReducers, } from "./Reducers/ShippingAddressReducers";
 import PriceVariantReducers from './Reducers/PriceVariantReducers';
+import { productDetailsReducers } from "./Reducers/ProductReducers";
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   userOrderDetails:userOrderDetailReducers,
   shippingInfo: addShippingAddressReducers,
   allShippingInfo: loadAllShippingAddressReducers,
-  priceVariant: PriceVariantReducers
+  priceVariant: PriceVariantReducers,
+  productDetails: productDetailsReducers
 });
 
 let initialState = {
