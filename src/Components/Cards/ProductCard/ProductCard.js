@@ -46,6 +46,7 @@ const ProductCard = ({ product }) => {
   //   alert.success("Item Added To Cart");
   // };
 
+  
   return (
     <>
       <div className="product_card_content">
