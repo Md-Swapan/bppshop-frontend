@@ -1,155 +1,180 @@
-import React from "react";
-import "./AddNewAddress.css";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { baseUrl } from "../../../BaseUrl/BaseUrl";
+import { addShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
+import { useForm } from "react-hook-form";
 
 const AddNewAddress = () => {
+  const token = localStorage.getItem("token");
+  const [districtDataOptions, setDistrictDataOptions] = useState([]);
+  const [thanaDataOptions, setThanaDataOptions] = useState([]);
+  const [areaDataOptions, setAreaDataOptions] = useState([]);
+  const [districtId, setDistrictId] = useState(null);
+  const [thanaId, setThanaId] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+
+
+  useEffect(() => {
+    axios
+      .get(baseUrl + "/location/districts", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setDistrictDataOptions(res.data.data);
+      });
+  }, [token]);
+
+  const handleDistrictChange = (e) => {
+    e.preventDefault();
+    const districtId = e.target.value;
+    setDistrictId(e.target.value);
+    axios
+      .get(baseUrl + `/location/thanas/${districtId}`)
+      .then((res) => setThanaDataOptions(res.data.data));
+  };
+
+  const handleThanaChange = (e) => {
+    e.preventDefault();
+    const thanaId = e.target.value;
+    setThanaId(e.target.value);
+    axios
+      .get(baseUrl + `/location/areas/${thanaId}`)
+      .then((res) => setAreaDataOptions(res.data.data));
+  };
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    const district_id = districtId;
+    const upazila_id = thanaId;
+    const newData = { ...data, district_id, upazila_id };
+    
+    dispatch(addShippingAddress(newData))
+
+    if(shippingAddressInfo?.status === "success"){
+      navigate("/profile/account-address")
+    }
+    
+  };
   return (
     <div>
-      <h4>Add new address</h4>
       <form>
-        {/* <div class="row">
-          <div class="col-md-6 d-flex">
-            <ul class="donate-now">
-              <li>
-                <input
-                  type="radio"
-                  id="a25"
-                  name="addressAs"
-                  value="permanent"
-                  data-gtm-form-interact-field-id="0"
-                />
-                <label for="a25" class="component">
-                  Permanent
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="a50"
-                  name="addressAs"
-                  value="home"
-                  data-gtm-form-interact-field-id="1"
-                />
-                <label for="a50" class="component">
-                  Home
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="a75"
-                  name="addressAs"
-                  value="office"
-                  checked="checked"
-                  data-gtm-form-interact-field-id="2"
-                />
-                <label for="a75" class="component">
-                  Office
-                </label>
-              </li>
-            </ul>
-          </div>
+      <div className="shipping_Add_container">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="shipping_Add_content">
+          <div className="shipping_Add_header">Add New Address</div>
+        </div>
+        <hr className="shipping_Add_line" />
 
-          <div class="col-md-6 d-flex">
-            <ul class="donate-now">
-              <li>
-                <input
-                  type="radio"
-                  name="is_billing"
-                  id="b25"
-                  value="0"
-                  data-gtm-form-interact-field-id="3"
-                />
-                <label for="b25" class="billing_component">
-                  Shipping
-                </label>
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="is_billing"
-                  id="b50"
-                  value="1"
-                  data-gtm-form-interact-field-id="4"
-                />
-                <label for="b50" class="billing_component">
-                  Billing
-                </label>
-              </li>
-            </ul>
+        <div className="shipping_address_input_container">
+          <div className="form-group">
+            <span>Contact person name *</span>
+            <input
+              {...register("contact_person_name", { required: true })}
+              name="contact_person_name"
+              className="shipping_address_input"
+              type="text"
+              placeholder="Enter Your Name"
+            />
           </div>
-        </div> */}
-
-        <div className="mt-4">
-          <div class="row">
-            <div class="col-md-6">
-              <label for="name">Contact person name</label>
-              <input
-                class="add_new_address_input"
-                type="text"
-                id="name"
-                name="name"
-                required
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="firstName">Phone</label>
-              <input
-                class="add_new_address_input"
-                type="text"
-                id="phone"
-                name="phone"
-                required
-              />
-            </div>
+          <div className="form-group">
+            <span>Phone *</span>
+            <input
+              {...register("phone", { required: true })}
+              name="phone"
+              className="shipping_address_input"
+              type="text"
+              placeholder="Enter Your Phone Number"
+            />
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label for="address-city">City</label>
-              <input
-                class="add_new_address_input"
-                type="text"
-                id="address-city"
-                name="city"
-                required
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="zip">Zip code</label>
-              <input
-                class="add_new_address_input"
-                type="number"
-                id="zip"
-                name="zip"
-                required
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label for="address">Address</label>
-
-              <textarea
-                class="add_new_address_input"
-                id="address"
-                type="text"
-                name="address"
-                required=""
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="add_new_address_btn_section">
-            <button
-              type="button"
-              class="add_new_address_close_btn"
+          <div className="form-group">
+            <span>District/City*</span>
+            <select
+              // {...register("district_id", { required: true })}
+              onChange={handleDistrictChange}
+              required
+              name="district_id"
+              class="shipping_address_input"
+              aria-label="Default select example"
             >
-              Close
-            </button>
-            <button type="submit" class="add_new_address_submit_btn">
-              Add Informations{" "}
-            </button>
+              <option value={null} selected>
+                ------Select District/City------
+              </option>
+              {districtDataOptions?.map((district) => (
+                <option key={district.id} value={district.id}>
+                  {district.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <span>Upazila/Thana*</span>
+            <select
+              // {...register("upazila_id", { required: true })}
+              onChange={handleThanaChange}
+              required
+              name="upazila_id"
+              class="shipping_address_input"
+              aria-label="Default select example"
+            >
+              <option value={null} selected>
+                ------Select Upazila/Thana------
+              </option>
+              {thanaDataOptions.map((thana) => (
+                <option key={thana.id} value={thana.id}>
+                  {thana.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <span>Area*</span>
+            <select
+              {...register("area_id", { required: true })}
+              name="area_id"
+              class=" shipping_address_input"
+              aria-label="Default select example"
+            >
+              <option selected>------Select Area------</option>
+              {areaDataOptions.map((area) => (
+                <option key={area.id} value={area.id}>
+                  {area.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <span>Address *</span>
+            <input
+              {...register("address", { required: true })}
+              name="address"
+              className="shipping_address_input"
+              type="text"
+              placeholder="House no. / Building /Street /Area"
+            />
           </div>
         </div>
+
+        <div className="shipping_add_close_btn">
+          <div>
+            <Link to="/profile/account-address">
+              <input
+                className="shipping_close_btn"
+                type="button"
+                value="close"
+              />
+            </Link>
+          </div>
+          <div>
+            <input className="shipping_save_btn" type="submit" value="save" />
+          </div>
+        </div>
+      </form>
+    </div>
       </form>
     </div>
   );

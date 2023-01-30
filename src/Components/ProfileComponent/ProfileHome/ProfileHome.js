@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import "./ProfileHome.css";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 
 const ProfileHome = () => {
@@ -127,7 +127,6 @@ const ProfileHome = () => {
             </small>
           </div>
           <div className="profile_form_btn_section">
-            <button className="profile_delete_btn">Delete Account</button>
             <input
               type="submit"
               className="profile_update_btn"
