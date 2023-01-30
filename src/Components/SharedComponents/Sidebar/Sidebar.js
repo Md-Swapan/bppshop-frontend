@@ -16,31 +16,63 @@ import hardwareIcon from "../../../Assets/Images/icons/image 52 (1).png";
 import homeDecorateIcon from "../../../Assets/Images/icons/image 50.png";
 import vehicleIcon from "../../../Assets/Images/icons/image 53.png";
 import usedProductsIcon from "../../../Assets/Images/icons/usedProduct.jfif";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 
 const Sidebar = () => {
-  const [allCategory, setAllCategory] = useState([]);
-  const categories = allCategory.find((item) => item);
-  const subCategory = categories?.childes?.map(item => item)
+  // const { slug } = useParams();
 
-  console.log(subCategory)
+  const [allCategory, setAllCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  // const [categoryName, setCategoryName] = useState('')
+
+
+  // const categoryList = allCategory?.map((item) => item)
+  // const categoryNames = categoryList?.map(item => item.slug)
+
+
+
+//   const subCategoryList = categoryList?.map(item => item.childes)
+//   const subCategoryName = subCategoryList.map(item => item.name)
+
+//  console.log(categoryNames)
 
   useEffect(() => {
     axios.get(`${baseUrl}/categories`).then((res) => {
-      setAllCategory(res.data.data);
+      setAllCategory(res?.data?.data);
     });
   }, []);
 
-  const subMenuHandler = () => {
-    // const subMenu = document.querySelector(".subMenu");
-    const chevronRight = document.querySelector(".chevron-right");
-    const chevronDown = document.querySelector(".chevron-down");
 
-    // subMenu.classList.toggle("subMenuActive");
-    chevronRight.style.display = "none";
-    chevronDown.style.display = "block";
+  const subMenuHandler = (slug) => {
+
+    // setCategoryName(slug)
+    // const category = allCategory?.map((item) => item)
+
+    // const categoryName = category?.map(item => item.slug)
+    // const subCategoryName = categoryName?.find((item) => item === slug);
+
+    // const subCategories = allCategory?.map((item) => item.childes)
+    // setSubCategory(subCategories?.find((item) => item.slug === slug));
+
+
+
+
+
+
+
+    
+    // if(subCategoryName === slug){
+    //   const subMenu = document.querySelector(".subMenu");
+    //   const chevronRight = document.querySelector(".chevron-right");
+    //   const chevronDown = document.querySelector(".chevron-down");
+  
+    //   subMenu.classList.toggle("subMenuActive");
+    //   chevronRight.style.display = "none";
+    //   chevronDown.style.display = "block";
+    // }
+    
   };
 
   return (
@@ -57,14 +89,14 @@ const Sidebar = () => {
             <li className="homeIcon">
               <Link to="/">
                 <div>
-                <i className="bi bi-house-door-fill"></i>
-                Home
+                  <i className="bi bi-house-door-fill"></i>
+                  Home
                 </div>
               </Link>
             </li>
 
             {allCategory.map((categoryItem) => (
-              <li onClick={subMenuHandler}>
+              <li onClick={() => subMenuHandler(categoryItem.slug)}>
                 <Link to={`/${categoryItem.slug}`}>
                   <div>
                     {categoryItem.name === "Islamic" ? (
@@ -185,14 +217,11 @@ const Sidebar = () => {
                     <i class="bi bi-chevron-down chevron-down"></i>
                   </span>
                 </Link>
-
-                <ul className="subMenu">
-                  <Link to="">
-                    <li className="menu-item">
-                      <i className="bi bi-person-lines-fill"></i> Customer List
-                    </li>
-                  </Link>
-                </ul>
+                {/* <ul className="subMenu">
+                  {subCategory.map((item) => (
+                    <li>{item.name}</li>
+                  ))}
+                </ul> */}
               </li>
             ))}
           </ul>
