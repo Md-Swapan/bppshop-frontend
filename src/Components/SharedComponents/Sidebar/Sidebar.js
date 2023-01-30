@@ -20,43 +20,33 @@ import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 
 const Sidebar = () => {
-  const [categoryName,setCategoryName]=useState('');
   const [allCategory, setAllCategory] = useState([]);
-  const subCategory = allCategory?.find(item=>item?.slug ===categoryName);
-  console.log(subCategory?.slug,categoryName);
+  const [subCategory, setSubCategory] = useState([]);
 
   useEffect(() => {
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res?.data?.data);
     });
   }, []);
-if (subCategory?.slug===categoryName) {
-  // console.log("match");
-   document.querySelector(".subMenu").classList.toggle("subMenuActive");;
 
-      // const chevronRight = document.querySelector(".chevron-right");
-      // const chevronDown = document.querySelector(".chevron-down");
-  
-      // subMenu.classList.toggle("subMenuActive");
-      // chevronRight.style.display = "none";
-      // chevronDown.style.display = "block";
-}
-
-  const subMenuHandler = (slug) => {
-    setCategoryName(slug)
-
-
-// if (subCategoryList.slug===slug) {
-//   console.log("match");
-//   const subMenu = document.querySelector(".subMenu");
-//       const chevronRight = document.querySelector(".chevron-right");
-//       const chevronDown = document.querySelector(".chevron-down");
-  
-//       subMenu.classList.toggle("subMenuActive");
-//       chevronRight.style.display = "none";
-//       chevronDown.style.display = "block";
-// }
+  const subMenuHandler = (slug, index) => {
     
+    const subCategories = allCategory.find((item) => item.slug === slug);
+    setSubCategory(subCategories.childes);
+    const categoryItem = document.getElementById(`categoryItem ${index}`);
+    const subMenu = document.querySelector(".subMenu");
+
+    categoryItem.append(subMenu);
+
+    if (subCategories) {
+      const subMenu = document.querySelector(".subMenu");
+      const chevronRight = document.querySelector(".chevron-right");
+      const chevronDown = document.querySelector(".chevron-down");
+
+      subMenu.classList.toggle("subMenuActive");
+      chevronRight.style.display = "none";
+      chevronDown.style.display = "block";
+    }
   };
 
   return (
@@ -74,13 +64,17 @@ if (subCategory?.slug===categoryName) {
               <Link to="/">
                 <div>
                   <i className="bi bi-house-door-fill"></i>
-                  Home
+                  Homes
                 </div>
               </Link>
             </li>
 
-            {allCategory.map((categoryItem) => (
-              <li onClick={() => subMenuHandler(categoryItem?.slug)}>
+            {allCategory.map((categoryItem, index) => (
+              <li
+                id={`categoryItem ${index}`}
+                className=""
+                onClick={() => subMenuHandler(categoryItem.slug, index)}
+              >
                 <Link to={`/${categoryItem.slug}`}>
                   <div>
                     {categoryItem.name === "Islamic" ? (
@@ -201,13 +195,14 @@ if (subCategory?.slug===categoryName) {
                     <i class="bi bi-chevron-down chevron-down"></i>
                   </span>
                 </Link>
-                <ul className="subMenu">
-                  {subCategory?.childes?.map((item) => (
-                    <li>{item.name}</li>
-                  ))}
-                </ul>
               </li>
             ))}
+
+            <ul className=" subMenu">
+              {subCategory?.map((item, indx) => (
+                <li>{item.name}</li>
+              ))}
+            </ul>
           </ul>
         </div>
       </div>
