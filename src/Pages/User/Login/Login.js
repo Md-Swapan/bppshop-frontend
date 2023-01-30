@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
@@ -13,15 +13,18 @@ const Login = () => {
   const { isAuthenticated, error} = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
+  const token = localStorage.getItem("token");
+
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
 
   };
-  if(isAuthenticated === true){
+  if(isAuthenticated === "true" && token){
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
   } 
+ 
 
   return (
     <div class="row justify-content-center">
