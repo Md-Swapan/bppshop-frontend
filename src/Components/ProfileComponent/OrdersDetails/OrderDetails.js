@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./OrderDetails.css";
 import productImg from "../../../Assets/Images/categoryImg/download (1).png";
 import { Link, useParams } from "react-router-dom";
@@ -19,9 +19,7 @@ const OrderDetails = () => {
   const productDetails = userOrderDetails?.map(
     (orderDetail) => orderDetail?.product_details
   );
-  // console.log(productDetails);
 
-  
   return (
     <div>
       <Link to="/profile/orders">
@@ -100,7 +98,9 @@ const OrderDetails = () => {
 
                   <td width="100%">
                     <div class="text-right">
-                      <span class="font-weight-bold amount">৳{product.unit_price} </span>
+                      <span class="font-weight-bold amount">
+                        ৳{product.unit_price}{" "}
+                      </span>
                       <br />
                       <span>Qty: {product.min_qty}</span>
                     </div>
@@ -209,13 +209,9 @@ const OrderDetails = () => {
         </div>
       </div>
       <div class="row">
-        {/* <div className="col-md-6">
-          <div className="view_invoice_btn"> View Invoice</div>
-        </div> */}
-        <div className="col-md-6">
-          {" "}
-          <div className="track_order_btn text-center">Track Order</div>
-        </div>
+          <div className="track_order_btn">
+            <Link to="/profile/track-order"><button>Track Order</button></Link>
+          </div>
       </div>
     </div>
   );
