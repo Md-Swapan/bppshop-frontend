@@ -10,6 +10,16 @@
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   /* transform: translateX(-300px); */
   transition: transform 250ms ease-in-out;
+  overflow: scroll;
+}
+
+#sidebarMenu::-webkit-scrollbar {
+  display: none;
+}
+
+#sidebarMenu {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
 #openSidebarMenu {
@@ -112,7 +122,11 @@
   border-radius: 2px;
 }
 
-.subMenu, .chevron-down {
+.subMenu {
+ background: #fff;
+ display: none;
+}
+.chevron-down {
   display: none;
 }
 /* .arrowToggle {
