@@ -12,9 +12,11 @@
     overflow: hidden;
     transition: all 0.3s;
 }
-.order_table_info_div{
+
+.order_table_info_div {
     text-align: end;
 }
+
 .order_detail_list {
     border: 1px solid #ececfb;
 }
@@ -31,18 +33,15 @@
     cursor: pointer;
 }
 
-
-.view_invoice_btn, .track_order_btn{
-color: white;
-text-align: center;
-padding: 10px 20px;
-border-radius: 5px;
-cursor: pointer;
-}
-.view_invoice_btn {
-    background: #ef8341;
-}
-
 .track_order_btn {
-    background: #000000;
+    text-align: center;
+    margin-top: 20px;
+}
+.track_order_btn button{
+    background: #ef8341;
+    color: white;
+    text-align: center;
+    padding: 10px 80px;
+    border-radius: 5px;
+    border: none;
 }

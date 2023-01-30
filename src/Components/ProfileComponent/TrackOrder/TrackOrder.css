@@ -1,33 +1,38 @@
-.track_order_header {
-    padding: 20px;
+
+.order_tracking_head{
+    width: 100%;
+    background: #ef8341;
+    padding: 20px 0px;
+    border-radius: 5px 5px 0px 0px;
+}
+.order_tracking_head h5{
+    color: white;
+    margin-left: 10px;
+}
+.order_status_info{
+    background:#e2f0ff;
+}
+.order_step_container{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-top: 50px;
+    padding: 50px 10px;
+    border-radius: 5px;
+}
+.order_step_icon {
+    font-size: 50px;
     text-align: center;
 }
-.order_tracking_form{
-    width: 70%;
-    margin: 0px auto;
+.order_step_icon_first{
+    color: #ef8341;
 }
-.order_tracking_input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    appearance: none;
-    border-radius: .25rem;
-    outline: none;
-    margin: 10px auto;
+.view_track_order_details {
+    text-align: end;
+    margin-top: 20px;
 }
-.track_order_submit {
-    margin: 5px 0px 40px 0px;
-}
-.track_order_submit_btn{
-    background: #ef8341;
+.view_track_order_details button {
     border: none;
     padding: 10px 20px;
+    background: #ef8341;
     color: white;
     border-radius: 5px;
 }

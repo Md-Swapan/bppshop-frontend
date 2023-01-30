@@ -19,7 +19,7 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
 import { loadUser } from './Redux/Actions/UserAction';
 import { loadUserOrders } from './Redux/Actions/UserOrderAction';
-// import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
+import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
 import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';
 import AddNewAddress from './Components/ProfileComponent/AddNewAddress/AddNewAddress';
 import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/ShippingDetails';
@@ -29,6 +29,7 @@ import ShippingHome from "./Components/ShippingComponent/ShippingHome/ShippingHo
 import CheckoutComple from "./Pages/Checkut/CheckoutComple";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
+import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
 // import { getCartData } from './Redux/Actions/CartAction';
 // import { useSelector } from 'react-redux';
 
@@ -76,7 +77,8 @@ function App() {
             <Route index element={<ProfileHome />}></Route>
             <Route path="orders" element={<OrderHome />}></Route>
             <Route path="orders-detail/:id" element={<OrderDetails />}></Route>
-            {/* <Route path="track-order" element={<TrackOrder/>}></Route> */}
+            <Route path="track-order" element={<TrackOrder/>}></Route>
+            <Route path="track-order-details" element={<TrackOrderDetails/>}></Route>
             <Route path="account-address" element={<AddressHome/>}></Route>
             <Route path="add-new-address" element={<AddNewAddress/>}></Route>
           </Route>
