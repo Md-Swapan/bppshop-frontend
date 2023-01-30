@@ -1,13 +1,14 @@
 #sidebarMenu {
   height: 100%;
-  width: 300px;
+  width: 270px;
   position: fixed;
   left: 0;
   top: 0;
   margin-top: 60px;
-  background: #f2f2f2;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  transform: translateX(-300px);
+  background: #f9f9f9;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  /* transform: translateX(-300px); */
   transition: transform 250ms ease-in-out;
 }
 
@@ -51,7 +52,7 @@
 }
 
 #openSidebarMenu:checked ~ #sidebarMenu {
-  transform: translateX(0px);
+  transform: translateX(-300px);
 }
 
 .menu {
@@ -64,31 +65,33 @@
   justify-content: center !important;
 }
 
-.homeIcon:hover a {
+/* .homeIcon:hover a {
   margin-left: 0px !important;
-}
+} */
 .homeIcon i {
   text-align: center;
-  border-radius: 50px ;
-  padding: 5px 9px ;
+  border-radius: 7px;
+  padding: 5px 9px;
   color: #fd7e14;
   background: #fff;
-  font-size: 22px;
+  font-size: 20px;
 }
 .menu li {
-  padding: 7px 10px;
+  padding: 5px 10px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(224, 224, 224);
-
+  border-bottom: 1px solid rgb(230, 230, 230);
 }
 .menu li a {
+  width: 100%;
   color: rgb(65, 65, 65);
   display: block;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 600;
   transition: all 0.3s;
+  display: flex;
+  justify-content: space-between;
 }
 .menu li:hover a {
   margin-left: 5px;
@@ -101,12 +104,20 @@
   background: #fff;
 }
 .menu li span {
-  font-size: 15px;
+  font-size: 14px;
   margin: 7px 2px 0px 0px !important;
 }
 
-
-
 .sidebar-Icon {
   border-radius: 2px;
+}
+
+.subMenu, .chevron-down {
+  display: none;
+}
+/* .arrowToggle {
+  transform: rotateX(180deg);
+} */
+.subMenuActive {
+  display: block;
 }
