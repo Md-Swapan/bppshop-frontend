@@ -24,7 +24,6 @@ const Sidebar = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [categorySlugName, setCategorySlugName] = useState([]);
   const [subCategorySlugName, setSubCategorySlugName] = useState([]);
- 
 
   useEffect(() => {
     axios.get(`${baseUrl}/categories`).then((res) => {
@@ -33,53 +32,53 @@ const Sidebar = () => {
   }, []);
 
   const subMenuHandler = (slug, index) => {
-    setCategorySlugName(slug)
-    
+    setCategorySlugName(slug);
+
     const subCategories = allCategory.find((item) => item.slug === slug);
     setSubCategory(subCategories.childes);
     const categoryItem = document.getElementById(`categoryItem ${index}`);
-    
+
     const subMenu = document.querySelector(".subMenu");
 
     categoryItem.append(subMenu);
 
     if (subCategories) {
       const subMenu = document.querySelector(".subMenu");
-      const chevronRight = document.querySelector(".chevron-right");
-      const chevronDown = document.querySelector(".chevron-down");
+      const chevronRight = document.querySelector(".chevronRight");
 
       subMenu.classList.toggle("subMenuActive");
-      chevronRight.style.display = "none";
-      chevronDown.style.display = "block";
+      chevronRight.classList.toggle("arrowToggle");
     }
   };
 
-
-
   const [subSubCategoryList, setSubSubCategoryList] = useState([]);
   const subSubCategoryViewHandler = (subSlug, indx) => {
-    setSubCategorySlugName(subSlug)
-    const subCategories = allCategory.find((item) => item);
+    setSubCategorySlugName(subSlug);
+
+    console.log(subSlug);
+
+    const subCategories = allCategory.find(
+      (item) => item.slug === categorySlugName
+    );
     const subSubCategories = subCategories?.childes.find(
       (item) => item.slug === subSlug
     );
 
     setSubSubCategoryList(subSubCategories);
 
-    const subSubCategoryItem = document.getElementById(`subSubCategoryItem ${indx}`);
+    console.log(subSubCategories.childes);
+
+    const subSubCategoryItem = document.getElementById(
+      `subSubCategoryItem ${indx}`
+    );
     const subSubMenu = document.querySelector(".subSubMenu");
     subSubCategoryItem.append(subSubMenu);
 
     if (subCategories) {
       const subSubMenu = document.querySelector(".subSubMenu");
-      const chevronRight = document.querySelector(".chevron-right");
-      const chevronDown = document.querySelector(".chevron-down");
-
       subSubMenu.classList.toggle("subSubMenuActive");
-      chevronRight.style.display = "none";
-      chevronDown.style.display = "block";
     }
-  }
+  };
 
   return (
     <>
@@ -96,20 +95,20 @@ const Sidebar = () => {
               <Link to="/">
                 <div>
                   <i className="bi bi-house-door-fill"></i>
-                  Homes
+                  Home
                 </div>
               </Link>
             </li>
 
-            {allCategory.map((categoryItem, index) => (
+            {allCategory?.map((categoryItem, index) => (
               <li
                 id={`categoryItem ${index}`}
                 className=""
-                onClick={() => subMenuHandler(categoryItem.slug, index)}
+                onClick={() => subMenuHandler(categoryItem?.slug, index)}
               >
-                <Link to={`/${categoryItem.slug}`}>
+                <Link to={`/${categoryItem?.slug}`}>
                   <div>
-                    {categoryItem.name === "Islamic" ? (
+                    {categoryItem?.name === "Islamic" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
@@ -117,70 +116,70 @@ const Sidebar = () => {
                         alt=""
                       />
                     ) : "icon" &&
-                      categoryItem.name === "Grocery ( Only Dhaka City)" ? (
+                      categoryItem?.name === "Grocery ( Only Dhaka City)" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={groceryIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Fashion" ? (
+                    ) : "icon" && categoryItem?.name === "Fashion" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={fashionIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Baby Care" ? (
+                    ) : "icon" && categoryItem?.name === "Baby Care" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={babyCareIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Cosmetics" ? (
+                    ) : "icon" && categoryItem?.name === "Cosmetics" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={cosmeticsIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Pharmacy" ? (
+                    ) : "icon" && categoryItem?.name === "Pharmacy" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={pharmacyIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Electronics" ? (
+                    ) : "icon" && categoryItem?.name === "Electronics" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={electronicsIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Eye Care" ? (
+                    ) : "icon" && categoryItem?.name === "Eye Care" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={eyeCareIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Shoe" ? (
+                    ) : "icon" && categoryItem?.name === "Shoe" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={shoesIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Furniture" ? (
+                    ) : "icon" && categoryItem?.name === "Furniture" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={furnitureIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Sports" ? (
+                    ) : "icon" && categoryItem?.name === "Sports" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
@@ -188,7 +187,7 @@ const Sidebar = () => {
                         alt=""
                       />
                     ) : "icon" &&
-                      categoryItem.name === "Home Appliance & Decorate" ? (
+                      categoryItem?.name === "Home Appliance & Decorate" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
@@ -196,21 +195,21 @@ const Sidebar = () => {
                         alt=""
                       />
                     ) : "icon" &&
-                      categoryItem.name === "Hardware, Cables & Sanitary" ? (
+                      categoryItem?.name === "Hardware, Cables & Sanitary" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={hardwareIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Vehicle" ? (
+                    ) : "icon" && categoryItem?.name === "Vehicle" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
                         src={vehicleIcon}
                         alt=""
                       />
-                    ) : "icon" && categoryItem.name === "Used Product" ? (
+                    ) : "icon" && categoryItem?.name === "Used Product" ? (
                       <img
                         width="15"
                         className="sidebar-Icon"
@@ -220,11 +219,11 @@ const Sidebar = () => {
                     ) : (
                       ""
                     )}
-                    {categoryItem.name}
+                    {categoryItem?.name}
                   </div>
                   <span>
-                    <i class="bi bi-chevron-right chevron-right"></i>
-                    <i class="bi bi-chevron-down chevron-down"></i>
+                    <i class="bi bi-chevron-right chevronRight"></i>
+                    {/* <i class="bi bi-chevron-down chevron-down"></i> */}
                   </span>
                 </Link>
               </li>
@@ -232,21 +231,25 @@ const Sidebar = () => {
 
             <ul className=" subMenu">
               {subCategory?.map((item, indx) => (
-                <Link to={`/${categorySlugName}/${item.slug}`}>
-                  <li id={`subSubCategoryItem ${indx}`} onClick={() => subSubCategoryViewHandler(item.slug, indx)}>{item.name}</li>
+                <Link to={`/${categorySlugName}/${item?.slug}`}>
+                  <li
+                    id={`subSubCategoryItem ${indx}`}
+                    onClick={() => subSubCategoryViewHandler(item?.slug, indx)}
+                  >
+                    {item?.name}
+                  </li>
+                  <ul className=" subSubMenu">
+                    {subSubCategoryList?.childes?.map((item) => (
+                      <Link
+                        to={`/${categorySlugName}/${subCategorySlugName}/${item?.slug}`}
+                      >
+                        <li>{item?.name}</li>
+                      </Link>
+                    ))}
+                  </ul>
                 </Link>
-                
               ))}
-              
             </ul>
-            <ul className=" subSubMenu">
-              {subSubCategoryList?.childes?.map((item) => (
-                <Link to={`/${categorySlugName}/${subCategorySlugName}/${item?.slug}`}>
-                  <li>{item?.name}</li>
-                </Link>
-                
-              ))}
-              </ul>
           </ul>
         </div>
       </div>

@@ -26,8 +26,6 @@ const customStyles = {
 const ProductCard = ({ product }) => {
   const { id, name, images, unit_price, choice_options, thumbnail} = product;
 
-  console.log(product)
-
   const [pid, setPid] = useState(null);
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
