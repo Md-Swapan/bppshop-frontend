@@ -77,8 +77,8 @@ function App() {
             <Route index element={<ProfileHome />}></Route>
             <Route path="orders" element={<OrderHome />}></Route>
             <Route path="orders-detail/:id" element={<OrderDetails />}></Route>
-            <Route path="track-order" element={<TrackOrder/>}></Route>
-            <Route path="track-order-details" element={<TrackOrderDetails/>}></Route>
+            <Route path="track-order/:id" element={<TrackOrder/>}></Route>
+            <Route path="track-order-details/:id" element={<TrackOrderDetails/>}></Route>
             <Route path="account-address" element={<AddressHome/>}></Route>
             <Route path="add-new-address" element={<AddNewAddress/>}></Route>
           </Route>

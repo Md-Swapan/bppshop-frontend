@@ -15,11 +15,17 @@ const OrderDetails = () => {
     dispatch(loadUserOrderDetails(id));
   }, [dispatch, id]);
   const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
+  // console.log(userOrderDetails);
 
   const productDetails = userOrderDetails?.map(
     (orderDetail) => orderDetail?.product_details
   );
-
+  console.log(productDetails);
+let totalItem=productDetails?.length;
+let subTotal = 0;
+let taxFee=0;
+let shippingFee=0;
+let discountAmount=0;
   return (
     <div>
       <Link to="/profile/orders">
@@ -85,8 +91,13 @@ const OrderDetails = () => {
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
           <table class="table table-borderless">
-            {productDetails?.map((product) => (
-              <tbody>
+            {productDetails?.map((product) => {
+              subTotal += product.min_qty*product.unit_price;
+              taxFee +=product.tax;
+              shippingFee +=product.shipping_cost;
+              discountAmount +=product.discount;
+              return(
+                <tbody key={product.id}>
                 <tr className="order_detail_list">
                   <td class="col-2 for-tab-img">
                     <img src={productImg} alt="" />
@@ -107,7 +118,8 @@ const OrderDetails = () => {
                   </td>
                 </tr>
               </tbody>
-            ))}
+              )
+            })}
           </table>
         </div>
       </div>
@@ -118,12 +130,12 @@ const OrderDetails = () => {
               <tr>
                 <td>
                   <div class="text-left">
-                    <span class="product-qty ">Item</span>
+                    <span class="product-qty ">Item </span>
                   </div>
                 </td>
                 <td>
                   <div class="text-right">
-                    <span>1</span>
+                    <span>{totalItem}</span>
                   </div>
                 </td>
               </tr>
@@ -136,7 +148,7 @@ const OrderDetails = () => {
                 </td>
                 <td>
                   <div class="text-right">
-                    <span>৳50.00</span>
+                    <span>৳{subTotal}.00</span>
                   </div>
                 </td>
               </tr>
@@ -149,7 +161,7 @@ const OrderDetails = () => {
                 </td>
                 <td>
                   <div class="text-right">
-                    <span>৳0.00</span>
+                    <span>৳{taxFee}.00</span>
                   </div>
                 </td>
               </tr>
@@ -161,7 +173,7 @@ const OrderDetails = () => {
                 </td>
                 <td>
                   <div class="text-right">
-                    <span>৳60.00</span>
+                    <span>৳{shippingFee}.00</span>
                   </div>
                 </td>
               </tr>
@@ -174,7 +186,7 @@ const OrderDetails = () => {
                 </td>
                 <td>
                   <div class="text-right">
-                    <span>- ৳0.00</span>
+                    <span>- ৳{discountAmount}.00</span>
                   </div>
                 </td>
               </tr>
@@ -187,7 +199,7 @@ const OrderDetails = () => {
                 </td>
                 <td>
                   <div class="text-right">
-                    <span>- ৳0.00</span>
+                    <span>--</span>
                   </div>
                 </td>
               </tr>
@@ -200,7 +212,7 @@ const OrderDetails = () => {
                 </td>
                 <td>
                   <div class="text-right">
-                    <span class="font-weight-bold amount ">৳110.00</span>
+                    <span class="font-weight-bold amount ">৳{(subTotal+shippingFee+taxFee)-discountAmount}.00</span>
                   </div>
                 </td>
               </tr>
@@ -210,7 +222,7 @@ const OrderDetails = () => {
       </div>
       <div class="row">
           <div className="track_order_btn">
-            <Link to="/profile/track-order"><button>Track Order</button></Link>
+            <Link to={`/profile/track-order/${id}`}><button>Track Order</button></Link>
           </div>
       </div>
     </div>
