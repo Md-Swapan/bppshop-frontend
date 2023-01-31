@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const OrderHome = () => {
   const { userOrders } = useSelector((state) => state.userOrders);
-  // console.log(userOrders);
 
   return (
     <div>

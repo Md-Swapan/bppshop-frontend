@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
 import "./TrackOrderDetails.css";
 
@@ -19,7 +20,6 @@ const TrackOrderDetails = () => {
   let shippingCost = 0;
   let taxAmount = 0;
   let discountAmount = 0;
-  console.log(productDetails);
   return (
     <div>
       <Link to={`/profile/track-order/${id}`}>
@@ -44,7 +44,8 @@ const TrackOrderDetails = () => {
                   <td>
                     <img
                       className="track_order_img"
-                      src="https://bppshop.com.bd/storage/product/thumbnail/2023-01-26-63d23da3e9990.png"
+                      // src="https://bppshop.com.bd/storage/product/thumbnail/2023-01-26-63d23da3e9990.png"
+                      src={imgThumbnailBaseUrl + `/${item.thumbnail}`}
                       alt=""
                     />
                   </td>
