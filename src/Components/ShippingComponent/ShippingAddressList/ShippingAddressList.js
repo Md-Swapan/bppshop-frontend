@@ -1,58 +1,74 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import "./ShippingAddressList.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loadAllShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
+import { setDefaultShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
 
-const ShippingAddressList = ({ shippingAddressList }) => {
-  const token = localStorage.getItem("token");
+const ShippingAddressList = () => {
+  const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
+  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleDefaultAddress = (address_id) => {
-    axios
-      .post(baseUrl + "/shipping-address/set-default", address_id, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          navigate("/shipping-details");
-        }
-      });
+
+  useEffect(() => {
+    dispatch(loadAllShippingAddress());
+  }, [dispatch]);
+
+  
+
+  const handleSetDefaultAddress = (address_id) => {
+    const addressId = {
+      address_id : address_id
+    }
+
+    dispatch(setDefaultShippingAddress(addressId))
+
+    if(shippingAddressInfo?.status === "success"){
+      navigate("/shipping-details");
+    }
   };
+
   return (
     <div>
       <div className="shipping_container">
         <div className="shipping_content">
-          <div className="shipping_header">Shipping Address</div>
+          <div className="shipping_header">Delivery Address</div>
         </div>
         <hr className="shipping_line" />
         <div className="address_content">
           <div className="row">
-            {shippingAddressList?.map((address) => (
-              <div key={address.id} className="col-md-6">
+            {allShippingAddressInfo?.data?.map((shippingAddInfo) => (
+              <div key={shippingAddInfo?.id} className="col-md-6">
                 <div className="shipping_address_box">
                   <div className="shipped_person">
                     <div>
-                      Delivery to :{address?.is_billing}{" "}
-                      {address?.contact_person_name}
+                      Delivery to :{" "}
+                      {shippingAddInfo?.contact_person_name}
                     </div>
                     <div>
-                      {address?.is_billing === 1 ? (
+                      {shippingAddInfo?.is_billing === 1 ? (
                         <div className="default_btn">
                           <i class="bi bi-check-circle-fill"></i>
                         </div>
                       ) : (
                         <div
-                          onClick={() => handleDefaultAddress(address?.id)}
+                          onClick={() =>
+                            handleSetDefaultAddress(shippingAddInfo?.id)
+                          }
                           className="set_default_btn"
                         >
-                          <i class="bi bi-check"></i> Set default
+                          <i class="bi bi-check"></i> Choose
                         </div>
                       )}
                     </div>
                   </div>
                   <div class="shiped_address">
-                    <span class="home_text">home</span> {address?.phone} |{" "}
-                    {address?.address}{" "}
+                    <span class="home_text">home</span> {shippingAddInfo?.phone}{" "}
+                    | {shippingAddInfo?.data?.address}{" "}
                     {/* <span class="change_text">
                       <i class="bi bi-pencil-fill"></i> Edit
                     </span> */}
@@ -67,7 +83,7 @@ const ShippingAddressList = ({ shippingAddressList }) => {
                 <div>
                   <i class="bi bi-plus"></i>
                 </div>
-                <div>Add More </div>
+                <div>Add Delivary Address </div>
               </div>
             </Link>
           </div>

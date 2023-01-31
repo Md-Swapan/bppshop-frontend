@@ -8,7 +8,7 @@ const SubSubCategoryCard = ({ SubSubcategory }) => {
 
   const handleProductView = (id, subSubSlug) => {
     if (id) {
-      navigate(slug);
+      navigate(subSubSlug);
     }
   };
 

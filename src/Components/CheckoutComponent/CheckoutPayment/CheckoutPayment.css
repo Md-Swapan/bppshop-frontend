@@ -1,0 +1,22 @@
+.confirm_order_img{
+    background: aliceblue;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.confirm_order_img img {
+    width: 150px;
+    margin: 20px;
+}
+.back_to_shipping{
+    text-align: center;
+    margin: 80px 0px 20px 0px;
+}
+.back_to_shipping button {
+    background: #2b3445;
+    color: white;
+    padding: 8px 30px;
+    border-radius: 5px;
+    border: none;
+}

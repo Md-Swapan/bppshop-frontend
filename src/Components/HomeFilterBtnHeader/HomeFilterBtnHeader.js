@@ -1,8 +1,8 @@
 import React from "react";
 import './HomeFilterBtnHeader.css';
 
-
 const HomeFilterBtnHeader = () => {
+ 
   return (
     <>
       <div className="homeFilterBtnHeader-container-section">

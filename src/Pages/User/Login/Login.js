@@ -5,12 +5,14 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
-import store from "../../../Redux/Store";
+// import store from "../../../Redux/Store";
+// import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { isAuthenticated, error} = useSelector((state) => state.user);
+  // const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
@@ -18,13 +20,20 @@ const Login = () => {
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-
   };
-  if(isAuthenticated === "true" && token){
+  
+  if(isAuthenticated === true){
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
   } 
  
+
+  const addToCartWithLoginHandler = () => {
+    // if(isAuthenticated === true ){
+    //   dispatch(addItemsToCartWithLogin())
+    // } 
+    
+  }
 
   return (
     <div class="row justify-content-center">
@@ -74,7 +83,7 @@ const Login = () => {
                   <Link to="/recover-password">Forgot password?</Link>
                 </div>
               </div>
-              <button class="signin_btn" type="submit">
+              <button onClick={() => addToCartWithLoginHandler()} class="signin_btn" type="submit">
                 Sign in
               </button>
             </form>

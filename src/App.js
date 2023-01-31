@@ -23,20 +23,30 @@ import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
 import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';
 import AddNewAddress from './Components/ProfileComponent/AddNewAddress/AddNewAddress';
 import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/ShippingDetails';
-import AddShipping from './Pages/ShippingAddressPage/AddShipping/AddShipping';
-import ShippingAddressList from './Pages/ShippingAddressPage/ShippingAddressList/ShippingAddressList';
-import OrderDetails from './Components/ProfileComponent/OrdersDetails/OrderDetails';
+import OrderDetails from "./Components/ProfileComponent/OrdersDetails/OrderDetails";
+import CheckoutPayment from "./Components/CheckoutComponent/CheckoutPayment/CheckoutPayment";
+import ShippingHome from "./Components/ShippingComponent/ShippingHome/ShippingHome";
+import CheckoutComple from "./Pages/Checkut/CheckoutComple";
+import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
+import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
+import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
+// import { getCartData } from './Redux/Actions/CartAction';
+// import { useSelector } from 'react-redux';
 
 
 function App() {
-  const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
-  const [shippingAddressList, setShippingAddressList] = useState([]);
+  // const { isAuthenticated, error} = useSelector((state) => state.user);
+  // const token = localStorage.getItem("token");
 
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadUserOrders())
+
+    // if(isAuthenticated === true && token){
+    //   store.dispatch(getCartData())
+    // }
 
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res.data.data);
@@ -44,16 +54,7 @@ function App() {
     });
 
   }, []);
-
-  useEffect(()=>{
-    axios.get(baseUrl + "/shipping-address", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      setShippingAddressList(res?.data?.data);
-    });
-  },[token])
-
+  
   return (
     <div className="App">
       <Layout>
@@ -62,14 +63,22 @@ function App() {
           <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
-          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
+        
+          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>
+              <Route index element={<ShippingHome></ShippingHome>}></Route>
+              <Route path="checkout-payment" element={<CheckoutPayment></CheckoutPayment>}></Route>
+          </Route>
+          <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComple /></ProtectedRoute>}/>
+
+          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails /></ProtectedRoute>}/>
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>
-          <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList shippingAddressList={shippingAddressList}/></ProtectedRoute>}/>
+          <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>
             <Route path="orders" element={<OrderHome />}></Route>
             <Route path="orders-detail/:id" element={<OrderDetails />}></Route>
             <Route path="track-order" element={<TrackOrder/>}></Route>
+            <Route path="track-order-details" element={<TrackOrderDetails/>}></Route>
             <Route path="account-address" element={<AddressHome/>}></Route>
             <Route path="add-new-address" element={<AddNewAddress/>}></Route>
           </Route>

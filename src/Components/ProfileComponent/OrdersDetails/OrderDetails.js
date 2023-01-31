@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./OrderDetails.css";
 import productImg from "../../../Assets/Images/categoryImg/download (1).png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
 
 const OrderDetails = () => {
+  const { id } = useParams();
+  const { userOrders } = useSelector((state) => state?.userOrders);
+  const userOrder = userOrders?.find((order) => order?.id === parseInt(id));
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUserOrderDetails(id));
+  }, [dispatch, id]);
+  const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
+
+  const productDetails = userOrderDetails?.map(
+    (orderDetail) => orderDetail?.product_details
+  );
+
   return (
     <div>
       <Link to="/profile/orders">
@@ -22,7 +38,7 @@ const OrderDetails = () => {
                       <span class="d-block spandHeadO">Order no: </span>
                     </div>
                     <div class="order_table_info_div_2">
-                      <span class="spanTr"> 100423 </span>
+                      <span class="spanTr"> {userOrder?.id} </span>
                     </div>
                   </div>
                 </td>
@@ -32,21 +48,9 @@ const OrderDetails = () => {
                       <span class="d-block spandHeadO">Order date: </span>
                     </div>
                     <div class="order_table_info_div_2">
-                      <span class="spanTr"> 23 Jan, 2023 </span>
-                    </div>
-                  </div>
-                </td>
-                <td class="order_table_td">
-                  <div class="order_table_info_div">
-                    <div class="order_table_info_div_1 py-2">
-                      <span class="d-block spandHeadO">Shipping address: </span>
-                    </div>
-
-                    <div class="order_table_info_div_2">
                       <span class="spanTr">
-                        Md-Shuvo-miah (01676667145), Excel It Ai,
-                        <br />
-                        Dhaka , Moghbazar
+                        {" "}
+                        {userOrder?.created_at?.slice(0, 10)}
                       </span>
                     </div>
                   </div>
@@ -54,13 +58,18 @@ const OrderDetails = () => {
                 <td class="order_table_td">
                   <div class="order_table_info_div">
                     <div class="order_table_info_div_1 py-2">
-                      <span class="d-block spandHeadO">Billing address: </span>
+                      <span class="d-block spandHeadO">Delivery address: </span>
                     </div>
 
                     <div class="order_table_info_div_2">
                       <span class="spanTr">
-                        Md-Shuvo-miah (01676667145), Excel It Ai, <br />
-                        Dhaka , Mogbazar , Moghbazar
+                        {userOrder?.shipping_address_data?.contact_person_name}{" "}
+                        ({userOrder?.shipping_address_data?.phone}),{" "}
+                        {userOrder?.shipping_address_data?.address},
+                        <br />
+                        {userOrder?.shipping_address_data?.city} ,{" "}
+                        {userOrder?.shipping_address_data?.thana},
+                        {userOrder?.shipping_address_data?.zip}
                       </span>
                     </div>
                   </div>
@@ -76,29 +85,29 @@ const OrderDetails = () => {
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
           <table class="table table-borderless">
-            <tbody>
-              <tr className="order_detail_list">
-                <td class="col-2 for-tab-img">
-                  <img src={productImg} alt="" />
-                </td>
-                <td class="col-10 ">
-                  <span className="for-glaxy-name">Gillette Guard Cream</span>
-                  <br />
-                </td>
-
-                <td width="100%">
-                  <div class="text-right">
-                    <span class="font-weight-bold amount">৳50.00 </span>
+            {productDetails?.map((product) => (
+              <tbody>
+                <tr className="order_detail_list">
+                  <td class="col-2 for-tab-img">
+                    <img src={productImg} alt="" />
+                  </td>
+                  <td class="col-10 ">
+                    <span className="for-glaxy-name">{product.name}</span>
                     <br />
-                    <span>Qty: 1</span>
-                  </div>
-                </td>
+                  </td>
 
-                <td></td>
-
-                <td></td>
-              </tr>
-            </tbody>
+                  <td width="100%">
+                    <div class="text-right">
+                      <span class="font-weight-bold amount">
+                        ৳{product.unit_price}{" "}
+                      </span>
+                      <br />
+                      <span>Qty: {product.min_qty}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            ))}
           </table>
         </div>
       </div>
@@ -200,13 +209,9 @@ const OrderDetails = () => {
         </div>
       </div>
       <div class="row">
-        <div className="col-md-6">
-          <div className="view_invoice_btn"> View Invoice</div>
-        </div>
-        <div className="col-md-6">
-          {" "}
-          <div className="track_order_btn">Track Order</div>
-        </div>
+          <div className="track_order_btn">
+            <Link to="/profile/track-order"><button>Track Order</button></Link>
+          </div>
       </div>
     </div>
   );

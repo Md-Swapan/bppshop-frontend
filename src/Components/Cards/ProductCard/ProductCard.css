@@ -4,8 +4,7 @@
   border-radius: 7px;
   cursor: pointer;
   font-family: "Space Grotesk", sans-serif;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border: 1px solid gainsboro;
   overflow: hidden;
   transition: all 0.3s;
 }
@@ -63,7 +62,7 @@
   font-size: 17px;
   font-weight: 600;
   text-align: center;
-  background: gainsboro;
+  background: #f2f2f2;
   color: #666666;
   border-bottom: 1px solid #b9b9b9;
   margin-top: 66px;

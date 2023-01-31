@@ -10,16 +10,8 @@
 
 .profile_form_btn_section {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding-top: 20px;
-}
-
-.profile_delete_btn {
-    background: rgb(47, 126, 47);
-    border: none;
-    padding: 10px 20px ;
-    border-radius: 5px;
-    color: white;
 }
 
 .profile_update_btn {

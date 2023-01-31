@@ -8,10 +8,17 @@ import axios  from 'axios';
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 
 
-export const getPriceVariant = () => async(dispatch) => {
+export const getPriceVariant = (priceVariantData) => async(dispatch) => {
   try {
     dispatch({type: PRICE_VARIANT_REQUEST} )
-    const {data} = await axios.post(`${baseUrl}/products/variant_price`)
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    const { data } = await axios.post(
+      `${baseUrl}/products/variant_price`,
+      priceVariantData,
+      config
+    );
 
     dispatch({
       type : PRICE_VARIANT_SUCCESS,

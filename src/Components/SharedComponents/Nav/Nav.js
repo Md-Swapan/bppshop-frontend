@@ -7,6 +7,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Redux/Actions/UserAction";
 import { ClearCart } from './../../../Redux/Actions/CartAction';
+import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 
 
 const Nav = () => {
@@ -19,6 +20,7 @@ const Nav = () => {
 
     dispatch(logout())
     dispatch(ClearCart())
+    dispatch(clearShippingAddress())
   };
 
   return (
