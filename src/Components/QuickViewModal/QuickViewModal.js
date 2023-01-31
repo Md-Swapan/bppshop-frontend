@@ -6,6 +6,7 @@ import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemsToCart } from './../../Redux/Actions/CartAction';
 import { getPriceVariant } from './../../Redux/Actions/PriceVariantAction';
+import Zoom from 'react-img-zoom'
 // import { getProductDetails } from "../../Redux/Actions/ProductsAction";
 
 const QuickViewModal = ({ pid }) => {
@@ -93,6 +94,12 @@ const QuickViewModal = ({ pid }) => {
             <div className="col-sm-4">
               <div className="imageView">
                 <div className="detailImgCarousel">
+                {/* <Zoom
+                  img={imgBaseUrl+`/${productDetail?.images}`}
+                  zoomScale={3}
+                  width={300}
+                  height={400}
+                /> */}
                   <img src={imgBaseUrl+`/${productDetail?.images}`} alt="img" />
                 </div>
               </div>
