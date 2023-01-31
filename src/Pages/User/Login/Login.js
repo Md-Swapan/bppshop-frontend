@@ -1,39 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { userLogin, loadUser } from './../../../Redux/Actions/UserAction';
+import { userLogin } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
-// import store from "../../../Redux/Store";
-// import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
+import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { isAuthenticated, error} = useSelector((state) => state.user);
-  // const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
-  const token = localStorage.getItem("token");
 
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
   };
   
-  if(isAuthenticated === true){
+  if(token ){
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
   } 
  
 
-  const addToCartWithLoginHandler = () => {
-    // if(isAuthenticated === true ){
-    //   dispatch(addItemsToCartWithLogin())
-    // } 
+  // const addToCartWithLoginHandler = () => {
+  //   if( token ){
+  //     dispatch(addItemsToCartWithLogin())
+  //   } 
     
-  }
+  // }
 
   return (
     <div class="row justify-content-center">
@@ -83,7 +81,7 @@ const Login = () => {
                   <Link to="/recover-password">Forgot password?</Link>
                 </div>
               </div>
-              <button onClick={() => addToCartWithLoginHandler()} class="signin_btn" type="submit">
+              <button class="signin_btn" type="submit">
                 Sign in
               </button>
             </form>
