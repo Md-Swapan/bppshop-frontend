@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Cart.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "../../Redux/Actions/CartAction";
 
 const Cart = () => {
   const cartItems = useSelector((state) => {
@@ -16,13 +17,19 @@ const Cart = () => {
     document.querySelector(".cart").style.display = "none";
   };
 
+  // const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   dispatch(getCartData())
+  // })
+
   return (
     <>
       <div onClick={CartDetailsViewHandler} className="cart">
         <div>
           <i className="bi bi-cart-plus"></i>
           <br />
-          <span> {cartItems.length} Items</span>
+          <span> {cartItems?.length} Items</span>
         </div>
         <div className="cartTotalPrice">
           <small>

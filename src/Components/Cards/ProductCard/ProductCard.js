@@ -5,9 +5,12 @@ import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import { useDispatch } from "react-redux";
-import { addItemsToCart } from "./../../../Redux/Actions/CartAction";
+import {
+  addItemsToCart,
+  addItemsToCartAfterLogin,
+} from "./../../../Redux/Actions/CartAction";
 import { imgBaseUrl } from "../../../BaseUrl/BaseUrl";
-import { imgThumbnailBaseUrl } from './../../../BaseUrl/BaseUrl';
+import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -24,10 +27,6 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
-  const { id, name, images, unit_price, choice_options, thumbnail} = product;
-
-  const [pid, setPid] = useState(null);
-
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -36,6 +35,10 @@ const ProductCard = ({ product }) => {
     setIsOpen(false);
   }
 
+  const token = localStorage.getItem("token");
+  const { id, name, images, unit_price, choice_options, thumbnail } = product;
+
+  const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
     setPid(pid);
   };
@@ -43,19 +46,38 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
-  // const addToCartHandler = () => {
-  //   dispatch(addItemsToCart(product, quantity));
-  //   alert.success("Item Added To Cart");
-  // };
+  const addToCartAfterLoginHandler = (product, quantity) => {
+
+  let color = product.colors?.map((color) => color?.code);
+  let choice_19 = product.choice_options?.map((list) => list?.options);
+  let option = choice_19?.map((option) => option[0]);
+
+
+    const addItemsToCartDataWithColor = {
+      id: `${product.id}`,
+      color: `${color[0]}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantity}`,
+    };
+    const addItemsToCartDataWithoutColor = {
+      id: `${product.id}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantity}`,
+    };
+
+    product.colors.length ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor))
+   
+  };
 
   
+
   return (
     <>
       <div className="product_card_content">
         <div className=" product-card">
           <div className=" product-card-body">
             <img
-              src={imgThumbnailBaseUrl+`/${thumbnail}`}
+              src={imgThumbnailBaseUrl + `/${thumbnail}`}
               className="card-img-top"
               alt=""
             />
@@ -87,10 +109,21 @@ const ProductCard = ({ product }) => {
           </div>
 
           <div className="card-footer product-card-footer">
-            <button onClick={() => dispatch(addItemsToCart(product, quantity))} type="">
-            {/* <button onClick={addToCartHandler} type=""> */}
-              <i className="bi bi-cart-plus"></i> Add To Cart
-            </button>
+            {token ? (
+              <button
+                onClick={() => addToCartAfterLoginHandler(product, quantity)}
+                type=""
+              >
+                <i className="bi bi-cart-plus"></i> Add To Cart
+              </button>
+            ) : (
+              <button
+                onClick={() => dispatch(addItemsToCart(product, quantity))}
+                type=""
+              >
+                <i className="bi bi-cart-plus"></i> Add To Cart
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import {
   addItemsToCart,
   removeItemsFromCart,
 } from "./../../../Redux/Actions/CartAction";
+import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -64,7 +65,7 @@ const CartDetailsView = () => {
         ) : (
           cartItems?.map((item) => (
             <div className="cartDetails">
-              <img src={defaultProImg} alt="" />
+              <img src={imgThumbnailBaseUrl + `/${item?.product?.thumbnail}`} alt="" />
               <div className="cart-content-qty-container">
                 <div className="d-flex justify-content-between">
                   <small>

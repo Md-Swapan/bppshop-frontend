@@ -19,7 +19,8 @@ import {
   CLEAR_ERRORS,
 } from "../Constants/UserConstants.js";
 import axios from "axios";
-import { baseUrl } from './../../BaseUrl/BaseUrl';
+import { baseUrl } from "./../../BaseUrl/BaseUrl";
+import { addItemsToCartWithLogin } from "./CartAction.js";
 
 // Login
 export const userLogin = (loginData) => async (dispatch, getState) => {
@@ -36,6 +37,11 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
     localStorage.setItem("token", data.token);
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(addItemsToCartWithLogin());
+    }
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
@@ -48,7 +54,11 @@ export const userRegister = (userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.post(`${baseUrl}/auth/register`, userData, config);
+    const { data } = await axios.post(
+      `${baseUrl}/auth/register`,
+      userData,
+      config
+    );
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -105,8 +115,6 @@ export const logout = () => async (dispatch) => {
 //   }
 // };
 
-
-
 // // Forgot Password
 // export const forgotPassword = (email) => async (dispatch) => {
 //   try {
@@ -124,8 +132,6 @@ export const logout = () => async (dispatch) => {
 //     });
 //   }
 // };
-
-
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {

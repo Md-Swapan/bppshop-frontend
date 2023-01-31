@@ -30,7 +30,7 @@ import CheckoutComple from "./Pages/Checkut/CheckoutComple";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
 import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
-// import { getCartData } from './Redux/Actions/CartAction';
+import { getCartData } from './Redux/Actions/CartAction';
 // import { useSelector } from 'react-redux';
 
 
@@ -38,13 +38,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
   // const { isAuthenticated, error} = useSelector((state) => state.user);
-  // const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadUserOrders())
 
-    // if(isAuthenticated === true && token){
+    // if(token){
     //   store.dispatch(getCartData())
     // }
 
@@ -53,7 +53,7 @@ function App() {
       setLoading(false);
     });
 
-  }, []);
+  }, [token]);
   
   return (
     <div className="App">
