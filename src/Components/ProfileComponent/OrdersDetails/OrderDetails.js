@@ -4,6 +4,7 @@ import productImg from "../../../Assets/Images/categoryImg/download (1).png";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
+import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -20,7 +21,6 @@ const OrderDetails = () => {
   const productDetails = userOrderDetails?.map(
     (orderDetail) => orderDetail?.product_details
   );
-  console.log(productDetails);
 let totalItem=productDetails?.length;
 let subTotal = 0;
 let taxFee=0;
@@ -100,7 +100,7 @@ let discountAmount=0;
                 <tbody key={product.id}>
                 <tr className="order_detail_list">
                   <td class="col-2 for-tab-img">
-                    <img src={productImg} alt="" />
+                    <img src={imgThumbnailBaseUrl + `/${product.thumbnail}`} alt="" />
                   </td>
                   <td class="col-10 ">
                     <span className="for-glaxy-name">{product.name}</span>
