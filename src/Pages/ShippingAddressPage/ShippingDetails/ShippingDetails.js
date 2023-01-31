@@ -5,9 +5,13 @@ import money from "../../../Assets/Images/shiping-icons/money.png";
 import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
 import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const ShippingDetails = () => {
+  //  useSelector((state) => console.log(state?.delivaryCharge));
+   const {delivaryCharge} = useSelector((state) => state?.delivaryCharge);
+   const delivaryCost = delivaryCharge.delivery_charge;
 
   return (
     <>
@@ -21,19 +25,19 @@ const ShippingDetails = () => {
               <div className="shiping_amount_container">
                 <div className="shiping_amount_content">
                   <div>Sub Total</div>
-                  <div className="amount_text">৳945.00</div>
+                  <div className="amount_text">৳0.00</div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Tax</div>
                   <div className="amount_text">৳0.00</div>
                 </div>
                 <div className="shiping_amount_content">
-                  <div>Shiping</div>
-                  <div className="amount_text">৳120.00</div>
+                  <div>Delivary</div>
+                  <div className="amount_text">৳{delivaryCost?delivaryCost:0}.00</div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>
-                  <div className="amount_text">-৳45.00</div>
+                  <div className="amount_text">-৳0.00</div>
                 </div>
                 <div>
                   <input
@@ -48,7 +52,7 @@ const ShippingDetails = () => {
                 <hr />
                 <div className="shiping_amount_content">
                   <div>Total</div>
-                  <div className="amount_text">৳1,020.00</div>
+                  <div className="amount_text">৳0.00</div>
                 </div>
                 <div class="container mt-4">
                   <div class="row">

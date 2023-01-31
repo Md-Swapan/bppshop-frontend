@@ -55,8 +55,6 @@ const Sidebar = () => {
   const subSubCategoryViewHandler = (subSlug, indx) => {
     setSubCategorySlugName(subSlug);
 
-    console.log(subSlug);
-
     const subCategories = allCategory.find(
       (item) => item.slug === categorySlugName
     );
