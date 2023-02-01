@@ -70,7 +70,9 @@ export const loadUserOrderCancelReducer = (state = { userOrders: [] }, action) =
       return {
         ...state,
         loading: false,
-        userOrders: state.userOrders.filter((item) => item.id !== action.payload),
+        // userOrders: state.userOrders.filter((item) => item.id !== action.payload),
+        userOrders:action.payload,
+        
       };
     case LOAD_USER_ORDERS_DETAILS_FAIL:
       return {
