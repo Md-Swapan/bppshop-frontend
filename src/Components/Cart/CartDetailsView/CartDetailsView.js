@@ -16,8 +16,7 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  // console.log(cartItems);
-
+  
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {

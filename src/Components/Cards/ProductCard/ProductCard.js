@@ -122,7 +122,7 @@ const ProductCard = ({ product }) => {
                 onClick={() => dispatch(addItemsToCart(product, quantity))}
                 type=""
               >
-                <i className="bi bi-cart-plus"></i> Add To Carts
+                <i className="bi bi-cart-plus"></i> Add To Cart
               </button>
             )}
 

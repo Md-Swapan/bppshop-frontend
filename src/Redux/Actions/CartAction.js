@@ -47,7 +47,7 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
         );
 
         dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data });
-        dispatch(getCartData())
+       
 
         localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
       } catch (error) {
@@ -69,7 +69,7 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
         );
 
         dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data });
-        dispatch(getCartData())
+        
         localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
       } catch (error) {
         dispatch({
@@ -94,11 +94,12 @@ export const addItemsToCartAfterLogin = (addItemToCartDataAfterLogin) => async (
         config
       );
 
-      dispatch(getCartData())
-      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS"});
+      console.log(data)
       
+      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data.data});
+     
       
-      // localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+      localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
     } catch (error) {
       dispatch({
         type: "ADD_TO_CART_AFTER_LOGIN_FAIL",
@@ -108,24 +109,24 @@ export const addItemsToCartAfterLogin = (addItemToCartDataAfterLogin) => async (
   };
 
 // get cart data.
-export const getCartData = () => async (dispatch, getState) => {
-  try {
-    dispatch({ type: "GET_CART_REQUEST" });
-    const token = localStorage.getItem("token");
-    const config = { headers: { Authorization: `Bearer ${token}` } };
+// export const getCartData = () => async (dispatch, getState) => {
+//   try {
+//     dispatch({ type: "GET_CART_REQUEST" });
+//     const token = localStorage.getItem("token");
+//     const config = { headers: { Authorization: `Bearer ${token}` } };
 
-    const { data } = await axios.get(`${baseUrl}/cart`, config);
+//     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-    console.log(data.data)
+//     console.log(data.data)
 
-    dispatch({ type: "GET_CART_SUCCESS", payload: data.data });
+//     dispatch({ type: "GET_CART_SUCCESS", payload: data.data });
 
-    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+//     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 
-  } catch (error) {
-    dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
-  }
-};
+//   } catch (error) {
+//     dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
+//   }
+// };
 
 // REMOVE FROM CART
 export const removeItemsFromCart = (payload) => async (dispatch, getState) => {
