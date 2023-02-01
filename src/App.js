@@ -30,7 +30,6 @@ import CheckoutComple from "./Pages/Checkut/CheckoutComple";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
 import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
-import { getCartData } from './Redux/Actions/CartAction';
 // import { useSelector } from 'react-redux';
 
 
