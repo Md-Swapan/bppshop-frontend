@@ -36,6 +36,7 @@ const ProductCard = ({ product }) => {
   }
 
   const token = localStorage.getItem("token");
+  
   const { id, name, images, unit_price, choice_options, thumbnail } = product;
 
   const [pid, setPid] = useState(null);
@@ -121,9 +122,10 @@ const ProductCard = ({ product }) => {
                 onClick={() => dispatch(addItemsToCart(product, quantity))}
                 type=""
               >
-                <i className="bi bi-cart-plus"></i> Add To Cart
+                <i className="bi bi-cart-plus"></i> Add To Carts
               </button>
             )}
+
           </div>
         </div>
       </div>

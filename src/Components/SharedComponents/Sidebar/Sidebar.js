@@ -64,8 +64,6 @@ const Sidebar = () => {
 
     setSubSubCategoryList(subSubCategories);
 
-    console.log(subSubCategories.childes);
-
     const subSubCategoryItem = document.getElementById(
       `subSubCategoryItem ${indx}`
     );

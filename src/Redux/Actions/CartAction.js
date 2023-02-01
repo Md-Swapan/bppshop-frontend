@@ -2,8 +2,7 @@ import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 
 // ADD TO CART without login
-export const addItemsToCart =
-  (product, quantity) => async (dispatch, getState) => {
+export const addItemsToCart = (product, quantity) => async (dispatch, getState) => {
     dispatch({
       type: "ADD_TO_CART",
       payload: {
@@ -37,7 +36,7 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
 
     if (color.length) {
       try {
-        dispatch({ type: "ADD_TO_CART_REQUEST" });
+        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
         const token = localStorage.getItem("token");
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -47,19 +46,19 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
           config
         );
 
-        dispatch({ type: "ADD_TO_CART_SUCCESS", payload: data });
+        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data });
         dispatch(getCartData())
 
-        // localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+        localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
       } catch (error) {
         dispatch({
-          type: "ADD_TO_CART_FAIL",
+          type: "ADD_TO_CART_WITH_LOGIN_FAIL",
           payload: error.response.data.message,
         });
       }
     } else {
       try {
-        dispatch({ type: "ADD_TO_CART_REQUEST" });
+        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
         const token = localStorage.getItem("token");
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -69,12 +68,12 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
           config
         );
 
-        dispatch({ type: "ADD_TO_CART_SUCCESS", payload: data });
+        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data });
         dispatch(getCartData())
-        // localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+        localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
       } catch (error) {
         dispatch({
-          type: "ADD_TO_CART_FAIL",
+          type: "ADD_TO_CART_WITH_LOGIN_FAIL",
           payload: error.response.data.message,
         });
       }
@@ -83,8 +82,7 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
 };
 
 // add to cart after login.
-export const addItemsToCartAfterLogin =
-  (addItemToCartDataAfterLogin) => async (dispatch, getState) => {
+export const addItemsToCartAfterLogin = (addItemToCartDataAfterLogin) => async (dispatch, getState) => {
     try {
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_REQUEST" });
       const token = localStorage.getItem("token");
@@ -96,10 +94,10 @@ export const addItemsToCartAfterLogin =
         config
       );
 
-      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
-
       dispatch(getCartData())
-
+      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS"});
+      
+      
       // localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
     } catch (error) {
       dispatch({
@@ -118,9 +116,11 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-    console.log(data)
+    console.log(data.data)
 
-    dispatch({ type: "GET_CART_SUCCESS", payload: data });
+    dispatch({ type: "GET_CART_SUCCESS", payload: data.data });
+
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 
   } catch (error) {
     dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
