@@ -1,11 +1,11 @@
-
-  .shiping-heading{
+.shiping-heading {
     font-weight: 900;
     font-size: 26px;
     color: black;
     margin-bottom: 10px;
-  }
-  .add_shipping_address_btn {
+}
+
+.add_shipping_address_btn {
     text-align: center;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     width: 100%;
@@ -13,7 +13,8 @@
     padding: 10px 0px;
     cursor: pointer;
 }
-.add_shipping_address_btn a{
+
+.add_shipping_address_btn a {
     text-decoration: none;
     color: #ef8341;
     font-weight: bold;
@@ -28,7 +29,8 @@
     border-radius: 25rem;
     margin-top: 25px;
 }
-.progress_content{
+
+.progress_content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,68 +43,79 @@
     transition: width .6s ease;
     background-color: #f99d71;
 }
-.shiping_container{
+
+.shiping_container {
     margin: 20px 0px;
 }
+
 .shiping-address-heading {
     font-weight: 400;
     font-size: 26px;
     color: rgb(29, 25, 25);
     margin: 50px 0px 20px 0px;
 }
-.shiping_address_box{
+
+.shiping_address_box {
     width: 100%;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     border-radius: 5px;
     padding: 20px;
     font-size: 14px;
 }
-.shiped_address{
+
+.shiped_address {
     margin-top: 14px;
 }
-.shiped_address a{
+
+.shiped_address a {
     text-decoration: none;
 }
 
-.home_text{
+.home_text {
     background: #f99d71;
     padding: 2px 5px;
     font-size: 10px;
     border-radius: 3px;
 }
-.change_text{
+
+.change_text {
     color: #86bc19;
     font-weight: bold;
     cursor: pointer;
     font-size: 13px;
 }
-.change_text i{
+
+.change_text i {
     font-size: 10px;
 }
-.shop_payment_btn_content{
+
+.shop_payment_btn_content {
     margin: 40px 0px;
-    }
-    .shop_payment_btn{
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        gap: 10px;
-    }
-    .shop_cart_btn{
-        background: black;
-        color: white;
-        border-radius: 8px;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-    }
-    .proceed_payment_btn{
-        background: rgb(88, 154, 27);
-        padding: 10px;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-    }
-    .proceed_payment_btn a{
-        color: white;
-        text-decoration: none;
-    }
+}
+
+.shop_payment_btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.shop_payment_btn a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+.shop_cart_btn, .proceed_payment_btn {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.shop_cart_btn {
+    background: black;
+}
+
+.proceed_payment_btn {
+    background: rgb(88, 154, 27);
+}

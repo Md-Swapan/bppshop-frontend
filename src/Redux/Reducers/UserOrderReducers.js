@@ -5,7 +5,6 @@ import {
   LOAD_USER_ORDERS_DETAILS_REQUEST,
   LOAD_USER_ORDERS_DETAILS_SUCCESS,
   LOAD_USER_ORDERS_DETAILS_FAIL,
-  CLEAR_ERRORS,
 } from "../Constants/UserConstants.js";
 
 //user orders reducer
@@ -28,12 +27,6 @@ export const userOrderReducers = (state = { userOrders: [] }, action) => {
         error: action.payload,
       };
 
-    // case CLEAR_ERRORS:
-    //   return {
-    //     ...state,
-    //     error: null,
-    //   };
-
     default:
       return state;
   }
@@ -46,28 +39,47 @@ export const userOrderDetailReducers = (state = { userOrderDetails: [] }, action
     case LOAD_USER_ORDERS_DETAILS_REQUEST:
       return {
         loading: true,
-        // isAuthenticated: false,
       };
     case LOAD_USER_ORDERS_DETAILS_SUCCESS:
       return {
         ...state,
         loading: false,
-        // isAuthenticated: true,
         userOrderDetails: action.payload,
       };
     case LOAD_USER_ORDERS_DETAILS_FAIL:
       return {
         loading: false,
-        // isAuthenticated: false,
         userOrderDetails: null,
         error: action.payload,
       };
 
-    // case CLEAR_ERRORS:
-    //   return {
-    //     ...state,
-    //     error: null,
-    //   };
+    default:
+      return state;
+  }
+};
+
+
+//user orders cancel reducer
+export const loadUserOrderCancelReducer = (state = { userOrders: [] }, action) => {
+  switch (action.type) {
+    case LOAD_USER_ORDERS_DETAILS_REQUEST:
+      return {
+        loading: true,
+      };
+    case LOAD_USER_ORDERS_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        // userOrders: state.userOrders.filter((item) => item.id !== action.payload),
+        userOrders:action.payload,
+        
+      };
+    case LOAD_USER_ORDERS_DETAILS_FAIL:
+      return {
+        loading: false,
+        userOrders: null,
+        error: action.payload,
+      };
 
     default:
       return state;

@@ -30,7 +30,7 @@ import CheckoutComple from "./Pages/Checkut/CheckoutComple";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
 import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
-import { getCartData } from './Redux/Actions/CartAction';
+import CheckoutShopCart from "./Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart";
 // import { useSelector } from 'react-redux';
 
 
@@ -65,8 +65,9 @@ function App() {
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
         
           <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>
-              <Route index element={<ShippingHome></ShippingHome>}></Route>
-              <Route path="checkout-payment" element={<CheckoutPayment></CheckoutPayment>}></Route>
+              <Route index element={<ShippingHome/>}></Route>
+              <Route path="checkout-shop-cart" element={<CheckoutShopCart/>}></Route>
+              <Route path="checkout-payment" element={<CheckoutPayment/>}></Route>
           </Route>
           <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComple /></ProtectedRoute>}/>
 
