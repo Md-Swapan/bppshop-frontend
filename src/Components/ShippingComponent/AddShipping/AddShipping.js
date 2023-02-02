@@ -7,7 +7,7 @@ import "./AddShipping.css";
 import { useDispatch } from 'react-redux';
 import { addShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
 import { useSelector } from 'react-redux';
-import { getDelivaryCharge } from "../../../Redux/Actions/DelivaryChargeAction";
+import { getDeliveryCharge } from '../../../Redux/Actions/DeliveryChargeAction';
 
 const AddShipping = () => {
   const token = localStorage.getItem("token");
@@ -56,7 +56,7 @@ const AddShipping = () => {
     const newData = { ...data, district_id, upazila_id };
     
     dispatch(addShippingAddress(newData))
-    dispatch(getDelivaryCharge(district_id))
+    dispatch(getDeliveryCharge(district_id))
     if(shippingAddressInfo?.status === "success"){
       navigate("/shipping-details")
     }

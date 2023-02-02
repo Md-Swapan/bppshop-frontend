@@ -47,7 +47,8 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
-  const addToCartAfterLoginHandler = (product, quantity) => {
+  const addToCartHandler = (product, quantity) => {
+    dispatch(addItemsToCart(product, quantity))
 
   let color = product.colors?.map((color) => color?.code);
   let choice_19 = product.choice_options?.map((list) => list?.options);
@@ -55,19 +56,20 @@ const ProductCard = ({ product }) => {
 
 
     const addItemsToCartDataWithColor = {
-      id: `${product.id}`,
-      color: `${color[0]}`,
-      choice_19: `${option[0]}`,
-      quantity: `${quantity}`,
+      "id": `${product.id}`,
+      "color": `${color[0]}`,
+      "choice_19": `${option[0]}`,
+      "quantity": `${quantity}`,
     };
     const addItemsToCartDataWithoutColor = {
-      id: `${product.id}`,
-      choice_19: `${option[0]}`,
-      quantity: `${quantity}`,
+      "id": `${product.id}`,
+      'choice_19': `${option[0]}`,
+      "quantity": `${quantity}`,
     };
 
-    product.colors.length ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor))
-   
+    if(token) {
+      product.colors.length ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor))
+    }    
   };
 
   
@@ -95,7 +97,7 @@ const ProductCard = ({ product }) => {
                 <strong> ৳ {unit_price}</strong>
               </div>
             </div>
-            <div className="quickView_AddToCart_overlay">
+            <div className="quickView_AddToCart_overlay" onClick={() => addToCartHandler(product, quantity)}>
               <div className="overlayAddToCartBtn">
                 {/* <h5>Add <br/> To <br/> Cart</h5>
                 <i class="bi bi-cart-plus-fill"></i> */}
@@ -110,21 +112,14 @@ const ProductCard = ({ product }) => {
           </div>
 
           <div className="card-footer product-card-footer">
-            {token ? (
               <button
-                onClick={() => addToCartAfterLoginHandler(product, quantity)}
+                onClick={() => addToCartHandler(product, quantity)}
                 type=""
               >
+                 
                 <i className="bi bi-cart-plus"></i> Add To Cart
               </button>
-            ) : (
-              <button
-                onClick={() => dispatch(addItemsToCart(product, quantity))}
-                type=""
-              >
-                <i className="bi bi-cart-plus"></i> Add To Cart
-              </button>
-            )}
+            
 
           </div>
         </div>

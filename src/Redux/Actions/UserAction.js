@@ -8,6 +8,7 @@ import {
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
   LOAD_USER_FAIL,
+  LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   UPDATE_PROFILE_REQUEST,
@@ -39,6 +40,7 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
     localStorage.setItem("token", data.token);
 
     const token = localStorage.getItem("token");
+
     if (token) {
       dispatch(addItemsToCartWithLogin());
     }
@@ -89,8 +91,11 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`${baseUrl}/customer/logout`);
+    // dispatch({ type: LOGOUT_REQUEST });
+    const token = localStorage.getItem("token");
+    const data = await axios.get(`${baseUrl}/customer/logout`, token);
 
+    console.log(data);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });

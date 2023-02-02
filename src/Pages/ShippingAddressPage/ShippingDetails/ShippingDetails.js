@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 
 const ShippingDetails = () => {
   //  useSelector((state) => console.log(state?.delivaryCharge));
-   const {delivaryCharge} = useSelector((state) => state?.delivaryCharge);
-   const delivaryCost = delivaryCharge.delivery_charge;
+   const {deliveryCharge} = useSelector((state) => state?.deliveryCharge);
+   const deliveryCost = deliveryCharge.delivery_charge;
 
   return (
     <>
@@ -32,8 +32,8 @@ const ShippingDetails = () => {
                   <div className="amount_text">৳0.00</div>
                 </div>
                 <div className="shiping_amount_content">
-                  <div>Delivary</div>
-                  <div className="amount_text">৳{delivaryCost?delivaryCost:0}.00</div>
+                  <div>Delivery</div>
+                  <div className="amount_text">৳{deliveryCost?deliveryCost:0}.00</div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>

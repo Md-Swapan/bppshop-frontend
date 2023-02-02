@@ -1,14 +1,23 @@
 import React from "react";
 import './HomeFilterBtnHeader.css';
+import { useDispatch } from 'react-redux';
+import { addItemsToCartWithLogin } from "../../Redux/Actions/CartAction";
 
 const HomeFilterBtnHeader = () => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
  
+  const btnHandler = () => {
+    if(token ){
+      dispatch(addItemsToCartWithLogin())
+    } 
+  }
   return (
     <>
       <div className="homeFilterBtnHeader-container-section">
         <div className="header_btn">
           <div>
-            <button>Brand</button>
+            <button onClick={btnHandler}>Brand</button>
           </div>
           <div>
             <button>Discounted Products</button>

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loadAllShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 import { setDefaultShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
-import { getDelivaryCharge } from "../../../Redux/Actions/DelivaryChargeAction";
+import { getDeliveryCharge } from '../../../Redux/Actions/DeliveryChargeAction';
 
 const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
@@ -61,7 +61,7 @@ const ShippingAddressList = () => {
                           }
                           className="set_default_btn"
                         >
-                        <span onClick={()=> dispatch(getDelivaryCharge(shippingAddInfo?.district_id))}><i class="bi bi-check"></i> Choose</span>
+                        <span onClick={()=> dispatch(getDeliveryCharge(shippingAddInfo?.district_id))}><i class="bi bi-check"></i> Choose</span>
                           
                         </div>
                       )}
@@ -84,7 +84,7 @@ const ShippingAddressList = () => {
                 <div>
                   <i class="bi bi-plus"></i>
                 </div>
-                <div>Add Delivary Address </div>
+                <div>Add Delivery Address </div>
               </div>
             </Link>
           </div>

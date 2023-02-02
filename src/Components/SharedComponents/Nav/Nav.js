@@ -6,8 +6,10 @@ import bppShopsLogo from "../../../Assets/Images/bppshopslogo.png";
 import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Redux/Actions/UserAction";
-import { ClearCart } from './../../../Redux/Actions/CartAction';
+import { ClearCart, ClearCartGroupItems } from './../../../Redux/Actions/CartAction';
 import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
+import axios  from 'axios';
+import { baseUrl } from './../../../BaseUrl/BaseUrl';
 
 
 const Nav = () => {
@@ -15,12 +17,28 @@ const Nav = () => {
   const { user } = useSelector((state) => state.user);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
+    const token = localStorage.getItem("token");
+    
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+    axios.get(
+    `${baseUrl}/customer/logout`,
+     config
+    )
+    .then(res => {
+      if(res.data.status === "success"){
+        localStorage.removeItem("token");
+        window.location.reload();
 
-    dispatch(logout())
+        console.log(res)
+      }
+    })
+
+
+    // dispatch(logout())
     dispatch(ClearCart())
     dispatch(clearShippingAddress())
+    dispatch(ClearCartGroupItems())
+
   };
 
   return (
@@ -104,7 +122,7 @@ const Nav = () => {
                   <li className="dropdown-item">Sign-Up</li>
                 </Link>
                 {/* <li onClick={handleLogout} className="dropdown-item"> */}
-                <li onClick={handleLogout} className="dropdown-item">
+                <li onClick={() => handleLogout()} className="dropdown-item">
                   Logout
                 </li>
               </div>

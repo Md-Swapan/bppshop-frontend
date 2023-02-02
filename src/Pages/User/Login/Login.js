@@ -18,6 +18,10 @@ const Login = () => {
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
+
+    // if(isAuthenticated && token ){
+    //   dispatch(addItemsToCartWithLogin())
+    // } 
   };
   
   if(token ){
@@ -25,13 +29,6 @@ const Login = () => {
     navigate(from, { replace: true });
   } 
  
-
-  // const addToCartWithLoginHandler = () => {
-  //   if( token ){
-  //     dispatch(addItemsToCartWithLogin())
-  //   } 
-    
-  // }
 
   return (
     <div class="row justify-content-center">

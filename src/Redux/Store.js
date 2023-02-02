@@ -7,11 +7,13 @@ import { userOrderDetailReducers, userOrderReducers } from './Reducers/UserOrder
 import { addShippingAddressReducers, loadAllShippingAddressReducers, } from "./Reducers/ShippingAddressReducers";
 import PriceVariantReducers from './Reducers/PriceVariantReducers';
 import { productDetailsReducers } from "./Reducers/ProductReducers";
-import delivaryChargeReducers from "./Reducers/DelivaryChargeReducer";
+import CartGroupReducers from "./Reducers/CartGroupReducers";
+import deliveryChargeReducers from "./Reducers/DeliveryChargeReducer";
 
 
 const rootReducer = combineReducers({
   cart: CartReducers,
+  cartGroup: CartGroupReducers,
   user: userReducer,
   userOrders: userOrderReducers,
   userOrderDetails:userOrderDetailReducers,
@@ -19,7 +21,7 @@ const rootReducer = combineReducers({
   allShippingInfo: loadAllShippingAddressReducers,
   priceVariant: PriceVariantReducers,
   productDetails: productDetailsReducers,
-  delivaryCharge:delivaryChargeReducers,
+  deliveryCharge:deliveryChargeReducers,
 });
 
 let initialState = {
@@ -33,6 +35,11 @@ let initialState = {
     shippingAddressInfo: localStorage.getItem("shippingAddressInfo")
       ? JSON.parse(localStorage.getItem("shippingAddressInfo"))
       : {},
+  },
+  cartGroup : {
+    cartGroupItems : localStorage.getItem("cartGroupItems") 
+    ? JSON.parse(localStorage.getItem("cartGroupItems"))
+    : []
   }
 };
 const middleware = [thunk];
