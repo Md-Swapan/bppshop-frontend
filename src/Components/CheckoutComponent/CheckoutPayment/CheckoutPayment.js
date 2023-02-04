@@ -2,26 +2,34 @@ import React from "react";
 import "./CheckoutPayment.css";
 import confirmImg from "../../../Assets/Images/confirm_order_img.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
+import {
+  ClearCart,
+  ClearCartGroupItems,
+} from "../../../Redux/Actions/CartAction";
+import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
   const token = localStorage.getItem("token");
   const config = { headers: { Authorization: `Bearer ${token}` } };
+  const dispatch = useDispatch();
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleCheckoutConfirm = (id) => {
     const address_id = {
       address_id: id,
     };
-    axios.post(`${baseUrl}/cart/checkout`,address_id, config)
-    .then(res=>{
-      if (res.data.status==="success") {
-        navigate('/checkout-complete')
+    axios.post(`${baseUrl}/cart/checkout`, address_id, config).then((res) => {
+      if (res.data.status === "success") {
+        dispatch(ClearCart());
+        dispatch(clearShippingAddress());
+        dispatch(ClearCartGroupItems());
+        navigate("/checkout-complete");
       }
-    })
+    });
   };
 
   return (
@@ -30,7 +38,10 @@ const CheckoutPayment = () => {
       <hr />
       <h6 class="my-5">Choose payment</h6>
       <div>
-        <div onClick={()=>handleCheckoutConfirm(shippingAddressInfo?.data?.id)} className="confirm_order_img">
+        <div
+          onClick={() => handleCheckoutConfirm(shippingAddressInfo?.data?.id)}
+          className="confirm_order_img"
+        >
           <img alt="" src={confirmImg} />
         </div>
       </div>
