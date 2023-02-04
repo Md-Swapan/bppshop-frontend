@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl} from "../../../BaseUrl/BaseUrl";
+import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import "./AddShipping.css";
-import { useDispatch } from 'react-redux';
-import { addShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
-import { useSelector } from 'react-redux';
-import { getDeliveryCharge } from '../../../Redux/Actions/DeliveryChargeAction';
+import { useDispatch } from "react-redux";
+import { addShippingAddress } from "./../../../Redux/Actions/ShippingAddressAction";
+import { useSelector } from "react-redux";
+import { getDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 
 const AddShipping = () => {
   const token = localStorage.getItem("token");
@@ -17,10 +17,8 @@ const AddShipping = () => {
   const [districtId, setDistrictId] = useState(null);
   const [thanaId, setThanaId] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
-  console.log(shippingAddressInfo?.data?.is_billing);
-
+  const dispatch = useDispatch();
+  const { shippingAddressInfo } = useSelector((state) => state.shippingInfo);
 
   useEffect(() => {
     axios
@@ -56,14 +54,22 @@ const AddShipping = () => {
     const district_id = districtId;
     const upazila_id = thanaId;
     const newData = { ...data, district_id, upazila_id };
-    
-    dispatch(addShippingAddress(newData))
-    dispatch(getDeliveryCharge(district_id))
-    if(shippingAddressInfo?.status === "success"){
-      navigate("/shipping-details")
+
+    dispatch(addShippingAddress(newData));
+    dispatch(getDeliveryCharge(district_id));
+
+    if (shippingAddressInfo?.status === "success") {
+      navigate("/shipping-details");
     }
-    
   };
+
+  // useEffect(() => {
+  //   if (shippingAddressInfo?.data?.is_billing === "1") {
+  //     dispatch(getDeliveryCharge(shippingAddressInfo?.data?.district_id));
+  //   }
+  // }, [dispatch, shippingAddressInfo]);
+
+  console.log(shippingAddressInfo);
 
   return (
     <div className="shipping_Add_container">
