@@ -68,7 +68,7 @@ const AddShipping = () => {
   //   }
   // }, [dispatch, shippingAddressInfo]);
 
-  console.log(shippingAddressInfo);
+  // console.log(shippingAddressInfo);
 
   return (
     <div className="shipping_Add_container">

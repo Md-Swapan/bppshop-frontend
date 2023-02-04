@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
+import { categoryBaseUrl } from "../../../BaseUrl/BaseUrl";
 
 const SubCategoryCard = ({ subcategory }) => {
-  const { id, name, img, slug } = subcategory;
+  const { id, name, img, slug, thumb } = subcategory;
   const navigate = useNavigate();
   const handleSubSubCategoryView = (id, subSlug) => {
     if (id) {
@@ -18,11 +19,7 @@ const SubCategoryCard = ({ subcategory }) => {
     >
       <div className="card">
         <div className="card-body">
-          {img ? (
-            <img src={img} className="card-img-top" alt="" />
-          ) : (
-            <img src={defaultProImg} className="card-img-top" alt="" />
-          )}
+        <img src={categoryBaseUrl + `/${thumb}`} className="card-img-top" alt="" />
         </div>
         <div className="card-footer">{name}</div>
       </div>
