@@ -107,7 +107,7 @@ const Sidebar = () => {
                       <img
                         width="15"
                         className="sidebar-Icon"
-                        src={categoryBaseUrl + `/${categoryItem.thumb}`}
+                        src={categoryBaseUrl + `/${categoryItem.icon}`}
                         alt=""
                       />
                     {categoryItem?.name}

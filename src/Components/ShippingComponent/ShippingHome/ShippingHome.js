@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const ShippingHome = () => {
   const navigate = useNavigate();
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
+  console.log(shippingAddressInfo)
 
   const changeShippingInfo = () => {
     navigate("/shipping-address");
