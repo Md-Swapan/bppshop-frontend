@@ -19,6 +19,7 @@ const AddShipping = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
+  console.log(shippingAddressInfo?.data?.is_billing);
 
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const AddShipping = () => {
       .get(baseUrl + `/location/areas/${thanaId}`)
       .then((res) => setAreaDataOptions(res.data.data));
   };
+
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
