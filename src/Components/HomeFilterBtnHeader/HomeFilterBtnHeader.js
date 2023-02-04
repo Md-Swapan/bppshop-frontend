@@ -17,7 +17,7 @@ const HomeFilterBtnHeader = () => {
       <div className="homeFilterBtnHeader-container-section">
         <div className="header_btn">
           <div>
-            <button onClick={btnHandler}>Brand</button>
+            <button >Brand</button>
           </div>
           <div>
             <button>Discounted Products</button>

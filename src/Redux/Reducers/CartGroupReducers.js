@@ -24,6 +24,14 @@ const CartGroupReducers = (state = { cartGroupItems: [] }, action) => {
         error: action.payload,
       };
 
+      case "REMOVE_ITEM_FROM_CART_GROUP":
+        return {
+          ...state,
+          cartGroupItems: state.cartGroupItems.filter(
+            (item) => item.product_id !== action.payload
+          ),
+        };
+
       case "CLEAR_CART_GROUP_ITEMS": {
         return {
           cartGroupItems: [],
