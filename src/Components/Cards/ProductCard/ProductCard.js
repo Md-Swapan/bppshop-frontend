@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
-import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import { useDispatch } from "react-redux";
 import {
   addItemsToCart,
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
-import { imgBaseUrl } from "../../../BaseUrl/BaseUrl";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 Modal.setAppElement("#root");
 
@@ -36,8 +34,8 @@ const ProductCard = ({ product }) => {
   }
 
   const token = localStorage.getItem("token");
-  
-  const { id, name, images, unit_price, choice_options, thumbnail } = product;
+
+  const { id, name, unit_price, choice_options, thumbnail } = product;
 
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
@@ -48,80 +46,113 @@ const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
 
   const addToCartHandler = (product, quantity) => {
-    dispatch(addItemsToCart(product, quantity))
+    dispatch(addItemsToCart(product, quantity));
 
-  let color = product.colors?.map((color) => color?.code);
-  let choice_19 = product.choice_options?.map((list) => list?.options);
-  let option = choice_19?.map((option) => option[0]);
-
+    let color = product.colors?.map((color) => color?.code);
+    let choice_19 = product.choice_options?.map((list) => list?.options);
+    let option = choice_19?.map((option) => option[0]);
 
     const addItemsToCartDataWithColor = {
-      "id": `${product.id}`,
-      "color": `${color[0]}`,
-      "choice_19": `${option[0]}`,
-      "quantity": `${quantity}`,
+      id: `${product.id}`,
+      color: `${color[0]}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantity}`,
     };
     const addItemsToCartDataWithoutColor = {
-      "id": `${product.id}`,
-      'choice_19': `${option[0]}`,
-      "quantity": `${quantity}`,
+      id: `${product.id}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantity}`,
     };
 
-    if(token) {
-      product.colors.length ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor))
-    }    
+    if (token) {
+      product.colors.length
+        ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
+        : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
+    }
   };
-
-  
 
   return (
     <>
       <div className="product_card_content">
-        <div className=" product-card">
-          <div className=" product-card-body">
-            <img
-              src={imgThumbnailBaseUrl + `/${thumbnail}`}
-              className="card-img-top"
-              alt=""
-            />
-            <div className="product-card-body-content">
-              <small>{name.toString().substring(0, 20)}...</small>
-              <br />
-              <div className="product-card-body-content-unit-price">
-                <span>
-                  {choice_options?.map((list) => (
-                    <>{list?.title} : </>
-                  ))}
-                </span>
-                <br />
-                <strong> ৳ {unit_price}</strong>
+        <div className="product-card">
+          {product.current_stock > 0 ? (
+            <div>
+              <div className=" product-card-body">
+                <img
+                  src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                  className="card-img-top"
+                  alt=""
+                />
+                <div className="product-card-body-content">
+                  <small>{name.toString().substring(0, 20)}...</small>
+                  <br />
+                  <div className="product-card-body-content-unit-price">
+                    <span>
+                      {choice_options?.map((list) => (
+                        <>{list?.title} : </>
+                      ))}
+                    </span>
+                    <br />
+                    <strong> ৳ {unit_price}</strong>
+                  </div>
+                </div>
+                <div
+                  className="quickView_AddToCart_overlay"
+                  onClick={() => addToCartHandler(product, quantity)}
+                >
+                  <div className="overlayAddToCartBtn">
+                    <img src={addToCartImg} alt="" />
+                  </div>
+                  <span onClick={() => productDetailsView(id)}>
+                    <button onClick={openModal}>
+                      <i className="bi bi-eye-fill"></i> <span>Quick View</span>
+                    </button>
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="quickView_AddToCart_overlay" onClick={() => addToCartHandler(product, quantity)}>
-              <div className="overlayAddToCartBtn">
-                {/* <h5>Add <br/> To <br/> Cart</h5>
-                <i class="bi bi-cart-plus-fill"></i> */}
-                <img src={addToCartImg} alt="" />
-              </div>
-              <span onClick={() => productDetailsView(id)}>
-                <button onClick={openModal}>
-                  <i className="bi bi-eye-fill"></i> <span>Quick View</span>
+              <div className="card-footer product-card-footer">
+                <button
+                  onClick={() => addToCartHandler(product, quantity)}
+                  type=""
+                >
+                  <i className="bi bi-cart-plus"></i> Add To Cart
                 </button>
-              </span>
+              </div>
             </div>
-          </div>
-
-          <div className="card-footer product-card-footer">
-              <button
-                onClick={() => addToCartHandler(product, quantity)}
-                type=""
-              >
-                 
-                <i className="bi bi-cart-plus"></i> Add To Cart
-              </button>
-            
-
-          </div>
+          ) : (
+            <div>
+              <div className=" product-card-body">
+                <img
+                  src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                  className="card-img-top"
+                  alt=""
+                />
+                <div className="product-card-body-content">
+                  <small>{name.toString().substring(0, 20)}...</small>
+                  <br />
+                  <div className="product-card-body-content-unit-price">
+                    <span>
+                      {choice_options?.map((list) => (
+                        <>{list?.title} : </>
+                      ))}
+                    </span>
+                    <br />
+                    <strong> ৳ {unit_price}</strong>
+                  </div>
+                </div>
+              </div>
+              <div className="card-footer product-card-footer">
+                <button>
+                  <i className="bi bi-cart-plus"></i> Stock Out
+                </button>
+              </div>
+              <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
+                <h3 className="text-center">
+                  Stock <br /> Out
+                </h3>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

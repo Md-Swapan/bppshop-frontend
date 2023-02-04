@@ -1,4 +1,6 @@
+
 .product-card {
+  position: relative;
   height: auto;
   border: none;
   border-radius: 7px;
@@ -110,4 +112,20 @@
   font-size: 20px;
   display: flex;
   justify-content: end;
+}
+
+/* stock out design */
+.product_stock_out_overlay {
+  position: absolute;
+  background: #000000be;
+  height: 400px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: all 0.3s;
+  display: none;
+  color: white;
+  display: block;
+  cursor: default;
 }

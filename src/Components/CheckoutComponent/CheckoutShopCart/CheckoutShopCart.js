@@ -14,7 +14,6 @@ const CheckoutShopCart = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  console.log(cartItems);
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -186,16 +185,16 @@ const CheckoutShopCart = () => {
         </div>
         <div class="shop_payment_btn_content">
           <div class="shop_payment_btn">
-            <a href="/">
+            <Link to="/">
               <div class="shop_cart_btn">
                 <i class="bi bi-chevron-left"></i> Continue shopping
               </div>
-            </a>
-            <a href="/shipping-details">
+            </Link>
+            <Link to="/shipping-details">
               <div class="proceed_payment_btn">
                 Checkout <i class="bi bi-chevron-right"></i>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
