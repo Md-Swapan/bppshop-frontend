@@ -48,6 +48,7 @@ const AddShipping = () => {
       .then((res) => setAreaDataOptions(res.data.data));
   };
 
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const district_id = districtId;

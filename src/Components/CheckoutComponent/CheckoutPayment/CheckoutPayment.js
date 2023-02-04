@@ -13,6 +13,7 @@ import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressActi
 
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
+  console.log(shippingAddressInfo);
   const token = localStorage.getItem("token");
   const config = { headers: { Authorization: `Bearer ${token}` } };
   const dispatch = useDispatch();
