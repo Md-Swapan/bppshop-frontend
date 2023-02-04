@@ -15,6 +15,36 @@ export const addItemsToCart =
       "cartItems",
       JSON.stringify(getState().cart.cartItems)
     );
+
+
+
+    const productId =product.id;
+    const cartGroupItem = getState().cartGroup.cartGroupItems;
+
+    console.log(productId)
+    
+    const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
+    const cartUpdateInfo = {
+      "key" : `${isItemExist.id}`,
+      "quantity": `${quantity}`
+    };
+
+    if (isItemExist) {
+      const token = localStorage.getItem("token");
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+  
+      const {data} = await axios.post(`${baseUrl}/cart/update`, 
+      cartUpdateInfo, 
+      config
+      );
+
+      console.log(data)
+      
+      dispatch({
+        type: "UPDATE_CART",
+        payload: data,
+      });
+    }
   };
 
 // add to cart with login.
@@ -89,7 +119,6 @@ export const addItemsToCartAfterLogin =
     }
   };
 
-
 // get cart data.
 export const getCartData = () => async (dispatch, getState) => {
   try {
@@ -109,16 +138,40 @@ export const getCartData = () => async (dispatch, getState) => {
   }
 };
 
-
 // REMOVE FROM CART
-export const removeItemsFromCart = (payload) => async (dispatch, getState) => {
-  dispatch({
-    type: "REMOVE_FROM_CART",
-    payload,
-  });
+export const removeItemsFromCart =
+  (productId) => async (dispatch, getState) => {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: productId,
+    });
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartItems)
+    );
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-};
+
+
+    const cartGroupItem = getState().cartGroup.cartGroupItems;
+    const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
+    const cartId = {"key" : `${isItemExist.id}`};
+
+    if (isItemExist) {
+      const token = localStorage.getItem("token");
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+  
+      const {data} = await axios.post(`${baseUrl}/cart/remove`, 
+      cartId, 
+      config
+      );
+
+      dispatch({
+        type: "REMOVE_ITEM_FROM_CART_GROUP",
+        payload: productId,
+      });
+    }
+    dispatch(getCartData());
+  };
 
 // CLEAR CART
 export const ClearCart = () => async (dispatch, getState) => {

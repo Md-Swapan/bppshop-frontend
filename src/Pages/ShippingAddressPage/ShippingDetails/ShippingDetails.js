@@ -9,9 +9,20 @@ import { useSelector } from "react-redux";
 
 
 const ShippingDetails = () => {
-  //  useSelector((state) => console.log(state?.delivaryCharge));
+  const cartItems = useSelector((state) => {
+    return state.cart.cartItems;
+  });
    const {deliveryCharge} = useSelector((state) => state?.deliveryCharge);
-   const deliveryCost = deliveryCharge.delivery_charge;
+   const deliveryCost = parseInt(deliveryCharge.delivery_charge);
+
+   const totalPrice = parseInt(`${cartItems?.reduce(
+    (acc, item) =>
+      acc +
+      item?.quantity * item?.product?.unit_price,
+    0
+  )}` )
+
+  const grandTotalPrice = totalPrice + deliveryCost
 
   return (
     <>
@@ -25,19 +36,26 @@ const ShippingDetails = () => {
               <div className="shiping_amount_container">
                 <div className="shiping_amount_content">
                   <div>Sub Total</div>
-                  <div className="amount_text">৳0.00</div>
+                  <div className="amount_text">৳ 
+                  {`${cartItems?.reduce(
+                    (acc, item) =>
+                      acc +
+                      item?.quantity * item?.product?.unit_price ,
+                    0
+                  )}`}.00
+                  </div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Tax</div>
-                  <div className="amount_text">৳0.00</div>
+                  <div className="amount_text">৳ 0.00</div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Delivery</div>
-                  <div className="amount_text">৳{deliveryCost?deliveryCost:0}.00</div>
+                  <div className="amount_text">৳ {deliveryCost?deliveryCost:0}.00</div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>
-                  <div className="amount_text">-৳0.00</div>
+                  <div className="amount_text">-৳ 0.00</div>
                 </div>
                 <div>
                   <input
@@ -52,7 +70,7 @@ const ShippingDetails = () => {
                 <hr />
                 <div className="shiping_amount_content">
                   <div>Total</div>
-                  <div className="amount_text">৳0.00</div>
+                  <div className="amount_text">৳ {grandTotalPrice}.00</div>
                 </div>
                 <div class="container mt-4">
                   <div class="row">
