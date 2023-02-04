@@ -15,13 +15,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-
-    // if(isAuthenticated && token ){
-    //   dispatch(addItemsToCartWithLogin())
-    // } 
   };
   
   if(token ){

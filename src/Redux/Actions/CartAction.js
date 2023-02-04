@@ -19,153 +19,44 @@ export const addItemsToCart =
 
 // add to cart with login.
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
+  const cartItemList = getState().cart.cartItems;
+  let bulk = [];
 
-  // const cartitem = getState().cart.cartItems.map(i=> i)
-  // console.log(cartitem);
-
-
-  await getState().cart.cartItems.map((i) => {
-   
-    let productId = i.product.id;
-    let color = i.product.colors?.map((color) => color?.code);
-    let choice_19 = i.product.choice_options?.map((list) => list?.options);
-    let option = choice_19?.map((option) => option[0]);
-    let quantity = i.quantity;
-
-    const addItemsToCartDataWithColor = {
-      id: `${productId}`,
-      color: `${color[0]}`,
-      choice_19: `${option[0]}`,
-      quantity: `${quantity}`,
-    };
-
-    const addItemsToCartDataWithOutColor = {
-      id: `${productId}`,
-      choice_19: `${option[0]}`,
-      quantity: `${quantity}`,
-    };
-
-    if (color.length > 0 ) {
-      try {
-        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
-        const token = localStorage.getItem("token");
-        const config = { headers: { Authorization: `Bearer ${token}` } };
-
-        const { data } =  axios.post(
-          `${baseUrl}/cart/add`,
-          addItemsToCartDataWithColor,
-          config
-        );
-
-        console.log(data)
-        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data.data });
-
-        localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
-      } catch (error) {
-        dispatch({
-          type: "ADD_TO_CART_WITH_LOGIN_FAIL",
-          payload: error.response.data.message,
-        });
-      }
+  cartItemList.forEach((element) => {
+    let product = {};
+    product.id = element.product.id;
+    if (element.product.colors.length) {
+      product.color = element.product.colors[0].code;
     }
+    product.choice_19 = element.product.choice_options[0].options[0];
+    product.quantity = element.quantity;
 
-    if(color.length < 1){
-      try {
-        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
-        const token = localStorage.getItem("token");
-        const config = { headers: { Authorization: `Bearer ${token}` } };
-
-        const { data } = axios.post(
-          `${baseUrl}/cart/add`,
-          addItemsToCartDataWithOutColor,
-          config
-        );
-        console.log(data)
-        dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data.data });
-
-        localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
-      } catch (error) {
-        dispatch({
-          type: "ADD_TO_CART_WITH_LOGIN_FAIL",
-          payload: error.response.data.message,
-        });
-      }
-    }
+    bulk.push(product);
+    console.log(bulk);
   });
 
+  try {
+    dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  // var addItemsToCartDataWithColor;
-  // var addItemsToCartDataWithOutColor;
-  // var color;
- 
-  // await getState().cart.cartItems.forEach((i) => {
-  //   let productId = i.product.id;
-  //   color = i.product.colors?.map((color) => color?.code);
-  //   let choice_19 = i.product.choice_options?.map((list) => list?.options);
-  //   let option = choice_19?.map((option) => option[0]);
-  //   let quantity = i.quantity;
-   
-    
-  //   addItemsToCartDataWithColor = {
-  //     id: `${productId}`,
-  //     color: `${color[0]}`,
-  //     choice_19: `${option[0]}`,
-  //     quantity: `${quantity}`,
-  //   };
+    const { data } = await axios.post(`${baseUrl}/cart/add-bulk`, bulk, config);
 
-  //    addItemsToCartDataWithOutColor = {
-  //     id: `${productId}`,
-  //     choice_19: `${option[0]}`,
-  //     quantity: `${quantity}`,
-  //   };
-    
-  // });
+    console.log(data);
+    data.cart.forEach((element) => {
+      dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: element });
+    });
 
-  
-  // if (color.length > 0) {
-  //       try {
-  //         dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
-  //         const token = localStorage.getItem("token");
-  //         const config = { headers: { Authorization: `Bearer ${token}` } };
-  
-  //         const { data } =  axios.post(
-  //           `${baseUrl}/cart/add`,
-  //           addItemsToCartDataWithColor,
-  //           config
-  //         );
-  //         console.log(data)
-  //         dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data.data });
-  
-  //         localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
-  //       } catch (error) {
-  //         dispatch({
-  //           type: "ADD_TO_CART_WITH_LOGIN_FAIL",
-  //           payload: error.response.data.message,
-  //         });
-  //       }
-  //     }else{
-  //       try {
-  //         dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
-  //         const token = localStorage.getItem("token");
-  //         const config = { headers: { Authorization: `Bearer ${token}` } };
-  
-  //         const { data } = await axios.post(
-  //           `${baseUrl}/cart/add`,
-  //           addItemsToCartDataWithOutColor,
-  //           config
-  //         );
-          
-  //         console.log(data)
-  //         dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: data.data });
-  
-  //         localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
-  //       } catch (error) {
-  //         dispatch({
-  //           type: "ADD_TO_CART_WITH_LOGIN_FAIL",
-  //           payload: error.response.data.message,
-  //         });
-  //       }
-  //     }
+    localStorage.setItem(
+      "cartGroupItems",
+      JSON.stringify(getState().cartGroup.cartGroupItems)
+    );
+  } catch (error) {
+    dispatch({
+      type: "ADD_TO_CART_WITH_LOGIN_FAIL",
+      payload: error.response.data.message,
+    });
+  }
 };
 
 // add to cart after login.
@@ -198,6 +89,7 @@ export const addItemsToCartAfterLogin =
     }
   };
 
+
 // get cart data.
 export const getCartData = () => async (dispatch, getState) => {
   try {
@@ -216,6 +108,7 @@ export const getCartData = () => async (dispatch, getState) => {
     dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
   }
 };
+
 
 // REMOVE FROM CART
 export const removeItemsFromCart = (payload) => async (dispatch, getState) => {

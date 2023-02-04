@@ -42,6 +42,7 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
     const token = localStorage.getItem("token");
 
     if (token) {
+      dispatch(loadUser())
       dispatch(addItemsToCartWithLogin());
     }
   } catch (error) {
