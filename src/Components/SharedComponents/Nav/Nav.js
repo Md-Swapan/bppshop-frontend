@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Nav.css";
 import defaultAvatar from "../../../Assets/Images/default-avatar.jpg";
 import bppShopsLogo from "../../../Assets/Images/bppshopslogo.png";
@@ -14,7 +14,6 @@ import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 
 const Nav = () => {
-  const navigate =useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
@@ -26,7 +25,6 @@ const Nav = () => {
       if (res.data.status === "success") {
         localStorage.removeItem("token");
         window.location.reload();
-        navigate('/');
         // dispatch(logout())
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
