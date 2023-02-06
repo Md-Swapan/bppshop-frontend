@@ -1,7 +1,6 @@
 .product-card {
   position: relative;
   height: auto;
-  border: none;
   border-radius: 7px;
   font-family: "Space Grotesk", sans-serif;
   border: 1px solid gainsboro;
@@ -149,4 +148,38 @@
   color: white;
   display: block;
   cursor: default;
+}
+
+
+/* mobile responsive design */
+@media screen and (max-width: 768px) {
+  .product-card-body img {
+    height: 190px;
+  }
+}
+@media screen and (max-width: 676px) {
+  .product-card-body img {
+    height: 180px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .product-card-body img {
+    height: 180px;
+  }
+}
+@media screen and (max-width: 476px) {
+  .product-card-body img {
+    height: 160px;
+  }
+  .btn_before_add_cart, .btn_after_added_cart {
+    padding: 2px 10px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .product-card-body img {
+    height: 100px;
+  }
+  .btn_before_add_cart, .btn_after_added_cart {
+    padding: 2px 10px;
+  }
 }
