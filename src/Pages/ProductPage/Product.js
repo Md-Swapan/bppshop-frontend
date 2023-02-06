@@ -53,7 +53,7 @@ const Product = ({ allCategory }) => {
       </nav>
 
       <div className="categoryView-container productView-container">
-        {products.length ? (
+        {/* {products.length ? ( */}
           <div className="category_content product-content">
             <SkeletonTheme baseColor="#DDDDDD" highlightColor="#F5F5F5">
               {loading ? (
@@ -81,11 +81,11 @@ const Product = ({ allCategory }) => {
               )}
             </SkeletonTheme>
           </div>
-        ) : (
+        {/* ) : (
           <div className="no_product_content">
             <img src={noProductImg} alt="" srcSet="" />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

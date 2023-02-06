@@ -25,6 +25,7 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
+  console.log(product)
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
