@@ -74,7 +74,7 @@
   /* border-top: 1px solid gainsboro; */
 }
 .profile_dropdown a{
-  /* text-decoration: none; */
+  text-decoration: none;
 }
 /* responsive css */
 @media only screen and (max-width: 1400px) {

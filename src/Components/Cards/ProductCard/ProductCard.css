@@ -1,15 +1,14 @@
-
 .product-card {
   position: relative;
   height: auto;
   border: none;
   border-radius: 7px;
-  cursor: pointer;
   font-family: "Space Grotesk", sans-serif;
   border: 1px solid gainsboro;
   overflow: hidden;
   transition: all 0.3s;
 }
+
 .product-card:hover {
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -22,6 +21,7 @@
   overflow: hidden;
   transition: all 0.3s;
 }
+
 .product-card-body img {
   height: 200px;
 }
@@ -30,9 +30,11 @@
   height: 30%;
   text-align: center;
 }
-.product-card-body-content-unit-price{
+
+.product-card-body-content-unit-price {
   text-align: center;
 }
+
 .quickView_AddToCart_overlay {
   position: absolute;
   background: #000000be;
@@ -43,20 +45,26 @@
   display: none;
   transition: all 0.3s;
 }
+
 .product-card-body:hover .quickView_AddToCart_overlay {
   display: block;
+  cursor: pointer;
 }
+
 .overlayAddToCartBtn {
   color: #ffffff;
   text-align: center;
   margin-top: 46px;
 }
+
 .overlayAddToCartBtn img {
   height: 133px;
 }
+
 .overlayAddToCartBtn i {
   font-size: 35px;
 }
+
 .quickView_AddToCart_overlay button {
   border: none;
   outline: none;
@@ -71,9 +79,11 @@
   margin-top: 66px;
   font-family: "DM Sans", sans-serif;
 }
+
 .quickView_AddToCart_overlay button:hover {
   color: #ef8341;
 }
+
 .quickView_AddToCart_overlay button i {
   font-size: 20px;
   margin-top: 5px;
@@ -83,22 +93,33 @@
   height: 20%;
   font-size: 14px;
 }
-.product-card-footer button {
+
+.btn_before_add_cart, .btn_after_added_cart {
   border: none;
   outline: none;
-  background: #ef8341;
   color: #ffffff;
   padding: 6px 20px;
   border-radius: 5px;
   transition: all 0.3s;
   font-family: "DM Sans", sans-serif;
 }
-.product-card-footer button:hover {
+
+.btn_before_add_cart {
+  background: #ef8341;
+}
+
+.btn_after_added_cart {
+  background: #6b5e56;
+}
+
+.btn_before_add_cart button:hover {
   background: #7e7e7e;
 }
-.product-card-footer button i {
+
+.btn_before_add_cart button i {
   font-size: 17px;
 }
+
 .ReactModal__Overlay--after-open {
   position: fixed;
   inset: 0px;

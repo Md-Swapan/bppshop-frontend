@@ -23,8 +23,8 @@ const TrackOrderDetails = () => {
   return (
     <div>
       <Link to={`/profile/track-order/${id}`}>
-        <button class="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
-          <i class="bi bi-arrow-left-circle mr-2"></i> Back
+        <button className="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
+          <i className="bi bi-arrow-left-circle mr-2"></i> Back
         </button>
       </Link>
       <div className="my-3">
@@ -32,7 +32,7 @@ const TrackOrderDetails = () => {
       </div>
       <hr />
       <div className="table-responsive my-4">
-        <table class="table">
+        <table className="table">
           <tbody>
             {productDetails?.map((item) => {
               subTotal += item.min_qty * item.unit_price;
@@ -40,7 +40,7 @@ const TrackOrderDetails = () => {
               taxAmount += item.tax;
               discountAmount += item.discount;
               return (
-                <tr>
+                <tr key={item.id}>
                   <td>
                     <img
                       className="track_order_img"
@@ -51,43 +51,43 @@ const TrackOrderDetails = () => {
                   </td>
                   <td>
                     <h6> {item?.name}</h6>
-                    <div class="text-muted">
+                    <div className="text-muted">
                       <span>{item?.unit} </span>
                       <span className="track_amount_value">
                         {item?.min_qty}
                       </span>
                     </div>
-                    <div class="fw-bold text-warning">
+                    <div className="fw-bold text-warning">
                       <span className="track_amount_value">
                         ৳ {item?.unit_price}.00
                       </span>
                     </div>
                   </td>
                   <td>
-                    <div class="text-muted">
+                    <div className="text-muted">
                       <span>Quantity: </span>
                     </div>
-                    <div class="fs-5">
+                    <div className="fs-5">
                       <span className="track_amount_value">
                         {item?.min_qty}
                       </span>
                     </div>
                   </td>
                   <td>
-                    <div class="text-muted">
+                    <div className="text-muted">
                       <span>Tax: </span>
                     </div>
-                    <div class="fs-5">
+                    <div className="fs-5">
                       <span className="track_amount_value">
                         ৳ {item?.tax}.00
                       </span>
                     </div>
                   </td>
                   <td>
-                    <div class="text-muted">
+                    <div className="text-muted">
                       <span>Subtotal</span>
                     </div>
-                    <div class="fs-5">
+                    <div className="fs-5">
                       <span className="track_amount_value">
                         ৳ {item?.min_qty * item?.unit_price}.00
                       </span>
@@ -102,26 +102,26 @@ const TrackOrderDetails = () => {
       <div className="track_order_amount_container">
         <div className="row">
           <div className="col-6 col-md-3 text-center">
-            <div class="px-2 py-1">
-              <span class="text-muted">Subtotal : </span>{" "}
+            <div className="px-2 py-1">
+              <span className="text-muted">Subtotal : </span>{" "}
               <span className="track_amount_value">৳ {subTotal}.00</span>
             </div>
           </div>
           <div className="col-6 col-md-3 text-center">
-            <div class="px-2 py-1">
-              <span class="text-muted">Shipping : </span>
+            <div className="px-2 py-1">
+              <span className="text-muted">Shipping : </span>
               <span className="track_amount_value">৳{shippingCost}.00</span>
             </div>
           </div>
           <div className="col-6 col-md-3 text-center">
-            <div class="px-2 py-1">
-              <span class="text-muted">Tax : </span>{" "}
+            <div className="px-2 py-1">
+              <span className="text-muted">Tax : </span>{" "}
               <span className="track_amount_value">৳{taxAmount}.00</span>
             </div>
           </div>
           <div className="col-6 col-md-3 text-center">
-            <div class="px-2 py-1">
-              <span class="text-muted">Discount : </span>
+            <div className="px-2 py-1">
+              <span className="text-muted">Discount : </span>
               <span className="track_amount_value">- ৳{discountAmount}.00</span>
             </div>
           </div>
@@ -130,14 +130,14 @@ const TrackOrderDetails = () => {
       <div className="track_order_amount_container">
         <div className="row">
           <div className="col-6">
-            <div class="px-2 py-1">
-              <span class="text-muted">Coupon Discount :</span>
+            <div className="px-2 py-1">
+              <span className="text-muted">Coupon Discount :</span>
               <span className="track_amount_value"> --</span>
             </div>
           </div>
           <div className="col-6 text-end">
-            <div class="px-2 py-1">
-              <span class="text-muted">Total: </span>
+            <div className="px-2 py-1">
+              <span className="text-muted">Total: </span>
               <span className="track_amount_value">
                 ৳{subTotal + shippingCost + taxAmount - discountAmount}.00
               </span>

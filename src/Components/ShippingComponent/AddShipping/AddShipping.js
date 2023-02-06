@@ -107,7 +107,7 @@ const AddShipping = () => {
               onChange={handleDistrictChange}
               required
               name="district_id"
-              class="shipping_address_input"
+              className="shipping_address_input"
               aria-label="Default select example"
             >
               <option value={null} selected>
@@ -127,7 +127,7 @@ const AddShipping = () => {
               onChange={handleThanaChange}
               required
               name="upazila_id"
-              class="shipping_address_input"
+              className="shipping_address_input"
               aria-label="Default select example"
             >
               <option value={null} selected>
@@ -145,7 +145,7 @@ const AddShipping = () => {
             <select
               {...register("area_id", { required: true })}
               name="area_id"
-              class=" shipping_address_input"
+              className=" shipping_address_input"
               aria-label="Default select example"
             >
               <option selected>------Select Area------</option>

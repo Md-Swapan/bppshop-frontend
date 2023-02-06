@@ -3,10 +3,10 @@ import "./ForgetPassword.css";
 
 const ForgetPassWord = () => {
   return (
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10">
-        <h2 class="h3 mb-4">Forgot your password?</h2>
-        <p class="font-size-md">
+    <div className="row justify-content-center">
+      <div className="col-lg-8 col-md-10">
+        <h2 className="h3 mb-4">Forgot your password?</h2>
+        <p className="font-size-md">
           Change your password in three easy steps. This helps to keep your new
           password secure .
         </p>
@@ -17,16 +17,16 @@ const ForgetPassWord = () => {
         </ol>
 
         <form>
-          <div class="recover_pass_card">
-            <div class="recover_pass_card_body needs-validation">
-              <label for="recover-email">Enter your phone number</label>
+          <div className="recover_pass_card">
+            <div className="recover_pass_card_body needs-validation">
+              <label htmlFor="recover-email">Enter your phone number</label>
               <input
-                class="recover_pass_input"
+                className="recover_pass_input"
                 type="text"
                 name="identity"
                 required
               />
-              <button class="recover_pass_btn" type="submit">
+              <button className="recover_pass_btn" type="submit">
                 Get new password
               </button>
             </div>

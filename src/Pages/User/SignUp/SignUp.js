@@ -35,22 +35,22 @@ const SignUp = () => {
   } 
 
   return (
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="signup_card">
+    <div className="row justify-content-center">
+      <div className="col-md-8">
+        <div className="signup_card">
           <div>
-            <h2 class="h4 mb-1">Create Account</h2>
-            <p class="font-size-sm text-muted mb-4">
+            <h2 className="h4 mb-1">Create Account</h2>
+            <p className="font-size-sm text-muted mb-4">
               Register control your order .
             </p>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div class="row">
-                <div class=" col-md-6">
+              <div className="row">
+                <div className=" col-md-6">
                   <div className="my-1">
                     <label>Your name</label>
                     <input
                       {...register("name", { required: true })}
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       name="name"
                       placeholder="Enter your name"
@@ -58,17 +58,17 @@ const SignUp = () => {
                     />
                   </div>
                 </div>
-                <div class=" col-md-6">
+                <div className=" col-md-6">
                   <div className="my-1">
                     <label>
                       Mobile
-                      <small class="text-primary">
+                      <small className="text-primary">
                         ( * Country code is must Like for BD 880 )
                       </small>
                     </label>
                     <input
                       {...register("phone", { required: true })}
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       name="phone"
                       placeholder="+880"
@@ -78,12 +78,12 @@ const SignUp = () => {
                 </div>
               </div>
               <div className="row">
-                <div class=" col-md-6">
+                <div className=" col-md-6">
                   <div className="my-1">
                     <label>Password</label>
                     <input
                       {...register("password", { required: true })}
-                      class="form-control"
+                      className="form-control"
                       type="password"
                       name="password"
                       placeholder="Minimum 8 characters long"
@@ -91,12 +91,12 @@ const SignUp = () => {
                     />
                   </div>
                 </div>
-                <div class=" col-md-6">
+                <div className=" col-md-6">
                   <div className="my-1">
                     <label>Confirm password</label>
                     <input
                       {...register("con_password", { required: true })}
-                      class="form-control"
+                      className="form-control"
                       type="password"
                       name="con_password"
                       placeholder="Minimum 8 characters long"
@@ -105,24 +105,24 @@ const SignUp = () => {
                   </div>
                 </div>
               </div>
-              <div class="form-group d-flex flex-wrap justify-content-between">
-                <div class="form-group my-3">
+              <div className="form-group d-flex flex-wrap justify-content-between">
+                <div className="form-group my-3">
                   <strong>
                     <input
                       type="checkbox"
-                      class="mr-1"
+                      className="mr-1"
                       name="remember"
                       id="inputCheckd"
                     />
                   </strong>
-                  <label class="ms-1" for="remember">
+                  <label className="ms-1" htmlFor="remember">
                     I agree to Your Terms and condition
                   </label>
                 </div>
                 <div id="invalid-feedback">{signUpError}</div>
               </div>
               
-              <div class="row">
+              <div className="row">
                 <div className="signup_card_footer">
                   <div className="sign_up_btn">
                     <button type="submit">Submit</button>

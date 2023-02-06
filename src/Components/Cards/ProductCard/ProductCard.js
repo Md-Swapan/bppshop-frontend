@@ -35,7 +35,15 @@ const ProductCard = ({ product }) => {
 
   const token = localStorage.getItem("token");
 
-  const { id, name, unit_price, choice_options, thumbnail } = product;
+  const {
+    id,
+    name,
+    unit_price,
+    choice_options,
+    discount,
+    current_stock,
+    thumbnail,
+  } = product;
 
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
@@ -45,8 +53,10 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
+  const [added, setAdded] = useState(false);
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
+    setAdded(true);
 
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
@@ -75,7 +85,7 @@ const ProductCard = ({ product }) => {
     <>
       <div className="product_card_content">
         <div className="product-card">
-          {product.current_stock > 0 ? (
+          {current_stock > 0 ? (
             <div>
               <div className=" product-card-body">
                 <img
@@ -93,14 +103,26 @@ const ProductCard = ({ product }) => {
                       ))}
                     </span>
                     <br />
-                    <strong> ৳ {unit_price}</strong>
+                    {discount ? (
+                      <span>
+                        <strong> ৳ {unit_price - discount} </strong>
+                        <del>
+                          <strong className="text-danger">
+                            {" "}
+                            ৳ {unit_price}
+                          </strong>
+                        </del>
+                      </span>
+                    ) : (
+                      <strong> ৳ {unit_price}</strong>
+                    )}
                   </div>
                 </div>
-                <div
-                  className="quickView_AddToCart_overlay"
-                  onClick={() => addToCartHandler(product, quantity)}
-                >
-                  <div className="overlayAddToCartBtn">
+                <div className="quickView_AddToCart_overlay">
+                  <div
+                    onClick={() => addToCartHandler(product, quantity)}
+                    className="overlayAddToCartBtn"
+                  >
                     <img src={addToCartImg} alt="" />
                   </div>
                   <span onClick={() => productDetailsView(id)}>
@@ -111,12 +133,18 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                <button
-                  onClick={() => addToCartHandler(product, quantity)}
-                  type=""
-                >
-                  <i className="bi bi-cart-plus"></i> Add To Cart
-                </button>
+                {!added ? (
+                  <button
+                  className="btn_before_add_cart"
+                    onClick={() => addToCartHandler(product, quantity)}
+                  >
+                    <i className="bi bi-cart-plus"></i> Add To Cart
+                  </button>
+                ) : (
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Added to Cart
+                  </button>
+                )}
               </div>
             </div>
           ) : (
@@ -142,7 +170,7 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                <button>
+                <button className="btn_before_add_cart">
                   <i className="bi bi-cart-plus"></i> Stock Out
                 </button>
               </div>
@@ -163,7 +191,7 @@ const ProductCard = ({ product }) => {
         contentLabel="Example Modal"
       >
         <span onClick={closeModal} className="modalCloseBtn">
-          <i class="bi bi-x-lg"></i>
+          <i className="bi bi-x-lg"></i>
         </span>
         <br />
         <QuickViewModal pid={pid} />

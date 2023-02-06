@@ -29,46 +29,46 @@ let discountAmount=0;
   return (
     <div>
       <Link to="/profile/orders">
-        <button class="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
-          <i class="bi bi-arrow-left-circle mr-2"></i> Back
+        <button className="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
+          <i className="bi bi-arrow-left-circle mr-2"></i> Back
         </button>
       </Link>
-      <div class="order_detail_card">
-        <div class="payment mb-3  table-responsive">
-          <table class="table table-borderless">
+      <div className="order_detail_card">
+        <div className="payment mb-3  table-responsive">
+          <table className="table table-borderless">
             <thead>
-              <tr class="order_table_tr order_table_head">
-                <td class="order_table_td">
-                  <div class="order_table_info_div">
-                    <div class="order_table_info_div_1 py-2">
-                      <span class="d-block spandHeadO">Order no: </span>
+              <tr className="order_table_tr order_table_head">
+                <td className="order_table_td">
+                  <div className="order_table_info_div">
+                    <div className="order_table_info_div_1 py-2">
+                      <span className="d-block spandHeadO">Order no: </span>
                     </div>
-                    <div class="order_table_info_div_2">
-                      <span class="spanTr"> {userOrder?.id} </span>
+                    <div className="order_table_info_div_2">
+                      <span className="spanTr"> {userOrder?.id} </span>
                     </div>
                   </div>
                 </td>
-                <td class="order_table_td">
-                  <div class="order_table_info_div">
-                    <div class="order_table_info_div_1 py-2">
-                      <span class="d-block spandHeadO">Order date: </span>
+                <td className="order_table_td">
+                  <div className="order_table_info_div">
+                    <div className="order_table_info_div_1 py-2">
+                      <span className="d-block spandHeadO">Order date: </span>
                     </div>
-                    <div class="order_table_info_div_2">
-                      <span class="spanTr">
+                    <div className="order_table_info_div_2">
+                      <span className="spanTr">
                         {" "}
                         {userOrder?.created_at?.slice(0, 10)}
                       </span>
                     </div>
                   </div>
                 </td>
-                <td class="order_table_td">
-                  <div class="order_table_info_div">
-                    <div class="order_table_info_div_1 py-2">
-                      <span class="d-block spandHeadO">Delivery address: </span>
+                <td className="order_table_td">
+                  <div className="order_table_info_div">
+                    <div className="order_table_info_div_1 py-2">
+                      <span className="d-block spandHeadO">Delivery address: </span>
                     </div>
 
-                    <div class="order_table_info_div_2">
-                      <span class="spanTr">
+                    <div className="order_table_info_div_2">
+                      <span className="spanTr">
                         {userOrder?.shipping_address_data?.contact_person_name}{" "}
                         ({userOrder?.shipping_address_data?.phone}),{" "}
                         {userOrder?.shipping_address_data?.address},
@@ -84,13 +84,13 @@ let discountAmount=0;
             </thead>
           </table>
 
-          <div class="row">
+          <div className="row">
             <div></div>
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-2"></div>
-          <div class="col-md-2"></div>
-          <table class="table table-borderless">
+          <div className="col-md-4"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2"></div>
+          <table className="table table-borderless">
             {productDetails?.map((product) => {
               subTotal += product.min_qty*product.unit_price;
               taxFee +=product.tax;
@@ -99,17 +99,17 @@ let discountAmount=0;
               return(
                 <tbody key={product.id}>
                 <tr className="order_detail_list">
-                  <td class="col-2 for-tab-img">
+                  <td className="col-2 for-tab-img">
                     <img src={imgThumbnailBaseUrl + `/${product.thumbnail}`} alt="" />
                   </td>
-                  <td class="col-10 ">
+                  <td className="col-10 ">
                     <span className="for-glaxy-name">{product.name}</span>
                     <br />
                   </td>
 
                   <td width="100%">
-                    <div class="text-right">
-                      <span class="font-weight-bold amount">
+                    <div className="text-right">
+                      <span className="font-weight-bold amount">
                         ৳{product.unit_price}{" "}
                       </span>
                       <br />
@@ -123,18 +123,18 @@ let discountAmount=0;
           </table>
         </div>
       </div>
-      <div class="row d-flex justify-content-end">
-        <div class="col-md-8 col-lg-5">
-          <table class="table table-borderless">
-            <tbody class="totals">
+      <div className="row d-flex justify-content-end">
+        <div className="col-md-8 col-lg-5">
+          <table className="table table-borderless">
+            <tbody className="totals">
               <tr>
                 <td>
-                  <div class="text-left">
-                    <span class="product-qty ">Item </span>
+                  <div className="text-left">
+                    <span className="product-qty ">Item </span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
+                  <div className="text-right">
                     <span>{totalItem}</span>
                   </div>
                 </td>
@@ -142,12 +142,12 @@ let discountAmount=0;
 
               <tr>
                 <td>
-                  <div class="text-left">
-                    <span class="product-qty ">Subtotal</span>
+                  <div className="text-left">
+                    <span className="product-qty ">Subtotal</span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
+                  <div className="text-right">
                     <span>৳{subTotal}.00</span>
                   </div>
                 </td>
@@ -155,24 +155,24 @@ let discountAmount=0;
 
               <tr>
                 <td>
-                  <div class="text-left">
-                    <span class="product-qty ">Text fee</span>
+                  <div className="text-left">
+                    <span className="product-qty ">Text fee</span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
+                  <div className="text-right">
                     <span>৳{taxFee}.00</span>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class="text-left">
-                    <span class="product-qty ">Shipping Fee</span>
+                  <div className="text-left">
+                    <span className="product-qty ">Shipping Fee</span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
+                  <div className="text-right">
                     <span>৳{shippingFee}.00</span>
                   </div>
                 </td>
@@ -180,12 +180,12 @@ let discountAmount=0;
 
               <tr>
                 <td>
-                  <div class="text-left">
-                    <span class="product-qty ">Discount On product</span>
+                  <div className="text-left">
+                    <span className="product-qty ">Discount On product</span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
+                  <div className="text-right">
                     <span>- ৳{discountAmount}.00</span>
                   </div>
                 </td>
@@ -193,26 +193,26 @@ let discountAmount=0;
 
               <tr>
                 <td>
-                  <div class="text-left">
-                    <span class="product-qty ">Coupon Discount</span>
+                  <div className="text-left">
+                    <span className="product-qty ">Coupon Discount</span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
+                  <div className="text-right">
                     <span>--</span>
                   </div>
                 </td>
               </tr>
 
-              <tr class="border-top border-bottom">
+              <tr className="border-top border-bottom">
                 <td>
-                  <div class="text-left">
-                    <span class="font-weight-bold">Total</span>
+                  <div className="text-left">
+                    <span className="font-weight-bold">Total</span>
                   </div>
                 </td>
                 <td>
-                  <div class="text-right">
-                    <span class="font-weight-bold amount ">৳{(subTotal+shippingFee+taxFee)-discountAmount}.00</span>
+                  <div className="text-right">
+                    <span className="font-weight-bold amount ">৳{(subTotal+shippingFee+taxFee)-discountAmount}.00</span>
                   </div>
                 </td>
               </tr>
@@ -220,7 +220,7 @@ let discountAmount=0;
           </table>
         </div>
       </div>
-      <div class="row">
+      <div className="row">
           <div className="track_order_btn">
             <Link to={`/profile/track-order/${id}`}><button>Track Order</button></Link>
           </div>

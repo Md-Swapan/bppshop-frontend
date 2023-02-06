@@ -17,23 +17,23 @@ const OrderHome = () => {
           <h5>You Dont't Have Any Order...</h5>
         </div>
       ) : (
-        <table class="table">
+        <table className="table">
           <thead className="order_table_head">
             <tr>
               <td>
-                <span class="">Order#</span>
+                <span className="">Order#</span>
               </td>
               <td>
-                <span class="">Order Date</span>
+                <span className="">Order Date</span>
               </td>
               <td>
-                <span class=""> Status</span>
+                <span className=""> Status</span>
               </td>
               <td>
-                <span class=""> Total</span>
+                <span className=""> Total</span>
               </td>
               <td>
-                <span class=""> Action</span>
+                <span className=""> Action</span>
               </td>
             </tr>
           </thead>
@@ -41,7 +41,7 @@ const OrderHome = () => {
           <tbody className="order_table_body">
             {userOrders?.map((order) => (
               <tr key={order?.id}>
-                <td class="fw-bold">ID: {order?.id}</td>
+                <td className="fw-bold">ID: {order?.id}</td>
                 <td>{order?.created_at?.slice(0, 10)}</td>
                 <td>
                   <span className="order_status">{order?.order_status}</span>
@@ -50,11 +50,11 @@ const OrderHome = () => {
                 <td>
                   <Link to={`/profile/orders-detail/${order?.id}`}>
                     <button className="my_order_view_btn">
-                      <i class="bi bi-eye-fill"></i> View
+                      <i className="bi bi-eye-fill"></i> View
                     </button>
                   </Link>
                   <button onClick={()=>dispatch(loadUserOrderCancelRequest(order?.id))} className="my_order_cancel_btn">
-                    <i class="bi bi-trash3-fill"></i> Cancel
+                    <i className="bi bi-trash3-fill"></i> Cancel
                   </button>
                 </td>
               </tr>

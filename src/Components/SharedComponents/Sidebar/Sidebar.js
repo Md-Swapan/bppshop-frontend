@@ -1,21 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
-import islamicIcon from "../../../Assets/Images/icons/islamic-icon-vector-27687758.jpg";
-import groceryIcon from "../../../Assets/Images/icons/grocery.webp";
-import fashionIcon from "../../../Assets/Images/icons/image 40.png";
-import babyCareIcon from "../../../Assets/Images/icons/3731013.png";
-import cosmeticsIcon from "../../../Assets/Images/icons/cosmetic.jpg";
-import shoesIcon from "../../../Assets/Images/icons/shoes.jpg";
-import eyeCareIcon from "../../../Assets/Images/icons/eyecare.jpg";
-import sportsIcon from "../../../Assets/Images/icons/Sport_balls.svg.png";
-import pharmacyIcon from "../../../Assets/Images/icons/pharmacy-icon-3.jpg";
-import electronicsIcon from "../../../Assets/Images/icons/electronics.jpg";
-import furnitureIcon from "../../../Assets/Images/icons/furniture.jpeg";
-import hardwareIcon from "../../../Assets/Images/icons/image 52 (1).png";
-import homeDecorateIcon from "../../../Assets/Images/icons/image 50.png";
-import vehicleIcon from "../../../Assets/Images/icons/image 53.png";
-import usedProductsIcon from "../../../Assets/Images/icons/usedProduct.jfif";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { baseUrl, categoryBaseUrl } from "./../../../BaseUrl/BaseUrl";
 
@@ -80,41 +65,53 @@ const Sidebar = () => {
     <>
       <div className="sidebar-toggle-section">
         <input type="checkbox" name="" id="openSidebarMenu" />
-        <label for="openSidebarMenu" className="sidebarIconToggle">
+        {/* <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
           <div className="spinner top"></div>
           <div className="spinner middle"></div>
           <div className="spinner bottom"></div>
+        </label> */}
+        <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
+          <i class="bi bi-list"></i>
         </label>
         <div id="sidebarMenu">
           <ul className="menu">
-            <li className="homeIcon">
+            {/* <li className="homeIcon">
               <Link to="/">
                 <div>
                   <i className="bi bi-house-door-fill"></i>
                   Home
                 </div>
               </Link>
-            </li>
+            </li> */}
+            <div className="homeIcon">
+              <Link to="/">
+                <div>
+                  <i className="bi bi-house-door-fill"></i>
+                </div>
+              </Link>
+            </div>
+            <hr />
 
             {allCategory?.map((categoryItem, index) => (
               <li
+                key={index}
                 id={`categoryItem ${index}`}
                 className=""
                 onClick={() => subMenuHandler(categoryItem?.slug, index)}
               >
                 <Link to={`/${categoryItem?.slug}`}>
                   <div>
-                      <img
-                        width="15"
-                        className="sidebar-Icon"
-                        src={categoryBaseUrl + `/${categoryItem.icon}`}
-                        alt=""
-                      />
+                    <img
+                      width="15"
+                      className="sidebar-Icon"
+                      src={categoryBaseUrl + `/${categoryItem.icon}`}
+                      alt=""
+                    />
                     {categoryItem?.name}
                   </div>
                   <span>
-                    <i class="bi bi-chevron-right chevronRight"></i>
-                    {/* <i class="bi bi-chevron-down chevron-down"></i> */}
+                    <i className="bi bi-chevron-right chevronRight"></i>
+                    {/* <i className="bi bi-chevron-down chevron-down"></i> */}
                   </span>
                 </Link>
               </li>
@@ -124,17 +121,18 @@ const Sidebar = () => {
               {subCategory?.map((item, indx) => (
                 <Link to={`/${categorySlugName}/${item?.slug}`}>
                   <li
+                    key={indx}
                     id={`subSubCategoryItem ${indx}`}
                     onClick={() => subSubCategoryViewHandler(item?.slug, indx)}
                   >
                     {item?.name}
                   </li>
                   <ul className=" subSubMenu">
-                    {subSubCategoryList?.childes?.map((item) => (
+                    {subSubCategoryList?.childes?.map((item, index) => (
                       <Link
                         to={`/${categorySlugName}/${subCategorySlugName}/${item?.slug}`}
                       >
-                        <li>{item?.name}</li>
+                        <li key={item.index}>{item?.name}</li>
                       </Link>
                     ))}
                   </ul>

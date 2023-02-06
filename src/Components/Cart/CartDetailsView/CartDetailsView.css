@@ -47,6 +47,7 @@
 }
 .cart-content{
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 .cart-content span{
@@ -85,7 +86,7 @@
 
 .cartItemDeleteBtn{
  color: #ef8341;
- font-size: 17px;
+ font-size: 14px;
  cursor: pointer;
 }
 

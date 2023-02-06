@@ -36,24 +36,24 @@ const CheckoutShopCart = () => {
       <div className="shop_cart_container">
         <i>Shop name : BPP Shop</i>
 
-        <div class="table-responsive">
-          <table class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table my-3">
-            <thead class="">
-              <tr class="text-center">
-                <th class="font-weight-bold">SL#</th>
-                <th class="font-weight-bold">Product Images</th>
-                <th class="font-weight-bold">Product Name</th>
-                <th class="font-weight-bold">Unit</th>
-                <th class="font-weight-bold">Unit price</th>
-                <th class="font-weight-bold">Qty</th>
-                <th class="font-weight-bold">Price</th>
+        <div className="table-responsive">
+          <table className="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table my-3">
+            <thead className="">
+              <tr className="text-center">
+                <th className="font-weight-bold">SL#</th>
+                <th className="font-weight-bold">Product Images</th>
+                <th className="font-weight-bold">Product Name</th>
+                <th className="font-weight-bold">Unit</th>
+                <th className="font-weight-bold">Unit price</th>
+                <th className="font-weight-bold">Qty</th>
+                <th className="font-weight-bold">Price</th>
               </tr>
             </thead>
 
             <tbody>
               {cartItems.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={item.product.id}>
                     <td>{index + 1}</td>
                     <td>
                       <img
@@ -138,9 +138,9 @@ const CheckoutShopCart = () => {
                         onClick={() =>
                           dispatch(removeItemsFromCart(item?.product?.id))
                         }
-                        class="cartItemDeleteBtn"
+                        className="cartItemDeleteBtn"
                       >
-                        <i class="bi bi-trash3"></i>
+                        <i className="bi bi-trash3"></i>
                       </span>
                     </td>
                   </tr>
@@ -183,16 +183,16 @@ const CheckoutShopCart = () => {
             />
           </div>
         </div>
-        <div class="shop_payment_btn_content">
-          <div class="shop_payment_btn">
+        <div className="shop_payment_btn_content">
+          <div className="shop_payment_btn">
             <Link to="/">
-              <div class="shop_cart_btn">
-                <i class="bi bi-chevron-left"></i> Continue shopping
+              <div className="shop_cart_btn">
+                <i className="bi bi-chevron-left"></i> Continue shopping
               </div>
             </Link>
             <Link to="/shipping-details">
-              <div class="proceed_payment_btn">
-                Checkout <i class="bi bi-chevron-right"></i>
+              <div className="proceed_payment_btn">
+                Checkout <i className="bi bi-chevron-right"></i>
               </div>
             </Link>
           </div>

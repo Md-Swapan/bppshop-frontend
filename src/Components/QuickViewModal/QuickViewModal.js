@@ -113,7 +113,7 @@ const QuickViewModal = ({ pid }) => {
                     {pid}{" "}
                   </h4>
                   <span>
-                    <i class="bi bi-heart"></i>
+                    <i className="bi bi-heart"></i>
                   </span>
                 </div>
                 <div className="price_Stock_Code">
@@ -142,7 +142,7 @@ const QuickViewModal = ({ pid }) => {
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
-                      <>
+                      <div key={list.id}>
                         <h5>{list?.title}: </h5>
                         <div className="d-flex">
                           {list?.options?.map((option) => (
@@ -152,7 +152,7 @@ const QuickViewModal = ({ pid }) => {
                             className="size1">{option}</span>
                           ))}
                         </div>
-                      </>
+                      </div>
                     ))}
                   </div>
 
@@ -233,7 +233,7 @@ const QuickViewModal = ({ pid }) => {
           <div className="row">
             <div className="col-md-4 img-carousel-item">
               {
-                 productDetail?.images?.map(img=><img width={70} src={imgBaseUrl+`/${img}`} alt="img" />)
+                 productDetail?.images?.map((img,index)=><img key={index} width={70} src={imgBaseUrl+`/${img}`} alt="img" />)
               }
 
             </div>

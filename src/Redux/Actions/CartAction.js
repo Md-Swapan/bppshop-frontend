@@ -16,12 +16,8 @@ export const addItemsToCart =
       JSON.stringify(getState().cart.cartItems)
     );
 
-
-
     const productId =product.id;
     const cartGroupItem = getState().cartGroup.cartGroupItems;
-
-    console.log(productId)
     
     const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
     const cartUpdateInfo = {
@@ -37,8 +33,6 @@ export const addItemsToCart =
       cartUpdateInfo, 
       config
       );
-
-      console.log(data)
       
       dispatch({
         type: "UPDATE_CART",
@@ -62,7 +56,6 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
     product.quantity = element.quantity;
 
     bulk.push(product);
-    console.log(bulk);
   });
 
   try {
@@ -71,8 +64,6 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     const { data } = await axios.post(`${baseUrl}/cart/add-bulk`, bulk, config);
-
-    console.log(data);
     data.cart.forEach((element) => {
       dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: element });
     });
@@ -103,7 +94,6 @@ export const addItemsToCartAfterLogin =
         config
       );
 
-      console.log(data);
       dispatch(getCartData());
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data.data });
 
@@ -128,7 +118,6 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-    console.log(data.data);
 
     // dispatch({ type: "GET_CART_SUCCESS", payload: data.data });
 

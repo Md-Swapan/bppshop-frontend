@@ -21,7 +21,6 @@ const Product = ({ allCategory }) => {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(products.length);
 
   useEffect(() => {
     axios
@@ -84,7 +83,7 @@ const Product = ({ allCategory }) => {
           </div>
         ) : (
           <div className="no_product_content">
-            <img src={noProductImg} alt="" srcset="" />
+            <img src={noProductImg} alt="" srcSet="" />
           </div>
         )}
       </div>

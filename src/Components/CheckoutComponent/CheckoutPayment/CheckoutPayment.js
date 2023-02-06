@@ -13,7 +13,7 @@ import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressActi
 
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
-  console.log(shippingAddressInfo);
+  // console.log(shippingAddressInfo);
   const token = localStorage.getItem("token");
   const config = { headers: { Authorization: `Bearer ${token}` } };
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const CheckoutPayment = () => {
     <div>
       <h3 className="mb-4">Payment method</h3>
       <hr />
-      <h6 class="my-5">Choose payment</h6>
+      <h6 className="my-5">Choose payment</h6>
       <div>
         <div
           onClick={() => handleCheckoutConfirm(shippingAddressInfo?.data?.id)}

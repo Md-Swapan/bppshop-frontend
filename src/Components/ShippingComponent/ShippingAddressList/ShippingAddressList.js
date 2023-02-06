@@ -52,7 +52,7 @@ const ShippingAddressList = () => {
                     <div>
                       {shippingAddInfo?.is_billing === 1 ? (
                         <div className="default_btn">
-                          <i class="bi bi-check-circle-fill"></i>
+                          <i className="bi bi-check-circle-fill"></i>
                         </div>
                       ) : (
                         <div
@@ -61,17 +61,17 @@ const ShippingAddressList = () => {
                           }
                           className="set_default_btn"
                         >
-                        <span onClick={()=> dispatch(getDeliveryCharge(shippingAddInfo?.district_id))}><i class="bi bi-check"></i> Choose</span>
+                        <span onClick={()=> dispatch(getDeliveryCharge(shippingAddInfo?.district_id))}><i className="bi bi-check"></i> Choose</span>
                           
                         </div>
                       )}
                     </div>
                   </div>
-                  <div class="shiped_address">
-                    <span class="home_text">home</span> {shippingAddInfo?.phone}{" "}
+                  <div className="shiped_address">
+                    <span className="home_text">home</span> {shippingAddInfo?.phone}{" "}
                     | {shippingAddInfo?.data?.address}{" "}
-                    {/* <span class="change_text">
-                      <i class="bi bi-pencil-fill"></i> Edit
+                    {/* <span className="change_text">
+                      <i className="bi bi-pencil-fill"></i> Edit
                     </span> */}
                   </div>
                 </div>
@@ -82,7 +82,7 @@ const ShippingAddressList = () => {
             <Link to="/add-shipping-address">
               <div className="d-flex justify-content-center align-items-center">
                 <div>
-                  <i class="bi bi-plus"></i>
+                  <i className="bi bi-plus"></i>
                 </div>
                 <div>Add Delivery Address </div>
               </div>

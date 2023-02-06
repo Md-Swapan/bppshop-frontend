@@ -7,22 +7,23 @@ import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
 const ShippingDetails = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-   const {deliveryCharge} = useSelector((state) => state?.deliveryCharge);
-   const deliveryCost = parseInt(deliveryCharge.delivery_charge);
+  const { deliveryCharge } = useSelector((state) => state?.deliveryCharge);
+  const deliveryCost = deliveryCharge?.delivery_charge;
 
-   const totalPrice = parseInt(`${cartItems?.reduce(
-    (acc, item) =>
-      acc +
-      item?.quantity * item?.product?.unit_price,
-    0
-  )}` )
-
-  const grandTotalPrice = totalPrice + deliveryCost
+  const totalPrice = parseInt(
+    `${cartItems?.reduce(
+      (acc, item) => acc + item?.quantity * item?.product?.unit_price,
+      0
+    )}`
+  );
+  let grandTotalPrice = totalPrice;
+  if (deliveryCost > 0) {
+    grandTotalPrice = totalPrice + deliveryCost;
+  }
 
   return (
     <>
@@ -36,13 +37,14 @@ const ShippingDetails = () => {
               <div className="shiping_amount_container">
                 <div className="shiping_amount_content">
                   <div>Sub Total</div>
-                  <div className="amount_text">৳ 
-                  {`${cartItems?.reduce(
-                    (acc, item) =>
-                      acc +
-                      item?.quantity * item?.product?.unit_price ,
-                    0
-                  )}`}.00
+                  <div className="amount_text">
+                    ৳
+                    {`${cartItems?.reduce(
+                      (acc, item) =>
+                        acc + item?.quantity * item?.product?.unit_price,
+                      0
+                    )}`}
+                    .00
                   </div>
                 </div>
                 <div className="shiping_amount_content">
@@ -51,7 +53,9 @@ const ShippingDetails = () => {
                 </div>
                 <div className="shiping_amount_content">
                   <div>Delivery</div>
-                  <div className="amount_text">৳ {deliveryCost?deliveryCost:0}.00</div>
+                  <div className="amount_text">
+                    ৳ {deliveryCost ? deliveryCost : 0}.00
+                  </div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>
@@ -72,40 +76,40 @@ const ShippingDetails = () => {
                   <div>Total</div>
                   <div className="amount_text">৳ {grandTotalPrice}.00</div>
                 </div>
-                <div class="container mt-4">
-                  <div class="row">
-                    <div class="col-md-3 p-0 text-center ">
+                <div className="container mt-4">
+                  <div className="row">
+                    <div className="col-md-3 p-0 text-center ">
                       <img
-                        class="order-summery-footer-image"
+                        className="order-summery-footer-image"
                         src={delivery}
                         alt=""
                       />
-                      <div class="deal-title">3 Days free delivery </div>
+                      <div className="deal-title">3 Days free delivery </div>
                     </div>
 
-                    <div class="col-md-3 p-0 text-center">
+                    <div className="col-md-3 p-0 text-center">
                       <img
-                        class="order-summery-footer-image"
+                        className="order-summery-footer-image"
                         src={money}
                         alt=""
                       />
-                      <div class="deal-title">Money back guarantee</div>
+                      <div className="deal-title">Money back guarantee</div>
                     </div>
-                    <div class="col-md-3 p-0 text-center">
+                    <div className="col-md-3 p-0 text-center">
                       <img
-                        class="order-summery-footer-image"
+                        className="order-summery-footer-image"
                         src={Genuine}
                         alt=""
                       />
-                      <div class="deal-title">100% Genuine Product</div>
+                      <div className="deal-title">100% Genuine Product</div>
                     </div>
-                    <div class="col-md-3 p-0 text-center">
+                    <div className="col-md-3 p-0 text-center">
                       <img
-                        class="order-summery-footer-image"
+                        className="order-summery-footer-image"
                         src={Payment}
                         alt=""
                       />
-                      <div class="deal-title">Authentic payment</div>
+                      <div className="deal-title">Authentic payment</div>
                     </div>
                   </div>
                 </div>

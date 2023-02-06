@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const ShippingHome = () => {
   const navigate = useNavigate();
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
-  console.log(shippingAddressInfo)
+  // console.log(shippingAddressInfo)
 
   const changeShippingInfo = () => {
     navigate("/shipping-address");
@@ -18,9 +18,9 @@ const ShippingHome = () => {
     <div>
       <div className="shiping-heading">DELIVERY ADDRESS</div>
       <hr className="shippin_billing_header_line" />
-      {/* <div class="progress_container">
+      {/* <div className="progress_container">
                 <div
-                  class="progress_content"
+                  className="progress_content"
                   role="progressbar"
                   aria-valuenow="100"
                   aria-valuemin="0"
@@ -42,16 +42,16 @@ const ShippingHome = () => {
                 onClick={() => changeShippingInfo()}
                 className="change_text"
               >
-                <i class="bi bi-pencil-fill"></i> Change
+                <i className="bi bi-pencil-fill"></i> Change
               </span>
             </div>
           </div>
         ) : (
-          <div class="add_shipping_address_btn">
+          <div className="add_shipping_address_btn">
             <Link to="/shipping-address">
               <div className="d-flex justify-content-center align-items-center">
                 <div>
-                  <i class="bi bi-plus"></i>
+                  <i className="bi bi-plus"></i>
                 </div>
                 <div>Choose Delivery Address</div>
               </div>
@@ -63,12 +63,12 @@ const ShippingHome = () => {
         <div className="shop_payment_btn">
           <Link to="/shipping-details/checkout-shop-cart">
             <div className="shop_cart_btn">
-              <i class="bi bi-chevron-left"></i> Shopping cart
+              <i className="bi bi-chevron-left"></i> Shopping cart
             </div>
           </Link>
           <Link to="/shipping-details/checkout-payment">
             <div className="proceed_payment_btn">
-              Proceed payment <i class="bi bi-chevron-right"></i>
+              Proceed payment <i className="bi bi-chevron-right"></i>
             </div>
           </Link>
         </div>

@@ -15,7 +15,7 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -62,12 +62,15 @@ const CartDetailsView = () => {
           </h4>
         ) : (
           cartItems?.map((item) => (
-            <div className="cartDetails">
-              <img src={imgThumbnailBaseUrl + `/${item?.product?.thumbnail}`} alt="" />
+            <div key={item?.product?.id} className="cartDetails">
+              <img
+                src={imgThumbnailBaseUrl + `/${item?.product?.thumbnail}`}
+                alt=""
+              />
               <div className="cart-content-qty-container">
                 <div className="d-flex justify-content-between">
                   <small>
-                    {item?.product?.name?.toString().substring(0, 15)}...
+                    {item?.product?.name?.toString().substring(0, 30)}...
                   </small>
                   <span
                     onClick={() =>
@@ -80,25 +83,23 @@ const CartDetailsView = () => {
                 </div>
                 <div className="cart-content">
                   {item?.product?.discount > 0 ? (
-                    <del>
-                      {" "}
-                      <span style={{ fontSize: "11px" }}>
-                        ৳ {item?.product?.unit_price}
-                      </span>
-                    </del>
+                    <div>
+                      <span>
+                        {" "}
+                        ৳{item?.product?.unit_price - item?.product?.discount}
+                      </span>{" "}
+                      <del className="text-danger">
+                        ৳{item?.product?.unit_price}
+                      </del>
+                    </div>
                   ) : (
-                    <span>৳ {item?.product?.unit_price}</span>
+                    <div>
+                      {" "}
+                      <span>৳{item?.product?.unit_price}</span>
+                    </div>
                   )}
 
                   <div className="cartTitleQty">
-                    {item?.product?.discount > 0 ? (
-                      <small>
-                        ৳ {item?.product?.unit_price - item?.product?.discount}{" "}
-                      </small>
-                    ) : (
-                      ""
-                    )}
-
                     <div className="quantity-set">
                       <span
                         onClick={() =>
@@ -123,14 +124,13 @@ const CartDetailsView = () => {
                       </span>
                     </div>
                     {item?.product?.discount > 0 ? (
-                      <span className="mx-2">
-                        Total :{" "}
-                        {item?.quantity *
+                      <span className="mx-2 text-end">
+                        ৳{item?.quantity *
                           (item?.product?.unit_price - item?.product?.discount)}
                       </span>
                     ) : (
-                      <span className="mx-2">
-                        Total : {item?.quantity * item?.product?.unit_price}
+                      <span className="mx-2 text-end">
+                        ৳{item?.quantity * item?.product?.unit_price}
                       </span>
                     )}
                   </div>

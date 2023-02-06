@@ -26,65 +26,65 @@ const Login = () => {
  
 
   return (
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="login_card">
-          <div class="card-body">
-            <h2 class="h4 mb-4">Sign in</h2>
+    <div className="row justify-content-center">
+      <div className="col-md-6">
+        <div className="login_card">
+          <div className="card-body">
+            <h2 className="h4 mb-4">Sign in</h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div class="form-group my-2">
+              <div className="form-group my-2">
                 <label>Mobile</label>
                 <input
                   {...register("phone", { required: true })}
                   required
-                  class="login_input_form"
+                  className="login_input_form"
                   type="text"
                   name="phone"
                   placeholder="Enter mobile number"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label>Password</label>
                 <input
                   {...register("password", { required: true })}
                   required
-                  class="login_input_form"
+                  className="login_input_form"
                   name="password"
                   type="password"
                   placeholder="Enter Password"
                 />
                 <div id="invalid-feedback">{error}</div>
               </div>
-              <div class="form-group d-flex flex-wrap justify-content-between py-2">
-                <div class="form-group">
+              <div className="form-group d-flex flex-wrap justify-content-between py-2">
+                <div className="form-group">
                   <input
                     type="checkbox"
-                    class="mr-1"
+                    className="mr-1"
                     name="remember"
                     id="remember"
                   />
 
-                  <label class="ms-1" for="remember">
+                  <label className="ms-1" htmlFor="remember">
                     Remember me
                   </label>
                 </div>
-                <div class="forget_pass">
+                <div className="forget_pass">
                   <Link to="/recover-password">Forgot password?</Link>
                 </div>
               </div>
-              <button class="signin_btn" type="submit">
+              <button className="signin_btn" type="submit">
                 Sign in
               </button>
             </form>
           </div>
-          <div class="login_card_footer">
+          <div className="login_card_footer">
             <div>
               <h6>No account ? Sign up now </h6>
             </div>
             <div className="sign_up_path">
               <Link to="/sign-up">
-                <i class="fa fa-user-circle"></i> Sign Up
+                <i className="fa fa-user-circle"></i> Sign Up
               </Link>
             </div>
           </div>

@@ -22,24 +22,24 @@ const AddressHome = () => {
       </div>
       <div className="address_card_container">
         {shipping_address_data.map((sippingAdd) => (
-          <div key={sippingAdd?.id} class="arrdess_card">
+          <div key={sippingAdd?.id} className="arrdess_card">
             <div className="address_card_header">
               <div className="address_card_header_pin">
-                <i class="bi bi-pin-fill"></i>
+                <i className="bi bi-pin-fill"></i>
               </div>
               <div className="home_shipping_address_title">
                 <span> {sippingAdd.address_type} Address ({sippingAdd.address})</span>
               </div>
-              <div class="d-flex justify-content-between">
+              <div className="d-flex justify-content-between">
                 <div className="address_card_header_edit mx-1">
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </div>
                 <div className="address_card_header_delete mx-1">
-                  <i class="bi bi-trash3-fill"></i>
+                  <i className="bi bi-trash3-fill"></i>
                 </div>
               </div>
             </div>
-            <div class="address_card_body">
+            <div className="address_card_body">
               <h6>{sippingAdd.contact_person_name}</h6>
               <p>
                 <span>Phone :</span> {sippingAdd.phone}

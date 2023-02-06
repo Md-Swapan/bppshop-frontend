@@ -33,13 +33,13 @@ const ProfileHome = () => {
                 className="profile_img"
                 src="https://bppshop.com.bd/assets/front-end/img/image-place-holder.png"
                 alt=""
-                srcset=""
+                srcSet=""
               />
             </div>
             <div>
               <div className="profile_name">{userProfile?.name}</div>
               <div>
-                <label for="files" class="change_profile_header">
+                <label htmlFor="files" className="change_profile_header">
                   Change your profile
                 </label>
                 <span className="change_profile_ratio">
@@ -55,26 +55,26 @@ const ProfileHome = () => {
             </div>
           </div> */}
           <h4 className="profile_heading"> Profile Info </h4>
-          <div class="form-group col-md-12 my-3">
-            <label for="name">Your name </label>
+          <div className="form-group col-md-12 my-3">
+            <label htmlFor="name">Your name </label>
             <input
               {...register("name")}
               type="text"
-              class="input_field"
+              className="input_field"
               name="name"
               defaultValue={user?.name}
             />
           </div>
           <div className="row my-3">
             <div className="col-md-6 col-sm-12">
-              <div class="form-group">
-                <label for="phone">Mobile </label>
-                <small class="text-primary">
+              <div className="form-group">
+                <label htmlFor="phone">Mobile </label>
+                <small className="text-primary">
                   ( * Country code is must Like for BD 880 )
                 </small>
                 <input
                   type="text"
-                  class="input_field"
+                  className="input_field"
                   name="phone"
                   value={user?.phone}
                   disabled
@@ -82,12 +82,12 @@ const ProfileHome = () => {
               </div>
             </div>
             <div className="col-md-6 col-sm-12">
-              <div class="form-group">
-                <label for="inputEmail4">Email </label>
+              <div className="form-group">
+                <label htmlFor="inputEmail4">Email </label>
                 <input
                   {...register("email")}
                   type="email"
-                  class="input_field"
+                  className="input_field"
                   name="email"
                   defaultValue={user?.email}
                 />
@@ -96,22 +96,22 @@ const ProfileHome = () => {
           </div>
           <div className="row">
             <div className="col-md-6 col-sm-12">
-              <div class="form-group">
-                <label for="si-password">New password</label>
+              <div className="form-group">
+                <label htmlFor="si-password">New password</label>
                 <input
                   {...register("password")}
-                  class="input_field"
+                  className="input_field"
                   name="password"
                   type="password"
                 />
               </div>
             </div>
             <div className="col-md-6 col-sm-12">
-              <div class="form-group">
-                <label for="newPass">Confirm password </label>
+              <div className="form-group">
+                <label htmlFor="newPass">Confirm password </label>
                 <input
                   {...register("con_password")}
-                  class="input_field"
+                  className="input_field"
                   name="con_password"
                   type="password"
                 />
@@ -188,13 +188,13 @@ export default ProfileHome;
 //                 className="profile_img"
 //                 src="https://bppshop.com.bd/assets/front-end/img/image-place-holder.png"
 //                 alt=""
-//                 srcset=""
+//                 srcSet=""
 //               />
 //             </div>
 //             <div>
 //               <div className="profile_name">{userProfile?.name}</div>
 //               <div>
-//                 <label for="files" class="change_profile_header">
+//                 <label htmlFor="files" className="change_profile_header">
 //                   Change your profile
 //                 </label>
 //                 <span className="change_profile_ratio">
@@ -210,26 +210,26 @@ export default ProfileHome;
 //             </div>
 //           </div> */}
 
-//         <div class="form-group col-md-12 my-3">
-//           <label for="name">Your name </label>
+//         <div className="form-group col-md-12 my-3">
+//           <label htmlFor="name">Your name </label>
 //           <input
 //             {...register("name")}
 //             type="text"
-//             class="input_field"
+//             className="input_field"
 //             name="name"
 //             defaultValue={userProfile?.name}
 //           />
 //         </div>
 //         <div className="row my-3">
 //           <div className="col-md-6 col-sm-12">
-//             <div class="form-group">
-//               <label for="phone">Mobile </label>
-//               <small class="text-primary">
+//             <div className="form-group">
+//               <label htmlFor="phone">Mobile </label>
+//               <small className="text-primary">
 //                 ( * Country code is must Like for BD 880 )
 //               </small>
 //               <input
 //                 type="text"
-//                 class="input_field"
+//                 className="input_field"
 //                 name="phone"
 //                 value={userProfile?.phone}
 //                 disabled
@@ -237,12 +237,12 @@ export default ProfileHome;
 //             </div>
 //           </div>
 //           <div className="col-md-6 col-sm-12">
-//             <div class="form-group">
-//               <label for="inputEmail4">Email </label>
+//             <div className="form-group">
+//               <label htmlFor="inputEmail4">Email </label>
 //               <input
 //                 {...register("email")}
 //                 type="email"
-//                 class="input_field"
+//                 className="input_field"
 //                 name="email"
 //                 defaultValue={userProfile?.email}
 //               />
@@ -251,22 +251,22 @@ export default ProfileHome;
 //         </div>
 //         <div className="row">
 //           <div className="col-md-6 col-sm-12">
-//             <div class="form-group">
-//               <label for="si-password">New password</label>
+//             <div className="form-group">
+//               <label htmlFor="si-password">New password</label>
 //               <input
 //                 {...register("password")}
-//                 class="input_field"
+//                 className="input_field"
 //                 name="password"
 //                 type="password"
 //               />
 //             </div>
 //           </div>
 //           <div className="col-md-6 col-sm-12">
-//             <div class="form-group">
-//               <label for="newPass">Confirm password </label>
+//             <div className="form-group">
+//               <label htmlFor="newPass">Confirm password </label>
 //               <input
 //                 {...register("con_password")}
-//                 class="input_field"
+//                 className="input_field"
 //                 name="con_password"
 //                 type="password"
 //               />
