@@ -83,13 +83,13 @@ const Sidebar = () => {
                 </div>
               </Link>
             </li> */}
-            <div className="homeIcon">
+            {/* <div className="homeIcon"> */}
               <Link to="/">
-                <div>
+                <li className="homeIcon">
                   <i className="bi bi-house-door-fill"></i>
-                </div>
+                </li>
               </Link>
-            </div>
+            {/* </div> */}
             <hr />
 
             {allCategory?.map((categoryItem, index) => (

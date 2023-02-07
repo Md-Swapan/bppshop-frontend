@@ -1,30 +1,27 @@
 import React from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { Link,  useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { userLogin } from './../../../Redux/Actions/UserAction';
-import { useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogin } from "./../../../Redux/Actions/UserAction";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const { isAuthenticated, error} = useSelector((state) => state.user);
-  const token = localStorage.getItem("token");
+  const { isAuthenticated, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
-  const loginMessage=localStorage.getItem("message");
-  console.log(loginMessage)
+  const loginMessage = localStorage.getItem("message");
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
   };
 
-  if(isAuthenticated===true ){
+  if (isAuthenticated === true) {
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
-  } 
- 
+  }
 
   return (
     <div className="row justify-content-center">
@@ -57,9 +54,9 @@ const Login = () => {
                 />
                 <div id="invalid-feedback">{error}</div>
               </div>
-              {
-                loginMessage && <small className="text-danger">{loginMessage}</small>
-              }
+              {loginMessage && (
+                <small className="text-danger">{loginMessage}</small>
+              )}
               <div className="form-group d-flex flex-wrap justify-content-between py-2">
                 <div className="form-group">
                   <input

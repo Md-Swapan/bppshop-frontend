@@ -16,8 +16,8 @@ const ShippingHome = () => {
   };
   return (
     <div>
-      <div className="shiping-heading">DELIVERY ADDRESS</div>
-      <hr className="shippin_billing_header_line" />
+      <div className="shipping-heading">DELIVERY ADDRESS</div>
+      <hr className="shipping_billing_header_line" />
       {/* <div className="progress_container">
                 <div
                   className="progress_content"
@@ -27,14 +27,14 @@ const ShippingHome = () => {
                   aria-valuemax="100"
                 ></div>
               </div> */}
-      <div className="shiping_container">
-        <div className="shiping-address-heading">Choose Delivery address</div>
+      <div className="shipping_container">
+        <div className="shipping-address-heading">Choose Delivery address</div>
         {shippingAddressInfo?.data?.is_billing === "1" ? (
-          <div className="shiping_address_box">
-            <div className="shiped_name">
+          <div className="shipping_address_box">
+            <div className="shipped_name">
               Delivery to : {shippingAddressInfo?.data?.contact_person_name}
             </div>
-            <div className="shiped_address">
+            <div className="shipped_address">
               <span className="home_text"> home </span>
               {shippingAddressInfo?.data?.phone} |{" "}
               {shippingAddressInfo?.data?.address}{" "}
@@ -47,16 +47,11 @@ const ShippingHome = () => {
             </div>
           </div>
         ) : (
-          <div className="add_shipping_address_btn">
-            <Link to="/shipping-address">
-              <div className="d-flex justify-content-center align-items-center">
-                <div>
-                  <i className="bi bi-plus"></i>
-                </div>
-                <div>Choose Delivery Address</div>
-              </div>
-            </Link>
-          </div>
+          <Link to="/shipping-address">
+            <button className="add_shipping_address_btn">
+              <i className="bi bi-plus"></i> Choose Delivery Address
+            </button>
+          </Link>
         )}
       </div>
       <div className="shop_payment_btn_content">
