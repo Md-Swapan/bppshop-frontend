@@ -5,6 +5,8 @@ import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   addItemsToCart,
   addItemsToCartAfterLogin,
@@ -59,7 +61,11 @@ const ProductCard = ({ product }) => {
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
     setAdded(true);
-
+    toast.success('Added to cart Successfully', {
+      position: "top-right",
+      autoClose: 1000,
+      });
+    
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
     let option = choice_19?.map((option) => option[0]);
@@ -77,6 +83,7 @@ const ProductCard = ({ product }) => {
     };
 
     if (token) {
+      
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
@@ -137,7 +144,7 @@ const ProductCard = ({ product }) => {
               </div>
               <div className="card-footer product-card-footer">
                 {!added ? (
-                  <button
+                  <button 
                   className="btn_before_add_cart"
                     onClick={() => addToCartHandler(product, quantity)}
                   >
@@ -185,6 +192,7 @@ const ProductCard = ({ product }) => {
             </div>
           )}
         </div>
+        <ToastContainer/>
       </div>
 
       <Modal

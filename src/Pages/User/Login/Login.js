@@ -3,6 +3,8 @@ import "./Login.css";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
 
@@ -16,6 +18,11 @@ const Login = () => {
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
+    toast.success('You Have Loging Successfuly', {
+      position: "top-right",
+      autoClose: 1000,
+      });
+  
   };
 
   if (isAuthenticated === true) {
@@ -90,6 +97,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
