@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import defaultAvatar from "../../../Assets/Images/default-avatar.jpg";
-import bppShopsLogo from "../../../Assets/Images/bppshopslogo.png";
+import bppShopsLogo from "../../../Assets/Images/bpp shop logo 01.png";
+import bppShopshortLogo from "../../../Assets/Images/bpp shop logo 02-01-01.png";
 import Sidebar from "../Sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -45,6 +46,7 @@ const Nav = () => {
             <div className="logo">
               <Link to="/">
                 <img className="bpshopsLogo" src={bppShopsLogo} alt="" />
+                <img className="bppshopShortLogo" src={bppShopshortLogo} alt="" />
               </Link>
 
               <img className="bpshopsIcon" src="img/bpp_icon.png" alt="" />
@@ -70,14 +72,14 @@ const Nav = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {/* {agent.image ? (
+                {/* {user.image ? (
                     <img
-                      src={`https://agentapi.bppshop.com.bd/${agent.image}`}
+                      src={`https://backend.bppshop.com.bd/storage/${user.image}`}
                       alt="profile"
                     />
                   ) : ( */}
                 <img src={defaultAvatar} alt="profile" />
-                {/* )} */}
+                {/* )}  */}
               </div>
               {user ? (
                 <div className="dropdown-menu profile_dropdown">

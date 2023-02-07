@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 import logo from "../../../Assets/Images/bpp shop logo fainal.png";
 import playstoreIcon from "../../../Assets/Images/images-1.webp";
-import appleIcon from "../../../Assets/Images/Apple_logo_black.svg.png";
+import appleIcon from "../../../Assets/Images/Apple-logo-1A9B9F20EA-seeklogo.com.png";
 
 const Footer = () => {
   return (

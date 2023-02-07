@@ -33,8 +33,10 @@ const CartDetailsView = () => {
   };
 
   const CartDetailsCloseHandler = () => {
-    document.querySelector(".cartDetailsView-container").style.display = "none";
-    document.querySelector(".cart").style.display = "block";
+    const cartDetailsViewContainer = document.querySelector(".cartDetailsView-container");
+    // document.querySelector(".cart").style.display = "block";
+
+    cartDetailsViewContainer.classList.toggle("cartDetailsView-container-toggle");
   };
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
     document.querySelector(".cartDetailsView-container").style.display = "none";

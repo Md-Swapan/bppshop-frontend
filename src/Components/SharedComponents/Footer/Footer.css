@@ -72,10 +72,10 @@
   font-size: 14px;
 }
 
-.appleIcon{
+/* .appleIcon{
   -webkit-filter: grayscale(0.9) invert(1);
   filter: grayscale(0.9) invert(1);
-}
+} */
 
 .newsletter_container{
   margin-top: 30px;
@@ -235,6 +235,27 @@
 @media screen and (max-width: 992px) {
   .footer-content {
     width: 65%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+  }
+
+  .contact_content i{
+    font-size: 14px;
+    color: #ef8341;
+    background: #ffffff;
+    padding: 3px 5px;
+    border-radius: 50px;
+  }
+  .contact_content {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer-content {
+    padding: 20px;
+    width: 100%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(1, 1fr);

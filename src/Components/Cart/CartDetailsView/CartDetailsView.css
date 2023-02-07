@@ -8,10 +8,13 @@
   top: 61px;
   margin-left: 84.25%;
   transform: translateX(300px);
-  transition: transform 1000ms ease-in-out;
+  transition: transform 250ms ease-in-out;
 
 }
-
+.cartDetailsView-container-toggle{
+  transform: translateX(0px);
+  z-index: 999;
+}
 .cartDetailsView-header{
   height: 10%;
   display: flex;
@@ -106,4 +109,12 @@
   color: #ffffff;
   border-radius: 5px;
   margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .cartDetailsView-container-toggle{
+    width: 100%;
+    transform: translateX(-84.5%);
+    z-index: 999;
+  }
 }

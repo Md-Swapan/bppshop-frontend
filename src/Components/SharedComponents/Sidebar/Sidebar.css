@@ -41,7 +41,7 @@
     position: absolute;
     z-index: 20;
     top: 12px;
-    left: 25px;
+    left: 15px;
     cursor: pointer;
 }
 .sidebarIconToggle i {
@@ -164,3 +164,39 @@
   transform: rotateY(180deg);
   color: #fd7e14;
 } */
+
+
+@media only screen and (max-width: 768px) {
+  #sidebarMenu {
+    height: 100%;
+    width: 270px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-top: 60px;
+    background: #ffffff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transform: translateX(-300px);
+    transition: transform 250ms ease-in-out;
+    overflow: scroll;
+  }
+
+  #openSidebarMenu:checked ~ .sidebarIconToggle > .middle {
+    opacity: 0;
+  }
+  
+  #openSidebarMenu:checked ~ .sidebarIconToggle > .top {
+    transform: rotate(135deg);
+    margin-top: 8px;
+  }
+  
+  #openSidebarMenu:checked ~ .sidebarIconToggle > .bottom {
+    transform: rotate(-135deg);
+    margin-top: -9px;
+  }
+  
+  #openSidebarMenu:checked ~ #sidebarMenu {
+    transform: translateX(0px);
+  }
+}

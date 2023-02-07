@@ -16,7 +16,7 @@
   align-items: center;
 }
 .logo{
-  margin-left: 35px;
+  margin-left: 15px;
   width: 200px;
 }
 
@@ -27,7 +27,11 @@
   border-radius: 30px;
   
 }
-
+.bppshopShortLogo{
+  width: 40px;
+  cursor: pointer;
+  display: none;
+}
 .bpshopsIcon {
   display: none;
   transition: all 1s;
@@ -219,7 +223,8 @@
 
 @media only screen and (max-width: 768px) {
   .search {
-    margin-left: 8%;
+    width: 320px;
+    margin-left: 5%;
   }
   .sidebarIconToggle {
     top: 32px;
@@ -249,7 +254,7 @@
 @media only screen and (max-width: 668px) {
   .search {
     width: 300px;
-    margin-left: 7.5%;
+    margin-left: -4%;
   }
   .sidebarIconToggle {
     top: 32px;
@@ -257,6 +262,9 @@
   }
   .bpshopsLogo {
     display: none;
+  }
+  .bppshopShortLogo{
+    display: block;
   }
 
   .bpshopsIcon {
@@ -280,8 +288,8 @@
 @media only screen and (max-width: 576px) {
   .search {
     width: 250px;
-    margin-left: 6%;
-    font-size: 14px;
+    margin-left: -8%;
+    font-size: 13px;
   }
   .searchIcon {
     margin-top: 8px;
@@ -302,21 +310,129 @@
     margin-left: 65px;
   }
 
-  .login h6 {
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    /* margin-right: 20px; */
+  }
+}
+@media only screen and (max-width: 550px) {
+  .search {
+    width: 250px;
+    margin-left: -8%;
+    font-size: 13px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
     display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
   }
 
   .threeDotMenuIcon {
     display: block;
   }
-  .login {
-    margin-right: 25px;
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 50px;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .search {
+    width: 250px;
+    margin-left: -12%;
+    font-size: 13px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 50px;
+  }
+}
+@media only screen and (max-width: 510px) {
+  .search {
+    width: 250px;
+    margin-left: -12%;
+    font-size: 13px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 50px;
   }
 }
 @media only screen and (max-width: 480px) {
   .search {
     width: 220px;
-    margin-left: -7%;
+    margin-left: -11%;
     font-size: 12px;
   }
   .searchIcon {
@@ -339,16 +455,169 @@
     margin-left: 65px;
   }
 
-  .login h6 {
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 50px;
+  }
+  
+}
+@media only screen and (max-width: 450px) {
+  .search {
+    width: 220px;
+    margin-left: -20%;
+    font-size: 12px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
     display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
   }
 
   .threeDotMenuIcon {
     display: block;
   }
-  .login {
-    margin-right: 25px;
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 50px;
   }
+  
+}
+@media only screen and (max-width: 420px) {
+  .search {
+    width: 210px;
+    margin-left: -25%;
+    font-size: 11px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 100px;
+  }
+  
+}
+@media only screen and (max-width: 410px) {
+  .search {
+    width: 210px;
+    margin-left: -30%;
+    font-size: 11px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 150px;
+  }
+  
+}
+@media only screen and (max-width: 400px) {
+  .search {
+    width: 200px;
+    margin-left: -32%;
+    font-size: 11px;
+  }
+  .searchIcon {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 200px;
+  }
+  
 }
 @media only screen and (max-width: 360px) {
   .search {
@@ -377,15 +646,54 @@
     width: 45px;
     margin-left: 65px;
   }
-
-  .login h6 {
-    display: none;
-  }
-
   .threeDotMenuIcon {
     display: block;
   }
-  .login {
-    margin-right: 25px;
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 50px;
   }
+
+}
+@media only screen and (max-width: 320px) {
+  .search {
+    width: 180px;
+    margin-left: -28%;
+    font-size: 10.5px;
+    padding: 8px 10px;
+  }
+  .searchIcon {
+    margin-top: 10px;
+    font-size: 10px;
+    padding-left: 10px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-right: 80px;
+  }
+
 }
