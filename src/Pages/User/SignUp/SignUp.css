@@ -21,20 +21,18 @@
     font-size: 16px;
     text-align: center;
     padding: 15px;
+    border-radius: 5px;
 }
 .sign_up_btn button {
-    background: #f7d4d4;
+    color: white;
+    background: #212529;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     border: none;
 }
 .sign_in_path a {
-    color: #fff;
-    background: #ef8341;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    margin: 10px 0px;
     text-decoration: none;
+    font-weight: bold;
+    color: black;
 }

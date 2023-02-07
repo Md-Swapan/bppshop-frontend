@@ -70,7 +70,7 @@ const CartDetailsView = () => {
               <div className="cart-content-qty-container">
                 <div className="d-flex justify-content-between">
                   <small>
-                    {item?.product?.name?.toString().substring(0, 30)}...
+                    {item?.product?.name?.toString().substring(0, 25)}...
                   </small>
                   <span
                     onClick={() =>

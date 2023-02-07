@@ -28,13 +28,13 @@
     outline: none;
 }
 
-#invalid-feedback {
+/* #invalid-feedback {
     display: none;
     width: 100%;
     margin-top: .25rem;
     font-size: 80%;
     color: #f34770;
-}
+} */
 
 .forget_pass a {
     text-decoration: none;
@@ -61,8 +61,9 @@
     border-top: 1px solid gainsboro;
 }
 .sign_up_path a {
+    color: white;
     text-decoration: none;
-    background: #f7d4d4;
+    background: #212529;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;

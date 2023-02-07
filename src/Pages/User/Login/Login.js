@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const { isAuthenticated, error } = useSelector((state) => state.user);
+  const { isAuthenticated} = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
   const loginMessage = localStorage.getItem("message");
@@ -52,7 +52,6 @@ const Login = () => {
                   type="password"
                   placeholder="Enter Password"
                 />
-                <div id="invalid-feedback">{error}</div>
               </div>
               {loginMessage && (
                 <small className="text-danger">{loginMessage}</small>

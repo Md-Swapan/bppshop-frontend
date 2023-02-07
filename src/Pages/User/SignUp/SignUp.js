@@ -3,36 +3,26 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./SignUp.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { userRegister } from "../../../Redux/Actions/UserAction";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [signUpError, setSignUpError] = useState("");
-  const { isAuthenticated} = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
 
   const onSubmit = (data) => {
     dispatch(userRegister(data));
-    
-    // axios.post(baseUrl + "/auth/register", data).then((res) => {
-    //   if (res?.data?.token) {
-    //     alert(res?.data?.message);
-    //     navigate("/");
-    //   } else {
-    //     setSignUpError(res?.data?.message);
-    //     document.getElementById("invalid-feedback").style.display = "block";
-    //   }
-    // });
   };
 
-  if(isAuthenticated === true){
+  if (isAuthenticated === true) {
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
-  } 
+  }
 
   return (
     <div className="row justify-content-center">
@@ -62,7 +52,7 @@ const SignUp = () => {
                   <div className="my-1">
                     <label>
                       Mobile
-                      <small className="text-primary">
+                      <small className="text-dark">
                         ( * Country code is must Like for BD 880 )
                       </small>
                     </label>
@@ -121,14 +111,14 @@ const SignUp = () => {
                 </div>
                 <div id="invalid-feedback">{signUpError}</div>
               </div>
-              
+
               <div className="row">
-                <div className="signup_card_footer">
-                  <div className="sign_up_btn">
-                    <button type="submit">Submit</button>
-                  </div>
+                <div className="signup_card_footer login_card_footer">
                   <div className="sign_in_path">
-                    <Link to="/login"> Sign in</Link>
+                  Already Have account ?<Link to="/login"> Sign in now </Link>
+                  </div>
+                  <div className="sign_up_btn">
+                    <button type="submit">Sign-up</button>
                   </div>
                 </div>
               </div>
