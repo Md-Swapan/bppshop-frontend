@@ -78,7 +78,7 @@ const ShippingAddressList = () => {
               </div>
             ))}
           </div>
-          <div className="add_more_address_btn">
+          {/* <div className="add_more_address_btn">
             <Link to="/add-shipping-address">
               <div className="d-flex justify-content-center align-items-center">
                 <div>
@@ -87,7 +87,14 @@ const ShippingAddressList = () => {
                 <div>Add Delivery Address </div>
               </div>
             </Link>
-          </div>
+          </div> */}
+
+
+          <Link to="/add-shipping-address">
+            <button className="add_more_address_btn">
+              <i className="bi bi-plus"></i> Add Delivery Address
+            </button>
+          </Link>
         </div>
       </div>
     </div>
