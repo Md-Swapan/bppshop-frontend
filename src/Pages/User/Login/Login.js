@@ -3,19 +3,26 @@ import "./Login.css";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const { isAuthenticated, error } = useSelector((state) => state.user);
+  const { isAuthenticated} = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
   const loginMessage = localStorage.getItem("message");
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
+    toast.success('You Have Loging Successfuly', {
+      position: "top-right",
+      autoClose: 1000,
+      });
+  
   };
 
   if (isAuthenticated === true) {
@@ -52,7 +59,6 @@ const Login = () => {
                   type="password"
                   placeholder="Enter Password"
                 />
-                <div id="invalid-feedback">{error}</div>
               </div>
               {loginMessage && (
                 <small className="text-danger">{loginMessage}</small>
@@ -91,6 +97,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
