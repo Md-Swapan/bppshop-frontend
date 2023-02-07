@@ -35,9 +35,9 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       loginData,
       config
     );
-
-    dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+    dispatch({ type: LOGIN_SUCCESS, payload: data});
     localStorage.setItem("token", data.token);
+    localStorage.setItem("message", data.message);
 
     const token = localStorage.getItem("token");
 
@@ -46,7 +46,7 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       dispatch(addItemsToCartWithLogin());
     }
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOGIN_FAIL, payload: error });
   }
 };
 

@@ -5,7 +5,6 @@ import { Link,  useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { userLogin } from './../../../Redux/Actions/UserAction';
 import { useSelector } from 'react-redux';
-import { addItemsToCartWithLogin } from "../../../Redux/Actions/CartAction";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,12 +13,14 @@ const Login = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const location = useLocation();
+  const loginMessage=localStorage.getItem("message");
+  console.log(loginMessage)
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
   };
-  
-  if(token ){
+
+  if(isAuthenticated===true ){
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
   } 
@@ -56,6 +57,9 @@ const Login = () => {
                 />
                 <div id="invalid-feedback">{error}</div>
               </div>
+              {
+                loginMessage && <small className="text-danger">{loginMessage}</small>
+              }
               <div className="form-group d-flex flex-wrap justify-content-between py-2">
                 <div className="form-group">
                   <input

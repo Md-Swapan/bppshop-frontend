@@ -16,7 +16,7 @@ const Footer = () => {
             <div className="address">
               <br />
               <h5>Address</h5>
-              <p>
+              <p className="address_footer">
                 17 (9th Floor), Alhaz Shamsuddin Mansion, New Eskaton Road,
                 Dhaka 1217
               </p>

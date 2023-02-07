@@ -71,7 +71,7 @@ const Sidebar = () => {
           <div className="spinner bottom"></div>
         </label> */}
         <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
-          <i class="bi bi-list"></i>
+          <i className="bi bi-list"></i>
         </label>
         <div id="sidebarMenu">
           <ul className="menu">

@@ -24,6 +24,7 @@ const Nav = () => {
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
       if (res.data.status === "success") {
         localStorage.removeItem("token");
+        localStorage.removeItem("message");
         window.location.reload();
         // dispatch(logout())
         dispatch(ClearCart());
