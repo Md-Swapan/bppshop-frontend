@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
+import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch } from "react-redux";
@@ -9,6 +10,7 @@ import {
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
+
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -89,11 +91,12 @@ const ProductCard = ({ product }) => {
           {current_stock > 0 ? (
             <div>
               <div className=" product-card-body">
-                <img
+                {thumbnail? <img
                   src={imgThumbnailBaseUrl + `/${thumbnail}`}
                   className="card-img-top"
                   alt=""
-                />
+                /> : <img src={defaultProImg} alt=""/>
+              }
                 <div className="product-card-body-content">
                   <small>{name.toString().substring(0, 15)}...</small>
                   <br />

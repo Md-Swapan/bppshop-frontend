@@ -19,7 +19,7 @@ const SubCategoryCard = ({ subcategory }) => {
     >
       <div className="card">
         <div className="card-body">
-        <img src={categoryBaseUrl + `/${thumb}`} className="card-img-top" alt="" />
+        {thumb? <img src={categoryBaseUrl + `/${thumb}`} className="card-img-top" alt="" /> : <img src={defaultProImg} alt=""/>}
         </div>
         <div className="card-footer">{name}</div>
       </div>
