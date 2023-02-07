@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
     setAdded(true);
     toast.success('Added to cart Successfully', {
       position: "top-right",
-      autoClose: 1000,
+      autoClose: 2000,
       });
     
     let color = product.colors?.map((color) => color?.code);

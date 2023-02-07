@@ -20,7 +20,7 @@ const Login = () => {
     dispatch(userLogin(data));
     toast.success('You Have Loging Successfuly', {
       position: "top-right",
-      autoClose: 1000,
+      autoClose: 2000,
       });
   
   };
