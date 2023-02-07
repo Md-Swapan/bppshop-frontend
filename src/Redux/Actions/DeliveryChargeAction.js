@@ -7,7 +7,7 @@ import {
   import { baseUrl } from "../../BaseUrl/BaseUrl";
   
   
-  export const getDeliveryCharge = (district_id) => async(dispatch) => {
+  export const getDeliveryCharge = (district_id) => async(dispatch, getState) => {
     const districtId={
         "district_id":`${district_id}`,
     }
@@ -24,9 +24,10 @@ import {
   
       dispatch({
         type : DELIVERY_CHARGE_SUCCESS,
-        payload: data
-  
+        payload: data  
       })
+      console.log(data)
+      localStorage.setItem("deliveryCharge", JSON.stringify(getState().deliveryCharge.deliveryCharge));
     }
     catch(error){
       dispatch({
@@ -35,3 +36,12 @@ import {
       })
     }
   };
+
+  // CLEAR DELIVERY CHARGE
+export const ClearDeliveryCharge = () => async (dispatch, getState) => {
+  dispatch({
+    type: "CLEAR_DELIVERY_CHARGE",
+  });
+
+  localStorage.setItem("deliveryCharge", JSON.stringify(getState().deliveryCharge.deliveryCharge));
+};

@@ -12,6 +12,7 @@ import {
 import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
+import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Nav = () => {
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
         dispatch(ClearCartGroupItems());
+        dispatch(ClearDeliveryCharge());
       }
     });
   };

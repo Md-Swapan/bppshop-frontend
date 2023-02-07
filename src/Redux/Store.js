@@ -40,6 +40,11 @@ let initialState = {
     cartGroupItems : localStorage.getItem("cartGroupItems") 
     ? JSON.parse(localStorage.getItem("cartGroupItems"))
     : []
+  },
+  deliveryCharge : {
+    deliveryCharge : localStorage.getItem("deliveryCharge") 
+    ? JSON.parse(localStorage.getItem("deliveryCharge"))
+    : {}
   }
 };
 const middleware = [thunk];

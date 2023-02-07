@@ -68,7 +68,7 @@ const ShippingAddressList = () => {
                     </div>
                   </div>
                   <div className="shiped_address">
-                    <span className="home_text">home</span> {shippingAddInfo?.phone}{" "}
+                    <span className="home_text">home </span> { shippingAddInfo?.phone}{" "}
                     | {shippingAddInfo?.data?.address}{" "}
                     {/* <span className="change_text">
                       <i className="bi bi-pencil-fill"></i> Edit

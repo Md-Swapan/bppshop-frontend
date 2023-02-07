@@ -25,7 +25,11 @@ import {
           deliveryCharge: null,
           error: action.payload,
         };
-  
+        case "CLEAR_DELIVERY_CHARGE": {
+          return {
+            deliveryCharge: [],
+          };
+        }
         default:
         return  state
     }
