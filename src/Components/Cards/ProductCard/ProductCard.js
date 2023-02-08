@@ -4,7 +4,7 @@ import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -14,6 +14,7 @@ import {
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 
 Modal.setAppElement("#root");
+
 
 const customStyles = {
   content: {
@@ -28,7 +29,11 @@ const customStyles = {
   },
 };
 
+
 const ProductCard = ({ product }) => {
+  
+
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -36,6 +41,7 @@ const ProductCard = ({ product }) => {
   function closeModal() {
     setIsOpen(false);
   }
+
 
   const token = localStorage.getItem("token");
 
@@ -57,14 +63,14 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
-  const [added, setAdded] = useState(false);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItem = cartItems.map(i => i.product.id)
+  const addedId = cartItem.find(i => i  ===  id)
+  // console.log(addedId)
+  
+
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
-    setAdded(true);
-    toast.success('Added to cart Successfully', {
-      position: "top-right",
-      autoClose: 2000,
-      });
     
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
@@ -90,6 +96,7 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  
   return (
     <>
       <div className="product_card_content">
@@ -143,16 +150,17 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                {!added ? (
-                  <button 
+                {addedId? (
+  
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Added to Cart
+                  </button>
+                ) : (
+                 <button 
                   className="btn_before_add_cart"
                     onClick={() => addToCartHandler(product, quantity)}
                   >
                     <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
-                ) : (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
                   </button>
                 )}
               </div>
