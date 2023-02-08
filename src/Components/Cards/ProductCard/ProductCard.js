@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { startTransition, useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
-import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   addItemsToCart,
   addItemsToCartAfterLogin,
@@ -29,6 +29,24 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
+
+  const cartItems = useSelector((state) => {
+    return state.cart.cartItems;
+  });
+
+  function isItemExitsInCart(product_id) {
+   let status = true;
+    const found = cartItems.find(function(element) { 
+      if(element.product.id === product_id){
+        status = false;
+      }
+    });
+
+    return status;
+
+  }
+
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -59,13 +77,15 @@ const ProductCard = ({ product }) => {
 
   const [added, setAdded] = useState(false);
   const addToCartHandler = (product, quantity) => {
+    console.log(product.id);
+
     dispatch(addItemsToCart(product, quantity));
     setAdded(true);
-    toast.success('Added to cart Successfully', {
+    toast.success("Added to cart Successfully", {
       position: "top-right",
       autoClose: 2000,
-      });
-    
+    });
+
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
     let option = choice_19?.map((option) => option[0]);
@@ -83,7 +103,6 @@ const ProductCard = ({ product }) => {
     };
 
     if (token) {
-      
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
@@ -97,12 +116,15 @@ const ProductCard = ({ product }) => {
           {current_stock > 0 ? (
             <div>
               <div className=" product-card-body">
-                {thumbnail? <img
-                  src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                  className="card-img-top"
-                  alt=""
-                /> : <img src={defaultProImg} alt=""/>
-              }
+                {thumbnail ? (
+                  <img
+                    src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                    className="card-img-top"
+                    alt=""
+                  />
+                ) : (
+                  <img src={defaultProImg} alt="" />
+                )}
                 <div className="product-card-body-content">
                   <small>{name.toString().substring(0, 15)}...</small>
                   <br />
@@ -143,9 +165,9 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                {!added ? (
-                  <button 
-                  className="btn_before_add_cart"
+                {isItemExitsInCart(product.id) ? (
+                  <button
+                    className="btn_before_add_cart"
                     onClick={() => addToCartHandler(product, quantity)}
                   >
                     <i className="bi bi-cart-plus"></i> Add To Cart
@@ -192,7 +214,7 @@ const ProductCard = ({ product }) => {
             </div>
           )}
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
 
       <Modal
