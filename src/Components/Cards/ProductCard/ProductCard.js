@@ -59,9 +59,7 @@ const ProductCard = ({ product }) => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartItem = cartItems.map(i => i.product.id)
-  const addedId = cartItem.find(i => i  ===  id)
-  // console.log(addedId)
-  
+  const addedId = cartItem.find(i => i  ===  id)  
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
