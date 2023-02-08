@@ -99,34 +99,3 @@
   margin: 10px 7px 0px 0px;
   border: .2px solid gainsboro;
 }
-
-.buyNowBtn_addToCartBtn_container button{
-  width: 140px;
-  border: none;
-  outline: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  text-align: center;
-  background: rgb(70, 70, 70);
-  color: #ffffff;
-  font-family: "DM Sans", sans-serif;
-  margin: 20px 20px 0px 0px;
-}
-.buyNowBtn_addToCartBtn_container button:last-child{
-  background: #ef8341;
-  color: #ffffff;
-  font-family: "DM Sans", sans-serif;
-  margin: 20px 20px 0px 0px;
-}
-.buyNowBtn_addToCartBtn_container button:first-child:hover{
-  background: rgb(100, 100, 100);
-  color: #ffffff;
-  font-family: "DM Sans", sans-serif;
-  margin: 20px 20px 0px 0px;
-}
-.buyNowBtn_addToCartBtn_container button:last-child:hover{
-  background: #c25715;
-  color: #ffffff;
-  font-family: "DM Sans", sans-serif;
-  margin: 20px 20px 0px 0px;
-}

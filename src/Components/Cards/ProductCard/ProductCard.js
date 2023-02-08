@@ -12,7 +12,9 @@ import {
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
+
 Modal.setAppElement("#root");
+
 const customStyles = {
   content: {
     top: "50%",
@@ -25,6 +27,7 @@ const customStyles = {
     paddingBottom: "20px",
   },
 };
+
 const ProductCard = ({ product }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
@@ -33,6 +36,7 @@ const ProductCard = ({ product }) => {
   function closeModal() {
     setIsOpen(false);
   }
+
   const token = localStorage.getItem("token");
   const {
     id,
@@ -43,37 +47,46 @@ const ProductCard = ({ product }) => {
     current_stock,
     thumbnail,
   } = product;
+
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
     setPid(pid);
   };
+
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const cartItem = cartItems.map((i) => i.product.id);
-  const addedId = cartItem.find((i) => i === id);
+  const cartItemsId = cartItems.map((i) => i.product.id);
+  const addedItemId = cartItemsId.find((i) => i === id);
+
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
+
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
     let option = choice_19?.map((option) => option[0]);
+
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
       choice_19: `${option[0]}`,
       quantity: `${quantity}`,
     };
+
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
       choice_19: `${option[0]}`,
       quantity: `${quantity}`,
     };
+
     if (token) {
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
   };
+
   return (
     <>
       <div className="product_card_content">
@@ -120,7 +133,13 @@ const ProductCard = ({ product }) => {
                     onClick={() => addToCartHandler(product, quantity)}
                     className="overlayAddToCartBtn"
                   >
-                    <img src={addToCartImg} alt="" />
+                    {addedItemId ? (
+                      <h1 style={{ fontSize: "35px" }}>
+                        Added <br /> To <br /> Cart
+                      </h1>
+                    ) : (
+                      <img src={addToCartImg} alt="" />
+                    )}
                   </div>
                   <span onClick={() => productDetailsView(id)}>
                     <button onClick={openModal}>
@@ -130,7 +149,7 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                {addedId ? (
+                {addedItemId ? (
                   <button disabled className="btn_after_added_cart">
                     <i className="bi bi-cart-plus"></i> Added to Cart
                   </button>
