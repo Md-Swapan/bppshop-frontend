@@ -31,9 +31,6 @@ const customStyles = {
 
 
 const ProductCard = ({ product }) => {
-  
-
-
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -41,7 +38,6 @@ const ProductCard = ({ product }) => {
   function closeModal() {
     setIsOpen(false);
   }
-
 
   const token = localStorage.getItem("token");
 
@@ -65,9 +61,7 @@ const ProductCard = ({ product }) => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartItem = cartItems.map(i => i.product.id)
-  const addedId = cartItem.find(i => i  ===  id)
-  // console.log(addedId)
-  
+  const addedId = cartItem.find(i => i  ===  id)  
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
@@ -89,7 +83,6 @@ const ProductCard = ({ product }) => {
     };
 
     if (token) {
-      
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
