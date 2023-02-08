@@ -13,8 +13,6 @@ import {
 import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 
 const Nav = () => {
@@ -23,10 +21,6 @@ const Nav = () => {
 
   const handleLogout = () => {
     const token = localStorage.getItem("token");
-    toast.success('Logout Successfuly', {
-      position: "top-right",
-      autoClose: 1000,
-      });
     const config = { headers: { Authorization: `Bearer ${token}` } };
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
       if (res.data.status === "success") {
@@ -137,7 +131,6 @@ const Nav = () => {
           {/* </div> */}
         </nav>
       </div>
-      <ToastContainer/>
     </>
   );
 };
