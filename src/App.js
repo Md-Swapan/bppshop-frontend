@@ -31,22 +31,16 @@ import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping"
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
 import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
 import CheckoutShopCart from "./Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart";
-// import { useSelector } from 'react-redux';
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
-  // const { isAuthenticated, error} = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadUserOrders())
-
-    // if(token){
-    //   store.dispatch(getCartData())
-    // }
 
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res.data.data);
