@@ -10,7 +10,10 @@ const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
-  console.log(productDetail);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItemsId = cartItems.map((i) => i.product.id);
+  const addedItemId = cartItemsId.find((i) => i === pid);
+  console.log(addedItemId);
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
 
@@ -127,7 +130,10 @@ const QuickViewModal = ({ pid }) => {
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
-                      <div key={list.id}>
+                      <div
+                        key={list.id}
+                        className="d-flex justify-content-center align-items-center"
+                      >
                         <h5>{list?.title}: </h5>
                         <div className="d-flex">
                           {list?.options?.map((option) => (
@@ -235,16 +241,23 @@ const QuickViewModal = ({ pid }) => {
                 />
               ))}
             </div>
-            <div className="col-md-8 buyNowBtn_addToCartBtn_container">
-              <button type="">Buy Now</button>
-              <button
-                onClick={() =>
-                  dispatch(addItemsToCart(productDetail, quantityCount))
-                }
-                type=""
-              >
-                Add To Cart
-              </button>
+            <div className="col-md-8">
+              <div className="my-4">
+                {addedItemId ? (
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Added to Cart
+                  </button>
+                ) : (
+                  <button
+                    className="btn_before_add_cart"
+                    onClick={() =>
+                      dispatch(addItemsToCart(productDetail, quantityCount))
+                    }
+                  >
+                    <i className="bi bi-cart-plus"></i> Add To Cart
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -5,8 +5,8 @@ import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   addItemsToCart,
   addItemsToCartAfterLogin,
@@ -14,7 +14,6 @@ import {
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 
 Modal.setAppElement("#root");
-
 
 const customStyles = {
   content: {
@@ -29,7 +28,6 @@ const customStyles = {
   },
 };
 
-
 const ProductCard = ({ product }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
@@ -40,7 +38,6 @@ const ProductCard = ({ product }) => {
   }
 
   const token = localStorage.getItem("token");
-
   const {
     id,
     name,
@@ -60,12 +57,12 @@ const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const cartItem = cartItems.map(i => i.product.id)
-  const addedId = cartItem.find(i => i  ===  id)  
+  const cartItemsId = cartItems.map((i) => i.product.id);
+  const addedItemId = cartItemsId.find((i) => i === id);
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
-    
+
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
     let option = choice_19?.map((option) => option[0]);
@@ -76,6 +73,7 @@ const ProductCard = ({ product }) => {
       choice_19: `${option[0]}`,
       quantity: `${quantity}`,
     };
+
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
       choice_19: `${option[0]}`,
@@ -89,7 +87,6 @@ const ProductCard = ({ product }) => {
     }
   };
 
-  
   return (
     <>
       <div className="product_card_content">
@@ -97,12 +94,15 @@ const ProductCard = ({ product }) => {
           {current_stock > 0 ? (
             <div>
               <div className=" product-card-body">
-                {thumbnail? <img
-                  src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                  className="card-img-top"
-                  alt=""
-                /> : <img src={defaultProImg} alt=""/>
-              }
+                {thumbnail ? (
+                  <img
+                    src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                    className="card-img-top"
+                    alt=""
+                  />
+                ) : (
+                  <img src={defaultProImg} alt="" />
+                )}
                 <div className="product-card-body-content">
                   <small>{name.toString().substring(0, 15)}...</small>
                   <br />
@@ -133,7 +133,13 @@ const ProductCard = ({ product }) => {
                     onClick={() => addToCartHandler(product, quantity)}
                     className="overlayAddToCartBtn"
                   >
-                    <img src={addToCartImg} alt="" />
+                    {addedItemId ? (
+                      <h1 style={{ fontSize: "35px" }}>
+                        Added <br /> To <br /> Cart
+                      </h1>
+                    ) : (
+                      <img src={addToCartImg} alt="" />
+                    )}
                   </div>
                   <span onClick={() => productDetailsView(id)}>
                     <button onClick={openModal}>
@@ -143,14 +149,13 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                {addedId? (
-  
+                {addedItemId ? (
                   <button disabled className="btn_after_added_cart">
                     <i className="bi bi-cart-plus"></i> Added to Cart
                   </button>
                 ) : (
-                 <button 
-                  className="btn_before_add_cart"
+                  <button
+                    className="btn_before_add_cart"
                     onClick={() => addToCartHandler(product, quantity)}
                   >
                     <i className="bi bi-cart-plus"></i> Add To Cart
@@ -193,9 +198,8 @@ const ProductCard = ({ product }) => {
             </div>
           )}
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -212,5 +216,4 @@ const ProductCard = ({ product }) => {
     </>
   );
 };
-
 export default ProductCard;
