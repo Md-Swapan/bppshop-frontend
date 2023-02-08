@@ -1,15 +1,20 @@
 /* -------Header Button Design------- */
 .homeFilterBtnHeader-container-section {
-  width: 100%;
-  margin-top: 80px;
-  margin-bottom: 40px;
+  width: 40%;
+  margin-top: 80px !important;
+  margin-bottom: 40px !important;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  /* position: fixed; */
+  z-index: 9999;
 }
 
 .header_btn {
   width: 100%;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
 }
@@ -17,16 +22,15 @@
 .header_btn button {
   width: 170px;
   height: 45px;
-  background: #EF8341;
+  background: #ef8341;
   border-radius: 4px;
   margin: 5px 10px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 700px;
   text-align: center;
   border: none;
   cursor: pointer;
-
 
   /* font-family: "Abel", sans-serif; */
   /* font-family: "Comfortaa", cursive; */
@@ -54,10 +58,10 @@
   margin-left: 20px;
   vertical-align: 2px;
   content: "";
-  border-top: .3em solid;
-  border-right: .3em solid transparent;
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
   border-bottom: 0;
-  border-left: .3em solid transparent;
+  border-left: 0.3em solid transparent;
 }
 
 hr:not([size]) {
@@ -66,7 +70,63 @@ hr:not([size]) {
   padding: 0px;
 }
 
-.dropdown-item:focus, .dropdown-item:hover {
+.dropdown-item:focus,
+.dropdown-item:hover {
   color: black;
-  background: #FFFFFF;
+  background: #ffffff;
+}
+
+@media only screen and (max-width: 768px) {
+  .header_btn {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+  .header_btn button {
+    width: 120px;
+    height: 42px;
+    margin: 5px 10px;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .homeFilterBtnHeader-container-section {
+    width: 45%;
+    margin-top: 80px !important;
+    margin-bottom: 40px !important;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .header_btn {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .homeFilterBtnHeader-container-section {
+    width: 45%;
+    margin-top: 80px !important;
+    margin-bottom: 40px !important;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .header_btn {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
 }

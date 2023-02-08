@@ -33,7 +33,7 @@ const Product = ({ allCategory }) => {
 
   return (
     <div className="categoryView-section productView-section">
-      <MetaData title="BPPShop Products" />
+      <MetaData title={`${subSubSlug}-${subSlug}-${slug}`} />
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item">
