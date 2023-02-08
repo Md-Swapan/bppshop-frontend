@@ -64,7 +64,7 @@ const Nav = () => {
                 name=""
                 id="dynamic-placeholder"
                 className="search"
-                placeholder="Search by Product Category"
+                placeholder="Search Product..."
               />
               <span className="searchIcon">
                 <i className="bi bi-search"></i>
