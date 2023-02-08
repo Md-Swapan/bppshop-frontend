@@ -1,4 +1,4 @@
-import React, { startTransition, useState } from "react";
+import React, { useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
@@ -12,9 +12,7 @@ import {
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
-
 Modal.setAppElement("#root");
-
 const customStyles = {
   content: {
     top: "50%",
@@ -27,7 +25,6 @@ const customStyles = {
     paddingBottom: "20px",
   },
 };
-
 const ProductCard = ({ product }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
@@ -36,9 +33,7 @@ const ProductCard = ({ product }) => {
   function closeModal() {
     setIsOpen(false);
   }
-
   const token = localStorage.getItem("token");
-
   const {
     id,
     name,
@@ -48,26 +43,20 @@ const ProductCard = ({ product }) => {
     current_stock,
     thumbnail,
   } = product;
-
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
     setPid(pid);
   };
-
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const cartItem = cartItems.map(i => i.product.id)
-  const addedId = cartItem.find(i => i  ===  id)  
-
+  const cartItem = cartItems.map((i) => i.product.id);
+  const addedId = cartItem.find((i) => i === id);
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
-
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
     let option = choice_19?.map((option) => option[0]);
-
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
@@ -79,14 +68,12 @@ const ProductCard = ({ product }) => {
       choice_19: `${option[0]}`,
       quantity: `${quantity}`,
     };
-
     if (token) {
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
   };
-
   return (
     <>
       <div className="product_card_content">
@@ -144,15 +131,15 @@ const ProductCard = ({ product }) => {
               </div>
               <div className="card-footer product-card-footer">
                 {addedId ? (
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Added to Cart
+                  </button>
+                ) : (
                   <button
                     className="btn_before_add_cart"
                     onClick={() => addToCartHandler(product, quantity)}
                   >
                     <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
-                ) : (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
                   </button>
                 )}
               </div>
@@ -194,7 +181,6 @@ const ProductCard = ({ product }) => {
         </div>
         <ToastContainer />
       </div>
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -211,5 +197,4 @@ const ProductCard = ({ product }) => {
     </>
   );
 };
-
 export default ProductCard;
