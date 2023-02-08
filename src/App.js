@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
-import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 import Layout from "./Pages/Layout/Layout";
 import SubCategory from "./Pages/CategoryPage/SubCategory/SubCategory";
 import SubSubCategory from "./Pages/CategoryPage/SubSubCategory/SubSubCategory";
@@ -29,9 +28,10 @@ import ShippingHome from "./Components/ShippingComponent/ShippingHome/ShippingHo
 import CheckoutComple from "./Pages/Checkut/CheckoutComple";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
-import TrackOrderDetails from "./Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails";
-import CheckoutShopCart from "./Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart";
-// import { useSelector } from 'react-redux';
+
+import PageNotFound from './Pages/PageNotFound/PageNotFound';
+import CheckoutShopCart from './Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart';
+import TrackOrderDetails from './Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails';
 
 
 function App() {

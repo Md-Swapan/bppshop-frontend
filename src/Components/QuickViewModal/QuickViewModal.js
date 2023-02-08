@@ -96,6 +96,17 @@ const QuickViewModal = ({ pid }) => {
                   />
                 </div>
               </div>
+
+              <div className=" img-carousel-item">
+                {productDetail?.images?.map((img, index) => (
+                  <img
+                    key={index}
+                    width={70}
+                    src={imgBaseUrl + `/${img}`}
+                    alt="img"
+                  />
+                ))}
+              </div>
             </div>
             <div className="col-sm-8">
               <div className="detail-content-view">
@@ -229,10 +240,29 @@ const QuickViewModal = ({ pid }) => {
                   ></span>
                 </div>
               </div>
+
+              {/* <div className="col-md-8"> */}
+                <div className="my-4">
+                  {addedItemId ? (
+                    <button disabled className="btn_after_added_cart">
+                      <i className="bi bi-cart-plus"></i> Added to Cart
+                    </button>
+                  ) : (
+                    <button
+                      className="btn_before_add_cart"
+                      onClick={() =>
+                        dispatch(addItemsToCart(productDetail, quantityCount))
+                      }
+                    >
+                      <i className="bi bi-cart-plus"></i> Add To Cart
+                    </button>
+                  )}
+                </div>
+              {/* </div> */}
             </div>
           </div>
           <div className="row">
-            <div className="col-md-4 img-carousel-item">
+            {/* <div className="col-md-4 img-carousel-item">
               {productDetail?.images?.map((img, index) => (
                 <img
                   key={index}
@@ -241,8 +271,8 @@ const QuickViewModal = ({ pid }) => {
                   alt="img"
                 />
               ))}
-            </div>
-            <div className="col-md-8">
+            </div> */}
+            {/* <div className="col-md-8">
               <div className="my-4">
                 {addedItemId ? (
                   <button disabled className="btn_after_added_cart">
@@ -259,7 +289,7 @@ const QuickViewModal = ({ pid }) => {
                   </button>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
