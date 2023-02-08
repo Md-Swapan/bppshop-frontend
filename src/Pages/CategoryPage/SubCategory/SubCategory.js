@@ -12,7 +12,7 @@ const SubCategory = ({ allCategory, loading }) => {
   return (
     <>
       <div className="categoryView-section">
-      <MetaData title="BPPShop Sub Category" />
+      <MetaData title={`Bppshop ${slug}`} />
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb my-4">
             <li className="breadcrumb-item">
