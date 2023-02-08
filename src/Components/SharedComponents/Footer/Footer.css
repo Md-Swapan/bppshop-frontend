@@ -174,7 +174,7 @@
 
 @media screen and (max-width: 1400px) {
   .footer-content {
-    width: 65%;
+    width: 70%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -192,9 +192,9 @@
     font-size: 14px;
   }
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1350px) {
   .footer-content {
-    width: 65%;
+    width: 75%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -214,7 +214,7 @@
 }
 @media screen and (max-width: 1200px) {
   .footer-content {
-    width: 65%;
+    width: 78%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -234,7 +234,7 @@
 }
 @media screen and (max-width: 992px) {
   .footer-content {
-    width: 65%;
+    width: 80%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -271,5 +271,45 @@
   }
   .contact_content {
     font-size: 14px;
+  }
+
+  .downloadApp_content {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+    gap: 20px;
+  }
+  .downloadApp_content button {
+    width: 145px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .downloadApp_content button h6{
+    font-size: 12px;
+  }
+  .newsletter_container input{
+    padding: 10px;
+    font-size: 14px;
+  }
+  .newsletter_container button{
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .social_content{
+    text-align: left;
+  }
+
+  .bottom_footer_content {
+    width: 90%;
+    margin: auto;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    padding: 20px 0px 80px 0px;
   }
 }

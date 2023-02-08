@@ -1,6 +1,6 @@
 import React from 'react';
 import './PageNotFound.css'
-import PageNotFoundGif from "../../Assets/Images/404.png"
+// import PageNotFoundGif from "../../Assets/Images/404.png"
 
 
 const PageNotFound = () => {
@@ -10,7 +10,7 @@ const PageNotFound = () => {
       <div className="">
         {/* <img src={PageNotFoundGif} alt="Page Not Found."/> */}
         <h2>Sorry!</h2>
-        <h4>Content Not Found.</h4>
+        <h4>Page Not Found.</h4>
 
         <br/>
 

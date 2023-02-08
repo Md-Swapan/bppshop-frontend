@@ -16,10 +16,13 @@ const Cart = () => {
     // document.querySelector(".cart").style.display = "none";
   };
 
+  const sidebarOpenHandler = () => {
+    document.querySelector("#sidebarMenu").style.transform = 'translateX(-300px)';
+  }
   return (
     <>
       <div className="cart">
-        <button className="start-shopping-btn">Start Shopping</button>
+        <button onClick={sidebarOpenHandler} className="start-shopping-btn ">Start Shopping</button>
         <div onClick={CartDetailsViewHandler}>
           <div className="cartIcon">
             <i className="bi bi-cart-plus"></i>
