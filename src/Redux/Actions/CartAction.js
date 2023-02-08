@@ -20,6 +20,7 @@ export const addItemsToCart =
     const cartGroupItem = getState().cartGroup.cartGroupItems;
     
     const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
+
     const cartUpdateInfo = {
       "key" : `${isItemExist.id}`,
       "quantity": `${quantity}`

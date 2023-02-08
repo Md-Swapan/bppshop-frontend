@@ -39,12 +39,12 @@
 
 .searchInput {
   position: relative;
-  width: 100%;
+  width: 35%;
   justify-content: center;
 }
 
 .search {
-  width: 500px;
+  width: 100%;
   background: #fff;
   border-radius: 5px;
   border: none;
@@ -54,7 +54,7 @@
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   transition: all 0.3s;
-  margin-left: 29%;
+  /* margin-left: 29%; */
 }
 
 .searchIcon {
@@ -82,87 +82,77 @@
 }
 /* responsive css */
 @media only screen and (max-width: 1400px) {
-  .search {
+  /* .search {
     margin-left: 17.5%;
-  }
+  } */
   .sidebarIconToggle {
     left: 37px;
   }
   .bpshopsLogo {
     margin-left: 75px;
   }
-  .login {
-    margin-right: 37px;
-  }
+  
 }
 
 @media only screen and (max-width: 1300px) {
-  .search {
+  /* .search {
     margin-left: 14.2%;
-  }
+  } */
   .bpshopsLogo {
     margin-left: 75px;
   }
   .sidebarIconToggle {
     left: 37px;
   }
-  .login {
-    margin-right: 37px;
-  }
+  
 }
 
 @media only screen and (max-width: 1200px) {
-  .search {
+  /* .search {
     margin-left: 10%;
-  }
+  } */
   .bpshopsLogo {
     margin-left: 75px;
   }
   .sidebarIconToggle {
     left: 37px;
   }
-  .login {
-    margin-right: 37px;
-  }
+ 
 }
 
 @media only screen and (max-width: 1100px) {
-  .search {
+  /* .search {
     width: 450px;
     margin-left: 8%;
-  }
+  } */
   .bpshopsLogo {
     margin-left: 75px;
   }
   .sidebarIconToggle {
     left: 37px;
   }
-  .login {
-    margin-right: 37px;
-  }
+
 }
 
 @media only screen and (max-width: 1000px) {
-  .search {
+  /* .search {
     width: 380px;
     margin-left: 6.5%;
-  }
+  } */
   .bpshopsLogo {
     margin-left: 75px;
   }
   .sidebarIconToggle {
     left: 37px;
   }
-  .login {
-    margin-right: 37px;
-  }
+  
 }
 
 @media only screen and (max-width: 900px) {
-  .search {
+  /* .search {
     width: 380px;
     margin-left: 16.3%;
-  }
+  } */
   .bpshopsLogo {
     display: none;
   }
@@ -180,9 +170,9 @@
 }
 
 @media only screen and (max-width: 892px) {
-  .search {
+  /* .search {
     margin-left: 15.5%;
-  }
+  } */
 
   .bpshopsLogo {
     display: none;
@@ -201,9 +191,9 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .search {
+  /* .search {
     margin-left: 10.1%;
-  }
+  } */
 
   .bpshopsLogo {
     display: none;
@@ -222,10 +212,10 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .search {
+  /* .search {
     width: 320px;
     margin-left: 5%;
-  }
+  } */
   .sidebarIconToggle {
     top: 32px;
     left: 37px;
@@ -246,16 +236,16 @@
   .threeDotMenuIcon {
     display: block;
   }
-  .login {
+  /* .login {
     margin-right: 37px;
-  }
+  } */
 }
 
 @media only screen and (max-width: 668px) {
-  .search {
+  /* .search {
     width: 300px;
     margin-left: -4%;
-  }
+  } */
   .sidebarIconToggle {
     top: 32px;
     left: 37px;
@@ -273,24 +263,24 @@
     margin-left: 75px;
   }
 
-  .login h6 {
+  /* .login h6 {
     display: none;
-  }
+  } */
 
   .threeDotMenuIcon {
     display: block;
   }
-  .login {
+  /* .login {
     margin-right: 37px;
-  }
+  } */
 }
 
 @media only screen and (max-width: 576px) {
-  .search {
+  /* .search {
     width: 250px;
     margin-left: -8%;
     font-size: 13px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
   }
@@ -322,11 +312,11 @@
   }
 }
 @media only screen and (max-width: 550px) {
-  .search {
+  /* .search {
     width: 250px;
     margin-left: -8%;
     font-size: 13px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
   }
@@ -354,15 +344,15 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
 }
 @media only screen and (max-width: 520px) {
-  .search {
+  /* .search {
     width: 250px;
     margin-left: -12%;
     font-size: 13px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
   }
@@ -390,15 +380,15 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
 }
 @media only screen and (max-width: 510px) {
-  .search {
+  /* .search {
     width: 250px;
     margin-left: -12%;
     font-size: 13px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
   }
@@ -426,15 +416,15 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
 }
 @media only screen and (max-width: 480px) {
-  .search {
+  /* .search {
     width: 220px;
     margin-left: -11%;
     font-size: 12px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
     font-size: 13px;
@@ -463,16 +453,16 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
   
 }
 @media only screen and (max-width: 450px) {
-  .search {
+  /* .search {
     width: 220px;
     margin-left: -20%;
     font-size: 12px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
     font-size: 13px;
@@ -501,16 +491,16 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
   
 }
 @media only screen and (max-width: 420px) {
-  .search {
+  /* .search {
     width: 210px;
     margin-left: -25%;
     font-size: 11px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
     font-size: 13px;
@@ -539,16 +529,16 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 100px;
+    /* margin-right: 100px; */
   }
   
 }
 @media only screen and (max-width: 410px) {
-  .search {
+  /* .search {
     width: 210px;
     margin-left: -30%;
     font-size: 11px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
     font-size: 13px;
@@ -577,16 +567,15 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 150px;
+    /* margin-right: 150px; */
   }
   
 }
 @media only screen and (max-width: 400px) {
-  .search {
+  /* .search {
     width: 200px;
-    margin-left: -32%;
     font-size: 11px;
-  }
+  } */
   .searchIcon {
     margin-top: 8px;
     font-size: 13px;
@@ -615,17 +604,54 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 200px;
+    /* margin-right: 50px; */
+  }
+  
+}
+@media only screen and (max-width: 390px) {
+  /* .search {
+    width: 200px;
+    font-size: 11px;
+  } */
+  .searchIcon {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .sidebarIconToggle {
+    top: 32px;
+    left: 30px;
+  }
+
+  .bpshopsLogo {
+    display: none;
+  }
+
+  .bpshopsIcon {
+    display: block;
+    width: 45px;
+    margin-left: 65px;
+  }
+
+  .threeDotMenuIcon {
+    display: block;
+  }
+  .user-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    /* margin-right: 100px; */
   }
   
 }
 @media only screen and (max-width: 360px) {
-  .search {
+  /* .search {
     width: 180px;
     margin-left: -28%;
     font-size: 10.5px;
     padding: 8px 10px;
-  }
+  } */
   .searchIcon {
     margin-top: 10px;
     font-size: 10px;
@@ -654,17 +680,17 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 50px;
+    /* margin-right: 50px; */
   }
 
 }
 @media only screen and (max-width: 320px) {
-  .search {
+  /* .search {
     width: 180px;
     margin-left: -28%;
     font-size: 10.5px;
     padding: 8px 10px;
-  }
+  } */
   .searchIcon {
     margin-top: 10px;
     font-size: 10px;
@@ -693,7 +719,7 @@
     height: 30px;
     border-radius: 50px;
     overflow: hidden;
-    margin-right: 80px;
+    /* margin-right: 80px; */
   }
 
 }

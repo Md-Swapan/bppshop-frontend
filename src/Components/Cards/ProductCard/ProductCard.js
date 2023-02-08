@@ -29,24 +29,6 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
-
-  const cartItems = useSelector((state) => {
-    return state.cart.cartItems;
-  });
-
-  function isItemExitsInCart(product_id) {
-   let status = true;
-    const found = cartItems.find(function(element) { 
-      if(element.product.id === product_id){
-        status = false;
-      }
-    });
-
-    return status;
-
-  }
-
-
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -75,16 +57,14 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
-  const [added, setAdded] = useState(false);
-  const addToCartHandler = (product, quantity) => {
-    console.log(product.id);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItem = cartItems.map(i => i.product.id)
+  const addedId = cartItem.find(i => i  ===  id)
+  // console.log(addedId)
+  
 
+  const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
-    setAdded(true);
-    toast.success("Added to cart Successfully", {
-      position: "top-right",
-      autoClose: 2000,
-    });
 
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
@@ -165,7 +145,7 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="card-footer product-card-footer">
-                {isItemExitsInCart(product.id) ? (
+                {addedId ? (
                   <button
                     className="btn_before_add_cart"
                     onClick={() => addToCartHandler(product, quantity)}
