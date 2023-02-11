@@ -27,7 +27,7 @@ const TrackOrder = () => {
               </span>
               <br />
               <span className="text-uppercase fw-bold text-info">
-                {userOrder.order_status}
+                {userOrder?.order_status}
               </span>
             </div>
           </div>
@@ -38,7 +38,7 @@ const TrackOrder = () => {
               </span>
               <br />
               <span className="text-uppercase fw-bold text-info">
-                {userOrder.payment_status}
+                {userOrder?.payment_status}
               </span>
             </div>
           </div>
