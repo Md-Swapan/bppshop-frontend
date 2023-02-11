@@ -1,34 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const { isAuthenticated} = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
   const loginMessage = localStorage.getItem("message");
+  const token = localStorage.getItem("token");
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-    toast.success('You Have Loging Successfuly', {
-      position: "top-right",
-      autoClose: 2000,
-      });
-  
   };
 
-  if (isAuthenticated === true) {
-    let from = location?.state?.from?.pathname || "/";
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (isAuthenticated === true && token) {
+      let from = location?.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, token, location, navigate]);
 
   return (
     <div className="row justify-content-center">
@@ -97,7 +95,9 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
+
+      <div id="snackbar">You Have Login Successfully</div>
     </div>
   );
 };
