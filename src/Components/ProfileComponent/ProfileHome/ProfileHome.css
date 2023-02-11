@@ -15,9 +15,9 @@
 }
 
 .profile_update_btn {
-    background: rgb(232, 119, 119);
+    background: #ef8341;
     border: none;
-    padding: 10px 20px ;
+    padding: 10px 50px ;
     border-radius: 5px;
     color: white;
 }

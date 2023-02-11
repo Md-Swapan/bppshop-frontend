@@ -15,7 +15,7 @@ const AddressHome = () => {
     <div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h4 className="fw-bold">ADDRESSES</h4>
+          <h4 className="">ADDRESSES</h4>
         </div>
         <div>
           <Link to="/profile/add-new-address">

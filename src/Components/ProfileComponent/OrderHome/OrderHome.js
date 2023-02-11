@@ -1,6 +1,5 @@
 import React from "react";
 import "./OrderHome.css";
-import ProfileHeader from "./../ProfileHeader/ProfileHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadUserOrderCancelRequest } from "../../../Redux/Actions/UserOrderAction";
@@ -11,7 +10,7 @@ const OrderHome = () => {
 
   return (
     <div>
-      <ProfileHeader>My Order</ProfileHeader>
+      <h4>My Order</h4>
       {userOrders?.length < 1 ? (
         <div className="blank_order">
           <h5>You Dont't Have Any Order...</h5>
