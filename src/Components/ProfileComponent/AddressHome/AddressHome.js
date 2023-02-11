@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import "./AddressHome.css";
 
 const AddressHome = () => {
-  const { userOrders } = useSelector((state) => state.userOrders);
-  const shipping_address_data = userOrders.map(order => order.shipping_address_data);
-  // console.log(shipping_address_data);
+  const userOrders = useSelector((state) => {
+    return state?.userOrders?.userOrders;
+  });
+
+  const shipping_address_data = userOrders?.map(order => order.shipping_address_data);
+  console.log(shipping_address_data);
 
   return (
     <div>
@@ -21,7 +24,7 @@ const AddressHome = () => {
         </div>
       </div>
       <div className="address_card_container">
-        {shipping_address_data.map((sippingAdd) => (
+        {shipping_address_data?.map((sippingAdd) => (
           <div key={sippingAdd?.id} className="arrdess_card">
             <div className="address_card_header">
               <div className="address_card_header_pin">

@@ -59,7 +59,7 @@ const HomeFilterBtnHeader = () => {
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="https://backend.bppshop.com.bd/shop/apply">
                   Become a seller
                 </a>
               </li>
@@ -67,7 +67,7 @@ const HomeFilterBtnHeader = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="https://backend.bppshop.com.bd/seller/auth/login">
                   Seller Login
                 </a>
               </li>

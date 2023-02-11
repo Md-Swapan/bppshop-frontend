@@ -13,7 +13,7 @@ import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import { LOAD_USER_ORDERS_CANCEL_REQUEST } from "./../Constants/UserConstants";
 
 // Load User Orders
-export const loadUserOrders = () => async (dispatch) => {
+export const loadUserOrders = () => async (dispatch, getState) => {
   try {
     dispatch({ type: LOAD_USER_ORDERS_REQUEST });
 
@@ -24,6 +24,7 @@ export const loadUserOrders = () => async (dispatch) => {
     });
 
     dispatch({ type: LOAD_USER_ORDERS_SUCCESS, payload: data.data });
+    localStorage.setItem("userOrders", JSON.stringify(getState().userOrders.userOrders));
   } catch (error) {
     dispatch({
       type: LOAD_USER_ORDERS_FAIL,

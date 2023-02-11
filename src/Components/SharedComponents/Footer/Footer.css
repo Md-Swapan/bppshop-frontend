@@ -12,6 +12,9 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
 }
+.footer_logo img{
+  width: 150px;
+}
 .footer-content h5{
   font-size: 17px;
   color: #ef8341;
