@@ -25,13 +25,13 @@ import ShippingDetails from './Pages/ShippingAddressPage/ShippingDetails/Shippin
 import OrderDetails from "./Components/ProfileComponent/OrdersDetails/OrderDetails";
 import CheckoutPayment from "./Components/CheckoutComponent/CheckoutPayment/CheckoutPayment";
 import ShippingHome from "./Components/ShippingComponent/ShippingHome/ShippingHome";
-import CheckoutComple from "./Pages/Checkut/CheckoutComple";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
 
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import CheckoutShopCart from './Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart';
 import TrackOrderDetails from './Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails';
+import CheckoutComplete from './Pages/Checkut/CheckoutComplete';
 
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
               <Route path="checkout-shop-cart" element={<CheckoutShopCart/>}></Route>
               <Route path="checkout-payment" element={<CheckoutPayment/>}></Route>
           </Route>
-          <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComple /></ProtectedRoute>}/>
+          <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComplete /></ProtectedRoute>}/>
 
           {/* <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails /></ProtectedRoute>}/> */}
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>

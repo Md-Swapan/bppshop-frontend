@@ -38,14 +38,12 @@ const CheckoutPayment = () => {
       <h3 className="mb-4">Payment method</h3>
       <hr />
       <h6 className="my-5">Choose payment</h6>
-      <div>
-        <div
-          onClick={() => handleCheckoutConfirm(shippingAddressInfo?.data?.id)}
-          className="confirm_order_img"
-        >
-          <img alt="" src={confirmImg} />
-        </div>
-      </div>
+      <button
+        onClick={() => handleCheckoutConfirm(shippingAddressInfo?.data?.id)}
+        className="confirm_order_img"
+      >
+        <img alt="" src={confirmImg} />
+      </button>
       <div className="back_to_shipping">
         <Link to="/shipping-details">
           <button>Back to Shipping</button>

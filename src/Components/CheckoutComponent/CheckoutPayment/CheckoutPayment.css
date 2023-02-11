@@ -1,13 +1,14 @@
 .confirm_order_img{
     background: aliceblue;
-    width: 50%;
+    width: auto;
     text-align: center;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
+    padding: 20px 40px;
 }
 .confirm_order_img img {
-    width: 150px;
-    margin: 20px;
+    width: 140px;
 }
 .back_to_shipping{
     text-align: center;
