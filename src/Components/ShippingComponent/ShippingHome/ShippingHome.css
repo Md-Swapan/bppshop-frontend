@@ -106,14 +106,14 @@
 
 .shop_cart_btn,
 .proceed_payment_btn {
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px;
 }
 
 .shop_cart_btn {
-  background: black;
+  background: rgb(151, 151, 151);
 }
 
 .proceed_payment_btn {
-  background: rgb(88, 154, 27);
+  background: #ef8341;
 }

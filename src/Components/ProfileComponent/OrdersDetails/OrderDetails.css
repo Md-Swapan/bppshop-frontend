@@ -4,7 +4,7 @@
 }
 
 .order_detail_card {
-    height: 335px;
+    height: auto;
     border: none;
     border-radius: 7px;
     font-family: "Kanit", sans-serif;
@@ -34,7 +34,7 @@
 }
 
 .track_order_btn {
-    text-align: center;
+    text-align: end;
     margin-top: 20px;
 }
 .track_order_btn button{
