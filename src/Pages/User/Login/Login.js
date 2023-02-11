@@ -15,21 +15,19 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const loginMessage = localStorage.getItem("message");
-  const token = localStorage.getItem("token");
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-
+    toast.success('You Have Loging Successfuly', {
+      position: "top-right",
+      autoClose: 2000,
+      });
   
   };
 
-  if (isAuthenticated === true && token) {
-    console.log(isAuthenticated,token);
+  if (isAuthenticated === true) {
     let from = location?.state?.from?.pathname || "/";
     navigate(from, { replace: true });
-   
-    // alert(loginMessage)
-
   }
 
   return (
