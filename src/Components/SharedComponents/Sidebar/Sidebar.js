@@ -20,6 +20,7 @@ const Sidebar = () => {
     setCategorySlugName(slug);
 
     const subCategories = allCategory.find((item) => item.slug === slug);
+
     setSubCategory(subCategories.childes);
     const categoryItem = document.getElementById(`categoryItem ${index}`);
 
@@ -46,16 +47,25 @@ const Sidebar = () => {
     const subSubCategories = subCategories?.childes.find(
       (item) => item.slug === subSlug
     );
-
     setSubSubCategoryList(subSubCategories);
 
-    const subSubCategoryItem = document.getElementById(
-      `subSubCategoryItem ${indx}`
-    );
-    const subSubMenu = document.querySelector(".subSubMenu");
-    subSubCategoryItem.append(subSubMenu);
+    // const subSubCategoryItem = document.getElementById(
+    //   `subSubCategoryItem ${indx}`
+    // );
 
-    if (subCategories) {
+    // const subSubMenu = document.querySelector(".subSubMenu");
+    // subSubCategoryItem.append(subSubMenu);
+
+    if (subSubCategories.slug === subSlug) {
+      const subSubCategoryItem = document.getElementById(
+        `subSubCategoryItem ${indx}`
+      );
+
+      const subSubMenu = document.querySelector(".subSubMenu");
+      subSubCategoryItem.append(subSubMenu);
+    }
+
+    if (subSubCategories) {
       const subSubMenu = document.querySelector(".subSubMenu");
       subSubMenu.classList.toggle("subSubMenuActive");
     }
@@ -82,14 +92,20 @@ const Sidebar = () => {
                   Home
                 </div>
               </Link>
-            </li> */}
-            {/* <div className="homeIcon"> */}
+            </li>
+            <div className="homeIcon">
             <Link to="/">
               <li className="homeIcon">
                 <i className="bi bi-house-door-fill"></i>
               </li>
             </Link>
-            {/* </div> */}
+            </div> */}
+
+            <Link to="/">
+              <li className="homeIcon">
+                <i className="bi bi-house-door-fill"></i>
+              </li>
+            </Link>
             <hr />
 
             {allCategory?.map((categoryItem, index) => (
@@ -111,7 +127,6 @@ const Sidebar = () => {
                   </div>
                   <span>
                     <i className="bi bi-chevron-right chevronRight"></i>
-                    {/* <i className="bi bi-chevron-down chevron-down"></i> */}
                   </span>
                 </Link>
               </li>
