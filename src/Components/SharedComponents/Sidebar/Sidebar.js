@@ -84,11 +84,11 @@ const Sidebar = () => {
               </Link>
             </li> */}
             {/* <div className="homeIcon"> */}
-              <Link to="/">
-                <li className="homeIcon">
-                  <i className="bi bi-house-door-fill"></i>
-                </li>
-              </Link>
+            <Link to="/">
+              <li className="homeIcon">
+                <i className="bi bi-house-door-fill"></i>
+              </li>
+            </Link>
             {/* </div> */}
             <hr />
 
@@ -117,7 +117,7 @@ const Sidebar = () => {
               </li>
             ))}
 
-            <ul className=" subMenu">
+            {/* <ul className=" subMenu">
               {subCategory?.map((item, indx) => (
                 <Link to={`/${categorySlugName}/${item?.slug}`}>
                   <li
@@ -137,6 +137,31 @@ const Sidebar = () => {
                     ))}
                   </ul>
                 </Link>
+              ))}
+            </ul> */}
+
+            <ul className=" subMenu">
+              {subCategory?.map((item, indx) => (
+                <li
+                  key={indx}
+                  id={`subSubCategoryItem ${indx}`}
+                  onClick={() => subSubCategoryViewHandler(item?.slug, indx)}
+                >
+                  <Link to={`/${categorySlugName}/${item?.slug}`}>
+                    {item?.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <ul className=" subSubMenu">
+              {subSubCategoryList?.childes?.map((item, index) => (
+                <li key={item.index}>
+                  <Link
+                    to={`/${categorySlugName}/${subCategorySlugName}/${item?.slug}`}
+                  >
+                    {item?.name}
+                  </Link>
+                </li>
               ))}
             </ul>
           </ul>

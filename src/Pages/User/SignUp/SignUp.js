@@ -28,11 +28,11 @@ const SignUp = () => {
     <div className="row justify-content-center">
       <div className="col-md-8">
         <div className="signup_card">
-          <div>
-            <h2 className="h4 mb-1">Create Account</h2>
-            <p className="font-size-sm text-muted mb-4">
-              Register control your order .
-            </p>
+          <div className="signup_card_body">
+            <h4 className=" mb-4">Create Account</h4>
+            {/* <p className="font-size-sm text-muted mb-4">
+            Register control your order .
+          </p> */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
                 <div className=" col-md-6">
@@ -95,6 +95,7 @@ const SignUp = () => {
                   </div>
                 </div>
               </div>
+              {/* <div className="d-flex justify-content-between"> */}
               <div className="form-group d-flex flex-wrap justify-content-between">
                 <div className="form-group my-3">
                   <strong>
@@ -112,17 +113,18 @@ const SignUp = () => {
                 <div id="invalid-feedback">{signUpError}</div>
               </div>
 
-              <div className="row">
-                <div className="signup_card_footer login_card_footer">
-                  <div className="sign_in_path">
-                  Already Have account ?<Link to="/login"> Sign in now </Link>
-                  </div>
-                  <div className="sign_up_btn">
-                    <button type="submit">Sign-up</button>
-                  </div>
-                </div>
+              <div className="sign_up_btn mt-2">
+                <button type="submit">Sign-up</button>
               </div>
+              {/* </div> */}
             </form>
+          </div>
+          <div className="row">
+            <div className="signup_card_footer login_card_footer">
+              <div className="sign_in_path">
+                Already have account ? <Link to="/login"> Sign in</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
