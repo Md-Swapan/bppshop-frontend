@@ -2,7 +2,7 @@
   position: relative;
   height: auto;
   border-radius: 7px;
-  font-family: "Space Grotesk", sans-serif;
+  /* font-family: "Space Grotesk", sans-serif; */
   border: 1px solid gainsboro;
   overflow: hidden;
   transition: all 0.3s;
@@ -19,6 +19,7 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s;
+  font-weight: 500;
 }
 
 .product-card-body img {
@@ -28,6 +29,11 @@
 .product-card-body-content {
   height: 30%;
   text-align: center;
+}
+.product-card-body-content small{
+  font-size: 13px;
+  margin-top: 10px;
+  /* text-align: left; */
 }
 
 .product-card-body-content-unit-price {

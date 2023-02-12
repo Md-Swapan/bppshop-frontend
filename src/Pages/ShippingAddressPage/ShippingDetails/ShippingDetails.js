@@ -16,7 +16,7 @@ const ShippingDetails = () => {
 
   const totalPrice = parseInt(
     `${cartItems?.reduce(
-      (acc, item) => acc + item?.quantity * item?.product?.unit_price,
+      (acc, item) => acc + item?.quantity * (item?.product?.unit_price - item?.product?.discount),
       0
     )}`
   );
@@ -41,7 +41,7 @@ const ShippingDetails = () => {
                     ৳
                     {`${cartItems?.reduce(
                       (acc, item) =>
-                        acc + item?.quantity * item?.product?.unit_price,
+                        acc + item?.quantity * (item?.product?.unit_price - item?.product?.discount),
                       0
                     )}`}
                     .00

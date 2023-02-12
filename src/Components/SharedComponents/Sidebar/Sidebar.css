@@ -36,13 +36,13 @@
   cursor: pointer;
 } */
 .sidebarIconToggle {
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    z-index: 20;
-    top: 12px;
-    left: 15px;
-    cursor: pointer;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  z-index: 20;
+  top: 12px;
+  left: 15px;
+  cursor: pointer;
 }
 .sidebarIconToggle i {
   color: white;
@@ -84,35 +84,29 @@
   margin: 0;
 }
 
-/* .homeIcon {
-  justify-content: center !important;
-} */
 .homeIcon {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px 0px;
 }
-
-/* .homeIcon:hover a {
-  margin-left: 0px !important;
-} */
 .homeIcon i {
   text-align: center;
   border-radius: 7px;
   padding: 5px 9px;
   color: #fd7e14;
   background: #fff;
-  font-size: 20px;
+  font-size: 20px; 
 }
+
 .menu li {
-  padding: 5px 10px;
-  /* display: flex;
-  justify-content: space-between; */
   border-bottom: 1px solid rgb(230, 230, 230);
+  margin-left: -34px;
+  list-style: none;
 }
 .menu li a {
   width: 100%;
+  padding: 5px 10px;
   color: rgb(65, 65, 65);
   display: block;
   text-decoration: none;
@@ -121,6 +115,9 @@
   transition: all 0.3s;
   display: flex;
   justify-content: space-between;
+}
+.menu li a:hover {
+  color: #fd7e14;
 }
 .menu li img {
   width: 35px;
@@ -138,17 +135,12 @@
   border-radius: 2px;
 }
 
-.subMenu, 
+.subMenu,
 .subSubMenu {
-  display: none;
+  /* display: none; */
+  border-left: 1px solid rgb(216, 216, 216);
+  margin-left: -10px;
 }
- 
-.subMenuActive, 
-.subSubMenuActive {
-  display: block;
-  border-left: 1px solid gainsboro;
-}
-
 .subMenu li,
 .subSubMenu li {
   width: 100%;
@@ -156,15 +148,20 @@
   list-style: none;
   cursor: pointer;
   border-bottom: none;
-  margin-left: -20px !important;
+}
+.subMenu li a:hover,
+.subSubMenu li a:hover {
+  color: #fd7e14;
 }
 
+.subMenu li a {
+  font-size: 12px;
+}
 
-/* .arrowToggle {
-  transform: rotateY(180deg);
-  color: #fd7e14;
-} */
-
+.subMenuActive,
+.subSubMenuActive{
+  /* display: none; */
+}
 
 @media only screen and (max-width: 768px) {
   #sidebarMenu {
@@ -185,17 +182,17 @@
   #openSidebarMenu:checked ~ .sidebarIconToggle > .middle {
     opacity: 0;
   }
-  
+
   #openSidebarMenu:checked ~ .sidebarIconToggle > .top {
     transform: rotate(135deg);
     margin-top: 8px;
   }
-  
+
   #openSidebarMenu:checked ~ .sidebarIconToggle > .bottom {
     transform: rotate(-135deg);
     margin-top: -9px;
   }
-  
+
   #openSidebarMenu:checked ~ #sidebarMenu {
     transform: translateX(0px);
   }

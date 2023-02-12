@@ -12,17 +12,22 @@ const Cart = () => {
       ".cartDetailsView-container"
     );
     cartDetailsViewContainer.style.display = "block";
-    cartDetailsViewContainer.classList.toggle("cartDetailsView-container-toggle");
+    cartDetailsViewContainer.classList.toggle(
+      "cartDetailsView-container-toggle"
+    );
     // document.querySelector(".cart").style.display = "none";
   };
 
   const sidebarOpenHandler = () => {
-    document.querySelector("#sidebarMenu").style.transform = 'translateX(-300px)';
-  }
+    document.querySelector("#sidebarMenu").style.transform =
+      "translateX(-300px)";
+  };
   return (
     <>
       <div className="cart">
-        <button onClick={sidebarOpenHandler} className="start-shopping-btn ">Start Shopping</button>
+        <button onClick={sidebarOpenHandler} className="start-shopping-btn ">
+          Start Shopping
+        </button>
         <div onClick={CartDetailsViewHandler}>
           <div className="cartIcon">
             <i className="bi bi-cart-plus"></i>
@@ -34,13 +39,18 @@ const Cart = () => {
             <span className="itemsForResScreen"> {cartItems?.length}</span>
           </div>
           <div className="cartTotalPrice">
-            <small>
-              ৳{" "}
-              {`${cartItems?.reduce(
-                (acc, item) => acc + item?.quantity * item?.product?.unit_price,
-                0
-              )}`}
-            </small>
+            {/* {cartItems?.product?.discount < 0 ? ( */}
+              <small>
+                ৳{" "}
+                {`${cartItems?.reduce(
+                  (acc, item) =>
+                    acc + item?.quantity * (item?.product?.unit_price - item?.product?.discount),
+                  0
+                )}`}
+              </small>
+            {/* ) : (
+              ""
+            )} */}
           </div>
         </div>
       </div>

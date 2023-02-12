@@ -33,7 +33,7 @@ const Login = () => {
       <div className="col-md-6">
         <div className="login_card">
           <div className="card-body">
-            <h2 className="h4 mb-4">Sign in</h2>
+            <h4 className="mb-4">Sign in</h4>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group my-2">
@@ -84,14 +84,17 @@ const Login = () => {
             </form>
           </div>
           <div className="login_card_footer">
-            <div>
-              <h6>No account ? Sign up now </h6>
-            </div>
-            <div className="sign_up_path">
+            <div className="needAccountToggleBtn">
+              <h6>Need an account?</h6>
               <Link to="/sign-up">
                 <i className="fa fa-user-circle"></i> Sign Up
               </Link>
             </div>
+            {/* <div className="sign_up_path">
+              <Link to="/sign-up">
+                <i className="fa fa-user-circle"></i> Sign Up
+              </Link>
+            </div> */}
           </div>
         </div>
       </div>
