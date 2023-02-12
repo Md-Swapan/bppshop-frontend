@@ -6,9 +6,12 @@ import { baseUrl, categoryBaseUrl } from "./../../../BaseUrl/BaseUrl";
 
 const Sidebar = () => {
   const [allCategory, setAllCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
   const [categorySlugName, setCategorySlugName] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
   const [subCategorySlugName, setSubCategorySlugName] = useState([]);
+
+
+  console.log(subCategory);
 
   useEffect(() => {
     axios.get(`${baseUrl}/categories`).then((res) => {
@@ -18,7 +21,6 @@ const Sidebar = () => {
 
   const subMenuHandler = (slug, index) => {
     setCategorySlugName(slug);
-
     const subCategories = allCategory.find((item) => item.slug === slug);
     setSubCategory(subCategories.childes);
     const categoryItem = document.getElementById(`categoryItem ${index}`);
@@ -84,38 +86,40 @@ const Sidebar = () => {
               </Link>
             </li> */}
             {/* <div className="homeIcon"> */}
-              <Link to="/">
-                <li className="homeIcon">
-                  <i className="bi bi-house-door-fill"></i>
-                </li>
-              </Link>
+            <Link to="/">
+              <li className="homeIcon">
+                <i className="bi bi-house-door-fill"></i>
+              </li>
+            </Link>
             {/* </div> */}
             <hr />
 
-            {allCategory?.map((categoryItem, index) => (
-              <li
-                key={index}
-                id={`categoryItem ${index}`}
-                className=""
-                onClick={() => subMenuHandler(categoryItem?.slug, index)}
-              >
-                <Link to={`/${categoryItem?.slug}`}>
-                  <div>
-                    <img
-                      width="15"
-                      className="sidebar-Icon"
-                      src={categoryBaseUrl + `/${categoryItem.icon}`}
-                      alt=""
-                    />
-                    {categoryItem?.name}
-                  </div>
-                  <span>
-                    <i className="bi bi-chevron-right chevronRight"></i>
-                    {/* <i className="bi bi-chevron-down chevron-down"></i> */}
-                  </span>
-                </Link>
-              </li>
-            ))}
+            {allCategory?.map((categoryItem, index) => {
+              return (
+                <li
+                  key={index}
+                  id={`categoryItem ${index}`}
+                  className=""
+                  onClick={() => subMenuHandler(categoryItem?.slug, index)}
+                >
+                  <Link to={`/${categoryItem?.slug}`}>
+                    <div>
+                      <img
+                        width="15"
+                        className="sidebar-Icon"
+                        src={categoryBaseUrl + `/${categoryItem.icon}`}
+                        alt=""
+                      />
+                      {categoryItem?.name}
+                    </div>
+                    <span> 
+                      <i className="bi bi-chevron-right chevronRight"></i>
+                      {/* <i className="bi bi-chevron-down chevron-down"></i> */}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
 
             <ul className=" subMenu">
               {subCategory?.map((item, indx) => (
