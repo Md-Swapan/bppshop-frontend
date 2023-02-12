@@ -72,7 +72,7 @@ const CartDetailsView = () => {
               <div className="cart-content-qty-container">
                 <div className="d-flex justify-content-between">
                   <small>
-                    {item?.product?.name?.toString().substring(0, 25)}...
+                    {item?.product?.name?.toString().substring(0, 20)}...
                   </small>
                   <span
                     onClick={() =>
@@ -150,7 +150,7 @@ const CartDetailsView = () => {
             {`${cartItems?.reduce(
               (acc, item) =>
                 acc +
-                item?.quantity * item?.product?.unit_price * quantityCount,
+                item?.quantity * (item?.product?.unit_price - item?.product?.discount) * quantityCount,
               0
             )}`}
           </h6>

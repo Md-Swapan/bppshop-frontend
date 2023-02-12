@@ -9,7 +9,7 @@
   margin-left: 84.25%;
   transform: translateX(300px);
   transition: transform 250ms ease-in-out;
-
+  font-weight: 500;
 }
 .cartDetailsView-container-toggle{
   transform: translateX(0px);
@@ -43,6 +43,7 @@
 }
 .cartDetails img{
   width: 50px;
+  
 }
 .cart-content-qty-container{
   width: 100%;

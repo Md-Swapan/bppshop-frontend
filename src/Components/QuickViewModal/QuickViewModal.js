@@ -5,6 +5,7 @@ import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
+import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg"
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -81,7 +82,7 @@ const QuickViewModal = ({ pid }) => {
       <div className="modal-container">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-4">
+            <div className="col-sm-5">
               <div className="imageView">
                 <div className="detailImgCarousel">
                   {/* <Zoom
@@ -90,6 +91,10 @@ const QuickViewModal = ({ pid }) => {
                   width={300}
                   height={400}
                 /> */}
+                  {/* <img
+                    src={proimg}
+                    alt="img"
+                  /> */}
                   <img
                     src={imgBaseUrl + `/${productDetail?.images}`}
                     alt="img"
@@ -108,7 +113,7 @@ const QuickViewModal = ({ pid }) => {
                 ))}
               </div>
             </div>
-            <div className="col-sm-8">
+            <div className="col-sm-7">
               <div className="detail-content-view">
                 <div className="productName_wishlist">
                   <h4 className="productName">{productDetail.name}</h4>
@@ -234,7 +239,7 @@ const QuickViewModal = ({ pid }) => {
                   </div>
                 </div>
                 <div className="about-div" style={{ margin: "10px 0px" }}>
-                  <h5>About this item</h5>
+                  <h5>Description</h5>
                   <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
                   ></span>

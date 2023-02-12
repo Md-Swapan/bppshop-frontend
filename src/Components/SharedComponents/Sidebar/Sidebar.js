@@ -6,9 +6,9 @@ import { baseUrl, categoryBaseUrl } from "./../../../BaseUrl/BaseUrl";
 
 const Sidebar = () => {
   const [allCategory, setAllCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
-  const [categorySlugName, setCategorySlugName] = useState([]);
-  const [subCategorySlugName, setSubCategorySlugName] = useState([]);
+  // const [subCategory, setSubCategory] = useState([]);
+  // const [categorySlugName, setCategorySlugName] = useState([]);
+  // const [subCategorySlugName, setSubCategorySlugName] = useState([]);
 
   useEffect(() => {
     axios.get(`${baseUrl}/categories`).then((res) => {
@@ -16,57 +16,73 @@ const Sidebar = () => {
     });
   }, []);
 
-  const subMenuHandler = (slug, index) => {
-    setCategorySlugName(slug);
+  // const subMenuHandler = (slug, index) => {
+  //   setCategorySlugName(slug);
 
-    const subCategories = allCategory.find((item) => item.slug === slug);
+  //   const subCategories = allCategory.find((item) => item.slug === slug);
 
-    setSubCategory(subCategories.childes);
-    const categoryItem = document.getElementById(`categoryItem ${index}`);
+  //   setSubCategory(subCategories.childes);
+  //   const categoryItem = document.getElementById(`categoryItem ${index}`);
 
-    const subMenu = document.querySelector(".subMenu");
+  //   const subMenu = document.querySelector(".subMenu");
 
-    categoryItem.append(subMenu);
+  //   categoryItem.append(subMenu);
 
-    if (subCategories) {
+  //   if (subCategories) {
+  //     const subMenu = document.querySelector(".subMenu");
+  //     const chevronRight = document.querySelector(".chevronRight");
+
+  //     subMenu.classList.toggle("subMenuActive");
+  //     chevronRight.classList.toggle("arrowToggle");
+  //   }
+  // };
+
+  // const [subSubCategoryList, setSubSubCategoryList] = useState([]);
+  // const subSubCategoryViewHandler = (subSlug, indx) => {
+  //   setSubCategorySlugName(subSlug);
+
+  //   const subCategories = allCategory.find(
+  //     (item) => item.slug === categorySlugName
+  //   );
+  //   const subSubCategories = subCategories?.childes.find(
+  //     (item) => item.slug === subSlug
+  //   );
+  //   setSubSubCategoryList(subSubCategories);
+
+  //   // const subSubCategoryItem = document.getElementById(
+  //   //   `subSubCategoryItem ${indx}`
+  //   // );
+
+  //   // const subSubMenu = document.querySelector(".subSubMenu");
+  //   // subSubCategoryItem.append(subSubMenu);
+
+  //   if (subSubCategories.slug === subSlug) {
+  //     const subSubCategoryItem = document.getElementById(
+  //       `subSubCategoryItem ${indx}`
+  //     );
+
+  //     const subSubMenu = document.querySelector(".subSubMenu");
+  //     subSubCategoryItem.append(subSubMenu);
+  //   }
+
+  //   if (subSubCategories) {
+  //     const subSubMenu = document.querySelector(".subSubMenu");
+  //     subSubMenu.classList.toggle("subSubMenuActive");
+  //   }
+  // };
+
+  const [expandedCategories, setExpandedCategories] = useState([]);
+  const sidebarToggleExpand = (categoryIndex) => {
+    setExpandedCategories(
+      expandedCategories.includes(categoryIndex)
+        ? expandedCategories.filter((index) => index !== categoryIndex)
+        : [...expandedCategories, categoryIndex]
+    );
+
+    if (categoryIndex ) {
       const subMenu = document.querySelector(".subMenu");
-      const chevronRight = document.querySelector(".chevronRight");
-
+      const subSubMenu = document.querySelector(".subSubMenu");
       subMenu.classList.toggle("subMenuActive");
-      chevronRight.classList.toggle("arrowToggle");
-    }
-  };
-
-  const [subSubCategoryList, setSubSubCategoryList] = useState([]);
-  const subSubCategoryViewHandler = (subSlug, indx) => {
-    setSubCategorySlugName(subSlug);
-
-    const subCategories = allCategory.find(
-      (item) => item.slug === categorySlugName
-    );
-    const subSubCategories = subCategories?.childes.find(
-      (item) => item.slug === subSlug
-    );
-    setSubSubCategoryList(subSubCategories);
-
-    // const subSubCategoryItem = document.getElementById(
-    //   `subSubCategoryItem ${indx}`
-    // );
-
-    // const subSubMenu = document.querySelector(".subSubMenu");
-    // subSubCategoryItem.append(subSubMenu);
-
-    if (subSubCategories.slug === subSlug) {
-      const subSubCategoryItem = document.getElementById(
-        `subSubCategoryItem ${indx}`
-      );
-
-      const subSubMenu = document.querySelector(".subSubMenu");
-      subSubCategoryItem.append(subSubMenu);
-    }
-
-    if (subSubCategories) {
-      const subSubMenu = document.querySelector(".subSubMenu");
       subSubMenu.classList.toggle("subSubMenuActive");
     }
   };
@@ -75,40 +91,89 @@ const Sidebar = () => {
     <>
       <div className="sidebar-toggle-section">
         <input type="checkbox" name="" id="openSidebarMenu" />
-        {/* <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
-          <div className="spinner top"></div>
-          <div className="spinner middle"></div>
-          <div className="spinner bottom"></div>
-        </label> */}
         <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
           <i className="bi bi-list"></i>
         </label>
         <div id="sidebarMenu">
           <ul className="menu">
-            {/* <li className="homeIcon">
-              <Link to="/">
-                <div>
-                  <i className="bi bi-house-door-fill"></i>
-                  Home
-                </div>
-              </Link>
-            </li>
-            <div className="homeIcon">
-            <Link to="/">
-              <li className="homeIcon">
-                <i className="bi bi-house-door-fill"></i>
-              </li>
-            </Link>
-            </div> */}
-
             <Link to="/">
               <li className="homeIcon">
                 <i className="bi bi-house-door-fill"></i>
               </li>
             </Link>
             <hr />
+            {allCategory?.map((categoryItem, categoryIndex) => {
+              return (
+                <ul key={categoryIndex} className="categoryMenu">
+                  <li onClick={() => sidebarToggleExpand(categoryIndex)}>
+                    <Link to={`/${categoryItem?.slug}`}>
+                      <div>
+                        <img
+                          width="15"
+                          className="sidebar-Icon"
+                          src={categoryBaseUrl + `/${categoryItem.icon}`}
+                          alt=""
+                        />
+                        {categoryItem?.name}
+                      </div>
+                      <span>
+                        <i className="bi bi-chevron-right chevronRight"></i>
+                      </span>
+                    </Link>
+                  </li>
+                  {expandedCategories?.includes(categoryIndex) && (
+                    <div>
+                      {categoryItem?.childes?.map(
+                        (subcategory, subcategoryIndex) => {
+                          return (
+                            <ul
+                              key={subcategoryIndex}
+                              className="subMenu"
+                              id={`subSubCategoryItem ${subcategoryIndex}`}
+                            >
+                              <li
+                                onClick={() =>
+                                  sidebarToggleExpand(
+                                    categoryIndex + "-" + subcategoryIndex
+                                  )
+                                }
+                              >
+                                <Link
+                                  to={`/${categoryItem?.slug}/${subcategory?.slug}`}
+                                >
+                                  {subcategory?.name}
+                                </Link>
+                              </li>
+                              {expandedCategories?.includes(
+                                categoryIndex + "-" + subcategoryIndex
+                              ) && (
+                                <ul className="subSubMenu">
+                                  {subcategory?.childes?.map(
+                                    (subsubcategory, subsubcategoryIndex) => {
+                                      return (
+                                        <li key={subsubcategoryIndex}>
+                                          <Link
+                                            to={`/${categoryItem?.slug}/${subcategory?.slug}/${subsubcategory?.slug}`}
+                                          >
+                                            {subsubcategory?.name}
+                                          </Link>
+                                        </li>
+                                      );
+                                    }
+                                  )}
+                                </ul>
+                              )}
+                            </ul>
+                          );
+                        }
+                      )}
+                    </div>
+                  )}
+                </ul>
+              );
+            })}
 
-            {allCategory?.map((categoryItem, index) => (
+            {/* {allCategory?.map((categoryItem, index) => (
               <li
                 key={index}
                 id={`categoryItem ${index}`}
@@ -130,7 +195,7 @@ const Sidebar = () => {
                   </span>
                 </Link>
               </li>
-            ))}
+            ))} */}
 
             {/* <ul className=" subMenu">
               {subCategory?.map((item, indx) => (
@@ -155,7 +220,7 @@ const Sidebar = () => {
               ))}
             </ul> */}
 
-            <ul className=" subMenu">
+            {/* <ul className=" subMenu">
               {subCategory?.map((item, indx) => (
                 <li
                   key={indx}
@@ -178,8 +243,43 @@ const Sidebar = () => {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </ul>
+
+          {/* <div> */}
+          {/* {allCategory?.map((category, categoryIndex) => {
+        return(
+        <div key={categoryIndex}>
+          <li onClick={() => toggleExpand(categoryIndex)}>
+            {category.name}
+          </li>
+          {expandedCategories?.includes(categoryIndex) && (
+            <div>
+              {category?.childes?.map((subcategory, subcategoryIndex) => {
+                return(
+                <div key={subcategoryIndex}>
+                  <li onClick={() => toggleExpand(categoryIndex + "-" + subcategoryIndex)}>
+                    {subcategory.name}
+                  </li>
+                  {expandedCategories?.includes(categoryIndex + "-" + subcategoryIndex) && (
+                    <ul>
+                      {subcategory?.childes?.map((subsubcategory, subsubcategoryIndex) => {
+                        console.log(subsubcategory.name)
+                        return(
+                        <li key={subsubcategoryIndex}>{subsubcategory.name}</li>
+                      )
+                      })}
+                    </ul>
+                  )}
+                </div>
+              )
+              })}
+            </div>
+          )}
+        </div>
+      )
+      })} */}
+          {/* </div> */}
         </div>
       </div>
     </>
