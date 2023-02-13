@@ -85,12 +85,12 @@ const CartDetailsView = () => {
                 </div>
                 <div className="cart-content">
                   {item?.product?.discount > 0 ? (
-                    <div>
+                    <div className="d-flex justify-content-center align-items-center">
                       <span>
                         {" "}
                         ৳{item?.product?.unit_price - item?.product?.discount}
                       </span>{" "}
-                      <del className="text-danger">
+                      <del className="text-danger ms-1">
                         ৳{item?.product?.unit_price}
                       </del>
                     </div>
