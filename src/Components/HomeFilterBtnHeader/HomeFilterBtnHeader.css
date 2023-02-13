@@ -96,6 +96,8 @@ hr:not([size]) {
     margin: 5px 10px;
     font-size: 12px;
   }
+
+  
 }
 @media only screen and (max-width: 576px) {
   .homeFilterBtnHeader-container-section {
@@ -115,6 +117,23 @@ hr:not([size]) {
     justify-content: center;
     align-items: center;
   }
+
+  .header_btn button {
+    width: 140px;
+    height: 42px;
+    margin: 5px ;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 500px) {
+ 
+
+  .header_btn button {
+    width: 140px;
+    height: 42px;
+    margin: 5px ;
+    font-size: 12px;
+  }
 }
 @media only screen and (max-width: 450px) {
   .homeFilterBtnHeader-container-section {
@@ -133,5 +152,29 @@ hr:not([size]) {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
+  }
+  .header_btn button {
+    width: 150px;
+    height: 42px;
+    margin: 5px ;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 350px) {
+ 
+  .header_btn button {
+    width: 140px;
+    height: 42px;
+    margin: 5px;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 320px) {
+ 
+  .header_btn button {
+    width: 130px;
+    height: 42px;
+    margin: 5px;
+    font-size: 12px;
   }
 }
