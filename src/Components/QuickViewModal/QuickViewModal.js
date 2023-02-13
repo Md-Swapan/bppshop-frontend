@@ -24,8 +24,6 @@ const QuickViewModal = ({ pid }) => {
     if (stock <= quantity) {
       return;
     }
-
-    console.log(id, newQty);
     dispatch(addItemsToCart(id, newQty));
   };
 
@@ -36,8 +34,6 @@ const QuickViewModal = ({ pid }) => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
-
-  console.log(productDetail);
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
 
