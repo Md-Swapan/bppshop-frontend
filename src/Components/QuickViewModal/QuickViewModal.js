@@ -359,11 +359,11 @@ const QuickViewModal = ({ pid }) => {
                     )}
                   </div>
                 </div>
-                <div className="about-div" style={{ margin: "10px 0px" }}>
+                <div className="about-div" style={{ margin: "10px 0px", height: "200px", overflow: "scroll" }}>
                   <h5>Description</h5>
-                  {/* <span
+                  <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
-                  ></span> */}
+                  ></span>
                 </div>
               </div>
 
