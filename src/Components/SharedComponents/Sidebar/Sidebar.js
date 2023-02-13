@@ -10,6 +10,9 @@ const Sidebar = () => {
   // const [categorySlugName, setCategorySlugName] = useState([]);
   // const [subCategorySlugName, setSubCategorySlugName] = useState([]);
 
+
+  // console.log(subCategory);
+
   useEffect(() => {
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res?.data?.data);
