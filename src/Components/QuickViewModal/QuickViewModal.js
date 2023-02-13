@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg";
+import SliderImage from 'react-zoom-slider';
+
+
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -95,6 +98,9 @@ const QuickViewModal = ({ pid }) => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
+  const img = productDetail?.images?.map((img, index) => img)
+ 
+
   return (
     <>
       <div className="modal-container">
@@ -103,20 +109,20 @@ const QuickViewModal = ({ pid }) => {
             <div className="col-sm-5">
               <div className="imageView">
                 <div className="detailImgCarousel">
-                  {/* <Zoom
-                  img={imgBaseUrl+`/${productDetail?.images}`}
-                  zoomScale={3}
-                  width={300}
-                  height={400}
-                /> */}
+                <SliderImage 
+                  data={img} 
+                  width="500px" 
+                  showDescription={true} 
+                  direction="right" 
+                />
+                
+              
                   {/* <img
-                    src={proimg}
+                    src={imgBaseUrl + `/${img}`}
                     alt="img"
                   /> */}
-                  <img
-                    src={imgBaseUrl + `/${productDetail?.images}`}
-                    alt="img"
-                  />
+
+                  
                 </div>
               </div>
 
@@ -143,7 +149,10 @@ const QuickViewModal = ({ pid }) => {
                   {productDetail.discount ? (
                     <h5 className="prices">
                       ৳{productDetail.unit_price - productDetail.discount}{" "}
-                      <del className="text-danger"> ৳{productDetail.unit_price}</del>
+                      <del className="text-danger">
+                        {" "}
+                        ৳{productDetail.unit_price}
+                      </del>
                     </h5>
                   ) : (
                     <h5 className="prices">৳{productDetail.unit_price}</h5>
@@ -289,36 +298,38 @@ const QuickViewModal = ({ pid }) => {
                     </div>
                   </div>
                   <div className="totalPrice">
-                    {isItemExist?.quantity ?
+                    {isItemExist?.quantity ? (
                       <h5>
-                       {productDetail?.discount > 0 ? (
-                      <span className="mx-2 text-end">
-                        ৳{isItemExist?.quantity *
-                          (productDetail?.unit_price - productDetail?.discount)}
-                      </span>
-                    ) : (
-                      <span className="mx-2 text-end">
-                        ৳{isItemExist?.quantity * productDetail?.unit_price}
-                      </span>
-                    )}
+                        {productDetail?.discount > 0 ? (
+                          <span className="mx-2 text-end">
+                            ৳
+                            {isItemExist?.quantity *
+                              (productDetail?.unit_price -
+                                productDetail?.discount)}
+                          </span>
+                        ) : (
+                          <span className="mx-2 text-end">
+                            ৳{isItemExist?.quantity * productDetail?.unit_price}
+                          </span>
+                        )}
                       </h5>
-                      :
+                    ) : (
                       <h5>
-                      Total Price: ৳{" "}
-                      {variantPrice
-                        ? variantPrice * quantityCount
-                        : quantityCount *
-                          (productDetail?.unit_price - productDetail?.discount)}
-                    </h5>}
-
-                    
+                        Total Price: ৳{" "}
+                        {variantPrice
+                          ? variantPrice * quantityCount
+                          : quantityCount *
+                            (productDetail?.unit_price -
+                              productDetail?.discount)}
+                      </h5>
+                    )}
                   </div>
                 </div>
                 <div className="about-div" style={{ margin: "10px 0px" }}>
                   <h5>Description</h5>
-                  <span
+                  {/* <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
-                  ></span>
+                  ></span> */}
                 </div>
               </div>
 

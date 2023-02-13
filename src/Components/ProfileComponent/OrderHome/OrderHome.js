@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./OrderHome.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadUserOrderCancelRequest } from "../../../Redux/Actions/UserOrderAction";
+import store from './../../../Redux/Store';
+import { loadUserOrders } from './../../../Redux/Actions/UserOrderAction';
 
 const OrderHome = () => {
+  useEffect(() => {
+    store.dispatch(loadUserOrders());
+  }, []);
+
   const { userOrders } = useSelector((state) => state?.userOrders);
   const dispatch = useDispatch();
 

@@ -9,26 +9,26 @@ const Profile = () => {
         <div className="row">
           <div className="col-md-3 col-sm-12">
             <div className="profile_left_container m-2">
-              <div className="sidebar_left">
-                <Link to="/profile">Profile info</Link>
-              </div>
-              <div className="sidebar_left">
-                <Link to="/profile/orders"> My order</Link>
-              </div>
+              <Link to="/profile">
+                <div className="sidebar_left">Profile info</div>
+              </Link>
+              <Link to="/profile/orders">
+                <div className="sidebar_left">My order</div>
+              </Link>
               {/* <div className="sidebar_left">
                 <Link to="/profile/track-order"> Track your order</Link>
               </div> */}
-              <div className="sidebar_left">
-                <Link to="/profile/account-address"> Address</Link>
-              </div>
+              <Link to="/profile/account-address">
+                <div className="sidebar_left">Address</div>
+              </Link>
             </div>
           </div>
           <div className="col-md-9 col-sm-12">
-          <div className="profile_right_container m-2">
-            <Outlet></Outlet>
+            <div className="profile_right_container m-2">
+              <Outlet></Outlet>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );
