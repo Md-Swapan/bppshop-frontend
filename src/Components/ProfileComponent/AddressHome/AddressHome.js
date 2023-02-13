@@ -15,9 +15,8 @@ const AddressHome = () => {
   });
 
   const shipping_address_data = userOrders?.map(
-    (order) => order.shipping_address_data
+    (order) => order?.shipping_address_data
   );
-  console.log(shipping_address_data);
 
   return (
     <div>
@@ -33,7 +32,7 @@ const AddressHome = () => {
       </div>
       <div className="address_card_container">
         {shipping_address_data?.map((sippingAdd) => (
-          <div key={sippingAdd?.id} className="arrdess_card">
+          <div key={sippingAdd?.id} className="address_card">
             <div className="address_card_header">
               <div className="d-flex">
                 <div className="address_card_header_pin">
