@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg";
-import SliderImage from 'react-zoom-slider';
-
-
+import SliderImage from "react-zoom-slider";
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -98,8 +96,45 @@ const QuickViewModal = ({ pid }) => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
-  const img = productDetail?.images?.map((img, index) => img)
- 
+  // let data = [
+  //   {
+  //     image:
+  //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a58ee.png",
+  //   },
+  //   {
+  //     image:
+  //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a640f.png",
+  //   },
+  // ];
+
+  // productDetail?.images?.map((imgProduct) => {
+  //   data.push({
+  //     image: `${imgBaseUrl}/${imgProduct}`,
+  //   });
+  // });
+
+  // if(data.length === 0){
+  //   data.push({
+  //     image : ``,
+  //   })
+  // }
+
+  // const data = productDetail?.images?.map((img) => {
+  //   if (productDetail?.images?.length > 0) {
+  //     return { image: `${imgBaseUrl}/${img}` };
+  //   }
+  //   else{
+  //     return { image: `` };
+  //   }
+  // });
+  // console.log(data);
+
+  const img = productDetail?.images?.map((img) => img )
+  const data = [
+    {
+      image: `${imgBaseUrl}/${img}`
+    }
+  ]
 
   return (
     <>
@@ -107,26 +142,25 @@ const QuickViewModal = ({ pid }) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
-              <div className="imageView">
-                <div className="detailImgCarousel">
-                <SliderImage 
-                  data={img} 
-                  width="500px" 
-                  showDescription={true} 
-                  direction="right" 
-                />
-                
-              
-                  {/* <img
+              {/* <div className="imageView"> */}
+              {/* <div className="detailImgCarousel"> */}
+              <SliderImage
+                data={data}
+                width="375px"
+                height="100%"
+                showDescription={true}
+                direction="right"
+              />
+
+              {/* <img
                     src={imgBaseUrl + `/${img}`}
                     alt="img"
                   /> */}
 
-                  
-                </div>
-              </div>
+              {/* </div> */}
+              {/* </div> */}
 
-              <div className=" img-carousel-item">
+              {/* <div className=" img-carousel-item">
                 {productDetail?.images?.map((img, index) => (
                   <img
                     key={index}
@@ -135,7 +169,7 @@ const QuickViewModal = ({ pid }) => {
                     alt="img"
                   />
                 ))}
-              </div>
+              </div> */}
             </div>
             <div className="col-sm-7">
               <div className="detail-content-view">
