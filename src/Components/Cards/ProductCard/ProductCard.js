@@ -109,7 +109,7 @@ const ProductCard = ({ product }) => {
                   <div className="product-card-body-content-unit-price">
                     <span>
                       {choice_options?.map((list) => (
-                        <>{list?.title} : </>
+                        <>{list?.title} :  {list?.options[0]} </>
                       ))}
                     </span>
                     <br />
@@ -177,7 +177,7 @@ const ProductCard = ({ product }) => {
                   <div className="product-card-body-content-unit-price">
                     <span>
                       {choice_options?.map((list) => (
-                        <>{list?.title} : </>
+                        <>{list?.title} : {list?.options[0]}</>
                       ))}
                     </span>
                     <br />

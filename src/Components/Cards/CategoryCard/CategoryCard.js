@@ -21,7 +21,7 @@ const CategoryCard = ({ category }) => {
         className="category_card_content"
       >
         <div className="card">
-          <div className="card-body">
+          <div className="category_card-body">
             {/* {img ? ( */}
               <img src={categoryBaseUrl + `/${thumb}`} className="card-img-top" alt="" />
             {/* ) : (

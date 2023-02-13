@@ -5,17 +5,39 @@ import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
-import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg"
+import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg";
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
 
-
   const cartItems = useSelector((state) => state.cart.cartItems);
+  // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === pid);
+
+  const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
+
+  const increaseQuantity = (id, quantity, stock) => {
+    const newQty = quantity + 1;
+    if (stock <= quantity) {
+      return;
+    }
+
+    console.log(id, newQty);
+    dispatch(addItemsToCart(id, newQty));
+  };
+
+  const decreaseQuantity = (id, quantity) => {
+    const newQty = quantity - 1;
+    if (1 >= quantity) {
+      return;
+    }
+    dispatch(addItemsToCart(id, newQty));
+  };
+
+  console.log(productDetail);
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
 
@@ -122,7 +144,15 @@ const QuickViewModal = ({ pid }) => {
                   </span>
                 </div>
                 <div className="price_Stock_Code">
-                  <h4 className="prices">৳{productDetail.unit_price}</h4>
+                  {productDetail.discount ? (
+                    <h5 className="prices">
+                      ৳{productDetail.unit_price - productDetail.discount}{" "}
+                      <del className="text-danger"> ৳{productDetail.unit_price}</del>
+                    </h5>
+                  ) : (
+                    <h5 className="prices">৳{productDetail.unit_price}</h5>
+                  )}
+
                   <p>
                     Product Code: <strong>{productDetail.code}</strong>
                     <span>
@@ -200,42 +230,92 @@ const QuickViewModal = ({ pid }) => {
                   <div className="d-flex">
                     <h4>Quantity: </h4>
                     <div className="quantity">
-                      <span
-                        onClick={
-                          () =>
+                      {isItemExist?.quantity ? (
+                        <span
+                          onClick={() =>
+                            decreaseQuantity(
+                              productDetail,
+                              isItemExist?.quantity
+                            )
+                          }
+                          className="minusBtn"
+                        >
+                          -
+                        </span>
+                      ) : (
+                        <span
+                          onClick={
+                            () =>
+                              setQuantityCount(
+                                quantityCount > 1
+                                  ? quantityCount - 1
+                                  : quantityCount
+                              )
+                            // priceVariantHandlerByQty()
+                          }
+                          className="minus"
+                        >
+                          -
+                        </span>
+                      )}
+                      <span className="count-number">
+                        {isItemExist?.quantity
+                          ? isItemExist?.quantity
+                          : quantityCount}
+                      </span>
+                      {isItemExist?.quantity ? (
+                        <span
+                          onClick={() =>
+                            increaseQuantity(
+                              productDetail,
+                              isItemExist?.quantity,
+                              productDetail.current_stock
+                            )
+                          }
+                          className="plusBtn"
+                        >
+                          +
+                        </span>
+                      ) : (
+                        <span
+                          onClick={() =>
                             setQuantityCount(
-                              quantityCount > 1
-                                ? quantityCount - 1
+                              productDetail.current_stock > quantityCount
+                                ? quantityCount + 1
                                 : quantityCount
                             )
-                          // priceVariantHandlerByQty()
-                        }
-                        className="minus"
-                      >
-                        -
-                      </span>
-                      <span className="count-number">{quantityCount}</span>
-                      <span
-                        onClick={() =>
-                          setQuantityCount(
-                            productDetail.current_stock > quantityCount
-                              ? quantityCount + 1
-                              : quantityCount
-                          )
-                        }
-                        className="plus"
-                      >
-                        +
-                      </span>
+                          }
+                          className="plus"
+                        >
+                          +
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="totalPrice">
-                    <h5>
+                    {isItemExist?.quantity ?
+                      <h5>
+                       {productDetail?.discount > 0 ? (
+                      <span className="mx-2 text-end">
+                        ৳{isItemExist?.quantity *
+                          (productDetail?.unit_price - productDetail?.discount)}
+                      </span>
+                    ) : (
+                      <span className="mx-2 text-end">
+                        ৳{isItemExist?.quantity * productDetail?.unit_price}
+                      </span>
+                    )}
+                      </h5>
+                      :
+                      <h5>
                       Total Price: ৳{" "}
                       {variantPrice
                         ? variantPrice * quantityCount
-                        : quantityCount * productDetail?.unit_price}
-                    </h5>
+                        : quantityCount *
+                          (productDetail?.unit_price - productDetail?.discount)}
+                    </h5>}
+
+                    
                   </div>
                 </div>
                 <div className="about-div" style={{ margin: "10px 0px" }}>
@@ -247,22 +327,22 @@ const QuickViewModal = ({ pid }) => {
               </div>
 
               {/* <div className="col-md-8"> */}
-                <div className="my-4">
-                  {addedItemId ? (
-                    <button disabled className="btn_after_added_cart">
-                      <i className="bi bi-cart-plus"></i> Added to Cart
-                    </button>
-                  ) : (
-                    <button
-                      className="btn_before_add_cart"
-                      onClick={() =>
-                        dispatch(addItemsToCart(productDetail, quantityCount))
-                      }
-                    >
-                      <i className="bi bi-cart-plus"></i> Add To Cart
-                    </button>
-                  )}
-                </div>
+              <div className="my-4">
+                {addedItemId ? (
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Added to Cart
+                  </button>
+                ) : (
+                  <button
+                    className="btn_before_add_cart"
+                    onClick={() =>
+                      dispatch(addItemsToCart(productDetail, quantityCount))
+                    }
+                  >
+                    <i className="bi bi-cart-plus"></i> Add To Cart
+                  </button>
+                )}
+              </div>
               {/* </div> */}
             </div>
           </div>
