@@ -37,8 +37,6 @@ const QuickViewModal = ({ pid }) => {
     dispatch(addItemsToCart(id, newQty));
   };
 
-  console.log(productDetail);
-
   const { priceVariant } = useSelector((state) => state?.priceVariant);
 
   const variantPrice = priceVariant?.data?.price;
@@ -65,13 +63,13 @@ const QuickViewModal = ({ pid }) => {
     const priceVariantData = {
       product_id: `${pid}`,
       choice_19: `${option}`,
-      color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
     option
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultOptionData));
   };
+
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${pid}`,
