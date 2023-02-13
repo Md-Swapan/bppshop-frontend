@@ -8,7 +8,7 @@ const AddressHome = () => {
     return state?.userOrders?.userOrders;
   });
 
-  const shipping_address_data = userOrders?.map(order => order.shipping_address_data);
+  const shipping_address_data = userOrders?.map(order => order?.shipping_address_data);
   console.log(shipping_address_data);
 
   return (
