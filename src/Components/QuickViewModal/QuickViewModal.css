@@ -3,7 +3,7 @@
   font-family: "Montserrat", sans-serif;
   color: #303030;
 }
-.imageView {
+.imageView SliderImage{
   width: 375px;
   height: 375px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
@@ -12,7 +12,6 @@
 }
 .imageView img {
   width: 100%;
-  height: 100% !important;
 }
 .productName_wishlist,
 .pc-size-color,
@@ -116,7 +115,7 @@
   height: 60px;
 }
 
-/* .react-slider__ul li {
+.react-slider__ul li {
   position: relative;
   width: 70px;
   cursor: pointer;
@@ -124,4 +123,28 @@
   list-style: none;
   margin: 1%;
   flex: 0 0 14%;
-} */
+}
+.react-slider__imgZoom {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(20px);
+  width: 500px;
+  height: 400px;
+  background-repeat: no-repeat;
+  border: thin solid #ccc;
+  opacity: 0;
+  z-index: -9999;
+  transition: opacity .3s ease-in-out;
+}
+
+.react-slider__lens {
+  position: absolute;
+  z-index: 0 !important;
+  border: 0px solid #d4d4d4;
+  width: 100px !important;
+  height: 100px !important;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}

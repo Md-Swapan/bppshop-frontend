@@ -5,17 +5,8 @@ import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
-import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg";
 import SliderImage from "react-zoom-slider";
 
-// import { Carousel } from 'react-responsive-carousel';
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import Zoom from 'react-medium-image-zoom'
-// import 'react-medium-image-zoom/dist/styles.css'
-
-import Grid from "@mui/material/Grid";
-// import ImageCarouselZoom"./components/ImageCarouselZoom";
-import { Container } from "@mui/material";
 
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -51,7 +42,7 @@ const QuickViewModal = ({ pid }) => {
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
-      setProductDetail(res.data.data);
+      setProductDetail(res?.data?.data);
     });
   }, [pid]);
 
@@ -105,36 +96,26 @@ const QuickViewModal = ({ pid }) => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
+  const newData = productDetail?.images?.map((img) => ({
+    image: imgBaseUrl + `/` + img,
+  }));
+
   return (
     <>
       <div className="modal-container">
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
-              {/* <div className="imageView">
-                <div className="detailImgCarousel"> */}
-              {/* <SliderImage
-                data={data}
-                width="380px"
-                // height="100px"
-                showDescription={true}
-                direction="right"
-              /> */}
-
-              {/* <img src={imgBaseUrl + `/${img}`} alt="img" /> */}
-              {/* </div> */}
-              {/* </div> */}
-
-              {/* <div className=" img-carousel-item">
-                {productDetail?.images?.map((img, index) => (
-                  <img
-                    key={index}
-                    width={70}
-                    src={imgBaseUrl + `/${img}`}
-                    alt="img"
-                  />
-                ))}
-              </div> */}
+              <div className="imageView">
+              {newData?.length > 0 && (
+                <SliderImage
+                  data={newData}
+                  width="375px"
+                  showDescription={true}
+                  direction="right"
+                />
+              )}
+              </div>
             </div>
             <div className="col-sm-7">
               <div className="detail-content-view">
@@ -171,8 +152,6 @@ const QuickViewModal = ({ pid }) => {
                   </p>
                 </div>
                 <div className="pc-size-color">
-                  {/* <h5>Pc: {productDetail.current_stock}</h5> */}
-
                   <div
                     className={
                       productDetail?.choice_options?.length < 1
@@ -339,24 +318,24 @@ const QuickViewModal = ({ pid }) => {
                 </div>
               </div>
 
-              {/* <div className="col-md-8"> */}
-              <div className="my-4">
-                {addedItemId ? (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
-                  </button>
-                ) : (
-                  <button
-                    className="btn_before_add_cart"
-                    onClick={() =>
-                      dispatch(addItemsToCart(productDetail, quantityCount))
-                    }
-                  >
-                    <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
-                )}
+              <div className="col-md-8">
+                <div className="my-4">
+                  {addedItemId ? (
+                    <button disabled className="btn_after_added_cart">
+                      <i className="bi bi-cart-plus"></i> Added to Cart
+                    </button>
+                  ) : (
+                    <button
+                      className="btn_before_add_cart"
+                      onClick={() =>
+                        dispatch(addItemsToCart(productDetail, quantityCount))
+                      }
+                    >
+                      <i className="bi bi-cart-plus"></i> Add To Cart
+                    </button>
+                  )}
+                </div>
               </div>
-              {/* </div> */}
             </div>
           </div>
            
