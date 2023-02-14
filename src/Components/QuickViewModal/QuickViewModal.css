@@ -97,28 +97,25 @@
   color: #ef8341;
 }
 
-
-.img-carousel-item img{
-  margin: 10px 7px 0px 0px;
-  border: .2px solid gainsboro;
-}
-
-.about-div{
+.product_description{
   font-size: 14px;
   font-weight: 500;
 }
 
-.react-slider__ul {
-  display: flex;
-  flex-flow: row wrap;
-  margin: 20px 0px 0px 0px;
-  justify-content: flex-start;
-  height: 60px;
+.react-slider__lens {
+  position: absolute;
+  z-index: 0;
+  border: 1px solid #d4d4d4;
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
 }
-
 .react-slider__ul li {
   position: relative;
   width: 70px;
+  height: 60px;
   cursor: pointer;
   padding: 0;
   list-style: none;
@@ -130,8 +127,8 @@
   top: 0;
   left: 100%;
   transform: translateX(20px);
-  width: 580px;
-  height: 500px;
+  width: 445px;
+  height: 394px;
   background-repeat: no-repeat;
   border: thin solid #ccc;
   opacity: 0;
