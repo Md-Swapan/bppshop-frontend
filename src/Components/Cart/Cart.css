@@ -24,7 +24,34 @@
 .itemsForResScreen {
   display: none;
 }
-
+@media only screen and (max-width: 1600px) {
+  .cart {
+    margin-left: 92%;
+    bottom: 380px;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .cart {
+    margin-left: 92%;
+    bottom: 380px;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .cart {
+    margin-left: 92%;
+    bottom: 380px;
+  }
+}
+@media only screen and (max-width: 1340px) {
+  .cart {
+    margin-left: 91%;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .cart {
+    margin-left: 90%;
+  }
+}
 @media only screen and (max-width: 768px) {
   .cart {
     bottom: 0px;

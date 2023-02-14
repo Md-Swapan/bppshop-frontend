@@ -96,13 +96,7 @@
   color: #ef8341;
 }
 
-
-.img-carousel-item img{
-  margin: 10px 7px 0px 0px;
-  border: .2px solid gainsboro;
-}
-
-.about-div{
+.product_description{
   font-size: 14px;
   font-weight: 500;
 }

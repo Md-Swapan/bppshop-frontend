@@ -7,7 +7,6 @@ import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import SliderImage from "react-zoom-slider";
 
-
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
@@ -107,14 +106,14 @@ const QuickViewModal = ({ pid }) => {
           <div className="row">
             <div className="col-sm-5">
               <div className="imageView">
-              {newData?.length > 0 && (
-                <SliderImage
-                  data={newData}
-                  width="375px"
-                  showDescription={true}
-                  direction="right"
-                />
-              )}
+                {newData?.length && (
+                  <SliderImage
+                    data={newData}
+                    width="375px"
+                    showDescription={true}
+                    direction="right"
+                  />
+                )}
               </div>
             </div>
             <div className="col-sm-7">
@@ -304,7 +303,7 @@ const QuickViewModal = ({ pid }) => {
                   </div>
                 </div>
                 <div
-                  className="about-div"
+                  className="product_description"
                   style={{
                     margin: "10px 0px",
                     height: "160px",
@@ -338,7 +337,6 @@ const QuickViewModal = ({ pid }) => {
               </div>
             </div>
           </div>
-           
         </div>
       </div>
     </>
