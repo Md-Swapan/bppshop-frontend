@@ -95,18 +95,6 @@ const QuickViewModal = ({ pid }) => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
-  // let data = [
-  //   {
-  //     image:
-  //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a58ee.png",
-  //   },
-  //   {
-  //     image:
-  //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a640f.png",
-  //   },
-  // ];
-  // console.log(data, "108 line");
-
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
   }));
@@ -126,32 +114,6 @@ const QuickViewModal = ({ pid }) => {
                 direction="right"
               />
               }
-              {/* <SliderImage
-                data={newData}
-                width="375px"
-                height="100%"
-                showDescription={true}
-                direction="right"
-              /> */}
-
-              {/* <img
-                    src={imgBaseUrl + `/${img}`}
-                    alt="img"
-                  /> */}
-
-              {/* </div> */}
-              {/* </div> */}
-
-              {/* <div className=" img-carousel-item">
-                {productDetail?.images?.map((img, index) => (
-                  <img
-                    key={index}
-                    width={70}
-                    src={imgBaseUrl + `/${img}`}
-                    alt="img"
-                  />
-                ))}
-              </div> */}
             </div>
             <div className="col-sm-7">
               <div className="detail-content-view">
@@ -188,7 +150,6 @@ const QuickViewModal = ({ pid }) => {
                   </p>
                 </div>
                 <div className="pc-size-color">
-                  {/* <h5>Pc: {productDetail.current_stock}</h5> */}
 
                   <div
                     className={
@@ -349,7 +310,7 @@ const QuickViewModal = ({ pid }) => {
                 </div>
               </div>
 
-              {/* <div className="col-md-8"> */}
+              <div className="col-md-8">
               <div className="my-4">
                 {addedItemId ? (
                   <button disabled className="btn_after_added_cart">
@@ -366,39 +327,10 @@ const QuickViewModal = ({ pid }) => {
                   </button>
                 )}
               </div>
-              {/* </div> */}
+              </div>
             </div>
           </div>
-          <div className="row">
-            {/* <div className="col-md-4 img-carousel-item">
-              {productDetail?.images?.map((img, index) => (
-                <img
-                  key={index}
-                  width={70}
-                  src={imgBaseUrl + `/${img}`}
-                  alt="img"
-                />
-              ))}
-            </div> */}
-            {/* <div className="col-md-8">
-              <div className="my-4">
-                {addedItemId ? (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
-                  </button>
-                ) : (
-                  <button
-                    className="btn_before_add_cart"
-                    onClick={() =>
-                      dispatch(addItemsToCart(productDetail, quantityCount))
-                    }
-                  >
-                    <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
-                )}
-              </div>
-            </div> */}
-          </div>
+       
         </div>
       </div>
     </>
