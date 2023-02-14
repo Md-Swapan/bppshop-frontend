@@ -5,7 +5,7 @@
 }
 .imageView SliderImage{
   width: 375px;
-  height: 375px;
+  height: 375px !important;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     overflow: hidden;
@@ -110,7 +110,7 @@
 .react-slider__ul {
   display: flex;
   flex-flow: row wrap;
-  margin: 20px 0px 0px 0px;
+  margin: 10px 0px 0px -32px !important;
   justify-content: flex-start;
   height: 60px;
 }
@@ -121,7 +121,7 @@
   cursor: pointer;
   padding: 0;
   list-style: none;
-  margin: 1%;
+  margin: 0% 10px 0px 0px !important;
   flex: 0 0 14%;
 }
 .react-slider__imgZoom {
@@ -142,9 +142,17 @@
   position: absolute;
   z-index: 0 !important;
   border: 0px solid #d4d4d4;
-  width: 100px !important;
-  height: 100px !important;
+  width: 100px ;
+  height: 100px;
   background-color: #fff;
   opacity: 0;
   transition: opacity .3s ease-in-out;
+}
+
+.react-slider__ul li.active img {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid rgb(189, 189, 189) !important;
 }
