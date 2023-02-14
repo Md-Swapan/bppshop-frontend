@@ -17,6 +17,7 @@ Modal.setAppElement("#root");
 
 const customStyles = {
   content: {
+    width: "1050px",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -87,6 +88,9 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  // document.querySelector(".product-card").addEventListener("onMouseOver", () => {
+  //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
+  // })
   return (
     <>
       <div className="product_card_content">
@@ -109,7 +113,9 @@ const ProductCard = ({ product }) => {
                   <div className="product-card-body-content-unit-price">
                     <span>
                       {choice_options?.map((list) => (
-                        <>{list?.title} :  {list?.options[0]} </>
+                        <>
+                          {list?.title} : {list?.options[0]}{" "}
+                        </>
                       ))}
                     </span>
                     <br />
@@ -134,9 +140,9 @@ const ProductCard = ({ product }) => {
                     className="overlayAddToCartBtn"
                   >
                     {addedItemId ? (
-                      <h1 style={{ fontSize: "35px" }}>
+                      <span>
                         Added <br /> To <br /> Cart
-                      </h1>
+                      </span>
                     ) : (
                       <img src={addToCartImg} alt="" />
                     )}
@@ -150,16 +156,32 @@ const ProductCard = ({ product }) => {
               </div>
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
-                  </button>
+                  // <div className="cardFooterBtn">
+                    <button disabled className="btn_after_added_cart">
+                      <i className="bi bi-cart-plus"></i> Added to Cart
+                    </button>
+
+                  //   {/* <span onClick={() => productDetailsView(id)}>
+                  //     <button className="openModal" onClick={openModal}>
+                  //       <i className="bi bi-eye-fill"></i>{" "}
+                  //     </button>
+                  //   </span> */}
+                  // {/* </div> */}
                 ) : (
-                  <button
-                    className="btn_before_add_cart"
-                    onClick={() => addToCartHandler(product, quantity)}
-                  >
-                    <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
+                  // <div className="cardFooterBtn">
+                    <button
+                      className="btn_before_add_cart"
+                      onClick={() => addToCartHandler(product, quantity)}
+                    >
+                      <i className="bi bi-cart-plus"></i> Add To Cart
+                    </button>
+
+                    // <span onClick={() => productDetailsView(id)}>
+                    //   <button className="openModal" onClick={openModal}>
+                    //     <i className="bi bi-eye-fill"></i>{" "}
+                    //   </button>
+                    // </span>
+                  // </div>
                 )}
               </div>
             </div>
@@ -177,7 +199,9 @@ const ProductCard = ({ product }) => {
                   <div className="product-card-body-content-unit-price">
                     <span>
                       {choice_options?.map((list) => (
-                        <>{list?.title} : {list?.options[0]}</>
+                        <>
+                          {list?.title} : {list?.options[0]}
+                        </>
                       ))}
                     </span>
                     <br />
