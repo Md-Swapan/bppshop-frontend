@@ -8,6 +8,15 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg";
 import SliderImage from "react-zoom-slider";
 
+// import { Carousel } from 'react-responsive-carousel';
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import Zoom from 'react-medium-image-zoom'
+// import 'react-medium-image-zoom/dist/styles.css'
+
+import Grid from "@mui/material/Grid";
+// import ImageCarouselZoom"./components/ImageCarouselZoom";
+import { Container } from "@mui/material";
+
 const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
@@ -96,67 +105,23 @@ const QuickViewModal = ({ pid }) => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
-  // let data = [
-  //   {
-  //     image:
-  //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a58ee.png",
-  //   },
-  //   {
-  //     image:
-  //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a640f.png",
-  //   },
-  // ];
-
-  // productDetail?.images?.map((imgProduct) => {
-  //   data.push({
-  //     image: `${imgBaseUrl}/${imgProduct}`,
-  //   });
-  // });
-
-  // if(data.length === 0){
-  //   data.push({
-  //     image : ``,
-  //   })
-  // }
-
-  // const data = productDetail?.images?.map((img) => {
-  //   if (productDetail?.images?.length > 0) {
-  //     return { image: `${imgBaseUrl}/${img}` };
-  //   }
-  //   else{
-  //     return { image: `` };
-  //   }
-  // });
-  // console.log(data);
-
-  const img = productDetail?.images?.map((img) => img )
-  const data = [
-    {
-      image: `${imgBaseUrl}/${img}`
-    }
-  ]
-
   return (
     <>
       <div className="modal-container">
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
-              {/* <div className="imageView"> */}
-              {/* <div className="detailImgCarousel"> */}
-              <SliderImage
+              {/* <div className="imageView">
+                <div className="detailImgCarousel"> */}
+              {/* <SliderImage
                 data={data}
-                width="375px"
-                height="100%"
+                width="380px"
+                // height="100px"
                 showDescription={true}
                 direction="right"
-              />
+              /> */}
 
-              {/* <img
-                    src={imgBaseUrl + `/${img}`}
-                    alt="img"
-                  /> */}
-
+              {/* <img src={imgBaseUrl + `/${img}`} alt="img" /> */}
               {/* </div> */}
               {/* </div> */}
 
@@ -359,8 +324,15 @@ const QuickViewModal = ({ pid }) => {
                     )}
                   </div>
                 </div>
-                <div className="about-div" style={{ margin: "10px 0px", height: "200px", overflow: "scroll" }}>
-                  <h5>Description</h5>
+                <div
+                  className="about-div"
+                  style={{
+                    margin: "10px 0px",
+                    height: "160px",
+                    overflow: "scroll",
+                  }}
+                >
+                  <h5>Description :</h5>
                   <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
                   ></span>
@@ -387,36 +359,7 @@ const QuickViewModal = ({ pid }) => {
               {/* </div> */}
             </div>
           </div>
-          <div className="row">
-            {/* <div className="col-md-4 img-carousel-item">
-              {productDetail?.images?.map((img, index) => (
-                <img
-                  key={index}
-                  width={70}
-                  src={imgBaseUrl + `/${img}`}
-                  alt="img"
-                />
-              ))}
-            </div> */}
-            {/* <div className="col-md-8">
-              <div className="my-4">
-                {addedItemId ? (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
-                  </button>
-                ) : (
-                  <button
-                    className="btn_before_add_cart"
-                    onClick={() =>
-                      dispatch(addItemsToCart(productDetail, quantityCount))
-                    }
-                  >
-                    <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
-                )}
-              </div>
-            </div> */}
-          </div>
+           
         </div>
       </div>
     </>
