@@ -105,13 +105,16 @@ const QuickViewModal = ({ pid }) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
-              {newData?.length && (
-                <SliderImage
-                  data={newData}
-                  showDescription={true}
-                  direction="right"
-                />
-              )}
+              <div className="imageView">
+                {newData?.length && (
+                  <SliderImage
+                    data={newData}
+                    width="375px"
+                    showDescription={true}
+                    direction="right"
+                  />
+                )}
+              </div>
             </div>
             <div className="col-sm-7">
               <div className="detail-content-view">
@@ -303,11 +306,11 @@ const QuickViewModal = ({ pid }) => {
                   className="product_description"
                   style={{
                     margin: "10px 0px",
-                    height: "200px",
+                    height: "160px",
                     overflow: "scroll",
                   }}
                 >
-                  <h5>Description</h5>
+                  <h5>Description :</h5>
                   <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
                   ></span>
