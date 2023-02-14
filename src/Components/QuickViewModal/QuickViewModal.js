@@ -5,7 +5,6 @@ import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
-import proimg from "../../Assets/Images/2023-02-11-63e768ea70d90.jpg";
 import SliderImage from "react-zoom-slider";
 
 const QuickViewModal = ({ pid }) => {
@@ -42,7 +41,7 @@ const QuickViewModal = ({ pid }) => {
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
-      setProductDetail(res.data.data);
+      setProductDetail(res?.data?.data);
     });
   }, [pid]);
 
@@ -106,35 +105,11 @@ const QuickViewModal = ({ pid }) => {
   //       "https://backend.bppshop.com.bd/storage/product/2023-02-11-63e77320a640f.png",
   //   },
   // ];
+  // console.log(data, "108 line");
 
-  // productDetail?.images?.map((imgProduct) => {
-  //   data.push({
-  //     image: `${imgBaseUrl}/${imgProduct}`,
-  //   });
-  // });
-
-  // if(data.length === 0){
-  //   data.push({
-  //     image : ``,
-  //   })
-  // }
-
-  // const data = productDetail?.images?.map((img) => {
-  //   if (productDetail?.images?.length > 0) {
-  //     return { image: `${imgBaseUrl}/${img}` };
-  //   }
-  //   else{
-  //     return { image: `` };
-  //   }
-  // });
-  // console.log(data);
-
-  const img = productDetail?.images?.map((img) => img )
-  const data = [
-    {
-      image: `${imgBaseUrl}/${img}`
-    }
-  ]
+  const newData = productDetail?.images?.map((img) => ({
+    image: imgBaseUrl + `/` + img,
+  }));
 
   return (
     <>
@@ -142,15 +117,22 @@ const QuickViewModal = ({ pid }) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
-              {/* <div className="imageView"> */}
-              {/* <div className="detailImgCarousel"> */}
-              <SliderImage
-                data={data}
+              {
+                newData?.length>0 &&<SliderImage
+                data={newData}
                 width="375px"
                 height="100%"
                 showDescription={true}
                 direction="right"
               />
+              }
+              {/* <SliderImage
+                data={newData}
+                width="375px"
+                height="100%"
+                showDescription={true}
+                direction="right"
+              /> */}
 
               {/* <img
                     src={imgBaseUrl + `/${img}`}
