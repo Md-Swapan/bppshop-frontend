@@ -125,3 +125,16 @@
   margin: 1%;
   flex: 0 0 14%;
 }
+.react-slider__imgZoom {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(20px);
+  width: 580px;
+  height: 500px;
+  background-repeat: no-repeat;
+  border: thin solid #ccc;
+  opacity: 0;
+  z-index: -9999;
+  transition: opacity .3s ease-in-out;
+}

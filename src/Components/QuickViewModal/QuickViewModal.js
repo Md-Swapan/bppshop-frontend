@@ -105,15 +105,15 @@ const QuickViewModal = ({ pid }) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
-              {
-                newData?.length>0 &&<SliderImage
-                data={newData}
-                width="375px"
-                height="100%"
-                showDescription={true}
-                direction="right"
-              />
-              }
+              {newData?.length > 0 && (
+                <SliderImage
+                  data={newData}
+                  width="375px"
+                  height="100%"
+                  showDescription={true}
+                  direction="right"
+                />
+              )}
             </div>
             <div className="col-sm-7">
               <div className="detail-content-view">
@@ -150,7 +150,6 @@ const QuickViewModal = ({ pid }) => {
                   </p>
                 </div>
                 <div className="pc-size-color">
-
                   <div
                     className={
                       productDetail?.choice_options?.length < 1
@@ -302,7 +301,14 @@ const QuickViewModal = ({ pid }) => {
                     )}
                   </div>
                 </div>
-                <div className="about-div" style={{ margin: "10px 0px", height: "200px", overflow: "scroll" }}>
+                <div
+                  className="about-div"
+                  style={{
+                    margin: "10px 0px",
+                    height: "200px",
+                    overflow: "scroll",
+                  }}
+                >
                   <h5>Description</h5>
                   <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
@@ -311,26 +317,25 @@ const QuickViewModal = ({ pid }) => {
               </div>
 
               <div className="col-md-8">
-              <div className="my-4">
-                {addedItemId ? (
-                  <button disabled className="btn_after_added_cart">
-                    <i className="bi bi-cart-plus"></i> Added to Cart
-                  </button>
-                ) : (
-                  <button
-                    className="btn_before_add_cart"
-                    onClick={() =>
-                      dispatch(addItemsToCart(productDetail, quantityCount))
-                    }
-                  >
-                    <i className="bi bi-cart-plus"></i> Add To Cart
-                  </button>
-                )}
-              </div>
+                <div className="my-4">
+                  {addedItemId ? (
+                    <button disabled className="btn_after_added_cart">
+                      <i className="bi bi-cart-plus"></i> Added to Cart
+                    </button>
+                  ) : (
+                    <button
+                      className="btn_before_add_cart"
+                      onClick={() =>
+                        dispatch(addItemsToCart(productDetail, quantityCount))
+                      }
+                    >
+                      <i className="bi bi-cart-plus"></i> Add To Cart
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-       
         </div>
       </div>
     </>
