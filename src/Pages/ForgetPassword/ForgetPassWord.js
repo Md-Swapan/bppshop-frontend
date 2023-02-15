@@ -1,7 +1,23 @@
 import React from "react";
 import "./ForgetPassword.css";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { baseUrl } from "../../BaseUrl/BaseUrl";
+import { useNavigate } from 'react-router-dom';
 
 const ForgetPassWord = () => {
+  const navigate=useNavigate();
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    axios
+      .post(baseUrl + "/auth/forgot", data)
+      .then((res) => {
+        if (res?.data?.status === "success") {
+          alert(res?.data?.message);
+          navigate("/login")
+        }
+      });
+  };
   return (
     <div className="row justify-content-center">
       <div className="col-lg-8 col-md-10">
@@ -16,14 +32,15 @@ const ForgetPassWord = () => {
           <li>Use the OTP to reset your password on our secure website.</li>
         </ol>
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="recover_pass_card">
             <div className="recover_pass_card_body needs-validation">
               <label htmlFor="recover-email">Enter your phone number</label>
               <input
+               {...register("phone")}
                 className="recover_pass_input"
                 type="text"
-                name="identity"
+                name="phone"
                 required
               />
               <button className="recover_pass_btn" type="submit">

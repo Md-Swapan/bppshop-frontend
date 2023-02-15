@@ -18,7 +18,6 @@ const ProfileHome = () => {
       })
       .then((res) => {
         if (res?.data?.status === "success") {
-          console.log(res?.data);
           alert(res?.data?.message);
         }
       });
