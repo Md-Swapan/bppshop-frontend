@@ -32,6 +32,7 @@ import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import CheckoutShopCart from './Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart';
 import TrackOrderDetails from './Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails';
 import CheckoutComplete from './Pages/Checkut/CheckoutComplete';
+import ProductDetailsPage from './Pages/ProductDetailsPage/ProductDetailsPage';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
           <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
+          <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage/>} />
         
           <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>
               <Route index element={<ShippingHome/>}></Route>

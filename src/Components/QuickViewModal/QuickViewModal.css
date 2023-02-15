@@ -134,10 +134,10 @@
 
 .react-slider__lens {
   position: absolute;
-  z-index: 0 !important;
+  /* z-index: 0 !important; */
   border: 0px solid #d4d4d4;
-  width: 100px ;
-  height: 100px;
+  width: 90px !important;
+  height: 90px !important;
   background-color: #fff;
   opacity: 0;
   transition: opacity .3s ease-in-out;
@@ -149,4 +149,18 @@
   top: 0;
   left: 0;
   border: 1px solid rgb(189, 189, 189) !important;
+}
+
+.product_description {
+  height: 160px;
+  overflow: scroll;
+  margin: 20px 0px;
+}
+.product_description::-webkit-scrollbar {
+  display: none;
+}
+
+.product_description {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

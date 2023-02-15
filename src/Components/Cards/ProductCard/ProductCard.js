@@ -12,6 +12,8 @@ import {
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 Modal.setAppElement("#root");
 
@@ -30,6 +32,7 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
+  const { slug, subSlug, subSubSlug } = useParams();
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
@@ -156,19 +159,19 @@ const ProductCard = ({ product }) => {
               </div>
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
-                  // <div className="cardFooterBtn">
+                  <div className="cardFooterBtn">
                     <button disabled className="btn_after_added_cart">
                       <i className="bi bi-cart-plus"></i> Added to Cart
                     </button>
 
-                  //   {/* <span onClick={() => productDetailsView(id)}>
-                  //     <button className="openModal" onClick={openModal}>
-                  //       <i className="bi bi-eye-fill"></i>{" "}
-                  //     </button>
-                  //   </span> */}
-                  // {/* </div> */}
+                    <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                       <button className="detailsViewBtn" >
+                         <i className="bi bi-eye-fill"></i>{" "}
+                      </button>
+                     </Link> 
+                  </div> 
                 ) : (
-                  // <div className="cardFooterBtn">
+                  <div className="cardFooterBtn">
                     <button
                       className="btn_before_add_cart"
                       onClick={() => addToCartHandler(product, quantity)}
@@ -176,12 +179,12 @@ const ProductCard = ({ product }) => {
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
 
-                    // <span onClick={() => productDetailsView(id)}>
-                    //   <button className="openModal" onClick={openModal}>
-                    //     <i className="bi bi-eye-fill"></i>{" "}
-                    //   </button>
-                    // </span>
-                  // </div>
+                    <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                       <button className="detailsViewBtn" >
+                         <i className="bi bi-eye-fill"></i>{" "}
+                      </button>
+                     </Link>
+                   </div>
                 )}
               </div>
             </div>

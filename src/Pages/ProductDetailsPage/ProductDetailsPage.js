@@ -1,27 +1,39 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./ProductDetailsPage.css";
+import { useParams } from "react-router-dom";
+import { baseUrl, imgBaseUrl } from "./../../BaseUrl/BaseUrl";
+import { useEffect } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import "./QuickViewModal.css";
-import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import SliderImage from "react-zoom-slider";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
-import SliderImage from "react-zoom-slider";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import ProductReview from "./../../Components/ProductReview/ProductReview";
 
-const QuickViewModal = ({ pid }) => {
-  const { slug, subSlug, subSubSlug } = useParams();
-  const [quantityCount, setQuantityCount] = useState(1);
+const ProductDetailsPage = () => {
+  const { id } = useParams();
   const [productDetail, setProductDetail] = useState([]);
+  const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
-
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
+      setProductDetail(res?.data?.data);
+    });
+  }, [id]);
+
+  const newData = productDetail?.images?.map((img) => ({
+    image: imgBaseUrl + `/` + img,
+  }));
+
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
-  const addedItemId = cartItemsId.find((i) => i === pid);
-
+  const addedItemId = cartItemsId.find((i) => i === id);
   const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
-
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -43,10 +55,10 @@ const QuickViewModal = ({ pid }) => {
   const variantPrice = priceVariant?.data?.price;
 
   useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
+    axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
     });
-  }, [pid]);
+  }, [id]);
 
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
@@ -56,13 +68,13 @@ const QuickViewModal = ({ pid }) => {
 
   const priceVariantHandlerByChoiceOption = (option) => {
     const priceVariantDefaultOptionData = {
-      product_id: `${pid}`,
+      product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
     const priceVariantData = {
-      product_id: `${pid}`,
+      product_id: `${id}`,
       choice_19: `${option}`,
       quantity: `${quantityCount}`,
     };
@@ -73,13 +85,13 @@ const QuickViewModal = ({ pid }) => {
 
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
-      product_id: `${pid}`,
+      product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
     const priceVariantData = {
-      product_id: `${pid}`,
+      product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
       color: `${selectedColor}`,
       quantity: `${quantityCount}`,
@@ -90,7 +102,7 @@ const QuickViewModal = ({ pid }) => {
   };
   const priceVariantHandlerByQty = () => {
     const priceVariantDefaultColorData = {
-      product_id: `${pid}`,
+      product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
@@ -98,62 +110,56 @@ const QuickViewModal = ({ pid }) => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
-  const newData = productDetail?.images?.map((img) => ({
-    image: imgBaseUrl + `/` + img,
-  }));
-
   return (
     <>
-      <div className="modal-container">
+      <div class="product_details_page_container">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-5">
-              <div className="imageView">
+            <div className="col-md-4">
+              <div class="product_details_page_img_container">
                 {newData?.length && (
-                  <SliderImage
-                    data={newData}
-                    width="375px"
-                    showDescription={true}
-                    direction="right"
-                  />
-                )}
+                      <SliderImage
+                        data={newData}
+                        width="375px"
+                        showDescription={true}
+                        direction="right"
+                      />
+                    )}
               </div>
             </div>
-            <div className="col-sm-7">
-              <div className="detail-content-view">
-                <div className="productName_wishlist">
-                  <h4 className="productName">{productDetail.name}</h4>
+            <div className="col-md-8">
+              <div class="product_details_page_content">
+                <h2>{productDetail.name}</h2>
+                <p>
                   <span>
-                    <i className="bi bi-heart"></i>
+                    Product Code: <strong>{productDetail.code}</strong>
                   </span>
-                </div>
-                <div className="price_Stock_Code">
+                  <span>
+                    {" "}
+                    Stock:{" "}
+                    {productDetail.current_stock > 0 ? (
+                      <strong>Available</strong>
+                    ) : (
+                      <strong>Not Available</strong>
+                    )}
+                  </span>
+                </p>
+
+                <div className="product_details_page_price">
                   {productDetail.discount ? (
                     <h5 className="prices">
-                      ৳{productDetail.unit_price - productDetail.discount}{" "}
+                      ৳ {productDetail.unit_price - productDetail.discount}{" "}
                       <del className="text-danger">
                         {" "}
-                        ৳{productDetail.unit_price}
+                        ৳ {productDetail.unit_price}
                       </del>
                     </h5>
                   ) : (
                     <h5 className="prices">৳{productDetail.unit_price}</h5>
                   )}
-
-                  <p>
-                    Product Code: <strong>{productDetail.code}</strong>
-                    <span>
-                      {" "}
-                      Stock:{" "}
-                      {productDetail.current_stock > 0 ? (
-                        <strong>Available</strong>
-                      ) : (
-                        <strong>Not Available</strong>
-                      )}
-                    </span>
-                  </p>
                 </div>
-                <div className="pc-size-color">
+
+                <div className="product_details_page_pc_size_color">
                   <div
                     className={
                       productDetail?.choice_options?.length < 1
@@ -211,71 +217,67 @@ const QuickViewModal = ({ pid }) => {
                     </div>
                   </div>
                 </div>
-                <div className="quantity-content">
-                  <div className="d-flex">
-                    <h4>Quantity: </h4>
-                    <div className="quantity">
-                      {isItemExist?.quantity ? (
-                        <span
-                          onClick={() =>
-                            decreaseQuantity(
-                              productDetail,
-                              isItemExist?.quantity
-                            )
-                          }
-                          className="minusBtn"
-                        >
-                          -
-                        </span>
-                      ) : (
-                        <span
-                          onClick={
-                            () =>
-                              setQuantityCount(
-                                quantityCount > 1
-                                  ? quantityCount - 1
-                                  : quantityCount
-                              )
-                            // priceVariantHandlerByQty()
-                          }
-                          className="minus"
-                        >
-                          -
-                        </span>
-                      )}
-                      <span className="count-number">
-                        {isItemExist?.quantity
-                          ? isItemExist?.quantity
-                          : quantityCount}
+
+                <div className="product_details_page_quantity_content ">
+                  <h5>Quantity: </h5>
+                  <div className="quantity">
+                    {isItemExist?.quantity ? (
+                      <span
+                        onClick={() =>
+                          decreaseQuantity(productDetail, isItemExist?.quantity)
+                        }
+                        className="minusBtn"
+                      >
+                        -
                       </span>
-                      {isItemExist?.quantity ? (
-                        <span
-                          onClick={() =>
-                            increaseQuantity(
-                              productDetail,
-                              isItemExist?.quantity,
-                              productDetail.current_stock
-                            )
-                          }
-                          className="plusBtn"
-                        >
-                          +
-                        </span>
-                      ) : (
-                        <span
-                          onClick={() =>
+                    ) : (
+                      <span
+                        onClick={
+                          () =>
                             setQuantityCount(
-                              productDetail.current_stock > quantityCount
-                                ? quantityCount + 1
+                              quantityCount > 1
+                                ? quantityCount - 1
                                 : quantityCount
                             )
-                          }
-                          className="plus"
-                        >
-                          +
-                        </span>
-                      )}
-                    </div>
+                          // priceVariantHandlerByQty()
+                        }
+                        className="minus"
+                      >
+                        -
+                      </span>
+                    )}
+                    <span className="count-number">
+                      {isItemExist?.quantity
+                        ? isItemExist?.quantity
+                        : quantityCount}
+                    </span>
+                    {isItemExist?.quantity ? (
+                      <span
+                        onClick={() =>
+                          increaseQuantity(
+                            productDetail,
+                            isItemExist?.quantity,
+                            productDetail.current_stock
+                          )
+                        }
+                        className="plusBtn"
+                      >
+                        +
+                      </span>
+                    ) : (
+                      <span
+                        onClick={() =>
+                          setQuantityCount(
+                            productDetail.current_stock > quantityCount
+                              ? quantityCount + 1
+                              : quantityCount
+                          )
+                        }
+                        className="plus"
+                      >
+                        +
+                      </span>
+                    )}
                   </div>
                   <div className="totalPrice">
                     {isItemExist?.quantity ? (
@@ -295,7 +297,7 @@ const QuickViewModal = ({ pid }) => {
                       </h5>
                     ) : (
                       <h5>
-                        Total Price: ৳{" "}
+                        Price: ৳{" "}
                         {variantPrice
                           ? variantPrice * quantityCount
                           : quantityCount *
@@ -305,19 +307,7 @@ const QuickViewModal = ({ pid }) => {
                     )}
                   </div>
                 </div>
-                <div
-                  className="product_description"
-                  
-                >
-                  <h5>Description :</h5>
-                  <span
-                    dangerouslySetInnerHTML={{ __html: productDetail.details }}
-                  ></span>
-                </div>
-              </div>
-
-              <div className="col-md-8">
-                <div className="my-4">
+                <div className="product_details_page_btn_container">
                   {addedItemId ? (
                     <button disabled className="btn_after_added_cart">
                       <i className="bi bi-cart-plus"></i> Added to Cart
@@ -332,20 +322,25 @@ const QuickViewModal = ({ pid }) => {
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
                   )}
+                  <button class="addWishListBtn">
+                    <i class="bi bi-heart"></i>
+                  </button>
+                </div>
 
-                  <Link to={`/${slug}/${subSlug}/${subSubSlug}/${pid}`}>
-                    <button className="btn_before_add_cart ms-3">
-                      <i className="bi bi-eye-fill"></i> View Details
-                    </button>
-                  </Link>
+                <div className="product_details_page_product_description">
+                  <h5>Description :</h5>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: productDetail.details }}
+                  ></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ProductReview />
     </>
   );
 };
 
-export default QuickViewModal;
+export default ProductDetailsPage;
