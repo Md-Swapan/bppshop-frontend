@@ -12,8 +12,8 @@ import {
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
@@ -138,7 +138,15 @@ const ProductCard = ({ product }) => {
                   </div>
                 </div>
                 <div className="quickView_AddToCart_overlay">
-                  <div
+                  <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                    <div className="overlayAddToCartBtn">
+                      <span>
+                        <i className="bi bi-eye-fill"></i> view
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* <div
                     onClick={() => addToCartHandler(product, quantity)}
                     className="overlayAddToCartBtn"
                   >
@@ -149,14 +157,30 @@ const ProductCard = ({ product }) => {
                     ) : (
                       <img src={addToCartImg} alt="" />
                     )}
-                  </div>
-                  <span onClick={() => productDetailsView(id)}>
-                    <button onClick={openModal}>
-                      <i className="bi bi-eye-fill"></i> <span>Quick View</span>
-                    </button>
-                  </span>
+                  </div> */}
+
+                  {/* {addedItemId ? (
+                    <div className="overlayAddToCartBtn">
+                      <span>
+                        Added <br /> To <br /> Cart
+                      </span>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => addToCartHandler(product, quantity)}
+                      className="overlayAddToCartBtn"
+                    >
+                      <img src={addToCartImg} alt="" />
+                    </div>
+                  )} */}
                 </div>
               </div>
+              <span onClick={() => productDetailsView(id)}>
+                <button className="quickViewBtn" onClick={openModal}>
+                  <i className="bi bi-eye-fill"></i> <span>Quick View</span>
+                </button>
+              </span>
+
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
                   <div className="cardFooterBtn">
@@ -164,12 +188,12 @@ const ProductCard = ({ product }) => {
                       <i className="bi bi-cart-plus"></i> Added to Cart
                     </button>
 
-                    <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                       <button className="detailsViewBtn" >
-                         <i className="bi bi-eye-fill"></i>{" "}
+                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                      <button className="detailsViewBtn">
+                        <i className="bi bi-eye-fill"></i>{" "}
                       </button>
-                     </Link> 
-                  </div> 
+                    </Link> */}
+                  </div>
                 ) : (
                   <div className="cardFooterBtn">
                     <button
@@ -179,12 +203,12 @@ const ProductCard = ({ product }) => {
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
 
-                    <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                       <button className="detailsViewBtn" >
-                         <i className="bi bi-eye-fill"></i>{" "}
+                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                      <button className="detailsViewBtn">
+                        <i className="bi bi-eye-fill"></i>{" "}
                       </button>
-                     </Link>
-                   </div>
+                    </Link> */}
+                  </div>
                 )}
               </div>
             </div>

@@ -12,7 +12,7 @@
 }
 
 .product-card-body {
-  height: 80%;
+  height: auto;
   padding: 10px;
   position: relative;
   overflow: hidden;
@@ -22,7 +22,6 @@
 
 .product-card-body img {
   width: 100%;
-  /* height: 80%; */
 }
 
 .product-card-body-content {
@@ -49,18 +48,22 @@
   transition: all 0.3s;
 }
 
-.product-card-body:hover .quickView_AddToCart_overlay {
+.product-card:hover .quickView_AddToCart_overlay {
   display: block;
   cursor: pointer;
 }
 
+
 .overlayAddToCartBtn {
   color: #ffffff;
   text-align: center;
-  margin-top: 89px;
+  margin-top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .overlayAddToCartBtn span{
-  font-size: 23px;
+  font-size: 22px;
 }
 
 .overlayAddToCartBtn img {
@@ -70,10 +73,10 @@
 }
 
 .overlayAddToCartBtn i {
-  font-size: 30px;
+  /* font-size: 30px; */
 }
 
-.quickView_AddToCart_overlay button {
+.quickViewBtn {
   border: none;
   outline: none;
   width: 100%;
@@ -84,19 +87,24 @@
   background: #f2f2f2;
   color: #666666;
   border-bottom: 1px solid #b9b9b9;
-  margin-top: 60px;
+  margin-top: -46px;
+  position: absolute;
   font-family: "DM Sans", sans-serif;
+  display: none;
 }
 
-.quickView_AddToCart_overlay button:hover {
+.quickViewBtn:hover {
   color: #ef8341;
 }
 
-.quickView_AddToCart_overlay button i {
+.quickViewBtn i {
   font-size: 20px;
   margin-top: 5px;
 }
-
+.product-card:hover .quickViewBtn {
+  display: block;
+  cursor: pointer;
+}
 .product-card-footer {
   height: 20%;
   font-size: 14px;
@@ -107,7 +115,7 @@
   border: none;
   outline: none;
   color: #ffffff;
-  padding: 6px 20px;
+  padding: 10px 20px;
   border-radius: 5px;
   transition: all 0.3s;
   font-family: "DM Sans", sans-serif;
@@ -232,16 +240,30 @@
     cursor: pointer;
   }
 
-  .cardFooterBtn {
+  /* .cardFooterBtn {
     display: flex;
     justify-content: space-between;
-  }
+  } */
   .detailsViewBtn{
     display: block;
     border: none;
     color: #ef8341;
     font-size: 20px;
   }
+
+  .overlayAddToCartBtn {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 52%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-card:hover .quickViewBtn {
+    display: none;
+  }
+ 
 }
 @media screen and (max-width: 676px) {
   .product-card-body img {
@@ -259,7 +281,7 @@
   }
   .btn_before_add_cart,
   .btn_after_added_cart {
-    padding: 2px 5px;
+    padding: 8px 15px;
     font-size: 13px;
   }
 }
@@ -269,7 +291,6 @@
   }
   .btn_before_add_cart,
   .btn_after_added_cart {
-    padding: 2px 5px;
     font-size: 12px;
   }
 }

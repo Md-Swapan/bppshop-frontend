@@ -112,11 +112,11 @@ const ProductDetailsPage = () => {
 
   return (
     <>
-      <div class="product_details_page_container">
+      <div className="product_details_page_container">
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
-              <div class="product_details_page_img_container">
+              <div className="product_details_page_img_container">
                 {newData?.length && (
                       <SliderImage
                         data={newData}
@@ -128,7 +128,7 @@ const ProductDetailsPage = () => {
               </div>
             </div>
             <div className="col-md-8">
-              <div class="product_details_page_content">
+              <div className="product_details_page_content">
                 <h2>{productDetail.name}</h2>
                 <p>
                   <span>
@@ -323,7 +323,7 @@ const ProductDetailsPage = () => {
                     </button>
                   )}
                   <button class="addWishListBtn">
-                    <i class="bi bi-heart"></i>
+                    <i className="bi bi-heart"></i>
                   </button>
                 </div>
 
