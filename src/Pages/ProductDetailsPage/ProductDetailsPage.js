@@ -16,6 +16,9 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
+
+  let newId = parseInt(id);
+
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
@@ -33,8 +36,10 @@ const ProductDetailsPage = () => {
 
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
-  const addedItemId = cartItemsId.find((i) => i === id);
+  const addedItemId = cartItemsId.find((i) => i === newId);
+
   const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -325,6 +330,8 @@ const ProductDetailsPage = () => {
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
                   )}
+
+                  
                   <button class="addWishListBtn">
                     <i className="bi bi-heart"></i>
                   </button>

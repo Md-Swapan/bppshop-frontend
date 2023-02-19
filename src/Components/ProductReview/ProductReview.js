@@ -65,7 +65,7 @@ const ProductReview = () => {
                       name=""
                       id="textarea"
                       cols="30"
-                      rows="5"
+                      rows="3"
                     ></textarea>
 
                     <button type="submit">Post Comment</button>

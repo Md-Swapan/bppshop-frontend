@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
+import addedToCartImg from "../../../Assets/Images/icons/addedToCart (1).png";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
@@ -94,6 +95,8 @@ const ProductCard = ({ product }) => {
   // document.querySelector(".product-card").addEventListener("onMouseOver", () => {
   //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
   // })
+
+
   return (
     <>
       <div className="product_card_content">
@@ -137,33 +140,18 @@ const ProductCard = ({ product }) => {
                     )}
                   </div>
                 </div>
-                <div className="quickView_AddToCart_overlay">
-                  <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                    <div className="overlayAddToCartBtn">
+                <div className={addedItemId ? `quickView_AddToCart_overlay_active` : `quickView_AddToCart_overlay`}>
+                  <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`} addedItemId={addedItemId}>
+                    <div className="overlayViewCartBtn">
                       <span>
                         <i className="bi bi-eye-fill"></i> view
                       </span>
                     </div>
                   </Link>
 
-                  {/* <div
-                    onClick={() => addToCartHandler(product, quantity)}
-                    className="overlayAddToCartBtn"
-                  >
-                    {addedItemId ? (
-                      <span>
-                        Added <br /> To <br /> Cart
-                      </span>
-                    ) : (
-                      <img src={addToCartImg} alt="" />
-                    )}
-                  </div> */}
-
-                  {/* {addedItemId ? (
+                  {addedItemId ? (
                     <div className="overlayAddToCartBtn">
-                      <span>
-                        Added <br /> To <br /> Cart
-                      </span>
+                      <img src={addedToCartImg} alt="" />
                     </div>
                   ) : (
                     <div
@@ -172,7 +160,7 @@ const ProductCard = ({ product }) => {
                     >
                       <img src={addToCartImg} alt="" />
                     </div>
-                  )} */}
+                  )}
                 </div>
               </div>
               <span onClick={() => productDetailsView(id)}>

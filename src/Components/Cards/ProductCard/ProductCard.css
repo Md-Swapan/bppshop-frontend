@@ -47,6 +47,16 @@
   display: none;
   transition: all 0.3s;
 }
+.quickView_AddToCart_overlay_active {
+  position: absolute;
+  background: #000000be;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: all 0.3s;
+}
 
 .product-card:hover .quickView_AddToCart_overlay {
   display: block;
@@ -54,7 +64,7 @@
 }
 
 
-.overlayAddToCartBtn {
+.overlayAddToCartBtn{
   color: #ffffff;
   text-align: center;
   margin-top: 50%;
@@ -62,7 +72,15 @@
   align-items: center;
   justify-content: center;
 }
-.overlayAddToCartBtn span{
+ .overlayViewCartBtn {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.overlayAddToCartBtn span, .overlayViewCartBtn span{
   font-size: 22px;
 }
 
@@ -126,7 +144,7 @@
 }
 
 .btn_after_added_cart {
-  background: #6b5e56;
+  background: #6b5e56 !important;
 }
 
 .btn_before_add_cart button:hover {
@@ -181,55 +199,14 @@
     display: block;
     cursor: pointer;
   }
-  /* .quickView_AddToCart_overlay {
-    position: absolute;
-    background: #000000be;
-    height: 150px;
-    width: 100%;
-    top: 0;
-    left: 0;
-    display: none;
-    transition: all 0.3s;
-  } */
-
-  
-/* .overlayAddToCartBtn img {
-  width: 60px;
-  height: 120px;
-}
-
-.overlayAddToCartBtn i {
-  font-size: 30px;
-}
-
-.quickView_AddToCart_overlay button {
-  border: none;
-  outline: none;
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  background: #f2f2f2;
-  color: #666666;
-  border-bottom: 1px solid #b9b9b9;
-  margin-top: 32px;
-  font-family: "DM Sans", sans-serif;
-}
-  .overlayAddToCartBtn {
-    color: #ffffff;
-    text-align: center;
-    margin-top: 71px;
-  }
-  .quickView_AddToCart_overlay button {
-    margin-top: -50px;
-  } */
+ 
 }
 @media screen and (max-width: 768px) {
   
   .product-card-body img {
     height: 150px;
   }
+
 
   .quickView_AddToCart_overlay button {
     display: none;
@@ -240,10 +217,7 @@
     cursor: pointer;
   }
 
-  /* .cardFooterBtn {
-    display: flex;
-    justify-content: space-between;
-  } */
+
   .detailsViewBtn{
     display: block;
     border: none;
@@ -252,12 +226,10 @@
   }
 
   .overlayAddToCartBtn {
-    color: #ffffff;
-    text-align: center;
-    margin-top: 52%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none !important;
+  }
+  .overlayViewCartBtn {
+    display: block;
   }
 
   .product-card:hover .quickViewBtn {
