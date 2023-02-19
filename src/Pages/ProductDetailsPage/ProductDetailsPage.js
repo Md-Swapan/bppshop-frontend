@@ -15,7 +15,7 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 
 
 const ProductDetailsPage = () => {
-  const { id } = useParams();
+  const {slug, subSlug, subSubSlug ,id } = useParams();
 
   let newId = parseInt(id);
 
@@ -120,7 +120,31 @@ const ProductDetailsPage = () => {
 
   return (
     <>
+    <nav aria-label="breadcrumb">
+        <ol className="breadcrumb my-4">
+          <li className="breadcrumb-item">
+            <Link to="/">Home</Link>
+          </li>
+
+          <li className="breadcrumb-item active" aria-current="page">
+            <Link to={`/${slug}`}>{slug}</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            <Link to={`/${slug}/${subSlug}`}>{subSlug}</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            
+            <Link to={`/${slug}/${subSlug}/${subSubSlug}`}>{subSubSlug}</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            
+            {productDetail.name}
+          </li>
+        </ol>
+      </nav>
+      <br/>
       <div className="product_details_page_container">
+      
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
