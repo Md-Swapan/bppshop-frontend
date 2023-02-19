@@ -13,6 +13,7 @@ import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 
+
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState([]);
@@ -109,6 +110,8 @@ const ProductDetailsPage = () => {
     };
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
+
+ 
 
   return (
     <>

@@ -3,12 +3,11 @@
   font-family: "Montserrat", sans-serif;
   color: #303030;
 }
-.imageView SliderImage{
-  width: 375px;
-  height: 375px !important;
+.imageView SliderImage {
+  width: 382px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    overflow: hidden;
+  overflow: hidden;
 }
 .imageView img {
   width: 100%;
@@ -17,7 +16,7 @@
 .pc-size-color,
 .price_Stock_Code,
 .quantity-content {
-  border: .3px solid gainsboro;
+  border: 0.3px solid gainsboro;
   padding: 8px;
   display: flex;
   justify-content: space-between;
@@ -40,7 +39,7 @@
   margin-left: 40px;
 }
 
-.size1{
+.size1 {
   width: 40px;
   height: 40px;
   border: 1px solid rgb(184, 184, 184);
@@ -52,22 +51,23 @@
   margin: 0px 3px;
 }
 
-.color h5, .size h5{
+.color h5,
+.size h5 {
   font-size: 17px;
- margin-top: 8px;
- margin-right: 10px;
+  margin-top: 8px;
+  margin-right: 10px;
 }
-.color1{
+.color1 {
   width: 40px;
   height: 40px;
-  border: .5px solid gainsboro;
+  border: 0.5px solid gainsboro;
   border-radius: 5px;
   background: rgb(53, 53, 53);
 }
-.color2{
+.color2 {
   width: 40px;
   height: 40px;
-  border: .5px solid gainsboro;
+  border: 0.5px solid gainsboro;
   border-radius: 5px;
   background: rgb(207, 127, 8);
   margin-left: 6px;
@@ -75,7 +75,6 @@
 .quantity {
   width: 200px;
   border: 0.5px solid gainsboro;
-  /* border-radius: 30px; */
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -96,7 +95,7 @@
   color: #ef8341;
 }
 
-.product_description{
+.product_description {
   font-size: 14px;
   font-weight: 500;
 }
@@ -129,18 +128,17 @@
   border: thin solid #ccc;
   opacity: 0;
   z-index: -9999;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .react-slider__lens {
   position: absolute;
-  /* z-index: 0 !important; */
   border: 0px solid #d4d4d4;
   width: 90px !important;
   height: 90px !important;
   background-color: #fff;
   opacity: 0;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .react-slider__ul li.active img {
