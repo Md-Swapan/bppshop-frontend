@@ -105,12 +105,12 @@
   flex-flow: row wrap;
   margin: 10px 0px 0px -32px !important;
   justify-content: flex-start;
-  height: 60px;
+  height: 70px;
 }
 
 .react-slider__ul li {
   position: relative;
-  width: 70px;
+  width: 100px;
   cursor: pointer;
   padding: 0;
   list-style: none;

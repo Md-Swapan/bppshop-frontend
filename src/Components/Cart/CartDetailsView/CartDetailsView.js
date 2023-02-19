@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CartDetailsView.css";
 import { Link } from "react-router-dom";
 import {
   addItemsToCart,
   removeItemsFromCart,
+  removeLoading,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 
@@ -15,6 +16,8 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
+  const { isLoading} = useSelector((state) => state.cart);
+
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -49,6 +52,11 @@ const CartDetailsView = () => {
     document.querySelector(".cartEmptyAlert").style.color = "red";
   };
 
+  // useEffect(() => {
+  //   if(removeLoading === false){
+  //     alert("removed")
+  //   }
+  // })
   return (
     <div className="cartDetailsView-container">
       <div className="cartDetailsView-header">

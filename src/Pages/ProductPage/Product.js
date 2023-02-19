@@ -82,8 +82,32 @@ const Product = ({ allCategory }) => {
             </SkeletonTheme>
           </div>
         {/* ) : (
-          <div className="no_product_content">
-            <img src={noProductImg} alt="" srcSet="" />
+          <div className="category_content product-content">
+            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#F5F5F5">
+              {loading ? (
+                <>
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                </>
+              ) : (
+                <div className="no_product_content">
+                  <img src={noProductImg} alt="" srcSet="" />
+                </div>
+              )}
+            </SkeletonTheme>
           </div>
         )} */}
       </div>

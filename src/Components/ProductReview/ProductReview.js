@@ -21,7 +21,7 @@ const ProductReview = () => {
                           <i className="bi bi-person"></i> User Name
                         </p>
                         <p>
-                          <i className="bi bi-clock"></i> Aug 29, 2022
+                          <i className="bi bi-clock"></i> Feb 2, 2023
                         </p>
                         <p className="rating-star">
                           <i className="bi bi-star-fill"></i>
@@ -35,13 +35,10 @@ const ProductReview = () => {
                         </button>
                       </div>
                       <small>
-                        Khaki cotton blend military jacket flattering fit mock
-                        horn buttons and patch pockets showerproof black
-                        lightgrey. Printed lining patch pockets jersey blazer
-                        built in pocket square wool casual quilted jacket
-                        without hood azure.
+                      খুবিই ভালো যেমনটা চেয়েছিলাম তেমনটাই পেলাম, এবং খুব দ্রুত ডেলিভারি পেয়েছি। ধন্যবাদ ❤️❤️❤️
                       </small>
                     </div>
+                    
                   </div>
                 </div>
 

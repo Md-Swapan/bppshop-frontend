@@ -16,25 +16,26 @@ export const addItemsToCart =
       JSON.stringify(getState().cart.cartItems)
     );
 
-    const productId =product.id;
+    const productId = product.id;
     const cartGroupItem = getState().cartGroup.cartGroupItems;
-    
+
     const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
 
     const cartUpdateInfo = {
-      "key" : `${isItemExist.id}`,
-      "quantity": `${quantity}`
+      key: `${isItemExist.id}`,
+      quantity: `${quantity}`,
     };
 
     if (isItemExist) {
       const token = localStorage.getItem("token");
       const config = { headers: { Authorization: `Bearer ${token}` } };
-  
-      const {data} = await axios.post(`${baseUrl}/cart/update`, 
-      cartUpdateInfo, 
-      config
+
+      const { data } = await axios.post(
+        `${baseUrl}/cart/update`,
+        cartUpdateInfo,
+        config
       );
-      
+
       dispatch({
         type: "UPDATE_CART",
         payload: data,
@@ -119,7 +120,6 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-
     // dispatch({ type: "GET_CART_SUCCESS", payload: data.data });
 
     // localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
@@ -127,6 +127,7 @@ export const getCartData = () => async (dispatch, getState) => {
     dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
   }
 };
+
 
 // REMOVE FROM CART
 export const removeItemsFromCart =
@@ -140,25 +141,25 @@ export const removeItemsFromCart =
       JSON.stringify(getState().cart.cartItems)
     );
 
-
-
     const cartGroupItem = getState().cartGroup.cartGroupItems;
     const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
-    const cartId = {"key" : `${isItemExist.id}`};
+    const cartId = { key: `${isItemExist.id}` };
 
     if (isItemExist) {
       const token = localStorage.getItem("token");
       const config = { headers: { Authorization: `Bearer ${token}` } };
-  
-      const {data} = await axios.post(`${baseUrl}/cart/remove`, 
-      cartId, 
-      config
-      );
 
+      const { data } = await axios.post(
+        `${baseUrl}/cart/remove`,
+        cartId,
+        config
+      );
+      console.log(data)
       dispatch({
         type: "REMOVE_ITEM_FROM_CART_GROUP",
         payload: productId,
       });
+    
     }
     dispatch(getCartData());
   };
