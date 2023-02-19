@@ -146,6 +146,7 @@ export const removeItemsFromCart =
     const cartId = { key: `${isItemExist.id}` };
 
     if (isItemExist) {
+      dispatch({type: "REMOVE_ITEM_FROM_CART_REQUEST"} )
       const token = localStorage.getItem("token");
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -156,7 +157,7 @@ export const removeItemsFromCart =
       );
       console.log(data)
       dispatch({
-        type: "REMOVE_ITEM_FROM_CART_GROUP",
+        type: "REMOVE_ITEM_FROM_CART_SUCCESS",
         payload: productId,
       });
     

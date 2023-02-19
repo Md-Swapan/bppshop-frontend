@@ -1,7 +1,6 @@
 const CartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case "ADD_TO_CART": {
-
       const item = action.payload;
 
       const isItemExist = state.cartItems?.find(
@@ -23,6 +22,12 @@ const CartReducer = (state = { cartItems: [] }, action) => {
       }
     }
 
+    case "REMOVE_ITEM_FROM_CART_REQUEST":
+      return {
+        loading: true,
+        ...state,
+        
+      };
 
     case "REMOVE_FROM_CART":
       return {
@@ -32,7 +37,14 @@ const CartReducer = (state = { cartItems: [] }, action) => {
         ),
       };
 
-
+    case "REMOVE_ITEM_FROM_CART_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        cartItems: state.cartItems.filter(
+          (item) => item.product?.id !== action.payload
+        ),
+      };
     case "CLEAR_CART": {
       return {
         cartItems: [],
