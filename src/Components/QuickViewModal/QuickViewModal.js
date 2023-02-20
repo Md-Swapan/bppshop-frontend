@@ -28,8 +28,11 @@ const QuickViewModal = ({ pid }) => {
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
 
-  const [activeOption, setActiveOption] = useState();
- 
+  const [activeOption, setActiveOption] = useState("");
+  // console.log(activeOption);
+  // let activeOption = localStorage.getItem("activeOption");
+  
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -56,10 +59,10 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  
   const priceVariantHandlerByChoiceOption = (option) => {
-    setActiveOption(option);
-
+    localStorage.setItem("activeOption", option);
+    const newActiveOption = localStorage.getItem("activeOption");
+    setActiveOption(newActiveOption);
 
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
@@ -179,7 +182,15 @@ const QuickViewModal = ({ pid }) => {
                               onClick={() =>
                                 priceVariantHandlerByChoiceOption(option)
                               }
-                              className={activeOption ? option === activeOption ? `activeOption` : `option` : option === defaultOption[0] ? `activeOption` : `option`}
+                              className={
+                                activeOption
+                                  ? option === activeOption
+                                    ? `activeOption`
+                                    : `option`
+                                  : option === defaultOption[0]
+                                  ? `activeOption`
+                                  : `option`
+                              }
                             >
                               {option}
                             </span>
@@ -234,7 +245,7 @@ const QuickViewModal = ({ pid }) => {
                         </span>
                       ) : (
                         <span
-                          onClick={() => 
+                          onClick={() =>
                             setQuantityCount(
                               quantityCount > 1
                                 ? quantityCount - 1
@@ -266,19 +277,19 @@ const QuickViewModal = ({ pid }) => {
                         </span>
                       ) : (
                         <span
-                          onClick={() => 
-                            setQuantityCount(
-                              productDetail.current_stock > quantityCount
-                                ? quantityCount + 1
-                                : quantityCount
-                            )
+                          onClick={
+                            () =>
+                              setQuantityCount(
+                                productDetail.current_stock > quantityCount
+                                  ? quantityCount + 1
+                                  : quantityCount
+                              )
 
                             // setQuantityCount((currentQty) => {
                             //   return productDetail.current_stock > quantityCount
                             //     ? currentQty + 1
                             //     : quantityCount;
                             //   });
-
                           }
                           className="plus"
                         >
