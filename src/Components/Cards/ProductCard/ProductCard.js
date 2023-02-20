@@ -6,8 +6,6 @@ import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import {
   addItemsToCart,
   addItemsToCartAfterLogin,
@@ -237,7 +235,6 @@ const ProductCard = ({ product }) => {
             </div>
           )}
         </div>
-        <ToastContainer />
       </div>
       <Modal
         isOpen={modalIsOpen}

@@ -13,9 +13,8 @@ import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 
-
 const ProductDetailsPage = () => {
-  const {slug, subSlug, subSubSlug ,id } = useParams();
+  const { slug, subSlug, subSubSlug, id } = useParams();
 
   let newId = parseInt(id);
 
@@ -46,9 +45,9 @@ const ProductDetailsPage = () => {
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
 
-  const [activeOption, setActiveOption] = useState();
-
-  
+  const [activeOption, setActiveOption] = useState("");
+  // console.log(activeOption);
+// let activeOption = localStorage.getItem("activeOption");
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -83,10 +82,9 @@ const ProductDetailsPage = () => {
   // const colors = productDetail?.colors?.map((color) => color?.code);
 
   const priceVariantHandlerByChoiceOption = (option) => {
-    setActiveOption(option)
-
     localStorage.setItem("activeOption", option);
-
+    const newActiveOption = localStorage.getItem("activeOption");
+    setActiveOption(newActiveOption);
 
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
@@ -131,11 +129,9 @@ const ProductDetailsPage = () => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
- 
-
   return (
     <>
-    <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item">
             <Link to="/">Home</Link>
@@ -148,30 +144,27 @@ const ProductDetailsPage = () => {
             <Link to={`/${slug}/${subSlug}`}>{subSlug}</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            
             <Link to={`/${slug}/${subSlug}/${subSubSlug}`}>{subSubSlug}</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            
             {productDetail.name}
           </li>
         </ol>
       </nav>
-      <br/>
+      <br />
       <div className="product_details_page_container">
-      
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
               <div className="product_details_page_img_container">
                 {newData?.length && (
-                      <SliderImage
-                        data={newData}
-                        width="375px"
-                        showDescription={true}
-                        direction="right"
-                      />
-                    )}
+                  <SliderImage
+                    data={newData}
+                    width="375px"
+                    showDescription={true}
+                    direction="right"
+                  />
+                )}
               </div>
             </div>
             <div className="col-md-8">
@@ -226,7 +219,15 @@ const ProductDetailsPage = () => {
                               onClick={() =>
                                 priceVariantHandlerByChoiceOption(option)
                               }
-                              className={activeOption ? option === activeOption ? `activeOption` : `option` : option === defaultOption[0] ? `activeOption` : `option`}
+                              className={
+                                activeOption
+                                  ? option === activeOption
+                                    ? `activeOption`
+                                    : `option`
+                                  : option === defaultOption[0]
+                                  ? `activeOption`
+                                  : `option`
+                              }
                             >
                               {option}
                             </span>
@@ -345,7 +346,7 @@ const ProductDetailsPage = () => {
                       <h5>
                         Total Price: ৳{" "}
                         {variantPrice && isItemExist
-                          ? variantPrice 
+                          ? variantPrice
                           : quantityCount *
                             (productDetail?.unit_price -
                               productDetail?.discount)}
@@ -369,7 +370,6 @@ const ProductDetailsPage = () => {
                     </button>
                   )}
 
-                  
                   <button class="addWishListBtn">
                     <i className="bi bi-heart"></i>
                   </button>
