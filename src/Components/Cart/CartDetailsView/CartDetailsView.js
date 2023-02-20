@@ -8,6 +8,8 @@ import {
   removeLoading,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -16,7 +18,7 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  const { isLoading} = useSelector((state) => state.cart);
+  const { loading} = useSelector((state) => state.cart);
 
 
   const increaseQuantity = (id, quantity, stock) => {
@@ -53,8 +55,8 @@ const CartDetailsView = () => {
   };
 
   // useEffect(() => {
-  //   if(removeLoading === false){
-  //     alert("removed")
+  //   if(loading === true){
+  //     toast("removed")
   //   }
   // })
   return (
@@ -175,6 +177,7 @@ const CartDetailsView = () => {
           </Link>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

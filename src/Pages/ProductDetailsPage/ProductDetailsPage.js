@@ -40,6 +40,14 @@ const ProductDetailsPage = () => {
 
   const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
 
+  const choiceOptions = productDetail?.choice_options?.map(
+    (list) => list?.options
+  );
+  const defaultOption = choiceOptions?.map((option) => option[0]);
+  const colors = productDetail?.colors?.map((color) => color?.code);
+
+  const [activeOption, setActiveOption] = useState();
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -66,13 +74,14 @@ const ProductDetailsPage = () => {
     });
   }, [id]);
 
-  const choiceOptions = productDetail?.choice_options?.map(
-    (list) => list?.options
-  );
-  const defaultOption = choiceOptions?.map((option) => option[0]);
-  const colors = productDetail?.colors?.map((color) => color?.code);
+  // const choiceOptions = productDetail?.choice_options?.map(
+  //   (list) => list?.options
+  // );
+  // const defaultOption = choiceOptions?.map((option) => option[0]);
+  // const colors = productDetail?.colors?.map((color) => color?.code);
 
   const priceVariantHandlerByChoiceOption = (option) => {
+    setActiveOption(option)
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
@@ -208,11 +217,10 @@ const ProductDetailsPage = () => {
                         <div className="d-flex">
                           {list?.options?.map((option) => (
                             <span
-                              style={{ cursor: "pointer" }}
                               onClick={() =>
                                 priceVariantHandlerByChoiceOption(option)
                               }
-                              className="size1"
+                              className={activeOption ? option === activeOption ? `activeOption` : `option` : option === defaultOption[0] ? `activeOption` : `option`}
                             >
                               {option}
                             </span>
@@ -329,9 +337,9 @@ const ProductDetailsPage = () => {
                       </h5>
                     ) : (
                       <h5>
-                        Price: ৳{" "}
-                        {variantPrice
-                          ? variantPrice * quantityCount
+                        Total Price: ৳{" "}
+                        {variantPrice && isItemExist
+                          ? variantPrice 
                           : quantityCount *
                             (productDetail?.unit_price -
                               productDetail?.discount)}

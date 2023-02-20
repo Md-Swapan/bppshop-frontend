@@ -39,7 +39,7 @@
   margin-left: 40px;
 }
 
-.size1 {
+.option {
   width: 40px;
   height: 40px;
   border: 1px solid rgb(184, 184, 184);
@@ -49,6 +49,21 @@
   justify-content: center;
   align-items: center;
   margin: 0px 3px;
+  cursor: pointer;
+}
+
+.activeOption{
+  background: #ef8341;
+  color: #ffff;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 3px;
+  cursor: pointer;
 }
 
 .color h5,
@@ -162,3 +177,4 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
