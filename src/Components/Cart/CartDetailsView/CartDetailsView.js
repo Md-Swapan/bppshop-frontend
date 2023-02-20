@@ -45,7 +45,7 @@ const CartDetailsView = () => {
   };
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
     document.querySelector(".cartDetailsView-container").style.display = "none";
-    document.querySelector(".cart").style.display = "none";
+    // document.querySelector(".cart").style.display = "none";
   };
 
   const CartEmptyAlert = () => {
