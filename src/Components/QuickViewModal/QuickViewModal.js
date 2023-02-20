@@ -30,7 +30,6 @@ const QuickViewModal = ({ pid }) => {
 
   const [activeOption, setActiveOption] = useState();
  
-
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -58,7 +57,6 @@ const QuickViewModal = ({ pid }) => {
   }, [pid]);
 
   
-
   const priceVariantHandlerByChoiceOption = (option) => {
     setActiveOption(option);
 
@@ -242,7 +240,6 @@ const QuickViewModal = ({ pid }) => {
                                 ? quantityCount - 1
                                 : quantityCount
                             )
-                            // dispatch(getPriceVariant(priceVariantDatas))
                           }
                           className="minus"
                         >
@@ -281,7 +278,6 @@ const QuickViewModal = ({ pid }) => {
                             //     ? currentQty + 1
                             //     : quantityCount;
                             //   });
-                            //   dispatch(getPriceVariant(priceVariantDatas))
 
                           }
                           className="plus"
