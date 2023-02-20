@@ -8,6 +8,7 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import SliderImage from "react-zoom-slider";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const QuickViewModal = ({ pid }) => {
   const { slug, subSlug, subSubSlug } = useParams();
@@ -29,10 +30,14 @@ const QuickViewModal = ({ pid }) => {
   const colors = productDetail?.colors?.map((color) => color?.code);
 
   const [activeOption, setActiveOption] = useState();
- 
+
+
+  const notify = () => toast.error('Stock Limited.');
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
+      // notify()
       return;
     }
     dispatch(addItemsToCart(id, newQty));
@@ -41,6 +46,7 @@ const QuickViewModal = ({ pid }) => {
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
+      // toast("Stock Limited")
       return;
     }
     dispatch(addItemsToCart(id, newQty));
@@ -110,7 +116,9 @@ const QuickViewModal = ({ pid }) => {
 
   return (
     <>
+    
       <div className="modal-container">
+      {/* <Toaster /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
@@ -351,6 +359,7 @@ const QuickViewModal = ({ pid }) => {
           </div>
         </div>
       </div>
+      {/* <ToastContainer /> */}
     </>
   );
 };

@@ -8,7 +8,7 @@ import {
   removeLoading,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const CartDetailsView = () => {
@@ -20,12 +20,15 @@ const CartDetailsView = () => {
   });
   const { loading} = useSelector((state) => state.cart);
 
-
+  const notify = () => toast.error('Stock Limited.');
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
+     
+      notify()
       return;
     }
+   
     dispatch(addItemsToCart(id, newQty));
   };
 
@@ -61,6 +64,7 @@ const CartDetailsView = () => {
   // })
   return (
     <div className="cartDetailsView-container">
+      <Toaster />
       <div className="cartDetailsView-header">
         <h4>My Cart</h4>
         <p onClick={CartDetailsCloseHandler}>
@@ -177,7 +181,7 @@ const CartDetailsView = () => {
           </Link>
         )}
       </div>
-      <ToastContainer />
+      
     </div>
   );
 };
