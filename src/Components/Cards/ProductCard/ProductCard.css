@@ -67,7 +67,7 @@
 .overlayAddToCartBtn{
   color: #ffffff;
   text-align: center;
-  margin-top: 50%;
+  margin-top: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,6 +230,7 @@
   }
   .overlayViewCartBtn {
     display: block;
+    margin-top: 40%;
   }
 
   .product-card:hover .quickViewBtn {
