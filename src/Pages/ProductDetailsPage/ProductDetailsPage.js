@@ -48,6 +48,8 @@ const ProductDetailsPage = () => {
 
   const [activeOption, setActiveOption] = useState();
 
+  
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -82,6 +84,10 @@ const ProductDetailsPage = () => {
 
   const priceVariantHandlerByChoiceOption = (option) => {
     setActiveOption(option)
+
+    localStorage.setItem("activeOption", option);
+
+
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
