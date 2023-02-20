@@ -15,8 +15,6 @@ const QuickViewModal = ({ pid }) => {
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
 
-  console.log(pid)
-
   const cartItems = useSelector((state) => state.cart.cartItems);
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
@@ -24,6 +22,14 @@ const QuickViewModal = ({ pid }) => {
 
   const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
 
+  const choiceOptions = productDetail?.choice_options?.map(
+    (list) => list?.options
+  );
+  const defaultOption = choiceOptions?.map((option) => option[0]);
+  const colors = productDetail?.colors?.map((color) => color?.code);
+
+  const [activeOption, setActiveOption] = useState();
+ 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -50,13 +56,11 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  const choiceOptions = productDetail?.choice_options?.map(
-    (list) => list?.options
-  );
-  const defaultOption = choiceOptions?.map((option) => option[0]);
-  const colors = productDetail?.colors?.map((color) => color?.code);
-
+  
   const priceVariantHandlerByChoiceOption = (option) => {
+    setActiveOption(option);
+
+
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
       choice_19: `${defaultOption[0]}`,
@@ -172,11 +176,10 @@ const QuickViewModal = ({ pid }) => {
                         <div className="d-flex">
                           {list?.options?.map((option) => (
                             <span
-                              style={{ cursor: "pointer" }}
                               onClick={() =>
                                 priceVariantHandlerByChoiceOption(option)
                               }
-                              className="size1"
+                              className={activeOption ? option === activeOption ? `activeOption` : `option` : option === defaultOption[0] ? `activeOption` : `option`}
                             >
                               {option}
                             </span>
@@ -231,14 +234,12 @@ const QuickViewModal = ({ pid }) => {
                         </span>
                       ) : (
                         <span
-                          onClick={
-                            () =>
-                              setQuantityCount(
-                                quantityCount > 1
-                                  ? quantityCount - 1
-                                  : quantityCount
-                              )
-                            // priceVariantHandlerByQty()
+                          onClick={() => 
+                            setQuantityCount(
+                              quantityCount > 1
+                                ? quantityCount - 1
+                                : quantityCount
+                            )
                           }
                           className="minus"
                         >
@@ -265,12 +266,19 @@ const QuickViewModal = ({ pid }) => {
                         </span>
                       ) : (
                         <span
-                          onClick={() =>
+                          onClick={() => 
                             setQuantityCount(
                               productDetail.current_stock > quantityCount
                                 ? quantityCount + 1
                                 : quantityCount
                             )
+
+                            // setQuantityCount((currentQty) => {
+                            //   return productDetail.current_stock > quantityCount
+                            //     ? currentQty + 1
+                            //     : quantityCount;
+                            //   });
+
                           }
                           className="plus"
                         >
@@ -298,8 +306,8 @@ const QuickViewModal = ({ pid }) => {
                     ) : (
                       <h5>
                         Total Price: ৳{" "}
-                        {variantPrice
-                          ? variantPrice * quantityCount
+                        {variantPrice && isItemExist
+                          ? variantPrice
                           : quantityCount *
                             (productDetail?.unit_price -
                               productDetail?.discount)}
@@ -307,10 +315,7 @@ const QuickViewModal = ({ pid }) => {
                     )}
                   </div>
                 </div>
-                <div
-                  className="product_description"
-                  
-                >
+                <div className="product_description">
                   <h5>Description :</h5>
                   <span
                     dangerouslySetInnerHTML={{ __html: productDetail.details }}
