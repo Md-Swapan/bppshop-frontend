@@ -172,16 +172,16 @@ const QuickViewModal = ({ pid }) => {
                     className={
                       productDetail?.choice_options?.length < 1
                         ? "d-none"
-                        : "d-flex size"
+                        : "choiceOptionListContainer size"
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
                       <div
                         key={list.id}
-                        className="d-flex justify-content-center align-items-center"
+                        className="choiceOptionList"
                       >
                         <h5>{list?.title}: </h5>
-                        <div className="d-flex">
+                        <div className="choiceOption">
                           {list?.options?.map((option) => (
                             <span
                               onClick={() =>

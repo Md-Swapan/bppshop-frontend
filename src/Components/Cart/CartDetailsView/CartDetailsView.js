@@ -18,7 +18,7 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  const { loading} = useSelector((state) => state.cart);
+  const { loading } = useSelector((state) => state.cart);
 
   const notify = () => toast.error('Stock Limited.');
   const increaseQuantity = (id, quantity, stock) => {
@@ -31,6 +31,8 @@ const CartDetailsView = () => {
    
     dispatch(addItemsToCart(id, newQty));
   };
+ 
+
 
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;

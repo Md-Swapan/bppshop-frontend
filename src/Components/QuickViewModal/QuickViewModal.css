@@ -66,10 +66,12 @@
   cursor: pointer;
 }
 
-.color h5,
+.color h5{
+  font-size: 17px;
+  margin-right: 10px;
+}
 .size h5 {
   font-size: 17px;
-  margin-top: 8px;
   margin-right: 10px;
 }
 .color1 {
@@ -166,15 +168,15 @@
 
 .product_description {
   height: 160px;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: 20px 0px;
 }
-.product_description::-webkit-scrollbar {
+/* .product_description::-webkit-scrollbar {
   display: none;
 }
 
 .product_description {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
+} */
 

@@ -23,6 +23,8 @@ const ProductDetailsPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  console.log(productDetail);
+
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
@@ -47,7 +49,7 @@ const ProductDetailsPage = () => {
 
   const [activeOption, setActiveOption] = useState("");
   // console.log(activeOption);
-// let activeOption = localStorage.getItem("activeOption");
+  // let activeOption = localStorage.getItem("activeOption");
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -204,16 +206,13 @@ const ProductDetailsPage = () => {
                     className={
                       productDetail?.choice_options?.length < 1
                         ? "d-none"
-                        : "d-flex size"
+                        : "choiceOptionListContainer size"
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
-                      <div
-                        key={list.id}
-                        className="d-flex justify-content-center align-items-center"
-                      >
+                      <div key={list.id} className="choiceOptionList">
                         <h5>{list?.title}: </h5>
-                        <div className="d-flex">
+                        <div className="choiceOption">
                           {list?.options?.map((option) => (
                             <span
                               onClick={() =>

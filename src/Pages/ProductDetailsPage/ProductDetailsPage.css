@@ -56,6 +56,19 @@
 .product_details_page_price .prices del {
   margin-left: 20px;
 }
+.choiceOptionListContainer{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+.choiceOptionList{
+  padding: 10px 0px;
+  /* border: 1px solid gainsboro; */
+}
+.choiceOption{
+  display: flex;
+  
+}
 .product_details_page_pc_size_color {
   border: 1px solid gainsboro;
   border-bottom: none;
@@ -125,17 +138,10 @@
 
 .product_details_page_product_description {
   height: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
-.product_details_page_product_description::-webkit-scrollbar {
-  display: none;
-}
 
-.product_details_page_product_description {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
 @media screen and (max-width: 768px) {
   .product_details_page_container {
@@ -153,7 +159,15 @@
     padding: 0px;
     margin-top: 50px;
   }
-
+  .choiceOptionListContainer{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+  }
+  .choiceOption{
+    display: flex;
+    flex-wrap: wrap; 
+  }
   .product_details_page_quantity_content {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
