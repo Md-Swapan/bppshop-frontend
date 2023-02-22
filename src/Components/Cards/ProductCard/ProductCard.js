@@ -50,6 +50,7 @@ const ProductCard = ({ product }) => {
     current_stock,
     thumbnail,
   } = product;
+  // console.log(product);
 
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {

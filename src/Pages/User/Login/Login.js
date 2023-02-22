@@ -5,6 +5,30 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
+import toast from 'react-hot-toast';
+
+const notify = () =>
+  toast("Login Success.", {
+    // Auto dismiss after 4 seconds
+    duration: 3000,
+    // Styling
+
+    style: {
+      width: "500px",
+      height: "80px",
+    },
+    className: "",
+
+    // Change colors of success/error/loading icon
+    iconTheme: {
+      primary: "#000",
+      secondary: "#fff",
+    },
+
+    // Aria
+    role: "status",
+    ariaLive: "polite",
+  });
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,7 +47,9 @@ const Login = () => {
     if (isAuthenticated === true && token) {
       let from = location?.state?.from?.pathname || "/";
       navigate(from, { replace: true });
+      notify();
     }
+    
   }, [isAuthenticated, token, location, navigate]);
 
   return (
@@ -96,8 +122,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-
-      <div id="snackbar">You Have Login Successfully</div>
     </div>
   );
 };
