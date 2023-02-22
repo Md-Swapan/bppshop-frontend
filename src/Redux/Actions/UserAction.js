@@ -35,6 +35,7 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       loginData,
       config
     );
+    // console.log(data);
     dispatch({ type: LOGIN_SUCCESS, payload: data});
     localStorage.setItem("token", data.token);
     localStorage.setItem("message", data.message);
