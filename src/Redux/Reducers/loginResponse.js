@@ -44,6 +44,26 @@ export const loginResReducer = (state = { loginRes: {} }, action) => {
         error: action.payload,
       };
 
+
+      // case LOGOUT_REQUEST:
+      // return {
+      //   loading: true,
+      //   isAuthenticated: false,
+      // };
+    case LOGOUT_SUCCESS:
+      return {
+        loading: false,
+        loginRes: null,
+        isAuthenticated: false,
+      };
+    case LOGOUT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+
     default:
       return state;
   }

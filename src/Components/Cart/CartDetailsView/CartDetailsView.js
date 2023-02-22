@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CartDetailsView.css";
 import { Link } from "react-router-dom";
 import {
   addItemsToCart,
   removeItemsFromCart,
-  removeLoading,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from "react-hot-toast";
+
+const notify = () =>
+ 
+  toast("Stock Limited.", {
+    duration: 3000,
+    style: {
+      width: "100%",
+      height: "80px",
+      padding: "0px 20px",
+      color: "red"
+    },
+  });
 
 
 const CartDetailsView = () => {
@@ -18,21 +29,17 @@ const CartDetailsView = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-  const { loading } = useSelector((state) => state.cart);
+  // const { loading } = useSelector((state) => state.cart);
 
-  const notify = () => toast.error('Stock Limited.');
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
-     
-      notify()
+      notify();
       return;
     }
-   
+
     dispatch(addItemsToCart(id, newQty));
   };
- 
-
 
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;
@@ -43,10 +50,14 @@ const CartDetailsView = () => {
   };
 
   const CartDetailsCloseHandler = () => {
-    const cartDetailsViewContainer = document.querySelector(".cartDetailsView-container");
+    const cartDetailsViewContainer = document.querySelector(
+      ".cartDetailsView-container"
+    );
     // document.querySelector(".cart").style.display = "block";
 
-    cartDetailsViewContainer.classList.toggle("cartDetailsView-container-toggle");
+    cartDetailsViewContainer.classList.toggle(
+      "cartDetailsView-container-toggle"
+    );
   };
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
     document.querySelector(".cartDetailsView-container").style.display = "none";
@@ -66,7 +77,6 @@ const CartDetailsView = () => {
   // })
   return (
     <div className="cartDetailsView-container">
-      
       <div className="cartDetailsView-header">
         <h4>My Cart</h4>
         <p onClick={CartDetailsCloseHandler}>
@@ -143,7 +153,8 @@ const CartDetailsView = () => {
                     </div>
                     {item?.product?.discount > 0 ? (
                       <span className="mx-2 text-end">
-                        ৳{item?.quantity *
+                        ৳
+                        {item?.quantity *
                           (item?.product?.unit_price - item?.product?.discount)}
                       </span>
                     ) : (
@@ -166,7 +177,9 @@ const CartDetailsView = () => {
             {`${cartItems?.reduce(
               (acc, item) =>
                 acc +
-                item?.quantity * (item?.product?.unit_price - item?.product?.discount) * quantityCount,
+                item?.quantity *
+                  (item?.product?.unit_price - item?.product?.discount) *
+                  quantityCount,
               0
             )}`}
           </h6>
@@ -183,7 +196,6 @@ const CartDetailsView = () => {
           </Link>
         )}
       </div>
-      <Toaster />
     </div>
   );
 };

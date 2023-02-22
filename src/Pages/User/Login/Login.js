@@ -5,7 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+
 
 
 const Login = () => {
@@ -16,23 +17,31 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
- 
-  const notify = () => {
-    toast.success('Toast Message.')
-  };
 
+  const notify = () =>
+  toast.success(`${loginRes?.message}`, {
+    duration: 3000,
+
+    style: {
+      width: "100%",
+      height: "80px",
+      padding: "0px 20px"
+    },
+  });
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
   };
+
   useEffect(() => {
     if (isAuthenticated === true && token) {
+      notify()
 
-      // let from = location?.state?.from?.pathname || "/";
-      // navigate(from, { replace: true });
+      let from = location?.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
     }
 
-  }, [loginRes, isAuthenticated, token, location, navigate]);
+  }, [loginRes, isAuthenticated, token, location, navigate,]);
 
   
   return (
@@ -103,10 +112,6 @@ const Login = () => {
               </Link>
             </div> */}
 
-<div>
-      <button onClick={notify}>Show The Toast</button>
-      <Toaster />
-    </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import defaultAvatar from "../../../Assets/Images/default-avatar.jpg";
 import bppShopsLogo from "../../../Assets/Images/bpp shop logo 01.png";
@@ -14,28 +14,49 @@ import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressActi
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
+import toast from 'react-hot-toast';
+import { loadUser, logout } from './../../../Redux/Actions/UserAction';
+
+
+
 
 const Nav = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+  const { loginRes } = useSelector((state) => state.loginRes);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     const token = localStorage.getItem("token");
     const config = { headers: { Authorization: `Bearer ${token}` } };
+
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
+      console.log(res)
       if (res.data.status === "success") {
+        navigate('/')
+        notify(res)
         localStorage.removeItem("token");
-        localStorage.removeItem("message");
+        // localStorage.removeItem("message");
         window.location.reload();
-        // dispatch(logout())
+        dispatch(logout())
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
         dispatch(ClearCartGroupItems());
         dispatch(ClearDeliveryCharge());
-     
+        // dispatch(loadUser());
       }
     });
   };
+
+  const notify = (res) =>
+  toast.success(`${res.data.message}`, {
+    duration: 3000,
+    style: {
+      width: "100%",
+      height: "80px",
+      padding: "0px 20px"
+    },
+  });
 
   return (
     <>

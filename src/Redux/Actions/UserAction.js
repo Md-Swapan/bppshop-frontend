@@ -99,11 +99,12 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logout = () => async (dispatch) => {
   try {
-    // dispatch({ type: LOGOUT_REQUEST });
+    dispatch({ type: LOGOUT_REQUEST });
     const token = localStorage.getItem("token");
     const data = await axios.get(`${baseUrl}/customer/logout`, token);
 
     console.log(data);
+
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
