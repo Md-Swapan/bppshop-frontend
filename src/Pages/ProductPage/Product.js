@@ -55,7 +55,7 @@ const Product = ({ allCategory }) => {
       <div className="categoryView-container productView-container">
         {/* {products.length ? ( */}
           <div className="category_content product-content">
-            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#F5F5F5">
+            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
               {loading ? (
                 <>
                   <Skeleton height="335px" borderRadius="10px" count={1} />

@@ -35,19 +35,25 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       loginData,
       config
     );
-    // console.log(data);
+    
+
+    // const loginResponse = data.message
+
+    // console.log(loginResponse)
+    
     dispatch({ type: LOGIN_SUCCESS, payload: data});
     localStorage.setItem("token", data.token);
-    localStorage.setItem("message", data.message);
-
     const token = localStorage.getItem("token");
 
     if (token) {
       dispatch(loadUser())
       dispatch(addItemsToCartWithLogin());
     }
+
+    // dispatch({ type: LOGIN_FAIL, payload: loginResponse});
+
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error });
+    dispatch({ type: LOGIN_FAIL, payload: error.response.message });
   }
 };
 

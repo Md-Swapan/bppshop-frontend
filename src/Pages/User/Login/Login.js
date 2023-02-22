@@ -5,34 +5,43 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Login = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  const { loginRes } = useSelector((state) => state.loginRes);
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
-  const loginMessage = localStorage.getItem("message");
   const token = localStorage.getItem("token");
+ 
+  const notify = () => {
+    toast.success('Toast Message.')
+  };
+
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
   };
-
   useEffect(() => {
     if (isAuthenticated === true && token) {
-      let from = location?.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
-    }
-  }, [isAuthenticated, token, location, navigate]);
 
+      // let from = location?.state?.from?.pathname || "/";
+      // navigate(from, { replace: true });
+    }
+
+  }, [loginRes, isAuthenticated, token, location, navigate]);
+
+  
   return (
     <div className="row justify-content-center">
+    
       <div className="col-md-6">
         <div className="login_card">
           <div className="card-body">
             <h4 className="mb-4">Sign in</h4>
-
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group my-2">
                 <label>Mobile</label>
@@ -56,8 +65,8 @@ const Login = () => {
                   placeholder="Enter Password"
                 />
               </div>
-              {loginMessage && (
-                <small className="text-danger">{loginMessage}</small>
+              {loginRes?.message && (
+                <small className="text-danger">{loginRes?.message}</small>
               )}
               <div className="form-group d-flex flex-wrap justify-content-between py-2">
                 <div className="form-group">
@@ -93,11 +102,14 @@ const Login = () => {
                 <i className="fa fa-user-circle"></i> Sign Up
               </Link>
             </div> */}
+
+<div>
+      <button onClick={notify}>Show The Toast</button>
+      <Toaster />
+    </div>
           </div>
         </div>
       </div>
-
-      <div id="snackbar">You Have Login Successfully</div>
     </div>
   );
 };

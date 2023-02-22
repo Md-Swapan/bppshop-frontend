@@ -33,7 +33,7 @@ const SubSubCategory = ({ allCategory, loading }) => {
 
         <div className="categoryView-container">
           <div className="category_content">
-            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#F5F5F5">
+            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
               {loading ? (
                 <>
                   <Skeleton height="335px" borderRadius="10px" count={1} />

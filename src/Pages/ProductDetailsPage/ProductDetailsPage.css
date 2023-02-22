@@ -58,8 +58,8 @@
 }
 .choiceOptionListContainer{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
+  grid-template-columns: repeat(1, 1fr);
+  /* grid-gap: 0px; */
 }
 .choiceOptionList{
   padding: 10px 0px;

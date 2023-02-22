@@ -9,12 +9,14 @@ import PriceVariantReducers from './Reducers/PriceVariantReducers';
 import { productDetailsReducers } from "./Reducers/ProductReducers";
 import CartGroupReducers from "./Reducers/CartGroupReducers";
 import deliveryChargeReducers from "./Reducers/DeliveryChargeReducer";
+import { loginResReducer } from './Reducers/loginResponse';
 
 
 const rootReducer = combineReducers({
   cart: CartReducers,
   cartGroup: CartGroupReducers,
   user: userReducer,
+  loginRes: loginResReducer,
   userOrders: userOrderReducers,
   userOrderDetails:userOrderDetailReducers,
   shippingInfo: addShippingAddressReducers,

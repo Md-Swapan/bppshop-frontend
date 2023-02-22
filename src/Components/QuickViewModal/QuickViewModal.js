@@ -111,6 +111,7 @@ const QuickViewModal = ({ pid }) => {
     image: imgBaseUrl + `/` + img,
   }));
 
+  
   return (
     <>
       <div className="modal-container">

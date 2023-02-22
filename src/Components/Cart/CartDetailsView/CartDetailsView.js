@@ -66,7 +66,7 @@ const CartDetailsView = () => {
   // })
   return (
     <div className="cartDetailsView-container">
-      <Toaster />
+      
       <div className="cartDetailsView-header">
         <h4>My Cart</h4>
         <p onClick={CartDetailsCloseHandler}>
@@ -183,7 +183,7 @@ const CartDetailsView = () => {
           </Link>
         )}
       </div>
-      
+      <Toaster />
     </div>
   );
 };
