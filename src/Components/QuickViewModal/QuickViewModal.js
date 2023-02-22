@@ -8,7 +8,7 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import SliderImage from "react-zoom-slider";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 const QuickViewModal = ({ pid }) => {
   const { slug, subSlug, subSubSlug } = useParams();
@@ -31,8 +31,7 @@ const QuickViewModal = ({ pid }) => {
 
   const [activeOption, setActiveOption] = useState();
 
-
-  const notify = () => toast.error('Stock Limited.');
+  const notify = () => toast.error("Stock Limited.");
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -62,10 +61,8 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  
   const priceVariantHandlerByChoiceOption = (option) => {
     setActiveOption(option);
-
 
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
@@ -116,9 +113,8 @@ const QuickViewModal = ({ pid }) => {
 
   return (
     <>
-    
       <div className="modal-container">
-      {/* <Toaster /> */}
+        {/* <Toaster /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
@@ -172,22 +168,30 @@ const QuickViewModal = ({ pid }) => {
                     className={
                       productDetail?.choice_options?.length < 1
                         ? "d-none"
-                        : "choiceOptionListContainer size"
+                        : "size"
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
                       <div
                         key={list.id}
-                        className="choiceOptionList"
+                        className=""
                       >
                         <h5>{list?.title}: </h5>
-                        <div className="choiceOption">
+                        <div className="d-flex flex-wrap">
                           {list?.options?.map((option) => (
                             <span
                               onClick={() =>
                                 priceVariantHandlerByChoiceOption(option)
                               }
-                              className={activeOption ? option === activeOption ? `activeOption` : `option` : option === defaultOption[0] ? `activeOption` : `option`}
+                              className={
+                                activeOption
+                                  ? option === activeOption
+                                    ? `activeOption`
+                                    : `option`
+                                  : option === defaultOption[0]
+                                  ? `activeOption`
+                                  : `option`
+                              }
                             >
                               {option}
                             </span>
@@ -242,7 +246,7 @@ const QuickViewModal = ({ pid }) => {
                         </span>
                       ) : (
                         <span
-                          onClick={() => 
+                          onClick={() =>
                             setQuantityCount(
                               quantityCount > 1
                                 ? quantityCount - 1
@@ -274,19 +278,19 @@ const QuickViewModal = ({ pid }) => {
                         </span>
                       ) : (
                         <span
-                          onClick={() => 
-                            setQuantityCount(
-                              productDetail.current_stock > quantityCount
-                                ? quantityCount + 1
-                                : quantityCount
-                            )
+                          onClick={
+                            () =>
+                              setQuantityCount(
+                                productDetail.current_stock > quantityCount
+                                  ? quantityCount + 1
+                                  : quantityCount
+                              )
 
                             // setQuantityCount((currentQty) => {
                             //   return productDetail.current_stock > quantityCount
                             //     ? currentQty + 1
                             //     : quantityCount;
                             //   });
-
                           }
                           className="plus"
                         >
