@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./ProductDetailsPage.css";
 import { useParams } from "react-router-dom";
 import { baseUrl, imgBaseUrl } from "./../../BaseUrl/BaseUrl";
 import { useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
 import SliderImage from "react-zoom-slider";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
+import ReactImageMagnify from 'react-image-magnify';
 
 const ProductDetailsPage = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
@@ -24,8 +24,7 @@ const ProductDetailsPage = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${id}`)
-    .then((res) => {
+    axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
     });
   }, [id]);
@@ -131,6 +130,31 @@ const ProductDetailsPage = () => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
+
+
+  // const newData = productDetail?.images?.map((img) => ({
+  //   image: imgBaseUrl + `/` + img,
+  // }));
+
+  // console.log(newData)
+  // const [img, setImg] = useState(newData);
+  // const hoverHandler = (image, i) => {
+  //   setImg(image);
+  //   refs.current[i].classList.add("active");
+  //   for (var j = 0; j < newData.length; j++) {
+  //     if (i !== j) {
+  //       refs.current[j].classList.remove("active");
+  //     }
+  //   }
+  // };
+  // const refs = useRef([]);
+  // refs.current = [];
+  // const addRefs = (el) => {
+  //   if (el && !refs.current.includes(el)) {
+  //     refs.current.push(el);
+  //   }
+  // };
+
   return (
     <>
       <nav aria-label="breadcrumb">
@@ -167,6 +191,41 @@ const ProductDetailsPage = () => {
                     direction="right"
                   />
                 )}
+
+                {/* <div className="imgZoomContainer">
+                  <div className="left_2">
+                    <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "Wristwatch by Ted Baker London",
+                          isFluidWidth: true,
+                          src: img,
+                        },
+                        largeImage: {
+                          src: img,
+                          width: 1200,
+                          height: 1800,
+                        },
+                        enlargedImageContainerDimensions: {
+                          width: "100%",
+                          height: "100%",
+                        },
+                      }}
+                    />
+                  </div>
+                  <div className="left_1">
+                    { productDetail?.images?.map((image, i) => (
+                      <div
+                        className={i == 0 ? "img_wrap active" : "img_wrap"}
+                        key={i}
+                        onMouseOver={() => hoverHandler(image, i)}
+                        ref={addRefs}
+                      >
+                        <img src={image} alt="" />
+                      </div>
+                    ))}
+                  </div>
+                </div> */}
               </div>
             </div>
             <div className="col-md-8">
