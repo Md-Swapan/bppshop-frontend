@@ -95,6 +95,36 @@ const ProductCard = ({ product }) => {
   //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
   // })
 
+  const OptionUnit = [
+    "kg",
+    "pc",
+    "mg",
+    "gm",
+    "gms",
+    "ltrs",
+    "ml",
+    "pcs",
+    "bundle",
+    "pair",
+    "box",
+    "carton",
+    "dozen",
+    "set",
+  ];
+
+  const optionTitle = product.choice_options?.map((list) => list?.title);
+  const title = optionTitle.map((i) => i);
+  const unit = OptionUnit.find((i) => i === title[0]);
+
+  const options = product.choice_options?.map((list) => list?.options);
+  const op = options.map((i) => i[0]);
+
+  // const optns = product.choice_options?.find((i) => i?.op[0]);
+  // const unitOptions = OprionUnit.find(i => i === op[0])
+
+  // console.log(optns)
+
+  
 
   return (
     <>
@@ -119,7 +149,7 @@ const ProductCard = ({ product }) => {
                     <span>
                       {choice_options?.map((list) => (
                         <>
-                          {list?.title} : {list?.options[0]}{" "}
+                          {list?.title} : {list?.options[0]}
                         </>
                       ))}
                     </span>
@@ -139,8 +169,17 @@ const ProductCard = ({ product }) => {
                     )}
                   </div>
                 </div>
-                <div className={addedItemId ? `quickView_AddToCart_overlay_active` : `quickView_AddToCart_overlay`}>
-                  <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`} addedItemId={addedItemId}>
+                <div
+                  className={
+                    addedItemId
+                      ? `quickView_AddToCart_overlay_active`
+                      : `quickView_AddToCart_overlay`
+                  }
+                >
+                  <Link
+                    to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                    addedItemId={addedItemId}
+                  >
                     <div className="overlayViewCartBtn">
                       <span>
                         <i className="bi bi-eye-fill"></i> view
@@ -163,9 +202,16 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <span onClick={() => productDetailsView(id)}>
-                <button className="quickViewBtn" onClick={openModal}>
+                {/* <button className="quickViewBtn" onClick={openModal}> */}
+                {/* <button onClick={openModal} className="quickViewBtn">
                   <i className="bi bi-eye-fill"></i> <span>Quick View</span>
-                </button>
+                </button> */}
+
+                <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                  <button className="quickViewBtn">
+                    <i className="bi bi-eye-fill"></i> View Details
+                  </button>
+                </Link>
               </span>
 
               <div className="card-footer product-card-footer">
@@ -215,6 +261,7 @@ const ProductCard = ({ product }) => {
                       {choice_options?.map((list) => (
                         <>
                           {list?.title} : {list?.options[0]}
+                          {/* {unit} : {op[0]}{" "} */}
                         </>
                       ))}
                     </span>

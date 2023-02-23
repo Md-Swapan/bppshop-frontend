@@ -23,13 +23,22 @@ const ProductDetailsPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  console.log(productDetail);
-
+  // window.location.reload();
   useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
+    axios.get(`${baseUrl}/products/details/${id}`)
+    .then((res) => {
       setProductDetail(res?.data?.data);
+
+      if(res.data.status === "success"){
+        // openDetailsPage()
+        
+      }
     });
   }, [id]);
+
+  // const openDetailsPage = () => {
+  //   window.location.reload();
+  // }
 
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
