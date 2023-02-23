@@ -152,7 +152,7 @@ const ProductCard = ({ product }) => {
                           {list?.title} : {list?.options[0]}
                         </>
                       ))} */}
-                      {choice_options?.map((list) => productUnitStatic.find(item=>item===list.title))}:{choice_options[0].options[0]}
+                      {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]}
                     </span>
                     <br />
                     {discount ? (
@@ -263,7 +263,7 @@ const ProductCard = ({ product }) => {
                         <>
                           {/* {list?.title} : {list?.options[0]} */}
                           <span>
-                            {choice_options?.map((list) => productUnitStatic.find(item=>item===list.title))}:{choice_options[0].options[0]}
+                            {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]}
                           </span>
                         </>
                       ))}
