@@ -33,21 +33,17 @@ import CheckoutShopCart from './Components/CheckoutComponent/CheckoutShopCart/Ch
 import TrackOrderDetails from './Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails';
 import CheckoutComplete from './Pages/Checkut/CheckoutComplete';
 import ProductDetailsPage from './Pages/ProductDetailsPage/ProductDetailsPage';
+import Search from "./Pages/Search/Search";
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
-  // const { isAuthenticated, error} = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadUserOrders())
-
-    // if(token){
-    //   store.dispatch(getCartData())
-    // }
 
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res.data.data);
@@ -65,6 +61,8 @@ function App() {
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
           <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage/>} />
+          <Route path="/search" element={<Search/>} />
+          {/* <Route path="/search/:productName" element={<Search/>} /> */}
         
           <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>
               <Route index element={<ShippingHome/>}></Route>
@@ -73,7 +71,7 @@ function App() {
           </Route>
           <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComplete /></ProtectedRoute>}/>
 
-          {/* <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails /></ProtectedRoute>}/> */}
+      
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>
           <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>

@@ -95,7 +95,7 @@ const ProductCard = ({ product }) => {
   //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
   // })
 
-  const OptionUnit = [
+  const productUnitStatic = [
     "kg",
     "pc",
     "mg",
@@ -112,12 +112,12 @@ const ProductCard = ({ product }) => {
     "set",
   ];
 
-  const optionTitle = product.choice_options?.map((list) => list?.title);
-  const title = optionTitle.map((i) => i);
-  const unit = OptionUnit.find((i) => i === title[0]);
+  // const optionTitle = product.choice_options?.map((list) => list?.title);
+  // const title = optionTitle.map((i) => i);
+  // const unit = OptionUnit.find((i) => i === title[0]);
 
-  const options = product.choice_options?.map((list) => list?.options);
-  const op = options.map((i) => i[0]);
+  // const options = product.choice_options?.map((list) => list?.options);
+  // const op = options.map((i) => i[0]);
 
   // const optns = product.choice_options?.find((i) => i?.op[0]);
   // const unitOptions = OprionUnit.find(i => i === op[0])
@@ -147,11 +147,12 @@ const ProductCard = ({ product }) => {
                   <br />
                   <div className="product-card-body-content-unit-price">
                     <span>
-                      {choice_options?.map((list) => (
+                      {/* {choice_options?.map((list) => (
                         <>
                           {list?.title} : {list?.options[0]}
                         </>
-                      ))}
+                      ))} */}
+                      {choice_options?.map((list) => productUnitStatic.find(item=>item===list.title))}:{choice_options[0].options[0]}
                     </span>
                     <br />
                     {discount ? (
@@ -260,8 +261,10 @@ const ProductCard = ({ product }) => {
                     <span>
                       {choice_options?.map((list) => (
                         <>
-                          {list?.title} : {list?.options[0]}
-                          {/* {unit} : {op[0]}{" "} */}
+                          {/* {list?.title} : {list?.options[0]} */}
+                          <span>
+                            {choice_options?.map((list) => productUnitStatic.find(item=>item===list.title))}:{choice_options[0].options[0]}
+                          </span>
                         </>
                       ))}
                     </span>
