@@ -91,11 +91,22 @@ const ProductCard = ({ product }) => {
     }
   };
 
-  // document.querySelector(".product-card").addEventListener("onMouseOver", () => {
-  //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
-  // })
-
-
+  const productUnitStatic = [
+    "kg",
+    "pc",
+    "mg",
+    "gm",
+    "gms",
+    "ltrs",
+    "ml",
+    "pcs",
+    "bundle",
+    "pair",
+    "box",
+    "carton",
+    "dozen",
+    "set",
+  ];
   return (
     <>
       <div className="product_card_content">
@@ -117,11 +128,7 @@ const ProductCard = ({ product }) => {
                   <br />
                   <div className="product-card-body-content-unit-price">
                     <span>
-                      {choice_options?.map((list) => (
-                        <>
-                          {list?.title} : {list?.options[0]}{" "}
-                        </>
-                      ))}
+                      {choice_options?.map((list) => productUnitStatic.find(item=>item===list.title))}:{choice_options[0].options[0]}
                     </span>
                     <br />
                     {discount ? (
@@ -139,8 +146,17 @@ const ProductCard = ({ product }) => {
                     )}
                   </div>
                 </div>
-                <div className={addedItemId ? `quickView_AddToCart_overlay_active` : `quickView_AddToCart_overlay`}>
-                  <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`} addedItemId={addedItemId}>
+                <div
+                  className={
+                    addedItemId
+                      ? `quickView_AddToCart_overlay_active`
+                      : `quickView_AddToCart_overlay`
+                  }
+                >
+                  <Link
+                    to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                    addedItemId={addedItemId}
+                  >
                     <div className="overlayViewCartBtn">
                       <span>
                         <i className="bi bi-eye-fill"></i> view
@@ -214,7 +230,9 @@ const ProductCard = ({ product }) => {
                     <span>
                       {choice_options?.map((list) => (
                         <>
-                          {list?.title} : {list?.options[0]}
+                          <span>
+                            {choice_options?.map((list) => productUnitStatic.find(item=>item===list.title))}:{choice_options[0].options[0]}
+                          </span>
                         </>
                       ))}
                     </span>

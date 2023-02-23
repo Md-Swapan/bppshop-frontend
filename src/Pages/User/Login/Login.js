@@ -41,7 +41,7 @@ const Login = () => {
       navigate(from, { replace: true });
     }
 
-  }, [loginRes, isAuthenticated, token, location, navigate,]);
+  }, [loginRes, isAuthenticated, token, location, navigate]);
 
   
   return (

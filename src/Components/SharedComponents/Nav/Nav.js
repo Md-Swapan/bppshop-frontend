@@ -14,50 +14,62 @@ import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressActi
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
-import toast from 'react-hot-toast';
-import { loadUser, logout } from './../../../Redux/Actions/UserAction';
-
-
-
+import toast from "react-hot-toast";
+import { logout } from "./../../../Redux/Actions/UserAction";
+import { useState } from "react";
 
 const Nav = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { loginRes } = useSelector((state) => state.loginRes);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
+  //Logout functionality
   const handleLogout = () => {
-    const token = localStorage.getItem("token");
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
-      console.log(res)
+      console.log(res);
       if (res.data.status === "success") {
-        navigate('/')
-        notify(res)
+        navigate("/");
+        notify(res);
         localStorage.removeItem("token");
-        // localStorage.removeItem("message");
         window.location.reload();
-        dispatch(logout())
+        dispatch(logout());
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
         dispatch(ClearCartGroupItems());
         dispatch(ClearDeliveryCharge());
-        // dispatch(loadUser());
       }
     });
   };
 
+  //toster functionality
   const notify = (res) =>
-  toast.success(`${res.data.message}`, {
-    duration: 3000,
-    style: {
-      width: "100%",
-      height: "80px",
-      padding: "0px 20px"
-    },
-  });
+    toast.success(`${res.data.message}`, {
+      duration: 3000,
+      style: {
+        width: "100%",
+        height: "80px",
+        padding: "0px 20px",
+      },
+    });
 
+  //search functionality
+  let offset = 1;
+  let limit = 10;
+  const url = baseUrl + "/products/search";
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    e.target.value && navigate("/search");
+    const data = {
+      "name": `${e.target.value}`,
+      "limit": `${limit}`,
+      "offset": `${offset}`,
+    };
+    axios({ method: "post", url, data }).then((res) => console.log(res));
+  };
   return (
     <>
       <div className="navbar-section">
@@ -67,7 +79,11 @@ const Nav = () => {
             <div className="logo">
               <Link to="/">
                 <img className="bpshopsLogo" src={bppShopsLogo} alt="" />
-                <img className="bppshopShortLogo" src={bppShopshortLogo} alt="" />
+                <img
+                  className="bppshopShortLogo"
+                  src={bppShopshortLogo}
+                  alt=""
+                />
               </Link>
 
               <img className="bpshopsIcon" src="img/bpp_icon.png" alt="" />
@@ -75,6 +91,7 @@ const Nav = () => {
 
             <div className="searchInput">
               <input
+                onKeyUp={handleSearch}
                 type="text"
                 name=""
                 id="dynamic-placeholder"

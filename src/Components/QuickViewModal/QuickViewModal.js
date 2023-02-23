@@ -16,6 +16,7 @@ const QuickViewModal = ({ pid }) => {
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
 
+  console.log(productDetail);
   const cartItems = useSelector((state) => state.cart.cartItems);
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
