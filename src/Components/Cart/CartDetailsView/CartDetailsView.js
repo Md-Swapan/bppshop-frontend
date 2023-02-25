@@ -10,17 +10,15 @@ import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import toast from "react-hot-toast";
 
 const notify = () =>
- 
   toast("Stock Limited.", {
     duration: 3000,
     style: {
       width: "100%",
       height: "80px",
       padding: "0px 20px",
-      color: "red"
+      color: "red",
     },
   });
-
 
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -47,6 +45,20 @@ const CartDetailsView = () => {
       return;
     }
     dispatch(addItemsToCart(id, newQty));
+  };
+
+  //cart item remove functionality
+  const handleRemoveItemFormCart = (id) => {
+    dispatch(removeItemsFromCart(id));
+    // toaster
+    toast.success(`Item removed from cart successfull`, {
+      duration: 3000,
+      style: {
+        width: "100%",
+        height: "80px",
+        padding: "0px 20px",
+      },
+    });
   };
 
   const CartDetailsCloseHandler = () => {
@@ -101,9 +113,7 @@ const CartDetailsView = () => {
                     {item?.product?.name?.toString().substring(0, 20)}...
                   </small>
                   <span
-                    onClick={() =>
-                      dispatch(removeItemsFromCart(item?.product?.id))
-                    }
+                    onClick={() => handleRemoveItemFormCart(item?.product?.id)}
                     className="cartItemDeleteBtn"
                   >
                     <i className="bi bi-trash3"></i>

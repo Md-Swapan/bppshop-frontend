@@ -12,47 +12,32 @@ import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
-
-// const images = [
-//   '../images/img1.jpg',
-//   '../images/img2.jpg',
-//   '../images/img3.jpg',
-//   '../images/img4.jpg',
-//   '../images/img5.jpg',
-// ];
+import toast from "react-hot-toast";
 
 const ProductDetailsPage = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
-
   let newId = parseInt(id);
-
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
     });
   }, [id]);
-
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
-
   const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
-
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
-
   const [activeOption, setActiveOption] = useState("");
   // console.log(activeOption);
   // let activeOption = localStorage.getItem("activeOption");
-
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -60,7 +45,6 @@ const ProductDetailsPage = () => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
-
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
@@ -68,28 +52,22 @@ const ProductDetailsPage = () => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
-
   const { priceVariant } = useSelector((state) => state?.priceVariant);
-
   const variantPrice = priceVariant?.data?.price;
-
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
     });
   }, [id]);
-
   // const choiceOptions = productDetail?.choice_options?.map(
   //   (list) => list?.options
   // );
   // const defaultOption = choiceOptions?.map((option) => option[0]);
   // const colors = productDetail?.colors?.map((color) => color?.code);
-
   const priceVariantHandlerByChoiceOption = (option) => {
     localStorage.setItem("activeOption", option);
     const newActiveOption = localStorage.getItem("activeOption");
     setActiveOption(newActiveOption);
-
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
@@ -105,7 +83,6 @@ const ProductDetailsPage = () => {
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultOptionData));
   };
-
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
@@ -164,6 +141,19 @@ const ProductDetailsPage = () => {
     }
   };
 
+
+  const addToCartHandler = (productDetail, quantityCount) => {
+    dispatch(addItemsToCart(productDetail, quantityCount));
+    // toaster
+    toast.success(`Add to cart successfull`, {
+      duration: 3000,
+      style: {
+        width: "100%",
+        height: "80px",
+        padding: "0px 20px",
+      },
+    });
+  };
   return (
     <>
       <nav aria-label="breadcrumb">
@@ -171,7 +161,6 @@ const ProductDetailsPage = () => {
           <li className="breadcrumb-item">
             <Link to="/">Home</Link>
           </li>
-
           <li className="breadcrumb-item active" aria-current="page">
             <Link to={`/${slug}`}>{slug}</Link>
           </li>
@@ -267,21 +256,19 @@ const ProductDetailsPage = () => {
                     )}
                   </span>
                 </p>
-
                 <div className="product_details_page_price">
                   {productDetail.discount ? (
                     <h5 className="prices">
-                      ৳ {productDetail.unit_price - productDetail.discount}{" "}
+                      ? {productDetail.unit_price - productDetail.discount}{" "}
                       <del className="text-danger">
                         {" "}
-                        ৳ {productDetail.unit_price}
+                        ? {productDetail.unit_price}
                       </del>
                     </h5>
                   ) : (
-                    <h5 className="prices">৳{productDetail.unit_price}</h5>
+                    <h5 className="prices">?{productDetail.unit_price}</h5>
                   )}
                 </div>
-
                 <div className="product_details_page_pc_size_color">
                   <div
                     className={
@@ -316,7 +303,6 @@ const ProductDetailsPage = () => {
                       </div>
                     ))}
                   </div>
-
                   <div
                     className={
                       productDetail?.colors?.length < 1
@@ -344,7 +330,6 @@ const ProductDetailsPage = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="product_details_page_quantity_content ">
                   <h5>Quantity: </h5>
                   <div className="quantity">
@@ -411,20 +396,20 @@ const ProductDetailsPage = () => {
                       <h5>
                         {productDetail?.discount > 0 ? (
                           <span className="mx-2 text-end">
-                            ৳
+                            ?
                             {isItemExist?.quantity *
                               (productDetail?.unit_price -
                                 productDetail?.discount)}
                           </span>
                         ) : (
                           <span className="mx-2 text-end">
-                            ৳{isItemExist?.quantity * productDetail?.unit_price}
+                            ?{isItemExist?.quantity * productDetail?.unit_price}
                           </span>
                         )}
                       </h5>
                     ) : (
                       <h5>
-                        Total Price: ৳{" "}
+                        Total Price: ?{" "}
                         {variantPrice && isItemExist
                           ? variantPrice
                           : quantityCount *
@@ -443,18 +428,16 @@ const ProductDetailsPage = () => {
                     <button
                       className="btn_before_add_cart"
                       onClick={() =>
-                        dispatch(addItemsToCart(productDetail, quantityCount))
+                        addToCartHandler(productDetail, quantityCount)
                       }
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
                   )}
-
                   <button class="addWishListBtn">
                     <i className="bi bi-heart"></i>
                   </button>
                 </div>
-
                 <div className="product_details_page_product_description">
                   <h5>Description :</h5>
                   <span
@@ -470,5 +453,4 @@ const ProductDetailsPage = () => {
     </>
   );
 };
-
 export default ProductDetailsPage;
