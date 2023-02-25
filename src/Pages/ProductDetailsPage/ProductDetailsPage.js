@@ -110,12 +110,43 @@ const ProductDetailsPage = () => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
+  const newData = productDetail?.images?.map((img) => ({
+    image: imgBaseUrl + `/` + img,
+  }));
+
+  console.log(newData);
+
+  const [img, setImg] = useState();
+
+  // const newData = productDetail?.images?.map((img) => {
+  //   setImg(img)
+  //   return img;
+  // });
+
+  const hoverHandler = (image, i) => {
+    setImg(image);
+    refs.current[i].classList.add("imgActive");
+    for (var j = 0; j < productDetail?.images?.length; j++) {
+      if (i !== j) {
+        refs.current[j].classList.remove("imgActive");
+      }
+    }
+  };
+
+  const refs = useRef([]);
+  refs.current = [];
+  const addRefs = (el) => {
+    if (el && !refs.current.includes(el)) {
+      refs.current.push(el);
+    }
+  };
+
+
   const addToCartHandler = (productDetail, quantityCount) => {
     dispatch(addItemsToCart(productDetail, quantityCount));
     // toaster
     toast.success(`Add to cart successfull`, {
       duration: 3000,
-
       style: {
         width: "100%",
         height: "80px",
@@ -123,28 +154,6 @@ const ProductDetailsPage = () => {
       },
     });
   };
-
-  const newData = productDetail?.images?.map((img) => ({
-    image: imgBaseUrl + `/` + img,
-  }));
-  console.log(newData);
-  // const [img, setImg] = useState(newData);
-  // const hoverHandler = (image, i) => {
-  //   setImg(image);
-  //   refs.current[i].classList.add("active");
-  //   for (var j = 0; j < newData.length; j++) {
-  //     if (i !== j) {
-  //       refs.current[j].classList.remove("active");
-  //     }
-  //   }
-  // };
-  // const refs = useRef([]);
-  // refs.current = [];
-  // const addRefs = (el) => {
-  //   if (el && !refs.current.includes(el)) {
-  //     refs.current.push(el);
-  //   }
-  // };
   return (
     <>
       <nav aria-label="breadcrumb">
@@ -172,48 +181,62 @@ const ProductDetailsPage = () => {
           <div className="row">
             <div className="col-md-4">
               <div className="product_details_page_img_container">
-                {newData?.length && (
+                {/* {newData?.length && (
                   <SliderImage
                     data={newData}
                     width="375px"
                     showDescription={true}
                     direction="right"
                   />
+                )} */}
+
+                {newData?.length && (
+                  <div className="imgZoomContainer">
+                    <div className="left_2">
+                      {productDetail?.images?.length && (
+                        <ReactImageMagnify
+                          {...{
+                            smallImage: {
+                              alt: "Wristwatch by Ted Baker London",
+                              isFluidWidth: true,
+                              sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px',
+                              src: img
+                                ? `https://backend.bppshop.com.bd/storage/product/${img}`
+                                : newData[0].image,
+
+                            },
+                            largeImage: {
+                              src: img
+                                ? `https://backend.bppshop.com.bd/storage/product/${img}`
+                                : newData[0].image,
+                                width: 1526,
+                                height: 2000
+                            },
+                            enlargedImageContainerDimensions: {
+                              width: "100%",
+                              height: "100%",
+                            },
+                          }}
+                        />
+                      )}
+                    </div>
+                    <div className="left_1">
+                      {productDetail?.images?.map((image, i) => (
+                        <div
+                          className={i === 0 ? "img_wrap active" : "img_wrap"}
+                          key={i}
+                          onClick={() => hoverHandler(image, i)}
+                          ref={addRefs}
+                        >
+                          <img
+                            src={`https://backend.bppshop.com.bd/storage/product/${image}`}
+                            alt=""
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 )}
-                {/* <div className="imgZoomContainer">
-                  <div className="left_2">
-                    <ReactImageMagnify
-                      {...{
-                        smallImage: {
-                          alt: "Wristwatch by Ted Baker London",
-                          isFluidWidth: true,
-                          src: img,
-                        },
-                        largeImage: {
-                          src: img,
-                          width: 1200,
-                          height: 1800,
-                        },
-                        enlargedImageContainerDimensions: {
-                          width: "100%",
-                          height: "100%",
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className="left_1">
-                    { productDetail?.images?.map((image, i) => (
-                      <div
-                        className={i == 0 ? "img_wrap active" : "img_wrap"}
-                        key={i}
-                        onMouseOver={() => hoverHandler(image, i)}
-                        ref={addRefs}
-                      >
-                        <img src={image} alt="" />
-                      </div>
-                    ))}
-                  </div>
-                </div> */}
               </div>
             </div>
             <div className="col-md-8">

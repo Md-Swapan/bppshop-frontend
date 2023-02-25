@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./QuickViewModal.css";
 import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import SliderImage from "react-zoom-slider";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import ReactImageMagnify from "react-image-magnify";
 
 const QuickViewModal = ({ pid }) => {
   const { slug, subSlug, subSubSlug } = useParams();
@@ -112,7 +113,31 @@ const QuickViewModal = ({ pid }) => {
     image: imgBaseUrl + `/` + img,
   }));
 
-  
+  const [img, setImg] = useState();
+
+  // const newData = productDetail?.images?.map((img) => {
+  //   setImg(img)
+  //   return img;
+  // });
+
+  const hoverHandler = (image, i) => {
+    setImg(image);
+    refs.current[i].classList.add("imgActive");
+    for (var j = 0; j < productDetail?.images?.length; j++) {
+      if (i !== j) {
+        refs.current[j].classList.remove("imgActive");
+      }
+    }
+  };
+
+  const refs = useRef([]);
+  refs.current = [];
+  const addRefs = (el) => {
+    if (el && !refs.current.includes(el)) {
+      refs.current.push(el);
+    }
+  };
+
   return (
     <>
       <div className="modal-container">
@@ -121,13 +146,60 @@ const QuickViewModal = ({ pid }) => {
           <div className="row">
             <div className="col-sm-5">
               <div className="imageView">
-                {newData?.length && (
+                {/* {newData?.length && (
                   <SliderImage
                     data={newData}
                     width="375px"
                     showDescription={true}
                     direction="right"
                   />
+                )} */}
+
+                {newData?.length > 0 && (
+                  <div className="imgZoomContainer">
+                    <div className="left_2">
+                      {productDetail?.images?.length && (
+                        <ReactImageMagnify
+                          {...{
+                            smallImage: {
+                              alt: "Wristwatch by Ted Baker London",
+                              isFluidWidth: true,
+                              sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px',
+                              src: img
+                                ? `https://backend.bppshop.com.bd/storage/product/${img}`
+                                : newData[0].image,
+                            },
+                            largeImage: {
+                              src: img
+                                ? `https://backend.bppshop.com.bd/storage/product/${img}`
+                                : newData[0].image,
+                                width: 1526,
+                                height: 2000
+                            },
+                            enlargedImageContainerDimensions: {
+                              width: "120%",
+                              height: "100%",
+                            },
+                          }}
+                        />
+                      )}
+                    </div>
+                    <div className="left_1">
+                      {productDetail?.images?.map((image, i) => (
+                        <div
+                          className={i === 0 ? "img_wrap active" : "img_wrap"}
+                          key={i}
+                          onClick={() => hoverHandler(image, i)}
+                          ref={addRefs}
+                        >
+                          <img
+                            src={`https://backend.bppshop.com.bd/storage/product/${image}`}
+                            alt=""
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -174,10 +246,7 @@ const QuickViewModal = ({ pid }) => {
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
-                      <div
-                        key={list.id}
-                        className=""
-                      >
+                      <div key={list.id} className="">
                         <h5>{list?.title}: </h5>
                         <div className="d-flex flex-wrap">
                           {list?.options?.map((option) => (

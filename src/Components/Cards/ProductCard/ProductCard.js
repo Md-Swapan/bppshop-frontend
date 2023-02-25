@@ -162,10 +162,7 @@ const ProductCard = ({ product }) => {
                           {list?.title} : {list?.options[0]}
                         </>
                       ))} */}
-                      {choice_options?.map((list) =>
-                        productUnitStatic?.find((item) => item === list?.title)
-                      )}
-                      :{choice_options[0]?.options[0]}
+                      {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]}
                     </span>
                     <br />
                     {discount ? (
@@ -217,15 +214,15 @@ const ProductCard = ({ product }) => {
               </div>
               <span onClick={() => productDetailsView(id)}>
                 {/* <button className="quickViewBtn" onClick={openModal}> */}
-                {/* <button onClick={openModal} className="quickViewBtn">
+                <button onClick={openModal} className="quickViewBtn">
                   <i className="bi bi-eye-fill"></i> <span>Quick View</span>
-                </button> */}
+                </button>
 
-                <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
                     <i className="bi bi-eye-fill"></i> View Details
                   </button>
-                </Link>
+                </Link> */}
               </span>
 
               <div className="card-footer product-card-footer">

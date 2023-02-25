@@ -143,6 +143,39 @@
 
 
 
+.left_1 {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.left_1 img{
+  width: 100%;
+}
+.img_wrap {
+  width: 80px;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+.img_wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.left_2 {
+  width: 380px;
+}
+.left_2 img {
+  width: 500px;
+  object-fit: contain;
+}
+.imgActive {
+  border: 2px solid #e77600;
+}
+
+
+
+
 @media screen and (max-width: 768px) {
   .product_details_page_container {
     width: 100% !important;
