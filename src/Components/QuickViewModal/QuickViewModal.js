@@ -16,7 +16,6 @@ const QuickViewModal = ({ pid }) => {
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
 
-  console.log(productDetail);
   const cartItems = useSelector((state) => state.cart.cartItems);
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
@@ -111,11 +110,6 @@ const QuickViewModal = ({ pid }) => {
   }));
 
   const [img, setImg] = useState();
-
-  // const newData = productDetail?.images?.map((img) => {
-  //   setImg(img)
-  //   return img;
-  // });
 
   const hoverHandler = (image, i) => {
     setImg(image);

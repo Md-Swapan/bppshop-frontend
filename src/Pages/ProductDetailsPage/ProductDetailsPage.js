@@ -114,14 +114,7 @@ const ProductDetailsPage = () => {
     image: imgBaseUrl + `/` + img,
   }));
 
-  console.log(newData);
-
   const [img, setImg] = useState();
-
-  // const newData = productDetail?.images?.map((img) => {
-  //   setImg(img)
-  //   return img;
-  // });
 
   const hoverHandler = (image, i) => {
     setImg(image);
