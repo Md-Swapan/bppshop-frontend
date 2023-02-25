@@ -18,16 +18,6 @@ const Login = () => {
   const location = useLocation();
   const token = localStorage.getItem("token");
 
-  const notify = () =>
-  toast.success(`${loginRes?.message}`, {
-    duration: 3000,
-
-    style: {
-      width: "100%",
-      height: "80px",
-      padding: "0px 20px"
-    },
-  });
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
@@ -35,7 +25,15 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated === true && token) {
-      notify()
+      toast.success(`${loginRes?.message}`, {
+        duration: 3000,
+    
+        style: {
+          width: "100%",
+          height: "80px",
+          padding: "0px 20px"
+        },
+      });
 
       let from = location?.state?.from?.pathname || "/";
       navigate(from, { replace: true });
