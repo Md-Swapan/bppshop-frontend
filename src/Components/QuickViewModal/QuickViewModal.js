@@ -5,10 +5,9 @@ import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
-import SliderImage from "react-zoom-slider";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import ReactImageMagnify from "react-image-magnify";
 
 const QuickViewModal = ({ pid }) => {
@@ -32,8 +31,6 @@ const QuickViewModal = ({ pid }) => {
   const colors = productDetail?.colors?.map((color) => color?.code);
 
   const [activeOption, setActiveOption] = useState();
-
-  const notify = () => toast.error("Stock Limited.");
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -136,6 +133,19 @@ const QuickViewModal = ({ pid }) => {
     if (el && !refs.current.includes(el)) {
       refs.current.push(el);
     }
+  };
+
+  const addToCartHandler = (productDetail, quantityCount) => {
+    dispatch(addItemsToCart(productDetail, quantityCount));
+    // toaster
+    toast.success(`Add to cart successfull`, {
+      duration: 3000,
+      style: {
+        width: "100%",
+        height: "80px",
+        padding: "0px 20px",
+      },
+    });
   };
 
   return (
@@ -415,8 +425,8 @@ const QuickViewModal = ({ pid }) => {
                   ) : (
                     <button
                       className="btn_before_add_cart"
-                      onClick={() =>
-                        dispatch(addItemsToCart(productDetail, quantityCount))
+                      onClick={() =>addToCartHandler(productDetail, quantityCount)
+                        // dispatch(addItemsToCart(productDetail, quantityCount))
                       }
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
