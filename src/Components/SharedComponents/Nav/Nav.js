@@ -16,7 +16,6 @@ import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 import toast from "react-hot-toast";
 import { logout } from "./../../../Redux/Actions/UserAction";
-import { useState } from "react";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ const Nav = () => {
       console.log(res);
       if (res.data.status === "success") {
         navigate("/");
-        notify(res);
         localStorage.removeItem("token");
         window.location.reload();
         dispatch(logout());
@@ -40,20 +38,18 @@ const Nav = () => {
         dispatch(clearShippingAddress());
         dispatch(ClearCartGroupItems());
         dispatch(ClearDeliveryCharge());
+        // toaster
+        toast.success(`Logout Successfull`, {
+          duration: 3000,
+          style: {
+            width: "100%",
+            height: "80px",
+            padding: "0px 20px",
+          },
+        });
       }
     });
   };
-
-  //toster functionality
-  const notify = (res) =>
-    toast.success(`${res.data.message}`, {
-      duration: 3000,
-      style: {
-        width: "100%",
-        height: "80px",
-        padding: "0px 20px",
-      },
-    });
 
   //search functionality
   let offset = 1;
@@ -64,9 +60,9 @@ const Nav = () => {
     e.preventDefault();
     e.target.value && navigate("/search");
     const data = {
-      "name": `${e.target.value}`,
-      "limit": `${limit}`,
-      "offset": `${offset}`,
+      name: `${e.target.value}`,
+      limit: `${limit}`,
+      offset: `${offset}`,
     };
     axios({ method: "post", url, data }).then((res) => console.log(res));
   };

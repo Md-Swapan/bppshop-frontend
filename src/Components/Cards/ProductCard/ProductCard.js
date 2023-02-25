@@ -13,6 +13,7 @@ import {
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 Modal.setAppElement("#root");
 
@@ -66,6 +67,17 @@ const ProductCard = ({ product }) => {
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
+
+    // toaster
+    toast.success(`Add to cart successfull`, {
+      duration: 3000,
+
+      style: {
+        width: "100%",
+        height: "80px",
+        padding: "0px 20px",
+      },
+    });
 
     let color = product.colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
@@ -124,8 +136,6 @@ const ProductCard = ({ product }) => {
 
   // console.log(optns)
 
-  
-
   return (
     <>
       <div className="product_card_content">
@@ -152,7 +162,10 @@ const ProductCard = ({ product }) => {
                           {list?.title} : {list?.options[0]}
                         </>
                       ))} */}
-                      {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]}
+                      {choice_options?.map((list) =>
+                        productUnitStatic?.find((item) => item === list?.title)
+                      )}
+                      :{choice_options[0]?.options[0]}
                     </span>
                     <br />
                     {discount ? (
@@ -263,7 +276,12 @@ const ProductCard = ({ product }) => {
                         <>
                           {/* {list?.title} : {list?.options[0]} */}
                           <span>
-                            {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]}
+                            {choice_options?.map((list) =>
+                              productUnitStatic?.find(
+                                (item) => item === list?.title
+                              )
+                            )}
+                            :{choice_options[0]?.options[0]}
                           </span>
                         </>
                       ))}
