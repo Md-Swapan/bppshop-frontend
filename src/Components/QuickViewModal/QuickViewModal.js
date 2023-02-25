@@ -15,8 +15,6 @@ const QuickViewModal = ({ pid }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
-
-  console.log(productDetail);
   const cartItems = useSelector((state) => state.cart.cartItems);
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
@@ -35,7 +33,6 @@ const QuickViewModal = ({ pid }) => {
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
-      // notify()
       return;
     }
     dispatch(addItemsToCart(id, newQty));
@@ -44,7 +41,6 @@ const QuickViewModal = ({ pid }) => {
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
-      // toast("Stock Limited")
       return;
     }
     dispatch(addItemsToCart(id, newQty));
@@ -112,11 +108,6 @@ const QuickViewModal = ({ pid }) => {
 
   const [img, setImg] = useState();
 
-  // const newData = productDetail?.images?.map((img) => {
-  //   setImg(img)
-  //   return img;
-  // });
-
   const hoverHandler = (image, i) => {
     setImg(image);
     refs.current[i].classList.add("imgActive");
@@ -151,7 +142,6 @@ const QuickViewModal = ({ pid }) => {
   return (
     <>
       <div className="modal-container">
-        {/* <Toaster /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-5">
@@ -426,7 +416,6 @@ const QuickViewModal = ({ pid }) => {
                     <button
                       className="btn_before_add_cart"
                       onClick={() =>addToCartHandler(productDetail, quantityCount)
-                        // dispatch(addItemsToCart(productDetail, quantityCount))
                       }
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
@@ -444,7 +433,6 @@ const QuickViewModal = ({ pid }) => {
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
     </>
   );
 };
