@@ -216,7 +216,7 @@ const ProductDetailsPage = ({allCategory}) => {
             <Link to={`/${slug}/${subSlug}/${subSubSlug}`}>{subSubSlug}</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {productDetail.name}
+            {productDetail?.name}
           </li>
         </ol>
       </nav>
