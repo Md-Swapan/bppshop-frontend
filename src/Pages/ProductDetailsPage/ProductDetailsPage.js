@@ -138,7 +138,7 @@ const ProductDetailsPage = () => {
   const addToCartHandler = (productDetail, quantityCount) => {
     dispatch(addItemsToCart(productDetail, quantityCount));
     // toaster
-    toast.success(`Add to cart successfull`, {
+    toast.success(`Product added to cart successfully`, {
       duration: 3000,
       style: {
         width: "100%",
