@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { loadAllShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 import { setDefaultShippingAddress } from './../../../Redux/Actions/ShippingAddressAction';
 import { getDeliveryCharge } from '../../../Redux/Actions/DeliveryChargeAction';
+import MetaData from "../../../Pages/Layout/MetaData";
 
 const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
@@ -33,7 +34,9 @@ const ShippingAddressList = () => {
   };
 
   return (
-    <div>
+    <>
+     <MetaData title="Choose-Default-Delivery-Address - BPPShop" />
+      <div>
       <div className="shipping_container">
         <div className="shipping_content">
           <div className="shipping_header">Delivery Address</div>
@@ -98,6 +101,7 @@ const ShippingAddressList = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

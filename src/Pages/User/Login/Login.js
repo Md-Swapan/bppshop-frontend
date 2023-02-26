@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "./../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
 import toast from 'react-hot-toast';
+import MetaData from "../../Layout/MetaData";
 
 
 
@@ -43,8 +44,8 @@ const Login = () => {
 
   
   return (
-    <div className="row justify-content-center">
-    
+  <><MetaData title="Login - BPPShop" />
+      <div className="row justify-content-center">
       <div className="col-md-6">
         <div className="login_card">
           <div className="card-body">
@@ -114,6 +115,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

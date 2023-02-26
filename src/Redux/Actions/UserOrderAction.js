@@ -5,12 +5,12 @@ import {
   LOAD_USER_ORDERS_DETAILS_REQUEST,
   LOAD_USER_ORDERS_DETAILS_SUCCESS,
   LOAD_USER_ORDERS_DETAILS_FAIL,
+  LOAD_USER_ORDERS_CANCEL_REQUEST,
   LOAD_USER_ORDERS_CANCEL_SUCCESS,
   LOAD_USER_ORDERS_CANCEL_FAIL,
 } from "../Constants/UserConstants.js";
 import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
-import { LOAD_USER_ORDERS_CANCEL_REQUEST } from "./../Constants/UserConstants";
 
 // Load User Orders
 export const loadUserOrders = () => async (dispatch, getState) => {

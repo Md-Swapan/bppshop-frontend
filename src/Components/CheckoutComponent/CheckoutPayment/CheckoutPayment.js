@@ -10,6 +10,7 @@ import {
   ClearCartGroupItems,
 } from "../../../Redux/Actions/CartAction";
 import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
+import MetaData from "../../../Pages/Layout/MetaData";
 
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
@@ -34,7 +35,9 @@ const CheckoutPayment = () => {
   };
 
   return (
-    <div>
+   <>
+   <MetaData title="Payment-Method - BPPShop" />
+     <div>
       <h3 className="mb-4">Payment method</h3>
       <hr />
       <h6 className="my-5">Choose payment</h6>
@@ -50,6 +53,7 @@ const CheckoutPayment = () => {
         </Link>
       </div>
     </div>
+   </>
   );
 };
 

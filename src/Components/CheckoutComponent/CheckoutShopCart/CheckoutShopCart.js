@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
+import MetaData from "../../../Pages/Layout/MetaData";
 import {
   addItemsToCart,
   removeItemsFromCart,
@@ -31,7 +32,9 @@ const CheckoutShopCart = () => {
     dispatch(addItemsToCart(id, newQty));
   };
   return (
-    <div>
+    <>
+    <MetaData title="Checkout-Shoping-Cart - BPPShop" />
+      <div>
       <h5 className="mb-2">SHOPPING CART</h5>
       <div className="shop_cart_container">
         <i>Shop name : BPP Shop</i>
@@ -51,7 +54,7 @@ const CheckoutShopCart = () => {
             </thead>
 
             <tbody>
-              {cartItems.map((item, index) => {
+              {cartItems?.map((item, index) => {
                 return (
                   <tr key={item.product.id}>
                     <td>{index + 1}</td>
@@ -199,6 +202,7 @@ const CheckoutShopCart = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -36,7 +36,7 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       config
     );
     
-
+console.log(data);
     // const loginResponse = data.message
 
     // console.log(loginResponse)

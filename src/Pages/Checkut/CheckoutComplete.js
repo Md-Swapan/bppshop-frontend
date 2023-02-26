@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MetaData from "../Layout/MetaData";
 import "./CheckoutComplete.css";
 
 const CheckoutComplete = () => {
   return (
-    <div>
+    <>
+    <MetaData title="Checkout-Complete - BPPShop" />
+      <div>
       <div className="row d-flex justify-content-center">
         <div className="col-md-10 col-lg-10">
           <div className="checkout_comple_card">
@@ -43,6 +46,7 @@ const CheckoutComplete = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

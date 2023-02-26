@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import MetaData from "../../../Pages/Layout/MetaData";
 import "./TrackOrder.css";
 
 const TrackOrder = () => {
@@ -8,7 +9,9 @@ const TrackOrder = () => {
   const { userOrders } = useSelector((state) => state?.userOrders);
   const userOrder = userOrders?.find((order) => order?.id === parseInt(id));
   return (
-    <div>
+    <>
+    <MetaData title="Tracked-Order-Info - BPPShop" />
+      <div>
       <Link to={`/profile/orders-detail/${id}`}>
         <button className="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
           <i className="bi bi-arrow-left-circle mr-2"></i> Back
@@ -115,6 +118,7 @@ const TrackOrder = () => {
         </Link>
       </div>
     </div>
+    </>
   );
 };
 

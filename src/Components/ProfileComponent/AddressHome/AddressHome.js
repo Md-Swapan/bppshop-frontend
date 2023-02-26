@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { loadUserOrders } from "../../../Redux/Actions/UserOrderAction";
 import "./AddressHome.css";
 import store from "./../../../Redux/Store";
+import MetaData from "../../../Pages/Layout/MetaData";
 
 const AddressHome = () => {
   useEffect(() => {
@@ -19,7 +20,9 @@ const AddressHome = () => {
   );
 
   return (
-    <div>
+   <>
+   <MetaData title="Your Addresses - BPPShop" />
+     <div>
       <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
         <div>
           <h4 className="">ADDRESSES</h4>
@@ -73,6 +76,7 @@ const AddressHome = () => {
         ))}
       </div>
     </div>
+   </>
   );
 };
 

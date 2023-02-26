@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 import { useNavigate } from 'react-router-dom';
+import MetaData from "../Layout/MetaData";
 
 const ForgetPassWord = () => {
   const navigate=useNavigate();
@@ -19,7 +20,9 @@ const ForgetPassWord = () => {
       });
   };
   return (
-    <div className="row justify-content-center">
+    <>
+    <MetaData title="Recover-Password - BPPShop" />
+      <div className="row justify-content-center">
       <div className="col-lg-8 col-md-10">
         <h2 className="h3 mb-4">Forgot your password?</h2>
         <p className="font-size-md">
@@ -51,6 +54,7 @@ const ForgetPassWord = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

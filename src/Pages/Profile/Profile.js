@@ -1,10 +1,12 @@
 import React from "react";
 import "./Profile.css";
 import { Link, Outlet } from "react-router-dom";
+import MetaData from "../Layout/MetaData";
 
 const Profile = () => {
   return (
     <>
+    <MetaData title="Your Profile - BPPShop" />
       <div className="profile_container">
         <div className="row">
           <div className="col-md-3 col-sm-12">

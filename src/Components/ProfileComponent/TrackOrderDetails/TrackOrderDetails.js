@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
+import MetaData from "../../../Pages/Layout/MetaData";
 import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
 import "./TrackOrderDetails.css";
 
@@ -21,7 +22,9 @@ const TrackOrderDetails = () => {
   let taxAmount = 0;
   let discountAmount = 0;
   return (
-    <div>
+  <>
+   <MetaData title="Track-Order-Details - BPPShop" />
+      <div>
       <Link to={`/profile/track-order/${id}`}>
         <button className="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
           <i className="bi bi-arrow-left-circle mr-2"></i> Back
@@ -146,6 +149,7 @@ const TrackOrderDetails = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

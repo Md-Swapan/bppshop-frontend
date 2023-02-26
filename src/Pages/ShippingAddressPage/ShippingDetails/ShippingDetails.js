@@ -6,6 +6,7 @@ import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
 import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import MetaData from './../../Layout/MetaData';
 
 const ShippingDetails = () => {
   const cartItems = useSelector((state) => {
@@ -27,6 +28,7 @@ const ShippingDetails = () => {
 
   return (
     <>
+    <MetaData title="Choose-Delivery-Address - BPPShop" />
       <div className="shiping-view-section">
         <div className="container">
           <div className="row">

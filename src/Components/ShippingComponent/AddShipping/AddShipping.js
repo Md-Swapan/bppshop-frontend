@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addShippingAddress } from "./../../../Redux/Actions/ShippingAddressAction";
 import { useSelector } from "react-redux";
 import { getDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
+import MetaData from "../../../Pages/Layout/MetaData";
 
 const AddShipping = () => {
   const token = localStorage.getItem("token");
@@ -72,10 +73,12 @@ const AddShipping = () => {
   // console.log(shippingAddressInfo);
 
   return (
-    <div className="shipping_Add_container">
+    <>
+    <MetaData title="Add-New-Delivery-Address - BPPShop" />
+      <div className="shipping_Add_container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="shipping_Add_content">
-          <div className="shipping_Add_header">Add New Address</div>
+          <div className="shipping_Add_header">Add New Delivery Address</div>
         </div>
         <hr className="shipping_Add_line" />
 
@@ -185,6 +188,7 @@ const AddShipping = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

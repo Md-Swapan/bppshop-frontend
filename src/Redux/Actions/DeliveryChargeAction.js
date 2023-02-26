@@ -26,7 +26,6 @@ import {
         type : DELIVERY_CHARGE_SUCCESS,
         payload: data  
       })
-      console.log(data)
       localStorage.setItem("deliveryCharge", JSON.stringify(getState().deliveryCharge.deliveryCharge));
     }
     catch(error){
