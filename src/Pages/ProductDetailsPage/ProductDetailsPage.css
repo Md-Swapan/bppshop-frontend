@@ -164,6 +164,7 @@
 
 .left_2 {
   width: 380px;
+  border: 1px solid gainsboro;
 }
 .left_2 img {
   width: 500px;

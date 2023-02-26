@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
     dispatch(addItemsToCart(product, quantity));
 
     // toaster
-    toast.success(`Add to cart successfull`, {
+    toast.success(`Product added to cart successfully`, {
       duration: 3000,
 
       style: {

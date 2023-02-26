@@ -51,7 +51,7 @@ const CartDetailsView = () => {
   const handleRemoveItemFormCart = (id) => {
     dispatch(removeItemsFromCart(id));
     // toaster
-    toast.success(`Item removed from cart successfull`, {
+    toast.success(`Item removed from cart successfully`, {
       duration: 3000,
       style: {
         width: "100%",
