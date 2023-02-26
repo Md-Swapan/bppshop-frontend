@@ -167,16 +167,16 @@ const ProductCard = ({ product }) => {
                     <br />
                     {discount ? (
                       <span>
-                        <strong> ৳ {unit_price - discount} </strong>
+                        <strong> ৳{unit_price - discount} </strong>
                         <del>
                           <strong className="text-danger">
                             {" "}
-                            ৳ {unit_price}
+                            ৳{unit_price}
                           </strong>
                         </del>
                       </span>
                     ) : (
-                      <strong> ৳ {unit_price}</strong>
+                      <strong> ৳{unit_price}</strong>
                     )}
                   </div>
                 </div>
@@ -284,7 +284,7 @@ const ProductCard = ({ product }) => {
                       ))}
                     </span>
                     <br />
-                    <strong> ৳ {unit_price}</strong>
+                    <strong> ৳{unit_price}</strong>
                   </div>
                 </div>
               </div>
