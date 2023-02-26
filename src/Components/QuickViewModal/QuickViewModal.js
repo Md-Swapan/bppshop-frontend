@@ -374,8 +374,7 @@ const QuickViewModal = ({ pid }) => {
                       <h5>
                         {productDetail?.discount > 0 ? (
                           <span className="mx-2 text-end">
-                            ৳
-                            {isItemExist?.quantity *
+                            ৳{isItemExist?.quantity *
                               (productDetail?.unit_price -
                                 productDetail?.discount)}
                           </span>
@@ -387,8 +386,7 @@ const QuickViewModal = ({ pid }) => {
                       </h5>
                     ) : (
                       <h5>
-                        Total Price: ৳{" "}
-                        {variantPrice && isItemExist
+                        Total Price: ৳{variantPrice && isItemExist
                           ? variantPrice
                           : quantityCount *
                             (productDetail?.unit_price -

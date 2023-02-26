@@ -389,21 +389,19 @@ const ProductDetailsPage = () => {
                       <h5>
                         {productDetail?.discount > 0 ? (
                           <span className="mx-2 text-end">
-                          ৳
-                            {isItemExist?.quantity *
+                          ৳{isItemExist?.quantity *
                               (productDetail?.unit_price -
                                 productDetail?.discount)}
                           </span>
                         ) : (
                           <span className="mx-2 text-end">
-                            ?{isItemExist?.quantity * productDetail?.unit_price}
+                          ৳{isItemExist?.quantity * productDetail?.unit_price}
                           </span>
                         )}
                       </h5>
                     ) : (
                       <h5>
-                        Total Price: ৳{" "}
-                        {variantPrice && isItemExist
+                        Total Price: ৳{variantPrice && isItemExist
                           ? variantPrice
                           : quantityCount *
                             (productDetail?.unit_price -
