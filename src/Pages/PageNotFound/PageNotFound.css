@@ -6,8 +6,8 @@
   text-align: center;
   color: gray;
 }
-.pageNotFoundContainer img{
-  width: 400px;
+.pageNotFoundContainer h1{
+  font-size: 100px;
 }
 .pageNotFoundContainer button{
   border: none;

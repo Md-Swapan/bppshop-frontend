@@ -9,6 +9,8 @@ const PageNotFound = () => {
      <div className="pageNotFoundContainer">
       <div className="">
         {/* <img src={PageNotFoundGif} alt="Page Not Found."/> */}
+        <h1>404!</h1>
+        <br/>
         <h2>Sorry!</h2>
         <h4>Page Not Found.</h4>
 

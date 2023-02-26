@@ -2,14 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../Components/Cards/ProductCard/ProductCard";
 import "./Product.css";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 import MetaData from "./../Layout/MetaData";
 
-const Product = ({ allCategory }) => {
+const Product = ({ allCategory, isLoading }) => {
   const { slug, subSlug, subSubSlug } = useParams();
+  const navigate = useNavigate();
   const categories = allCategory.find((item) => item.slug === slug);
   const subCategories = categories?.childes?.find(
     (item) => item.slug === subSlug
@@ -29,6 +30,15 @@ const Product = ({ allCategory }) => {
         setLoading(false);
       });
   }, [subSubCategories?.id]);
+
+
+  
+
+  useEffect(() => {
+    if (!isLoading && !subSubCategories) {
+      navigate("/404", { replace: true });
+    }
+  }, [subSubCategories, isLoading, navigate]);
 
   return (
     <div className="categoryView-section productView-section">

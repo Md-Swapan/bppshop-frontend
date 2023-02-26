@@ -1,0 +1,19 @@
+.checkout_comple_card {
+    border: none;
+    border-radius: 7px;
+    font-family: "Kanit", sans-serif;
+}
+.go_to_shopping, .got_to_check_order{
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+.go_to_shopping a, .got_to_check_order a{
+    color: white;
+    text-decoration: none;
+}
+.go_to_shopping{
+background: #ef8341;
+}
+.got_to_check_order{
+background:#000000 ;
+}

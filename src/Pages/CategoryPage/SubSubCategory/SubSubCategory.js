@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SubSubCategoryCard from "./../../../Components/Cards/SubSubCategoryCard/SubSubCategoryCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -11,6 +11,14 @@ const SubSubCategory = ({ allCategory, loading }) => {
   const subSubCategories = subCategories?.childes?.find(
     (item) => item.slug === subSlug
   );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !subSubCategories) {
+      navigate("/404", { replace: true });
+    }
+  }, [subSubCategories, loading, navigate]);
 
   return (
     <>

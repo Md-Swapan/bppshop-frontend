@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Layout from "./Pages/Layout/Layout";
 import SubCategory from "./Pages/CategoryPage/SubCategory/SubCategory";
@@ -27,13 +27,12 @@ import CheckoutPayment from "./Components/CheckoutComponent/CheckoutPayment/Chec
 import ShippingHome from "./Components/ShippingComponent/ShippingHome/ShippingHome";
 import AddShipping from "./Components/ShippingComponent/AddShipping/AddShipping";
 import ShippingAddressList from "./Components/ShippingComponent/ShippingAddressList/ShippingAddressList";
-
-import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import CheckoutShopCart from './Components/CheckoutComponent/CheckoutShopCart/CheckoutShopCart';
 import TrackOrderDetails from './Components/ProfileComponent/TrackOrderDetails/TrackOrderDetails';
-import CheckoutComplete from './Pages/Checkut/CheckoutComplete';
+import CheckoutComplete from './Pages/Checkout/CheckoutComplete';
 import ProductDetailsPage from './Pages/ProductDetailsPage/ProductDetailsPage';
 import Search from "./Pages/Search/Search";
+import PageNotFound from './Pages/PageNotFound/PageNotFound';
 
 
 function App() {
@@ -51,6 +50,18 @@ function App() {
     });
 
   }, [token]);
+
+
+  // const navigate = useNavigate();
+  // const { slug } = useParams();
+  // console.log(slug)
+
+  // useEffect(() => {
+  //   if (slug) {
+  //     navigate("/404", { replace: true });
+  //   }
+  // }, [slug, navigate]);
+
   
   return (
     <div className="App">
@@ -59,8 +70,8 @@ function App() {
           <Route path="/" element={<Home allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
-          <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} />} />
-          <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage/>} />
+          <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
+          <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
           <Route path="/search" element={<Search/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         
@@ -87,7 +98,8 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
           <Route path="/recover-password" element={<ForgetPassWord />}></Route>
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/404" element={<PageNotFound />} />
+          <Route path="*" element={<navigate to="/404" replace />} />
         </Routes>
       </Layout>
     </div>

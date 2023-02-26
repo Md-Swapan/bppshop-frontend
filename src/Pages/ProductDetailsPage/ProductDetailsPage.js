@@ -1,11 +1,10 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./ProductDetailsPage.css";
 import { useParams } from "react-router-dom";
 import { baseUrl, imgBaseUrl } from "./../../BaseUrl/BaseUrl";
 import { useEffect } from "react";
 import axios from "axios";
-import SliderImage from "react-zoom-slider";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addItemsToCart } from "./../../Redux/Actions/CartAction";
@@ -14,30 +13,64 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
 
-const ProductDetailsPage = () => {
+const ProductDetailsPage = ({allCategory}) => {
   const { slug, subSlug, subSubSlug, id } = useParams();
   let newId = parseInt(id);
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const [loading, setLoading] = useState(true);
+
+
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
+      setLoading(false)
     });
   }, [id]);
+
+
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
-  const choiceOptions = productDetail?.choice_options?.map(
-    (list) => list?.options
-  );
+  const choiceOptions = productDetail?.choice_options?.map((list) => list?.options);
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
   const [activeOption, setActiveOption] = useState("");
   // console.log(activeOption);
   // let activeOption = localStorage.getItem("activeOption");
+
+  
+  // const categories = allCategory.find((item) => item.slug === slug);
+  // const subCategories = categories?.childes?.find(
+  //   (item) => item.slug === subSlug
+  // );
+  // const subSubCategories = subCategories?.childes?.find(
+  //   (item) => item.slug === subSubSlug
+  // );
+ 
+  const paramId = id
+  const productDetailsPathId = productDetail?.id?.toString()
+  const productDetailsPath = productDetailsPathId == paramId
+
+  console.log(productDetailsPath)
+
+  // console.log(productDetail?.id)
+  // console.log(productDetail?.id.toString())
+
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !productDetailsPath) {
+      navigate("/404", { replace: true });
+    }
+  }, [productDetailsPath, loading, navigate]);
+
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -45,6 +78,8 @@ const ProductDetailsPage = () => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
+
+
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
@@ -52,18 +87,25 @@ const ProductDetailsPage = () => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
+
+
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
+
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res?.data?.data);
     });
   }, [id]);
+
+
   // const choiceOptions = productDetail?.choice_options?.map(
   //   (list) => list?.options
   // );
   // const defaultOption = choiceOptions?.map((option) => option[0]);
   // const colors = productDetail?.colors?.map((color) => color?.code);
+
+
   const priceVariantHandlerByChoiceOption = (option) => {
     localStorage.setItem("activeOption", option);
     const newActiveOption = localStorage.getItem("activeOption");
@@ -83,6 +125,8 @@ const ProductDetailsPage = () => {
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultOptionData));
   };
+
+
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
@@ -100,6 +144,8 @@ const ProductDetailsPage = () => {
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
+
+
   const priceVariantHandlerByQty = () => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
@@ -110,11 +156,14 @@ const ProductDetailsPage = () => {
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
+
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
   }));
 
+
   const [img, setImg] = useState();
+
 
   const hoverHandler = (image, i) => {
     setImg(image);
@@ -125,6 +174,7 @@ const ProductDetailsPage = () => {
       }
     }
   };
+
 
   const refs = useRef([]);
   refs.current = [];
@@ -147,6 +197,8 @@ const ProductDetailsPage = () => {
       },
     });
   };
+
+
   return (
     <>
       <nav aria-label="breadcrumb">
@@ -169,7 +221,7 @@ const ProductDetailsPage = () => {
         </ol>
       </nav>
       <br />
-      <div className="product_details_page_container">
+      {productDetailsPath === true && <div className="product_details_page_container">
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
@@ -234,15 +286,15 @@ const ProductDetailsPage = () => {
             </div>
             <div className="col-md-8">
               <div className="product_details_page_content">
-                <h2>{productDetail.name}</h2>
+                <h2>{productDetail?.name}</h2>
                 <p>
                   <span>
-                    Product Code: <strong>{productDetail.code}</strong>
+                    Product Code: <strong>{productDetail?.code}</strong>
                   </span>
                   <span>
                     {" "}
                     Stock:{" "}
-                    {productDetail.current_stock > 0 ? (
+                    {productDetail?.current_stock > 0 ? (
                       <strong>Available</strong>
                     ) : (
                       <strong>Not Available</strong>
@@ -250,16 +302,16 @@ const ProductDetailsPage = () => {
                   </span>
                 </p>
                 <div className="product_details_page_price">
-                  {productDetail.discount ? (
+                  {productDetail?.discount ? (
                     <h5 className="prices">
-                    ৳{productDetail.unit_price - productDetail.discount}{" "}
+                    ৳{productDetail?.unit_price - productDetail?.discount}{" "}
                       <del className="text-danger">
                         {" "}
-                         {productDetail.unit_price}
+                         {productDetail?.unit_price}
                       </del>
                     </h5>
                   ) : (
-                    <h5 className="prices">৳{productDetail.unit_price}</h5>
+                    <h5 className="prices">৳{productDetail?.unit_price}</h5>
                   )}
                 </div>
                 <div className="product_details_page_pc_size_color">
@@ -271,7 +323,7 @@ const ProductDetailsPage = () => {
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
-                      <div key={list.id} className="choiceOptionList">
+                      <div key={list?.id} className="choiceOptionList">
                         <h5>{list?.title}: </h5>
                         <div className="choiceOption">
                           {list?.options?.map((option) => (
@@ -305,14 +357,14 @@ const ProductDetailsPage = () => {
                   >
                     <h5>Color: </h5>
                     <div className="d-flex">
-                      {productDetail.colors?.map((color) => (
+                      {productDetail?.colors?.map((color) => (
                         <>
                           <div
                             onClick={() =>
-                              priceVariantHandlerByColor(color.code)
+                              priceVariantHandlerByColor(color?.code)
                             }
                             style={{
-                              background: `${color.code}`,
+                              background: `${color?.code}`,
                               margin: "0px 2px",
                               cursor: "pointer",
                             }}
@@ -362,7 +414,7 @@ const ProductDetailsPage = () => {
                           increaseQuantity(
                             productDetail,
                             isItemExist?.quantity,
-                            productDetail.current_stock
+                            productDetail?.current_stock
                           )
                         }
                         className="plusBtn"
@@ -373,7 +425,7 @@ const ProductDetailsPage = () => {
                       <span
                         onClick={() =>
                           setQuantityCount(
-                            productDetail.current_stock > quantityCount
+                            productDetail?.current_stock > quantityCount
                               ? quantityCount + 1
                               : quantityCount
                           )
@@ -432,14 +484,14 @@ const ProductDetailsPage = () => {
                 <div className="product_details_page_product_description">
                   <h5>Description :</h5>
                   <span
-                    dangerouslySetInnerHTML={{ __html: productDetail.details }}
+                    dangerouslySetInnerHTML={{ __html: productDetail?.details }}
                   ></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>}
       <ProductReview />
     </>
   );
