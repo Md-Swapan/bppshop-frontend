@@ -252,14 +252,14 @@ const ProductDetailsPage = () => {
                 <div className="product_details_page_price">
                   {productDetail.discount ? (
                     <h5 className="prices">
-                      ? {productDetail.unit_price - productDetail.discount}{" "}
+                    ৳{productDetail.unit_price - productDetail.discount}{" "}
                       <del className="text-danger">
                         {" "}
-                        ? {productDetail.unit_price}
+                         {productDetail.unit_price}
                       </del>
                     </h5>
                   ) : (
-                    <h5 className="prices">?{productDetail.unit_price}</h5>
+                    <h5 className="prices">৳{productDetail.unit_price}</h5>
                   )}
                 </div>
                 <div className="product_details_page_pc_size_color">
@@ -389,7 +389,7 @@ const ProductDetailsPage = () => {
                       <h5>
                         {productDetail?.discount > 0 ? (
                           <span className="mx-2 text-end">
-                            ?
+                          ৳
                             {isItemExist?.quantity *
                               (productDetail?.unit_price -
                                 productDetail?.discount)}
@@ -402,7 +402,7 @@ const ProductDetailsPage = () => {
                       </h5>
                     ) : (
                       <h5>
-                        Total Price: ?{" "}
+                        Total Price: ৳{" "}
                         {variantPrice && isItemExist
                           ? variantPrice
                           : quantityCount *
