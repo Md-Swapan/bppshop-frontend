@@ -26,7 +26,8 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated === true && token) {
-      toast.success(`${loginRes?.message}`, {
+
+      loginRes?.message && toast.success(`${loginRes?.message}`, {
         duration: 3000,
     
         style: {
