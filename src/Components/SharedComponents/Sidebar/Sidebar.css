@@ -161,7 +161,8 @@
 
 .subMenuActive,
 .subSubMenuActive{
-  /* display: none; */
+  color: #fd7e14 !important;
+  font-weight: 600 !important;
 }
 
 @media only screen and (max-width: 768px) {

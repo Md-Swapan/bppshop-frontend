@@ -63,14 +63,15 @@ const Footer = () => {
             <h5>DOWNLOAD OUR APP</h5>
             <div className="downloadApp_content">
               <button type="">
-                <img width={25} src={playstoreIcon} alt="" />
+              <img className="appleIcon" width={25} src={appleIcon} alt="" />
+                
                 <div>
                   <small>Download on the</small>
                   <h6>App Store</h6>
                 </div>
               </button>
               <button type="">
-                <img className="appleIcon" width={25} src={appleIcon} alt="" />
+              <img width={25} src={playstoreIcon} alt="" />
                 <div>
                   <small>Get it on</small>
                   <h6>Google Play</h6>

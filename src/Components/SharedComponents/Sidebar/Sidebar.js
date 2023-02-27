@@ -10,7 +10,6 @@ const Sidebar = () => {
   // const [categorySlugName, setCategorySlugName] = useState([]);
   // const [subCategorySlugName, setSubCategorySlugName] = useState([]);
 
-
   // console.log(subCategory);
 
   useEffect(() => {
@@ -75,19 +74,52 @@ const Sidebar = () => {
   // };
 
   const [expandedCategories, setExpandedCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+
   const sidebarToggleExpand = (categoryIndex) => {
+    setActiveCategory(categoryIndex);
+
     setExpandedCategories(
       expandedCategories.includes(categoryIndex)
         ? expandedCategories.filter((index) => index !== categoryIndex)
         : [...expandedCategories, categoryIndex]
     );
 
-    if (categoryIndex ) {
+    console.log(categoryIndex.id)
+    if (activeCategory) {
       const subMenu = document.querySelector(".subMenu");
       const subSubMenu = document.querySelector(".subSubMenu");
       subMenu.classList.toggle("subMenuActive");
       subSubMenu.classList.toggle("subSubMenuActive");
     }
+  };
+
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [activeSubMenu, setActiveSubMenu] = useState(null);
+  const [activeSubSubMenu, setActiveSubSubMenu] = useState(null);
+
+  const handleMenuClick = (menu) => {
+    
+    
+    setActiveMenu(menu);
+    setActiveSubMenu('');
+    setActiveSubSubMenu('');
+
+    // if(menu){
+    //   setExpandedCategories(
+    //     expandedCategories.includes('')
+    //   );
+    // }
+  };
+  const handleSubMenuClick = (subMenu) => {
+    // setExpandedCategories("");
+    setActiveSubMenu(subMenu);
+    setActiveSubSubMenu('')
+    
+  };
+  const handleSubSubMenuClick = (subSubMenu) => {
+    setActiveSubSubMenu(subSubMenu);
+    // setExpandedCategories("");
   };
 
   return (
@@ -109,7 +141,16 @@ const Sidebar = () => {
               return (
                 <ul key={categoryIndex} className="categoryMenu">
                   <li onClick={() => sidebarToggleExpand(categoryIndex)}>
-                    <Link to={`/${categoryItem?.slug}`}>
+                    <Link to={`/${categoryItem?.slug}`}
+                     onClick={() =>
+                      handleMenuClick(categoryItem.id)
+                    }
+                    className={
+                      activeMenu === categoryItem.id
+                        ? "subSubMenuActive"
+                        : ""
+                    }
+                    >
                       <div>
                         <img
                           width="15"
@@ -143,6 +184,14 @@ const Sidebar = () => {
                               >
                                 <Link
                                   to={`/${categoryItem?.slug}/${subcategory?.slug}`}
+                                  onClick={() =>
+                                    handleSubMenuClick(subcategory.id)
+                                  }
+                                  className={
+                                    activeSubMenu === subcategory.id
+                                      ? "subMenuActive"
+                                      : ""
+                                  }
                                 >
                                   {subcategory?.name}
                                 </Link>
@@ -154,9 +203,20 @@ const Sidebar = () => {
                                   {subcategory?.childes?.map(
                                     (subsubcategory, subsubcategoryIndex) => {
                                       return (
-                                        <li key={subsubcategoryIndex}>
+                                        <li
+                                          key={subsubcategoryIndex}
+                                          
+                                        >
                                           <Link
                                             to={`/${categoryItem?.slug}/${subcategory?.slug}/${subsubcategory?.slug}`}
+                                            onClick={() =>
+                                              handleSubSubMenuClick(subsubcategory.id)
+                                            }
+                                            className={
+                                              activeSubSubMenu === subsubcategory.id
+                                                ? "subSubMenuActive"
+                                                : ""
+                                            }
                                           >
                                             {subsubcategory?.name}
                                           </Link>

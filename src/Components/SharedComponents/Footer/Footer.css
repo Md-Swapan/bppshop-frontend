@@ -49,10 +49,10 @@
   gap: 20px;
 }
 .downloadApp_content button {
-  width: 150px;
+  width: 160px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   text-align: left;
   border: none;
   border-radius: 5px;
@@ -73,6 +73,10 @@
 
 .downloadApp_content button h6{
   font-size: 14px;
+}
+.downloadApp_content button img{
+  margin-right: 10px;
+  margin-top: -5px;
 }
 
 /* .appleIcon{
