@@ -99,17 +99,11 @@ const Sidebar = () => {
   const [activeSubSubMenu, setActiveSubSubMenu] = useState(null);
 
   const handleMenuClick = (menu) => {
-    
-    
     setActiveMenu(menu);
     setActiveSubMenu('');
     setActiveSubSubMenu('');
 
-    // if(menu){
-    //   setExpandedCategories(
-    //     expandedCategories.includes('')
-    //   );
-    // }
+    
   };
   const handleSubMenuClick = (subMenu) => {
     // setExpandedCategories("");
@@ -205,7 +199,6 @@ const Sidebar = () => {
                                       return (
                                         <li
                                           key={subsubcategoryIndex}
-                                          
                                         >
                                           <Link
                                             to={`/${categoryItem?.slug}/${subcategory?.slug}/${subsubcategory?.slug}`}
