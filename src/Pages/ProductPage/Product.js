@@ -90,7 +90,7 @@ const Product = ({ allCategory, isLoading }) => {
         ) : (
           !loading && (
             <div className="d-flex justify-content-center align-items-center">
-              <h2 className="text-warning mt-5">Products will comming soon.</h2>
+              <h2 className="text-warning mt-5">Products will coming soon.</h2>
             </div>
           )
         )}
