@@ -52,7 +52,7 @@ export const userReducer = (state = { user: {} }, action) => {
         loading: false,
         isAuthenticated: false,
         user: null,
-        error: action.payload,
+        error: actio n.payload,
       };
 
     case LOAD_USER_FAIL:

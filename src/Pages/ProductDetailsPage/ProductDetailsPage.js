@@ -32,6 +32,8 @@ const ProductDetailsPage = ({allCategory}) => {
   }, [id]);
 
 
+  console.log(productDetail)
+
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
@@ -56,7 +58,7 @@ const ProductDetailsPage = ({allCategory}) => {
   const productDetailsPathId = productDetail?.id?.toString()
   const productDetailsPath = productDetailsPathId == paramId
 
-  console.log(productDetailsPath)
+  // console.log(productDetailsPath)
 
   // console.log(productDetail?.id)
   // console.log(productDetail?.id.toString())
@@ -107,7 +109,11 @@ const ProductDetailsPage = ({allCategory}) => {
 
 
   const priceVariantHandlerByChoiceOption = (option) => {
+
     localStorage.setItem("activeOption", option);
+
+    console.log(option)
+
     const newActiveOption = localStorage.getItem("activeOption");
     setActiveOption(newActiveOption);
     const priceVariantDefaultOptionData = {

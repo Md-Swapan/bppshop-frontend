@@ -10,7 +10,7 @@ import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import toast from "react-hot-toast";
 
 const notify = () =>
-  toast("Stock Limited.", {
+  toast.error("Stock Limited.", {
     duration: 3000,
     style: {
       width: "100%",
