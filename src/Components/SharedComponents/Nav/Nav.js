@@ -16,6 +16,8 @@ import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 import toast from "react-hot-toast";
 import { logout } from "./../../../Redux/Actions/UserAction";
+import { searchProduct } from "../../../Redux/Actions/SearchAction";
+import { useState } from "react";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -28,7 +30,6 @@ const Nav = () => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
-      console.log(res);
       if (res.data.status === "success") {
         navigate("/");
         localStorage.removeItem("token");
@@ -52,20 +53,26 @@ const Nav = () => {
   };
 
   //search functionality
+  // const [loading,setloading]=useState(true)
   let offset = 1;
   let limit = 10;
-  const url = baseUrl + "/products/search";
+  // const url = baseUrl + "/products/search";
 
-  const handleSearch = (e) => {
+  const handleSearchByKeyUp = (e) => {
     e.preventDefault();
-    e.target.value && navigate("/search");
-    const data = {
+    const searchData = {
       name: `${e.target.value}`,
       limit: `${limit}`,
       offset: `${offset}`,
     };
-    axios({ method: "post", url, data }).then((res) => console.log(res));
+      dispatch(searchProduct(searchData));
+   
+    // axios({ method: "post", url, data }).then((res) => {
+    //   dispatch(searchProduct(res.data.products));
+      e.target.value && navigate("/search");
+    // });
   };
+
   return (
     <>
       <div className="navbar-section">
@@ -86,17 +93,25 @@ const Nav = () => {
             </div>
 
             <div className="searchInput">
-              <input
-                onKeyUp={handleSearch}
-                type="text"
-                name=""
-                id="dynamic-placeholder"
-                className="search"
-                placeholder="Search Product..."
-              />
-              <span className="searchIcon">
-                <i className="bi bi-search"></i>
-              </span>
+              {/* <form onChange={handleSearch}> */}
+                <input
+                  onKeyUp={handleSearchByKeyUp}
+                  type="text"
+                  name="search"
+                  id="dynamic-placeholder"
+                  className="search"
+                  placeholder="Search Product..."
+                />
+                <span className="searchIcon">
+                  <button 
+                  // onClick={handleSearchByClick}
+                    type="submit"
+                    style={{ border: "none", background: "none" }}
+                  >
+                    <i className="bi bi-search"></i>
+                  </button>
+                </span>
+              {/* </form> */}
             </div>
 
             <div className="userProfileTab">

@@ -31,9 +31,6 @@ const Product = ({ allCategory, isLoading }) => {
       });
   }, [subSubCategories?.id]);
 
-
-  
-
   useEffect(() => {
     if (!isLoading && !subSubCategories) {
       navigate("/404", { replace: true });
@@ -62,7 +59,7 @@ const Product = ({ allCategory, isLoading }) => {
       </nav>
 
       <div className="categoryView-container productView-container">
-        {/* {products.length ? ( */}
+        {products?.length ? (
           <div className="category_content product-content">
             <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
               {loading ? (
@@ -90,35 +87,13 @@ const Product = ({ allCategory, isLoading }) => {
               )}
             </SkeletonTheme>
           </div>
-        {/* ) : (
-          <div className="category_content product-content">
-            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#F5F5F5">
-              {loading ? (
-                <>
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                </>
-              ) : (
-                <div className="no_product_content">
-                  <img src={noProductImg} alt="" srcSet="" />
-                </div>
-              )}
-            </SkeletonTheme>
-          </div>
-        )} */}
+        ) : (
+          !loading && (
+            <div className="d-flex justify-content-center align-items-center">
+              <h2 className="text-warning mt-5">Products will comming soon.</h2>
+            </div>
+          )
+        )}
       </div>
     </div>
   );
