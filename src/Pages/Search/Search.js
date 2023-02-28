@@ -8,7 +8,6 @@ const Search = () => {
   const { searchProducts, loading } = useSelector(
     (state) => state?.searchProducts
   );
-  console.log(searchProducts, loading);
   return (
     <>
       <MetaData title="Search:- BPPShop" />
