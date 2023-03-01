@@ -78,7 +78,7 @@ const OrderHome = () => {
                         {order?.order_status}
                       </span>
                     </td>
-                    <td data-label="Total">৳{order?.order_amount}</td>
+                    <td data-label="Total">৳{order?.order_amount + order?.shipping_cost}</td>
                     <td data-label="Action">
                       <Link to={`/profile/orders-detail/${order?.id}`}>
                         <button className="my_order_view_btn">
