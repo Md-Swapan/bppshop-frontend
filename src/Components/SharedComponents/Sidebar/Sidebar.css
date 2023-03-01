@@ -14,6 +14,10 @@
   overflow: scroll;
 }
 
+.sidebar-toggle-section-toggle{
+  transform: translateX(-300px);
+}
+
 #sidebarMenu::-webkit-scrollbar {
   display: none;
 }

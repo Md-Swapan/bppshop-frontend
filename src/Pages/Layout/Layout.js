@@ -14,7 +14,7 @@ const CartDetailsCloseHandler = () => {
   const cartDetailsViewContainer = document.querySelector(
     ".cartDetailsView-container"
   );
-  
+
   const cartDetailsViewSectionOverlay = document.querySelector(
     ".cartDetailsView_section_overlay"
   );
@@ -25,11 +25,19 @@ const CartDetailsCloseHandler = () => {
   );
 };
 
+// const sidebarCloseGlobalHandler = () => {
+//   const sidebarToggleSection = document.querySelector("#sidebarMenu");
+//   sidebarToggleSection.classList.toggle(
+//     "sidebar-toggle-section-toggle"
+//   );
+// }
+
 const Layout = ({ children }) => {
   return (
     <div>
       <Nav />
       <HomeFilterBtnHeader />
+      {/* <main className="layout_container" onClick={sidebarCloseGlobalHandler}>{children}</main> */}
       <main className="layout_container">{children}</main>
       <CartDetailsView />
       <Cart />

@@ -64,14 +64,14 @@ const Product = ({ allCategory, isLoading }) => {
             <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
               {loading ? (
                 <>
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
+                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
                   <Skeleton height="335px" borderRadius="10px" count={1} />
                   <Skeleton height="335px" borderRadius="10px" count={1} />
                   <Skeleton height="335px" borderRadius="10px" count={1} />
@@ -81,7 +81,7 @@ const Product = ({ allCategory, isLoading }) => {
                   <Skeleton height="335px" borderRadius="10px" count={1} />
                 </>
               ) : (
-                products?.length && products?.map((product) => (
+                 products?.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 )) 
                 // : !loading && (
