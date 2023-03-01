@@ -81,7 +81,7 @@ const Product = ({ allCategory, isLoading }) => {
                   <Skeleton height="335px" borderRadius="10px" count={1} />
                 </>
               ) : (
-                products?.length && products?.map((product) => (
+                products?.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 )) 
                 // : !loading && (
