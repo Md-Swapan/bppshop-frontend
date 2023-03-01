@@ -7,21 +7,31 @@ const Cart = () => {
     return state.cart.cartItems;
   });
 
+
   const CartDetailsViewHandler = () => {
     const cartDetailsViewContainer = document.querySelector(
       ".cartDetailsView-container"
     );
-    cartDetailsViewContainer.style.display = "block";
+
+    const cartDetailsViewSectionOverlay = document.querySelector(
+      ".cartDetailsView_section_overlay"
+    );
+
+    cartDetailsViewContainer.style.display = "block";   
+    cartDetailsViewSectionOverlay.style.display = "block";   
+
     cartDetailsViewContainer.classList.toggle(
       "cartDetailsView-container-toggle"
     );
-    // document.querySelector(".cart").style.display = "none";
   };
+
 
   const sidebarOpenHandler = () => {
     document.querySelector("#sidebarMenu").style.transform =
       "translateX(-300px)";
   };
+
+
   return (
     <>
       <div className="cart">

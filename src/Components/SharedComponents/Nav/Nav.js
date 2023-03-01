@@ -61,9 +61,9 @@ const Nav = () => {
   const handleSearchByKeyUp = (e) => {
     e.preventDefault();
     const searchData = {
-      name: `${e.target.value}`,
-      limit: `${limit}`,
-      offset: `${offset}`,
+      name: `${e.target.value}`
+      // limit: `${limit}`,
+      // offset: `${offset}`,
     };
       dispatch(searchProduct(searchData));
    

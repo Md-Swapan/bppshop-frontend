@@ -1,3 +1,4 @@
+
 .cartDetailsView-container{
   position: fixed;
   width: 320px;
@@ -10,6 +11,8 @@
   transform: translateX(350px);
   transition: transform 250ms ease-in-out;
   font-weight: 500;
+
+ 
 }
 .cartDetailsView-container-toggle{
   transform: translateX(0px);
@@ -120,9 +123,21 @@
   }
 
 }
+@media screen and (max-width: 1550px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 79.50%;
+  }
+
+}
 @media screen and (max-width: 1500px) {
   .cartDetailsView-container-toggle{
     margin-left: 78.50%;
+  }
+
+}
+@media screen and (max-width: 1450px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 78%;
   }
 
 }
@@ -132,9 +147,63 @@
   }
 
 }
+@media screen and (max-width: 1350px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 76.50%;
+  }
+
+}
 @media screen and (max-width: 1300px) {
   .cartDetailsView-container-toggle{
     margin-left: 75.50%;
+  }
+
+}
+@media screen and (max-width: 1270px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 75%;
+  }
+
+}
+@media screen and (max-width: 1250px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 74.50%;
+  }
+
+}
+@media screen and (max-width: 1230px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 74%;
+  }
+
+}
+@media screen and (max-width: 1230px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 74%;
+  }
+
+}
+@media screen and (max-width: 1200px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 73.50%;
+  }
+
+}
+@media screen and (max-width: 1170px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 73%;
+  }
+
+}
+@media screen and (max-width: 1150px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 72.50%;
+  }
+
+}
+@media screen and (max-width: 1100px) {
+  .cartDetailsView-container-toggle{
+    margin-left: 71%;
   }
 
 }

@@ -9,6 +9,22 @@ import { Toaster } from "react-hot-toast";
 
 // const notify = () => toast('Here is your toast.');
 
+
+const CartDetailsCloseHandler = () => {
+  const cartDetailsViewContainer = document.querySelector(
+    ".cartDetailsView-container"
+  );
+  
+  const cartDetailsViewSectionOverlay = document.querySelector(
+    ".cartDetailsView_section_overlay"
+  );
+
+  cartDetailsViewSectionOverlay.style.display = "none";   
+  cartDetailsViewContainer.classList.toggle(
+    "cartDetailsView-container-toggle"
+  );
+};
+
 const Layout = ({ children }) => {
   return (
     <div>
@@ -19,6 +35,7 @@ const Layout = ({ children }) => {
       <Cart />
       <Footer />
       <Toaster position="top-right" reverseOrder={false} />
+      <div onClick={CartDetailsCloseHandler} className="cartDetailsView_section_overlay"></div>
     </div>
   );
 };
