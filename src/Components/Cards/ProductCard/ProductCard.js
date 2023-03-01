@@ -46,12 +46,16 @@ const ProductCard = ({ product }) => {
     id,
     name,
     unit_price,
-    choice_options,
+    colors,
     discount,
     current_stock,
     thumbnail,
   } = product;
   // console.log(product);
+
+  const newChoiseOption =product?.choice_options?.find((option) => option?.title === product?.unit)
+
+
 
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
@@ -79,7 +83,7 @@ const ProductCard = ({ product }) => {
       },
     });
 
-    let color = product.colors?.map((color) => color?.code);
+    let color = colors?.map((color) => color?.code);
     let choice_19 = product.choice_options?.map((list) => list?.options);
     let option = choice_19?.map((option) => option[0]);
 
@@ -107,22 +111,22 @@ const ProductCard = ({ product }) => {
   //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
   // })
 
-  const productUnitStatic = [
-    "kg",
-    "pc",
-    "mg",
-    "gm",
-    "gms",
-    "ltrs",
-    "ml",
-    "pcs",
-    "bundle",
-    "pair",
-    "box",
-    "carton",
-    "dozen",
-    "set",
-  ];
+  // const productUnitStatic = [
+  //   "kg",
+  //   "pc",
+  //   "mg",
+  //   "gm",
+  //   "gms",
+  //   "ltrs",
+  //   "ml",
+  //   "pcs",
+  //   "bundle",
+  //   "pair",
+  //   "box",
+  //   "carton",
+  //   "dozen",
+  //   "set",
+  // ];
 
   // const optionTitle = product.choice_options?.map((list) => list?.title);
   // const title = optionTitle.map((i) => i);
@@ -162,8 +166,13 @@ const ProductCard = ({ product }) => {
                           {list?.title} : {list?.options[0]}
                         </>
                       ))} */}
-                      {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]}
+                      {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
+                      {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
+
                     </span>
+                    {
+                      newChoiseOption && <span>{newChoiseOption?.title} : {newChoiseOption?.options[0]}</span>
+                    }
                     <br />
                     {discount ? (
                       <span>
@@ -268,21 +277,19 @@ const ProductCard = ({ product }) => {
                   <small>{name?.toString().substring(0, 15)}...</small>
                   <br />
                   <div className="product-card-body-content-unit-price">
-                    <span>
-                      {choice_options?.map((list) => (
+                  <span>
+                      {/* {choice_options?.map((list) => (
                         <>
-                          {/* {list?.title} : {list?.options[0]} */}
-                          <span>
-                            {choice_options?.map((list) =>
-                              productUnitStatic?.find(
-                                (item) => item === list?.title
-                              )
-                            )}
-                            :{choice_options[0]?.options[0]}
-                          </span>
+                          {list?.title} : {list?.options[0]}
                         </>
-                      ))}
+                      ))} */}
+                      {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
+                      {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
+
                     </span>
+                    {
+                      newChoiseOption && <span>{newChoiseOption?.title} : {newChoiseOption?.options[0]}</span>
+                    }
                     <br />
                     <strong> ৳{unit_price}</strong>
                   </div>
