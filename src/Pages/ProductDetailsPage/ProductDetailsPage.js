@@ -20,7 +20,7 @@ const ProductDetailsPage = ({allCategory}) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-
+  const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(true);
 
 
@@ -112,7 +112,7 @@ const ProductDetailsPage = ({allCategory}) => {
 
     localStorage.setItem("activeOption", option);
 
-    console.log(option)
+    // console.log(option)
 
     const newActiveOption = localStorage.getItem("activeOption");
     setActiveOption(newActiveOption);
@@ -192,6 +192,9 @@ const ProductDetailsPage = ({allCategory}) => {
 
 
   const addToCartHandler = (productDetail, quantityCount) => {
+    // if(token){
+    //   dispatch(addItemsToCart(productDetail, quantityCount));
+    // }
     dispatch(addItemsToCart(productDetail, quantityCount));
     // toaster
     toast.success(`Product added to cart successfully`, {

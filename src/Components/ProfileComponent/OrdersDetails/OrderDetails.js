@@ -8,31 +8,29 @@ import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import MetaData from "../../../Pages/Layout/MetaData";
 
 const OrderDetails = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const { userOrders } = useSelector((state) => state?.userOrders);
+  const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
   const userOrder = userOrders?.find((order) => order?.id === parseInt(id));
-
-  const dispatch = useDispatch();
-
-  console.log(userOrder)
 
   useEffect(() => {
     dispatch(loadUserOrderDetails(id));
   }, [dispatch, id]);
 
-  const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
-  console.log(userOrderDetails);
+  const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
 
-  const productDetails = userOrderDetails?.map(
-    (orderDetail) => orderDetail?.product_details
-  );
+  console.log(OrderDetails)
 
-  let totalItem = productDetails?.length;
+  let totalItem = 0;
   let subTotal = 0;
   let taxFee = 0;
   let shippingFee = 0;
   let discountAmount = 0;
 
+  // for (let i = 0; i < userOrderDetails?.length; i++) {
+  //   totalItem += userOrderDetails[i].qty;
+  // }
 
   return (
     <>
@@ -44,7 +42,7 @@ const OrderDetails = () => {
           </button>
         </Link>
         <div className="order_detail_card">
-          <div className="payment mb-3  table-responsive">
+          <div className="payment  table-responsive">
             <table className="table table-borderless">
               <thead>
                 <tr className="order_table_tr order_table_head">
@@ -99,39 +97,45 @@ const OrderDetails = () => {
               </thead>
             </table>
 
-            <div className="row">
+            {/* <div className="row">
               <div></div>
-            </div>
-            <div className="col-md-4"></div>
+            </div> */}
+            {/* <div className="col-md-4"></div>
             <div className="col-md-2"></div>
-            <div className="col-md-2"></div>
+            <div className="col-md-2"></div> */}
+
             <table className="table table-borderless">
-              {productDetails?.map((product) => {
-                subTotal += product.min_qty * product.unit_price;
-                taxFee += product.tax;
-                shippingFee = userOrder.shipping_cost;
-                discountAmount += product.discount;
+              {OrderDetails?.map((order) => {
+                subTotal += order?.qty * order?.product_details?.unit_price;
+                taxFee += order?.product_details?.tax;
+                shippingFee = userOrder?.shipping_cost;
+                discountAmount += order?.discount;
                 return (
-                  <tbody key={product.id}>
+                  <tbody key={order?.product_details?.id}>
                     <tr className="order_detail_list">
                       <td className="col-2 for-tab-img">
                         <img
-                          src={imgThumbnailBaseUrl + `/${product.thumbnail}`}
+                          src={
+                            imgThumbnailBaseUrl +
+                            `/${order?.product_details?.thumbnail}`
+                          }
                           alt=""
                         />
                       </td>
                       <td className="col-10 ">
-                        <span className="for-glaxy-name">{product.name}</span>
+                        <span className="for-glaxy-name">
+                          {order?.product_details?.name}
+                        </span>
                         <br />
                       </td>
 
                       <td width="100%">
                         <div className="text-right">
                           <span className="font-weight-bold amount">
-                            ৳{product.unit_price}{" "}
+                            ৳{order?.product_details?.unit_price}{" "}
                           </span>
                           <br />
-                          <span>Qty: {product.min_qty}</span>
+                          <span>Qty:{order?.qty} </span>
                         </div>
                       </td>
                     </tr>
@@ -153,7 +157,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>{totalItem}</span>
+                      <span>{userOrderDetails?.length}</span>
                     </div>
                   </td>
                 </tr>
@@ -166,7 +170,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>৳{subTotal}.00</span>
+                      <span>৳ {subTotal}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -174,12 +178,12 @@ const OrderDetails = () => {
                 <tr>
                   <td>
                     <div className="text-left">
-                      <span className="product-qty ">Text fee</span>
+                      <span className="product-qty ">Tax Fee</span>
                     </div>
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>৳{taxFee}.00</span>
+                      <span>৳ {taxFee}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -191,7 +195,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>৳{shippingFee}.00</span>
+                      <span>৳ {shippingFee}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -199,12 +203,12 @@ const OrderDetails = () => {
                 <tr>
                   <td>
                     <div className="text-left">
-                      <span className="product-qty ">Discount On product</span>
+                      <span className="product-qty ">Discount On Product</span>
                     </div>
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>- ৳{discountAmount}.00</span>
+                      <span>-৳ {discountAmount}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -217,7 +221,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>--</span>
+                      <span>-</span>
                     </div>
                   </td>
                 </tr>
@@ -231,7 +235,7 @@ const OrderDetails = () => {
                   <td>
                     <div className="text-right">
                       <span className="font-weight-bold amount ">
-                        ৳{subTotal + shippingFee + taxFee - discountAmount}.00
+                        ৳ {subTotal + shippingFee + taxFee - discountAmount}.00
                       </span>
                     </div>
                   </td>
