@@ -42,20 +42,13 @@ const ProductCard = ({ product }) => {
   }
 
   const token = localStorage.getItem("token");
-  const {
-    id,
-    name,
-    unit_price,
-    colors,
-    discount,
-    current_stock,
-    thumbnail,
-  } = product;
+  const { id, name, unit_price, colors, discount, current_stock, thumbnail } =
+    product;
   // console.log(product);
 
-  const newChoiseOption =product?.choice_options?.find((option) => option?.title === product?.unit)
-
-
+  const newChoiseOption = product?.choice_options?.find(
+    (option) => option?.title === product?.unit
+  );
 
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
@@ -157,7 +150,7 @@ const ProductCard = ({ product }) => {
                   <img src={defaultProImg} alt="" />
                 )}
                 <div className="product-card-body-content">
-                  <small>{name.toString().substring(0, 15)}...</small>
+                  <small>{name.toString().substring(0, 20)}...</small>
                   <br />
                   <div className="product-card-body-content-unit-price">
                     <span>
@@ -168,24 +161,25 @@ const ProductCard = ({ product }) => {
                       ))} */}
                       {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
                       {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
-
                     </span>
-                    {
-                      newChoiseOption && <span>{newChoiseOption?.title} : {newChoiseOption?.options[0]}</span>
-                    }
+                    {newChoiseOption && (
+                      <span>
+                        {newChoiseOption?.title} : {newChoiseOption?.options[0]}
+                      </span>
+                    )}
                     <br />
                     {discount ? (
                       <span>
-                        <strong> ৳{unit_price - discount} </strong>
+                        <strong> ৳ {unit_price - discount} </strong>
                         <del>
-                          <strong className="text-danger">
+                          <strong className="text-danger ms-3">
                             {" "}
-                            ৳{unit_price}
+                            ৳ {unit_price}
                           </strong>
                         </del>
                       </span>
                     ) : (
-                      <strong> ৳{unit_price}</strong>
+                      <strong> ৳ {unit_price}</strong>
                     )}
                   </div>
                 </div>
@@ -202,7 +196,7 @@ const ProductCard = ({ product }) => {
                   >
                     <div className="overlayViewCartBtn">
                       <span>
-                        <i className="bi bi-eye-fill"></i> view
+                        <i className="bi bi bi-eye"></i> view
                       </span>
                     </div>
                   </Link>
@@ -221,18 +215,18 @@ const ProductCard = ({ product }) => {
                   )}
                 </div>
               </div>
-              <span onClick={() => productDetailsView(id)}>
-                {/* <button className="quickViewBtn" onClick={openModal}> */}
-                <button onClick={openModal} className="quickViewBtn">
-                  <i className="bi bi-eye-fill"></i> <span>Quick View</span>
-                </button>
+              {/* <span onClick={() => productDetailsView(id)}> */}
+              {/* <button className="quickViewBtn" onClick={openModal}> */}
+              {/* <button onClick={openModal} className="quickViewBtn">
+                  <i className="bi bi bi-eye"></i> <span>Quick View</span>
+                </button> */}
 
-                {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+              {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
-                    <i className="bi bi-eye-fill"></i> View Details
+                    <i className="bi bi bi-eye"></i> View Details
                   </button>
                 </Link> */}
-              </span>
+              {/* </span> */}
 
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
@@ -240,10 +234,25 @@ const ProductCard = ({ product }) => {
                     <button disabled className="btn_after_added_cart">
                       <i className="bi bi-cart-plus"></i> Added to Cart
                     </button>
+                    <span onClick={() => productDetailsView(id)}>
+                      {/* <button className="quickViewBtn" onClick={openModal}> */}
+                      <button
+                        onClick={openModal}
+                        className="btn_before_add_cart"
+                      >
+                        <i className="bi bi bi-eye"></i>
+                      </button>
+
+                      {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                  <button className="quickViewBtn">
+                    <i className="bi bi bi-eye"></i> View Details
+                  </button>
+                </Link> */}
+                    </span>
 
                     {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                       <button className="detailsViewBtn">
-                        <i className="bi bi-eye-fill"></i>{" "}
+                        <i className="bi bi bi-eye"></i>{" "}
                       </button>
                     </Link> */}
                   </div>
@@ -255,10 +264,25 @@ const ProductCard = ({ product }) => {
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
+                    <span onClick={() => productDetailsView(id)}>
+                      {/* <button className="quickViewBtn" onClick={openModal}> */}
+                      <button
+                        onClick={openModal}
+                        className="btn_before_add_cart"
+                      >
+                        <i className="bi bi bi-eye"></i>
+                      </button>
+
+                      {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                  <button className="quickViewBtn">
+                    <i className="bi bi bi-eye"></i> View Details
+                  </button>
+                </Link> */}
+                    </span>
 
                     {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                       <button className="detailsViewBtn">
-                        <i className="bi bi-eye-fill"></i>{" "}
+                        <i className="bi bi bi-eye"></i>{" "}
                       </button>
                     </Link> */}
                   </div>
@@ -267,17 +291,17 @@ const ProductCard = ({ product }) => {
             </div>
           ) : (
             <div>
-              <div className=" product-card-body">
+              <div className="product-card-body">
                 <img
                   src={imgThumbnailBaseUrl + `/${thumbnail}`}
                   className="card-img-top"
                   alt=""
                 />
                 <div className="product-card-body-content">
-                  <small>{name?.toString().substring(0, 15)}...</small>
+                  <small>{name?.toString().substring(0, 20)}...</small>
                   <br />
                   <div className="product-card-body-content-unit-price">
-                  <span>
+                    <span>
                       {/* {choice_options?.map((list) => (
                         <>
                           {list?.title} : {list?.options[0]}
@@ -285,13 +309,14 @@ const ProductCard = ({ product }) => {
                       ))} */}
                       {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
                       {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
-
                     </span>
-                    {
-                      newChoiseOption && <span>{newChoiseOption?.title} : {newChoiseOption?.options[0]}</span>
-                    }
+                    {newChoiseOption && (
+                      <span>
+                        {newChoiseOption?.title} : {newChoiseOption?.options[0]}
+                      </span>
+                    )}
                     <br />
-                    <strong> ৳{unit_price}</strong>
+                    <strong> ৳ {unit_price}</strong>
                   </div>
                 </div>
               </div>
@@ -299,6 +324,21 @@ const ProductCard = ({ product }) => {
                 <button className="btn_before_add_cart">
                   <i className="bi bi-cart-plus"></i> Stock Out
                 </button>
+                <span onClick={() => productDetailsView(id)}>
+                      {/* <button className="quickViewBtn" onClick={openModal}> */}
+                      <button
+                        onClick={openModal}
+                        className="btn_before_add_cart"
+                      >
+                        <i className="bi bi bi-eye"></i>
+                      </button>
+
+                      {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                  <button className="quickViewBtn">
+                    <i className="bi bi bi-eye"></i> View Details
+                  </button>
+                </Link> */}
+                    </span>
               </div>
               <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
                 <h3 className="text-center">

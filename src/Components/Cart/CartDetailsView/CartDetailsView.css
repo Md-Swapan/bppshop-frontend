@@ -58,10 +58,10 @@
   align-items: center;
   font-size: 12px;
 }
-.cart-content span{
-  font-size: 12px;
+/* .cart-content span {
+  font-size: 17px;
   font-weight: 600;
-}
+} */
 .cartTitleQty{
   display: flex;
   align-items: center;
@@ -76,21 +76,24 @@
   width: auto;
   display: flex;
 }
-.quantity-set{
+.quantity-set {
   width: 80px;
+  height: 30px;
   border: 0.5px solid gainsboro;
-  /* border-radius: 30px; */
   overflow: hidden;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-left: 55px; */
 }
-.minusBtn, .plusBtn{
+.qtyCount-number {
+  font-size: 14px;
+}
+.minusBtn, .plusBtn {
   cursor: pointer;
   background: gainsboro;
-  padding: 0px 8px;
-  color: #000000;
+  padding: 0;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
 }
 
 .cartItemDeleteBtn{

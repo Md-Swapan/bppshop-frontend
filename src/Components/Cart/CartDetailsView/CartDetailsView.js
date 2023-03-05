@@ -158,7 +158,7 @@ const CartDetailsView = () => {
                           }
                           className="minusBtn"
                         >
-                          -
+                          <i class="bi bi-dash-lg"></i>
                         </span>
                         <span className="qtyCount-number">
                           {item?.quantity}
@@ -173,7 +173,7 @@ const CartDetailsView = () => {
                           }
                           className="plusBtn"
                         >
-                          +
+                          <i class="bi bi-plus-lg"></i>
                         </span>
                       </div>
                       {item?.product?.discount > 0 ? (
