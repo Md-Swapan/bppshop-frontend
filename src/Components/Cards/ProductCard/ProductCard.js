@@ -73,7 +73,7 @@ const ProductCard = ({ product }) => {
         width: "100%",
         height: "80px",
         padding: "0px 20px",
-        background: "green",
+        background: "#86bc19",
         color: "#fff"
       },
     });
@@ -236,7 +236,7 @@ const ProductCard = ({ product }) => {
                 {addedItemId ? (
                   <div className="cardFooterBtn">
                     <button disabled className="btn_after_added_cart">
-                      <i className="bi bi-cart-plus"></i> Added to Cart
+                      <i className="bi bi-cart-plus"></i> Product in Cart
                     </button>
                     <span onClick={() => productDetailsView(id)}>
                       {/* <button className="quickViewBtn" onClick={openModal}> */}

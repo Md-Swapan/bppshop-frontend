@@ -153,11 +153,11 @@
   border: none;
   outline: none;
   color: #ffffff;
-  padding: 5px 22px;
+  padding: 5px 15px;
   border-radius: 5px;
   transition: all 0.3s;
   font-family: "DM Sans", sans-serif;
-  margin: 2px;
+  margin: 0px 5px;
 }
 
 .btn_before_add_cart {

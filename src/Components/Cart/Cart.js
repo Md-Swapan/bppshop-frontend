@@ -1,12 +1,13 @@
 import React from "react";
 import "./Cart.css";
 import { useSelector } from "react-redux";
+import cartIcon from "../../Assets/Images/icons/download.png";
+import cartIcongif from "../../Assets/Images/icons/1615424075_16825_gif-url.gif";
 
 const Cart = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-
 
   const CartDetailsViewHandler = () => {
     const cartDetailsViewContainer = document.querySelector(
@@ -17,20 +18,18 @@ const Cart = () => {
       ".cartDetailsView_section_overlay"
     );
 
-    cartDetailsViewContainer.style.display = "block";   
-    cartDetailsViewSectionOverlay.style.display = "block";   
+    cartDetailsViewContainer.style.display = "block";
+    cartDetailsViewSectionOverlay.style.display = "block";
 
     cartDetailsViewContainer.classList.toggle(
       "cartDetailsView-container-toggle"
     );
   };
 
-
   const sidebarOpenHandler = () => {
     document.querySelector("#sidebarMenu").style.transform =
       "translateX(-300px)";
   };
-
 
   return (
     <>
@@ -40,7 +39,7 @@ const Cart = () => {
         </button>
         <div onClick={CartDetailsViewHandler}>
           <div className="cartIcon">
-            <i className="bi bi-cart-plus"></i>
+            <img width={40} src={cartIcon} alt="" />
             <br />
             <span className="itemsForFullScreen">
               {" "}
@@ -49,18 +48,16 @@ const Cart = () => {
             <span className="itemsForResScreen"> {cartItems?.length}</span>
           </div>
           <div className="cartTotalPrice">
-            {/* {cartItems?.product?.discount < 0 ? ( */}
-              <small>
-                ৳{" "}
-                {`${cartItems?.reduce(
-                  (acc, item) =>
-                    acc + item?.quantity * (item?.product?.unit_price - item?.product?.discount),
-                  0
-                )}`}
-              </small>
-            {/* ) : (
-              ""
-            )} */}
+            <small>
+              ৳{" "}
+              {`${cartItems?.reduce(
+                (acc, item) =>
+                  acc +
+                  item?.quantity *
+                    (item?.product?.unit_price - item?.product?.discount),
+                0
+              )}`}
+            </small>
           </div>
         </div>
       </div>

@@ -61,7 +61,7 @@ const CartDetailsView = () => {
         width: "100%",
         height: "80px",
         padding: "0px 20px",
-        background: "green",
+        background: "#86bc19",
         color: "#fff"
       },
     });
