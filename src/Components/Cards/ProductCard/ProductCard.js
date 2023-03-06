@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProductCard.css";
 import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
-import addedToCartImg from "../../../Assets/Images/icons/addedToCart (1).png";
+import addedToCartImg from "../../../Assets/Images/icons/addedSucessfuly.png";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
@@ -67,12 +67,14 @@ const ProductCard = ({ product }) => {
 
     // toaster
     toast.success(`Product added to cart successfully`, {
-      duration: 3000,
+      duration: 5000,
 
       style: {
         width: "100%",
         height: "80px",
         padding: "0px 20px",
+        background: "green",
+        color: "#fff"
       },
     });
 
@@ -138,7 +140,8 @@ const ProductCard = ({ product }) => {
       <div className="product_card_content">
         <div className="product-card">
           {current_stock > 0 ? (
-            <div>
+            <>
+              {/* <div className="Product_border_container"> */}
               <div className=" product-card-body">
                 {thumbnail ? (
                   <img
@@ -215,6 +218,7 @@ const ProductCard = ({ product }) => {
                   )}
                 </div>
               </div>
+
               {/* <span onClick={() => productDetailsView(id)}> */}
               {/* <button className="quickViewBtn" onClick={openModal}> */}
               {/* <button onClick={openModal} className="quickViewBtn">
@@ -288,9 +292,11 @@ const ProductCard = ({ product }) => {
                   </div>
                 )}
               </div>
-            </div>
+              {/* </div> */}
+            </>
           ) : (
             <div>
+              
               <div className="product-card-body">
                 <img
                   src={imgThumbnailBaseUrl + `/${thumbnail}`}
@@ -325,20 +331,17 @@ const ProductCard = ({ product }) => {
                   <i className="bi bi-cart-plus"></i> Stock Out
                 </button>
                 <span onClick={() => productDetailsView(id)}>
-                      {/* <button className="quickViewBtn" onClick={openModal}> */}
-                      <button
-                        onClick={openModal}
-                        className="btn_before_add_cart"
-                      >
-                        <i className="bi bi bi-eye"></i>
-                      </button>
+                  {/* <button className="quickViewBtn" onClick={openModal}> */}
+                  <button onClick={openModal} className="btn_before_add_cart">
+                    <i className="bi bi bi-eye"></i>
+                  </button>
 
-                      {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                  {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
                     <i className="bi bi bi-eye"></i> View Details
                   </button>
                 </Link> */}
-                    </span>
+                </span>
               </div>
               <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
                 <h3 className="text-center">

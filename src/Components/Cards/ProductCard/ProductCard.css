@@ -1,3 +1,4 @@
+
 .product-card {
   position: relative;
   height: auto;
@@ -6,8 +7,14 @@
   overflow: hidden;
   transition: all 0.3s;
 }
-
-.product-card:hover {
+/* .Product_border_container {
+  border: 1px solid gainsboro;
+  border-radius: 7px;
+} */
+/* .product-card:hover .Product_border_container {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+} */
+.product-card:hover{
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -76,7 +83,7 @@
 .overlayAddToCartBtn {
   color: #ffffff;
   text-align: center;
-  margin-top: 40%;
+  margin-top: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,11 +165,11 @@
 }
 
 .btn_after_added_cart {
-  background: #6b5e56 !important;
+  background: rgb(151, 151, 151) !important;
 }
 
 .btn_before_add_cart button:hover {
-  background: #7e7e7e;
+  background: rgb(151, 151, 151);
 }
 
 .btn_before_add_cart button i {
