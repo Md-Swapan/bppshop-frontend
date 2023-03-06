@@ -275,7 +275,7 @@
     height: 180px;
   }
   .btn_before_add_cart, .btn_after_added_cart {
-    padding: 5px 8px;
+    padding: 5px 10px;
     font-size: 12px;
 }
 }
