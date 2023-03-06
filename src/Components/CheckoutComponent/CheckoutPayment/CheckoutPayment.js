@@ -27,7 +27,7 @@ const CheckoutPayment = () => {
     axios.post(`${baseUrl}/cart/checkout`, address_id, config).then((res) => {
       if (res.data.status === "success") {
         dispatch(ClearCart());
-        dispatch(clearShippingAddress());
+        // dispatch(clearShippingAddress());
         dispatch(ClearCartGroupItems());
         navigate("/checkout-complete");
       }

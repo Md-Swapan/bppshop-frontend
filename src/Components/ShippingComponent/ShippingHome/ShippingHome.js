@@ -12,7 +12,7 @@ const ShippingHome = () => {
   const changeShippingInfo = () => {
     navigate("/shipping-address");
 
-    // window.location.reload(true);
+    window.location.reload(true);
   };
   return (
     <div>
@@ -29,7 +29,7 @@ const ShippingHome = () => {
               </div> */}
       <div className="shipping_container">
         <div className="shipping-address-heading">Choose Delivery address</div>
-        {shippingAddressInfo?.data?.is_billing === "1" ? (
+        {shippingAddressInfo?.data && shippingAddressInfo?.data?.is_billing === "1" ? (
           <div className="shipping_address_box">
             <div className="shipped_name">
               Delivery to : {shippingAddressInfo?.data?.contact_person_name}
