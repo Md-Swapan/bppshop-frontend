@@ -12,7 +12,7 @@ const ShippingHome = () => {
   const changeShippingInfo = () => {
     navigate("/shipping-address");
 
-    window.location.reload(true);
+    // window.location.reload(true);
   };
   return (
     <div>

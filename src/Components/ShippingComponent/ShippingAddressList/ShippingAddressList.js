@@ -12,6 +12,9 @@ const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
   const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
 
+  // console.log(allShippingAddressInfo)
+  // console.log(shippingAddressInfo)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,7 +23,6 @@ const ShippingAddressList = () => {
   }, [dispatch]);
 
   
-
   const handleSetDefaultAddress = (address_id) => {
     const addressId = {
       address_id : address_id
@@ -44,7 +46,7 @@ const ShippingAddressList = () => {
         <hr className="shipping_line" />
         <div className="address_content">
           <div className="row">
-            {allShippingAddressInfo?.data?.map((shippingAddInfo) => (
+            { shippingAddressInfo?.data?.map((shippingAddInfo) => (
               <div key={shippingAddInfo?.id} className="col-md-6">
                 <div className="shipping_address_box">
                   <div className="shipped_person">
