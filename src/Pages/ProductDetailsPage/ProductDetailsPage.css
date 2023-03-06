@@ -86,15 +86,21 @@
 .product_details_page_quantity_content h5 {
   margin: 0px 0px 0px 0px;
 }
-
-.product_details_page_quantity_content .plus,
+.detailsViewMinusBtn, .detailsViewPlusBtn {
+  cursor: pointer;
+  background: gainsboro;
+  padding: 8px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}
+/* .product_details_page_quantity_content .plus,
 .minus {
   cursor: pointer;
   font-size: 24px;
   background: gainsboro;
   padding: 0px 20px;
   color: #000000;
-}
+} */
 .product_details_page_quantity_content .totalPrice {
   margin: 1px 0px 0px 20px;
 }

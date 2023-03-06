@@ -125,6 +125,14 @@
   justify-content: flex-start;
   height: 70px;
 }
+.quickViewMinusBtn, .quickViewPlusBtn {
+  cursor: pointer;
+  background: gainsboro;
+  padding: 5px 10px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}
+
 
 .react-slider__ul li {
   position: relative;

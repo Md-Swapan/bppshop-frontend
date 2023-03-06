@@ -392,9 +392,9 @@ const ProductDetailsPage = ({allCategory}) => {
                         onClick={() =>
                           decreaseQuantity(productDetail, isItemExist?.quantity)
                         }
-                        className="minusBtn"
+                        className="detailsViewMinusBtn"
                       >
-                        -
+                       <i class="bi bi-dash-lg"></i>
                       </span>
                     ) : (
                       <span
@@ -409,7 +409,7 @@ const ProductDetailsPage = ({allCategory}) => {
                         }
                         className="minus"
                       >
-                        -
+                         <i class="bi bi-dash-lg"></i>
                       </span>
                     )}
                     <span className="count-number">
@@ -426,9 +426,9 @@ const ProductDetailsPage = ({allCategory}) => {
                             productDetail?.current_stock
                           )
                         }
-                        className="plusBtn"
+                        className="detailsViewPlusBtn"
                       >
-                        +
+                        <i class="bi bi-plus-lg"></i>
                       </span>
                     ) : (
                       <span
@@ -441,7 +441,7 @@ const ProductDetailsPage = ({allCategory}) => {
                         }
                         className="plus"
                       >
-                        +
+                        <i class="bi bi-plus-lg"></i>
                       </span>
                     )}
                   </div>
