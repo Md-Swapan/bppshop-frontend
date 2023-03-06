@@ -56,11 +56,13 @@ const CartDetailsView = () => {
     dispatch(removeItemsFromCart(id));
     // toaster
     toast.success(`Item removed from cart successfully`, {
-      duration: 3000,
+      duration: 5000,
       style: {
         width: "100%",
         height: "80px",
         padding: "0px 20px",
+        background: "green",
+        color: "#fff"
       },
     });
   };
