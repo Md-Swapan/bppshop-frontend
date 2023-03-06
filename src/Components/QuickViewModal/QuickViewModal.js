@@ -310,9 +310,9 @@ const QuickViewModal = ({ pid }) => {
                               isItemExist?.quantity
                             )
                           }
-                          className="minusBtn"
+                          className="quickViewMinusBtn"
                         >
-                          -
+                          <i class="bi bi-dash-lg"></i>
                         </span>
                       ) : (
                         <span
@@ -325,7 +325,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="minus"
                         >
-                          -
+                          <i class="bi bi-dash-lg"></i>
                         </span>
                       )}
                       <span className="count-number">
@@ -342,9 +342,9 @@ const QuickViewModal = ({ pid }) => {
                               productDetail.current_stock
                             )
                           }
-                          className="plusBtn"
+                          className="quickViewPlusBtn"
                         >
-                          +
+                          <i class="bi bi-plus-lg"></i>
                         </span>
                       ) : (
                         <span
@@ -364,7 +364,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="plus"
                         >
-                          +
+                         <i class="bi bi-plus-lg"></i>
                         </span>
                       )}
                     </div>

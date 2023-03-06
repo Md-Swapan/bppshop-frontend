@@ -156,7 +156,7 @@ const CartDetailsView = () => {
                           onClick={() =>
                             decreaseQuantity(item?.product, item?.quantity)
                           }
-                          className="minusBtn"
+                          className="cartMinusBtn"
                         >
                           <i class="bi bi-dash-lg"></i>
                         </span>
@@ -171,7 +171,7 @@ const CartDetailsView = () => {
                               item?.product?.current_stock
                             )
                           }
-                          className="plusBtn"
+                          className="cartPlusBtn"
                         >
                           <i class="bi bi-plus-lg"></i>
                         </span>
