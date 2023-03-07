@@ -331,11 +331,11 @@ const ProductDetailsPage = ({allCategory}) => {
                         : "choiceOptionListContainer size"
                     }
                   >
-                    {productDetail?.choice_options?.map((list) => (
+                    {productDetail?.choice_options?.map((list, index) => (
                       <div key={list?.id} className="choiceOptionList">
-                        <h5>{list?.title}: </h5>
+                        <h5>{list?.title}: {index}</h5>
                         <div className="choiceOption">
-                          {list?.options?.map((option) => (
+                          {list?.options?.map((option, indx) => (
                             <span
                               onClick={() =>
                                 priceVariantHandlerByChoiceOption(option)
@@ -350,7 +350,7 @@ const ProductDetailsPage = ({allCategory}) => {
                                   : `option`
                               }
                             >
-                              {option}
+                              {option} {indx}
                             </span>
                           ))}
                         </div>
