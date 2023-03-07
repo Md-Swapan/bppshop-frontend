@@ -32,7 +32,7 @@ const ProductDetailsPage = ({allCategory}) => {
   }, [id]);
 
 
-  console.log(productDetail)
+  // console.log(productDetail)
 
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
@@ -108,11 +108,11 @@ const ProductDetailsPage = ({allCategory}) => {
   // const colors = productDetail?.colors?.map((color) => color?.code);
 
 
-  const priceVariantHandlerByChoiceOption = (option) => {
+  const priceVariantHandlerByChoiceOption = (option, indx) => {
 
     localStorage.setItem("activeOption", option);
 
-    // console.log(option)
+    console.log(option, indx)
 
     const newActiveOption = localStorage.getItem("activeOption");
     setActiveOption(newActiveOption);
@@ -333,12 +333,14 @@ const ProductDetailsPage = ({allCategory}) => {
                   >
                     {productDetail?.choice_options?.map((list, index) => (
                       <div key={list?.id} className="choiceOptionList">
-                        <h5>{list?.title}: {index}</h5>
+                        <h5>{list?.title}: 
+                        {/* {index} */}
+                        </h5>
                         <div className="choiceOption">
                           {list?.options?.map((option, indx) => (
                             <span
                               onClick={() =>
-                                priceVariantHandlerByChoiceOption(option)
+                                priceVariantHandlerByChoiceOption(option, indx)
                               }
                               className={
                                 activeOption
@@ -350,7 +352,8 @@ const ProductDetailsPage = ({allCategory}) => {
                                   : `option`
                               }
                             >
-                              {option} {indx}
+                              {option}
+                               {/* {indx} */}
                             </span>
                           ))}
                         </div>
