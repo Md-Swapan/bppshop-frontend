@@ -32,7 +32,7 @@ const ProductDetailsPage = ({allCategory}) => {
   }, [id]);
 
 
-  console.log(productDetail)
+  // console.log(productDetail)
 
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
@@ -42,7 +42,9 @@ const ProductDetailsPage = ({allCategory}) => {
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
   const [activeOption, setActiveOption] = useState("");
-  // console.log(activeOption);
+  // console.log(choiceOptions?.[index]?.[0]);
+  // console.log(choiceOptions?.[1]?.[0]);
+  // console.log(choiceOptions?.[2]?.[0]);
   // let activeOption = localStorage.getItem("activeOption");
 
   
