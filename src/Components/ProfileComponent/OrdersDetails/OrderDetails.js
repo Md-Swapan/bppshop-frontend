@@ -20,7 +20,7 @@ const OrderDetails = () => {
 
   const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
 
-  console.log(OrderDetails)
+  // console.log(OrderDetails);
 
   let totalItem = 0;
   let subTotal = 0;
@@ -104,45 +104,47 @@ const OrderDetails = () => {
             <div className="col-md-2"></div>
             <div className="col-md-2"></div> */}
 
-            <table className="table table-borderless">
-              {OrderDetails?.map((order) => {
-                subTotal += order?.qty * order?.product_details?.unit_price;
-                taxFee += order?.product_details?.tax;
-                shippingFee = userOrder?.shipping_cost;
-                discountAmount += order?.discount;
-                return (
-                  <tbody key={order?.product_details?.id}>
-                    <tr className="order_detail_list">
-                      <td className="col-2 for-tab-img">
-                        <img
-                          src={
-                            imgThumbnailBaseUrl +
-                            `/${order?.product_details?.thumbnail}`
-                          }
-                          alt=""
-                        />
-                      </td>
-                      <td className="col-10 ">
-                        <span className="for-glaxy-name">
-                          {order?.product_details?.name}
-                        </span>
-                        <br />
-                      </td>
-
-                      <td width="100%">
-                        <div className="text-right">
-                          <span className="font-weight-bold amount">
-                            ৳{order?.product_details?.unit_price}{" "}
+            <div className="px-2">
+              <table className="table table-borderless">
+                {OrderDetails?.map((order) => {
+                  subTotal += order?.qty * order?.product_details?.unit_price;
+                  taxFee += order?.product_details?.tax;
+                  shippingFee = userOrder?.shipping_cost;
+                  discountAmount += order?.discount;
+                  return (
+                    <tbody key={order?.product_details?.id}>
+                      <tr className="order_detail_list">
+                        <td className="col-2 for-tab-img">
+                          <img
+                            src={
+                              imgThumbnailBaseUrl +
+                              `/${order?.product_details?.thumbnail}`
+                            }
+                            alt=""
+                          />
+                        </td>
+                        <td className="col-10 ">
+                          <span className="for-glaxy-name">
+                            {order?.product_details?.name}
                           </span>
                           <br />
-                          <span>Qty:{order?.qty} </span>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-            </table>
+                        </td>
+
+                        <td width="100%">
+                          <div className="text-right">
+                            <span className="font-weight-bold amount">
+                              ৳{order?.product_details?.unit_price}{" "}
+                            </span>
+                            <br />
+                            <span>Qty:{order?.qty} </span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+              </table>
+            </div>
           </div>
         </div>
         <div className="row d-flex justify-content-end">

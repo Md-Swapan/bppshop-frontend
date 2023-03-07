@@ -100,6 +100,35 @@ const ProductCard = ({ product }) => {
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
+
+
+
+
+    // Animate the product image to the cart container
+    const productImage = document.querySelector('.product-card-body img');
+ 
+    const productImageClone = productImage.cloneNode(true);
+    document.body.appendChild(productImageClone);
+
+    const cart = document.querySelector('.cart');
+    const cartRect = cart.getBoundingClientRect();
+    const productImageRect = productImage.getBoundingClientRect();
+
+    const animation = productImageClone.animate([
+      { transform: `translate(${productImageRect.left}px, ${productImageRect.top}px)` },
+      { transform: `translate(${cartRect.top}px, ${cartRect.top}px)` }
+    ], {
+      duration: 100,
+      easing: 'ease-in-out'
+    });
+
+    animation.onfinish = () => {
+      productImageClone.remove();
+      
+    };
+
+    // Show the cart container
+    
   };
 
   // document.querySelector(".product-card").addEventListener("onMouseOver", () => {

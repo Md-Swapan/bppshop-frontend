@@ -78,8 +78,9 @@
 }
 .quantity-set {
   width: 90px;
-  height: 30px;
+  height: 26px;
   border: 0.5px solid gainsboro;
+  border-radius: 3px;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -91,9 +92,18 @@
 .cartMinusBtn, .cartPlusBtn {
   cursor: pointer;
   background: gainsboro;
-  padding: 0px 2px;
-  color: rgb(0, 0, 0);
-  font-size: 20px;
+  color: #ef8341;
+  padding: 0px 0px;
+  margin-top: 2px !important;
+  /* color: rgb(0, 0, 0); */
+  font-size: 24px;
+  font-weight: bold!important;
+}
+.cartMinusBtn {
+  color: #d80909;
+}
+.cartPlusBtn {
+  color: #08a802;
 }
 
 .cartItemDeleteBtn{
