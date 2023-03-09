@@ -119,10 +119,6 @@
   font-size: 16px;
   transition: all 0.3s;
 }
-.btn_after_added_cart {
-  background: #6d6d6d !important;
-  color: #ffffff;
-}
 
 .product_details_page_btn_container button:hover {
   background: #6d6d6d;

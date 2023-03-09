@@ -280,7 +280,7 @@
 }
 @media screen and (max-width: 768px) {
   .footer-content {
-    padding: 20px;
+    padding: 20px 10px;
     width: 100%;
     margin: auto;
     display: grid;
@@ -300,7 +300,6 @@
   }
 
   .downloadApp_content {
-
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -308,7 +307,7 @@
     gap: 20px;
   }
   .downloadApp_content button {
-    width: 145px;
+    width: auto;
     display: flex;
     justify-content: space-between;
   }
@@ -316,7 +315,7 @@
     font-size: 12px;
   }
   .newsletter_container input{
-    padding: 10px;
+    padding: 10px 0px 10px 10px;
     font-size: 14px;
   }
   .newsletter_container button{

@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
         height: "80px",
         padding: "0px 20px",
         background: "#86bc19",
-        color: "#fff"
+        color: "#fff",
       },
     });
 
@@ -101,34 +101,34 @@ const ProductCard = ({ product }) => {
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
 
-
-
-
     // Animate the product image to the cart container
-    const productImage = document.querySelector('.product-card-body img');
- 
+    const productImage = document.querySelector(".product-card-body img");
+
     const productImageClone = productImage.cloneNode(true);
     document.body.appendChild(productImageClone);
 
-    const cart = document.querySelector('.cart');
+    const cart = document.querySelector(".cart");
     const cartRect = cart.getBoundingClientRect();
     const productImageRect = productImage.getBoundingClientRect();
 
-    const animation = productImageClone.animate([
-      { transform: `translate(${productImageRect.left}px, ${productImageRect.top}px)` },
-      { transform: `translate(${cartRect.top}px, ${cartRect.top}px)` }
-    ], {
-      duration: 100,
-      easing: 'ease-in-out'
-    });
+    const animation = productImageClone.animate(
+      [
+        {
+          transform: `translate(${productImageRect.left}px, ${productImageRect.top}px)`,
+        },
+        { transform: `translate(${cartRect.top}px, ${cartRect.top}px)` },
+      ],
+      {
+        duration: 100,
+        easing: "ease-in-out",
+      }
+    );
 
     animation.onfinish = () => {
       productImageClone.remove();
-      
     };
 
     // Show the cart container
-    
   };
 
   // document.querySelector(".product-card").addEventListener("onMouseOver", () => {
@@ -172,17 +172,19 @@ const ProductCard = ({ product }) => {
             <>
               {/* <div className="Product_border_container"> */}
               <div className=" product-card-body">
-                {thumbnail ? (
-                  <img
-                    src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                    className="card-img-top"
-                    alt=""
-                  />
-                ) : (
-                  <img src={defaultProImg} alt="" />
-                )}
+                <div className="productImg_container">
+                  {thumbnail ? (
+                    <img
+                      src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                      className="card-img-top"
+                      alt=""
+                    />
+                  ) : (
+                    <img src={defaultProImg} alt="" />
+                  )}
+                </div>
                 <div className="product-card-body-content">
-                  <small>{name.toString().substring(0, 20)}...</small>
+                  <small>{name.toString().substring(0, 15)}...</small>
                   <br />
                   <div className="product-card-body-content-unit-price">
                     <span>
@@ -267,20 +269,29 @@ const ProductCard = ({ product }) => {
                     <button disabled className="btn_after_added_cart">
                       <i className="bi bi-cart-plus"></i> Product in Cart
                     </button>
+
                     <span onClick={() => productDetailsView(id)}>
                       {/* <button className="quickViewBtn" onClick={openModal}> */}
                       <button
                         onClick={openModal}
-                        className="btn_before_add_cart"
+                        className="quickViewBtn"
                       >
                         <i className="bi bi bi-eye"></i>
                       </button>
+                      <Link
+                        to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                        addedItemId={addedItemId}
+                      >
+                        <button className="detailsViewBtn">
+                          <i className="bi bi bi-eye"></i>
+                        </button>
+                      </Link>
 
                       {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                  <button className="quickViewBtn">
-                    <i className="bi bi bi-eye"></i> View Details
-                  </button>
-                </Link> */}
+                        <button className="quickViewBtn">
+                          <i className="bi bi bi-eye"></i> View Details
+                        </button>
+                      </Link> */}
                     </span>
 
                     {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
@@ -301,10 +312,19 @@ const ProductCard = ({ product }) => {
                       {/* <button className="quickViewBtn" onClick={openModal}> */}
                       <button
                         onClick={openModal}
-                        className="btn_before_add_cart"
+                        className="quickViewBtn"
                       >
                         <i className="bi bi bi-eye"></i>
                       </button>
+
+                      <Link
+                        to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                        addedItemId={addedItemId}
+                      >
+                        <button className="detailsViewBtn">
+                          <i className="bi bi bi-eye"></i>
+                        </button>
+                      </Link>
 
                       {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
@@ -325,7 +345,6 @@ const ProductCard = ({ product }) => {
             </>
           ) : (
             <div>
-              
               <div className="product-card-body">
                 <img
                   src={imgThumbnailBaseUrl + `/${thumbnail}`}

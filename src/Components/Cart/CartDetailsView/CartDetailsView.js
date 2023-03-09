@@ -16,20 +16,18 @@ const notify = () =>
       width: "100%",
       height: "80px",
       padding: "0px 20px",
-      color: "red",
+      background: "#86bc19",
+      color: "#fff"
     },
   });
-
 
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
 
-   
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
-
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -41,7 +39,6 @@ const CartDetailsView = () => {
     dispatch(addItemsToCart(id, newQty));
   };
 
-
   const decreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
@@ -49,7 +46,6 @@ const CartDetailsView = () => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
-
 
   //cart item remove functionality
   const handleRemoveItemFormCart = (id) => {
@@ -62,7 +58,7 @@ const CartDetailsView = () => {
         height: "80px",
         padding: "0px 20px",
         background: "#86bc19",
-        color: "#fff"
+        color: "#fff",
       },
     });
   };
@@ -80,9 +76,7 @@ const CartDetailsView = () => {
     );
   };
 
-
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
-    
     const cartDetailsViewSectionOverlay = document.querySelector(
       ".cartDetailsView_section_overlay"
     );
@@ -91,13 +85,11 @@ const CartDetailsView = () => {
     // document.querySelector(".cartDetailsView-container").style.display = "none";
   };
 
-
   const CartEmptyAlert = () => {
     document.querySelector(".cartEmptyAlert").innerHTML =
       "Please add product in cart first.";
     document.querySelector(".cartEmptyAlert").style.color = "red";
   };
-
 
   return (
     <>
