@@ -46,9 +46,14 @@ const ProductCard = ({ product }) => {
     product;
   // console.log(product);
 
-  const newChoiseOption = product?.choice_options?.find(
-    (option) => option?.title === product?.unit
+
+  const newChoiceOption = product?.choice_options?.find(
+    (option) => option
   );
+
+  // const newStaticProductUnit = newChoiceOption?.concat(productUnitStatic);
+  // console.log(product?.choice_options)
+  // console.log(newChoiceOption.title)
 
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
@@ -196,9 +201,9 @@ const ProductCard = ({ product }) => {
                       {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
                       {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
                     </span>
-                    {newChoiseOption && (
+                    {newChoiceOption && (
                       <span>
-                        {newChoiseOption?.title} : {newChoiseOption?.options[0]}
+                        {newChoiceOption?.title} : {newChoiceOption?.options[0]}
                       </span>
                     )}
                     <br />
@@ -272,10 +277,7 @@ const ProductCard = ({ product }) => {
 
                     <span onClick={() => productDetailsView(id)}>
                       {/* <button className="quickViewBtn" onClick={openModal}> */}
-                      <button
-                        onClick={openModal}
-                        className="quickViewBtn"
-                      >
+                      <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
                       </button>
                       <Link
@@ -310,10 +312,7 @@ const ProductCard = ({ product }) => {
                     </button>
                     <span onClick={() => productDetailsView(id)}>
                       {/* <button className="quickViewBtn" onClick={openModal}> */}
-                      <button
-                        onClick={openModal}
-                        className="quickViewBtn"
-                      >
+                      <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
                       </button>
 
@@ -364,9 +363,9 @@ const ProductCard = ({ product }) => {
                       {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
                       {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
                     </span>
-                    {newChoiseOption && (
+                    {newChoiceOption && (
                       <span>
-                        {newChoiseOption?.title} : {newChoiseOption?.options[0]}
+                        {newChoiceOption?.title} : {newChoiceOption?.options[0]}
                       </span>
                     )}
                     <br />

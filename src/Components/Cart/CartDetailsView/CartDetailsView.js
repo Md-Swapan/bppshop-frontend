@@ -80,9 +80,14 @@ const CartDetailsView = () => {
     const cartDetailsViewSectionOverlay = document.querySelector(
       ".cartDetailsView_section_overlay"
     );
+    const cartDetailsViewContainer = document.querySelector(
+      ".cartDetailsView-container"
+    );
 
     cartDetailsViewSectionOverlay.style.display = "none";
-    // document.querySelector(".cartDetailsView-container").style.display = "none";
+     cartDetailsViewContainer.classList.toggle(
+      "cartDetailsView-container-toggle"
+    );
   };
 
   const CartEmptyAlert = () => {
