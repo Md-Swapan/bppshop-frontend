@@ -1,23 +1,84 @@
-.confirm_order_img{
-    background: aliceblue;
-    width: auto;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 20px 40px;
+.payment-way-container {
+  margin: 40px 0px 0px 30px;
 }
-.confirm_order_img img {
-    width: 140px;
+.payment-way {
+  margin: 30px 0px 0px 0px;
 }
-.back_to_shipping{
-    text-align: center;
-    margin: 80px 0px 20px 0px;
+.cashOnDeliVery,
+.mobile_payment,
+.bank_payment,
+.agent_Wallet_payment {
+  text-align: left;
 }
-.back_to_shipping button {
-    background: #2b3445;
-    color: white;
-    padding: 8px 30px;
-    border-radius: 5px;
-    border: none;
+
+.cashOnDeliVery label,
+.mobile_payment label,
+.bank_payment label,
+.agent_Wallet_payment label {
+  margin: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.cashOnDelivery_content {
+  display: none;
+  /* overflow: hidden; */
+}
+.COD_Btn {
+  background: rgb(255, 255, 255);
+  width: auto;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  border: 1px solid gainsboro;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  margin-bottom: 20px;
+  margin-left: 25px;
+}
+.COD_Btn img {
+  width: 70px;
+}
+
+.payment-option-way,
+.bankPayment-option-way {
+  display: none;
+}
+.payment-option,
+.bankPayment-option {
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 25px;
+}
+.payment-option-way img,
+.bankPayment-option-way img {
+  border: 1px solid gainsboro;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  padding: 7px 15px;
+  margin: 0px 12px 0px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.payment_bottom_Btn {
+  margin: 80px 0px 0px 0px;
+}
+.back_to_shipping {
+  background: rgb(151, 151, 151);
+  color: white;
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: none;
+}
+
+#cashOnDeliveryNextBtn {
+  background: #ef8341;
+  color: white;
+  padding: 10px 50px;
+  margin-left: 20px;
+  border-radius: 5px;
+  border: none;
+  display: none;
 }
