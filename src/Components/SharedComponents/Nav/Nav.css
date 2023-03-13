@@ -40,6 +40,7 @@
   position: relative;
   width: 40%;
   justify-content: center;
+  /* z-index: 999; */
 }
 
 .search {
@@ -63,6 +64,37 @@
   cursor: pointer;
 }
 
+.suggested_item_container::-webkit-scrollbar {
+  display: none;
+}
+
+.suggested_item_container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.suggested_item_container{
+  width: 100%;
+  max-height: 40vh;
+  background-color: #fff;
+  border: 1px solid gainsboro;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: none;
+  margin-top: -9px;
+  position: absolute;
+  padding: 10px 15px;
+  overflow: scroll;
+  z-index: -1;
+}
+.suggested_item_container p{
+  border-top: 1px solid gainsboro;
+  padding-top: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.suggested_item_container p i{
+  margin-right: 5px;
+}
 .user-profile {
   width: 40px;
   height: 40px;
@@ -78,6 +110,7 @@
 .profile_dropdown a {
   text-decoration: none;
 }
+
 
 /* responsive css */
 /* @media only screen and (max-width: 1400px) {

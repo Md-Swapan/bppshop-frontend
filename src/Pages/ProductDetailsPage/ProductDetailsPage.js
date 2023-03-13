@@ -32,8 +32,6 @@ const ProductDetailsPage = ({allCategory}) => {
   }, [id]);
 
 
-  // console.log(productDetail)
-
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
@@ -114,7 +112,7 @@ const ProductDetailsPage = ({allCategory}) => {
 
     localStorage.setItem("activeOption", option);
 
-    console.log(option, indx)
+    // console.log(option, indx)
 
     const newActiveOption = localStorage.getItem("activeOption");
     setActiveOption(newActiveOption);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import defaultAvatar from "../../../Assets/Images/default-avatar.jpg";
@@ -24,6 +24,36 @@ const Nav = () => {
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [allCategory, setAllCategory] = useState([]);
+  const [SuggestedCategory, setSuggestedCategory] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/categories`).then((res) => {
+      setAllCategory(res.data.data);
+    });
+  }, [token]);
+
+  let categoryList = [];
+
+  function keepAllCategroryInAList(data)
+  { 
+    if(data.hasOwnProperty('childes'))
+    {
+      data.childes.forEach(element => {
+        keepAllCategroryInAList(element);
+      });
+    }
+    else{
+      categoryList.push(data);
+    }
+
+  }
+  allCategory.forEach(function(element)
+  {
+    keepAllCategroryInAList(element);
+  });
+
+  console.log(categoryList,'after keep all List');
 
   //Logout functionality
   const handleLogout = () => {
@@ -60,18 +90,32 @@ const Nav = () => {
 
   const handleSearchByKeyUp = (e) => {
     e.preventDefault();
+    const suggestedItemContainer = document.querySelector(
+      ".suggested_item_container"
+    );
+
+    setSuggestedCategory(
+      categoryList.filter((i) => i.name.toLowerCase().includes(e.target.value))
+    );
+
+    if (SuggestedCategory.length > 0) {
+      suggestedItemContainer.style.display = "block";
+    }
+
     const searchData = {
-      name: `${e.target.value}`
+      name: `${e.target.value}`,
       // limit: `${limit}`,
       // offset: `${offset}`,
     };
-      dispatch(searchProduct(searchData));
-   
+    dispatch(searchProduct(searchData));
+
     // axios({ method: "post", url, data }).then((res) => {
     //   dispatch(searchProduct(res.data.products));
-      e.target.value && navigate("/search");
+    e.target.value && navigate("/search");
     // });
   };
+
+  console.log(SuggestedCategory);
 
   return (
     <>
@@ -94,25 +138,43 @@ const Nav = () => {
 
             <div className="searchInput">
               {/* <form onChange={handleSearch}> */}
-                <input
-                  onKeyUp={handleSearchByKeyUp}
-                  type="text"
-                  name="search"
-                  id="dynamic-placeholder"
-                  className="search"
-                  placeholder="Search Product..."
-                />
-                <span className="searchIcon">
-                  <button 
+              <input
+                onKeyUp={handleSearchByKeyUp}
+                type="text"
+                name="search"
+                id="dynamic-placeholder"
+                className="search"
+                placeholder="Search Product..."
+              />
+              <span className="searchIcon">
+                <button
                   // onClick={handleSearchByClick}
-                    type="submit"
-                    style={{ border: "none", background: "none" }}
-                  >
-                    <i className="bi bi-search"></i>
-                  </button>
-                </span>
+                  type="submit"
+                  style={{ border: "none", background: "none" }}
+                >
+                  <i className="bi bi-search"></i>
+                </button>
+              </span>
               {/* </form> */}
+
+              {SuggestedCategory && (
+                <div className="suggested_item_container">
+                  {SuggestedCategory?.map((suggestItem) => (
+                    <div>
+                      <p><i className="bi bi-search"></i> {suggestItem?.name}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+
+            {/* <div className="suggested_item_container">
+              {SuggestedCategory.map((suggestItem) => (
+                <div>
+                  <p>{suggestItem.name}</p>
+                </div>
+              ))}
+            </div> */}
 
             <div className="userProfileTab">
               <div

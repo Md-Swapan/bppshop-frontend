@@ -16,7 +16,7 @@ const ShippingHome = () => {
   };
   return (
     <div>
-      <div className="shipping-heading">DELIVERY ADDRESS</div>
+      <h2 className="shipping-heading">DELIVERY ADDRESS</h2>
       <hr className="shipping_billing_header_line" />
       {/* <div className="progress_container">
                 <div

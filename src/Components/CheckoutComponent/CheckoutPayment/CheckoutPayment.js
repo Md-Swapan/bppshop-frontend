@@ -93,7 +93,6 @@ const CheckoutPayment = () => {
     cashOnDeliveryNextBtn.style.display = "none";
   };
 
-
   const AgentWalletPaymentHandler = () => {
     const bankPaymentOptionWay = document.querySelector(
       ".bankPayment-option-way"
@@ -114,8 +113,9 @@ const CheckoutPayment = () => {
   return (
     <>
       <MetaData title="Payment-Method - BPPShop" />
-      <div>
-        <h3 className="mb-2">Payment method</h3>
+      
+      <div className="payment_method_container">
+        <h3 className="mb-2">Payment Method</h3>
         <hr />
 
         <div className="payment-way-container">

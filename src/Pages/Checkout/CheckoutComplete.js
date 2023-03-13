@@ -2,50 +2,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import MetaData from "../Layout/MetaData";
 import "./CheckoutComplete.css";
+import successImg from "../../Assets/Images/bankLogo/done.jpg";
+import { useSelector } from "react-redux";
 
 const CheckoutComplete = () => {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <>
-    <MetaData title="Checkout-Complete - BPPShop" />
-      <div>
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-10 col-lg-10">
-          <div className="checkout_comple_card">
-            <div className=" p-5">
-              <div className="row">
-                <div className="col-md-6">
-                  <h5>Your order has been placed successfully! !</h5>
-                </div>
-              </div>
+      <MetaData title="Checkout-Complete - BPPShop" />
+      <div className="checkout_success_container">
+        <div className="row">
+          <div className="successImg">
+            <img width={100} src={successImg} alt="" />
+          </div>
+          <h4>Hey, {user.name}</h4>
+          <h5>Your order has been placed successfully!</h5>
 
-              <div className="row mb-4">
-                <div className="col-12">
-                  <div className="my-5 text-center">
-                  <i className="bi bi-check-circle-fill fw-bold fs-1 check_fill_icon"></i>
-                  </div>
-                </div>
-              </div>
-
-              <span className="font-weight-bold d-block mt-4">Hello, </span>
-              <span>
-                You order has been confirmed and will be shipped according to
-                the method you selected!
-              </span>
-
-              <div className="d-flex justify-content-between align-items-center my-5">
-                <div className="go_to_shopping">
-                  <Link to="/">Go to shopping</Link>
-                </div>
-
-                <div className="got_to_check_order">
-                  <Link to="/profile/orders">Check orders</Link>
-                </div>
-              </div>
-            </div>
+          <div className="checkout_success_btn_container">
+            <Link to="/">
+              <button className="go_to_shopping_btn">Go to shopping</button>
+            </Link>
+            <Link to="/profile/orders">
+              <button className="got_to_check_order_btn">Check orders</button>
+            </Link>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

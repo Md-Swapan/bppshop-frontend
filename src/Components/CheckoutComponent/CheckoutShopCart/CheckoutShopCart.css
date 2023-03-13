@@ -1,7 +1,11 @@
+.shop_cart_title{
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
 .shop_cart_container {
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    margin-top: 21px;
 }
 .shipping_delivary_form_input {
     width: 100%;
@@ -15,4 +19,18 @@
 }
 .continue_checkout_btn{
     background: blue;
+}
+.shopCartMinusBtn{
+    padding: 10px;
+    color: red;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.shopCartPlusBtn{
+    padding: 10px;
+    color: green;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
 }
