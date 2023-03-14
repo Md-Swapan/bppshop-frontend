@@ -64,35 +64,59 @@
   cursor: pointer;
 }
 
-.suggested_item_container::-webkit-scrollbar {
+/* .suggested_item_container::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .suggested_item_container {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.suggested_item_container{
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaaaaa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #979797;
+}
+
+.suggested_item_container {
   width: 100%;
-  max-height: 40vh;
+  max-height: 35vh;
   background-color: #fff;
   border: 1px solid gainsboro;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   display: none;
-  margin-top: -9px;
+  margin-top: -10px;
   position: absolute;
-  padding: 10px 15px;
-  overflow: scroll;
+  padding: 10px 0px;
+  overflow-y: scroll;
   z-index: -1;
 }
-.suggested_item_container p{
+.search_item_show {
   border-top: 1px solid gainsboro;
-  padding-top: 5px;
-  font-size: 15px;
+  /* margin-top: 5px; */
+}
+.suggested_item_container p {
+  padding: 5px 15px 0px 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
   cursor: pointer;
 }
-.suggested_item_container p i{
+.suggested_item_container p i {
   margin-right: 5px;
 }
 .user-profile {
@@ -110,7 +134,6 @@
 .profile_dropdown a {
   text-decoration: none;
 }
-
 
 /* responsive css */
 /* @media only screen and (max-width: 1400px) {

@@ -9,6 +9,13 @@ import { Toaster } from "react-hot-toast";
 
 // const notify = () => toast('Here is your toast.');
 
+const searchSuggestionCloseHandler = () => {
+  const suggestedItemContainer = document.querySelector(
+    ".suggested_item_container"
+  );
+
+  suggestedItemContainer.style.display = "none";
+};
 
 const CartDetailsCloseHandler = () => {
   const cartDetailsViewContainer = document.querySelector(
@@ -18,11 +25,13 @@ const CartDetailsCloseHandler = () => {
   const cartDetailsViewSectionOverlay = document.querySelector(
     ".cartDetailsView_section_overlay"
   );
-
-  cartDetailsViewSectionOverlay.style.display = "none";   
-  cartDetailsViewContainer.classList.toggle(
-    "cartDetailsView-container-toggle"
+  const suggestedItemContainer = document.querySelector(
+    ".suggested_item_container"
   );
+
+  cartDetailsViewSectionOverlay.style.display = "none";
+  suggestedItemContainer.style.display = "none";
+  cartDetailsViewContainer.classList.toggle("cartDetailsView-container-toggle");
 };
 
 // const sidebarCloseGlobalHandler = () => {
@@ -32,16 +41,14 @@ const CartDetailsCloseHandler = () => {
 //   );
 // }
 
-
-
 // $(document).ready(function(){
 //   $('#addtocart').on('click',function(){
-    
+
 //     var button = $(this);
 //     var cart = $('#cart');
 //     var cartTotal = cart.attr('data-totalitems');
 //     var newCartTotal = parseInt(cartTotal) + 1;
-    
+
 //     button.addClass('sendtocart');
 //     setTimeout(function(){
 //       button.removeClass('sendtocart');
@@ -53,20 +60,23 @@ const CartDetailsCloseHandler = () => {
 //   })
 // })
 
-
-
 const Layout = ({ children }) => {
   return (
     <div>
       <Nav />
-      <HomeFilterBtnHeader />
-      {/* <main className="layout_container" onClick={sidebarCloseGlobalHandler}>{children}</main> */}
-      <main className="layout_container">{children}</main>
-      <CartDetailsView />
-      <Cart />
-      <Footer />
-      <Toaster position="top-right" reverseOrder={false} />
-      <div onClick={CartDetailsCloseHandler} className="cartDetailsView_section_overlay"></div>
+      <div onClick={searchSuggestionCloseHandler}>
+        <HomeFilterBtnHeader />
+        {/* <main className="layout_container" onClick={sidebarCloseGlobalHandler}>{children}</main> */}
+        <main className="layout_container">{children}</main>
+        <CartDetailsView />
+        <Cart />
+        <Footer />
+        <Toaster position="top-right" reverseOrder={false} />
+        <div
+          onClick={CartDetailsCloseHandler}
+          className="cartDetailsView_section_overlay"
+        ></div>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 import toast from "react-hot-toast";
 import { logout } from "./../../../Redux/Actions/UserAction";
-import { searchProduct } from "../../../Redux/Actions/SearchAction";
+import { searchProduct, searchProductByCategory } from "../../../Redux/Actions/SearchAction";
 import { useState } from "react";
 
 const Nav = () => {
@@ -33,56 +33,24 @@ const Nav = () => {
     });
   }, [token]);
 
+  // search Suggestion......
+  const [suggestion, setSuggestion] = useState("")
   let categoryList = [];
 
-  function keepAllCategroryInAList(data)
-  { 
-    if(data.hasOwnProperty('childes'))
-    {
-      data.childes.forEach(element => {
-        keepAllCategroryInAList(element);
+  function keepAllCategoryInAList(data) {
+    if (data.hasOwnProperty("childes")) {
+      data.childes.forEach((element) => {
+        keepAllCategoryInAList(element);
       });
-    }
-    else{
+    } else {
       categoryList.push(data);
     }
-
   }
-  allCategory.forEach(function(element)
-  {
-    keepAllCategroryInAList(element);
+  allCategory.forEach(function (element) {
+    keepAllCategoryInAList(element);
   });
 
-  console.log(categoryList,'after keep all List');
-
-  //Logout functionality
-  const handleLogout = () => {
-    const config = { headers: { Authorization: `Bearer ${token}` } };
-
-    axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
-      if (res.data.status === "success") {
-        navigate("/");
-        localStorage.removeItem("token");
-        window.location.reload();
-        dispatch(logout());
-        dispatch(ClearCart());
-        dispatch(clearShippingAddress());
-        dispatch(ClearCartGroupItems());
-        dispatch(ClearDeliveryCharge());
-        // toaster
-        toast.success(`Logout Successfull`, {
-          duration: 3000,
-          style: {
-            width: "100%",
-            height: "80px",
-            padding: "0px 20px",
-          },
-        });
-      }
-    });
-  };
-
-  //search functionality
+  //search functionality.......
   // const [loading,setloading]=useState(true)
   let offset = 1;
   let limit = 10;
@@ -115,7 +83,48 @@ const Nav = () => {
     // });
   };
 
-  console.log(SuggestedCategory);
+  const searchSuggestionCloseHandler = () => {
+    const suggestedItemContainer = document.querySelector(
+      ".suggested_item_container"
+    );
+  
+    suggestedItemContainer.style.display = "none";
+  };
+
+  const onClickSearchBySuggestion = (id, name) => {
+    setSuggestion(name);
+    dispatch(searchProductByCategory( id));
+
+    searchSuggestionCloseHandler()
+  };
+
+  //Logout functionality........
+  const handleLogout = () => {
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
+      if (res.data.status === "success") {
+        navigate("/");
+        localStorage.removeItem("token");
+        window.location.reload();
+        dispatch(logout());
+        dispatch(ClearCart());
+        dispatch(clearShippingAddress());
+        dispatch(ClearCartGroupItems());
+        dispatch(ClearDeliveryCharge());
+        // toaster
+        toast.success(`Logout Successfull`, {
+          duration: 3000,
+          style: {
+            width: "100%",
+            height: "80px",
+            padding: "0px 20px",
+          },
+        });
+      }
+    });
+  };
+ 
 
   return (
     <>
@@ -139,12 +148,13 @@ const Nav = () => {
             <div className="searchInput">
               {/* <form onChange={handleSearch}> */}
               <input
-                onKeyUp={handleSearchByKeyUp}
+                onChange={handleSearchByKeyUp}
                 type="text"
                 name="search"
                 id="dynamic-placeholder"
                 className="search"
                 placeholder="Search Product..."
+                defaultValue={suggestion}
               />
               <span className="searchIcon">
                 <button
@@ -160,8 +170,14 @@ const Nav = () => {
               {SuggestedCategory && (
                 <div className="suggested_item_container">
                   {SuggestedCategory?.map((suggestItem) => (
-                    <div>
-                      <p><i className="bi bi-search"></i> {suggestItem?.name}</p>
+                    <div className="search_item_show">
+                      <p
+                        onClick={() =>
+                          onClickSearchBySuggestion(suggestItem?.id, suggestItem?.name)
+                        }
+                      >
+                        <i className="bi bi-search"></i> {suggestItem?.name}
+                      </p>
                     </div>
                   ))}
                 </div>

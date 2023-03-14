@@ -31,6 +31,8 @@ const Product = ({ allCategory, isLoading }) => {
       });
   }, [subSubCategories?.id]);
 
+  console.log(subSubCategories?.id)
+  
   useEffect(() => {
     if (!isLoading && !subSubCategories) {
       navigate("/404", { replace: true });
