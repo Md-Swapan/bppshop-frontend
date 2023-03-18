@@ -8,10 +8,13 @@ const Search = () => {
   const { searchProducts, loading } = useSelector(
     (state) => state?.searchProducts
   );
+
   return (
     <>
       <MetaData title="Search:- BPPShop" />
       <div className="categoryView-container productView-container">
+        <h6>Search result:</h6>
+        <br/>
         {searchProducts?.length ? (
           <div className="category_content product-content">
             <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">

@@ -247,6 +247,19 @@
   padding: 7px 20px;
 }
 
+.addToCartGif_container{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addToCartGif{
+  display: none;
+  width: 250px;
+  z-index: 99999;
+}
+
+
 @media screen and (max-width: 1600px) {
   .product-card-body:hover .quickView_AddToCart_overlay {
     display: block;

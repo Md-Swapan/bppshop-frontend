@@ -7,6 +7,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 import MetaData from "./../Layout/MetaData";
+import addToCartGif from "../../Assets/Images/addtocart.gif";
 
 const Product = ({ allCategory, isLoading }) => {
   const { slug, subSlug, subSubSlug } = useParams();
@@ -31,8 +32,8 @@ const Product = ({ allCategory, isLoading }) => {
       });
   }, [subSubCategories?.id]);
 
-  console.log(subSubCategories?.id)
-  
+  // console.log(subSubCategories?.id);
+
   useEffect(() => {
     if (!isLoading && !subSubCategories) {
       navigate("/404", { replace: true });
@@ -62,39 +63,74 @@ const Product = ({ allCategory, isLoading }) => {
 
       <div className="categoryView-container productView-container">
         {/* {products?.length ? ( */}
-          <div className="category_content product-content">
-            <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
-              {loading ? (
-                <>
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton className="skeletonLoader" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                  <Skeleton height="335px" borderRadius="10px" count={1} />
-                </>
-              ) : (
-                 products?.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                )) 
-                // : !loading && (
-                //   <div className="d-flex justify-content-center align-items-center">
-                //     <h2 className="text-warning mt-5">Products will coming soon.</h2>
-                //   </div>
-                // )
-              )
-              }
-            </SkeletonTheme>
-          </div>
+
+        <div className="category_content product-content">
+          <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
+            {loading ? (
+              <>
+                {/* <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                />
+                <Skeleton
+                  className="skeletonLoader"
+                  borderRadius="10px"
+                  count={1}
+                /> */}
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+                <Skeleton height="335px" borderRadius="10px" count={1} />
+              </>
+            ) : (
+              products?.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+              // : !loading && (
+              //   <div className="d-flex justify-content-center align-items-center">
+              //     <h2 className="text-warning mt-5">Products will coming soon.</h2>
+              //   </div>
+              // )
+            )}
+          </SkeletonTheme>
+        </div>
         {/* ) : (
           !loading && (
             <div className="d-flex justify-content-center align-items-center">

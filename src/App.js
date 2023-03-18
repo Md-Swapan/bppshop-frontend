@@ -33,6 +33,12 @@ import CheckoutComplete from './Pages/Checkout/CheckoutComplete';
 import ProductDetailsPage from './Pages/ProductDetailsPage/ProductDetailsPage';
 import Search from "./Pages/Search/Search";
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
+import Brands from './Pages/Brand/Brands/Brands';
+import BestSelling from './Pages/BestSelling/BestSelling';
+import NewArrival from './Pages/NewArrival/NewArrival';
+import TopRated from "./Pages/TopRated/TopRated";
+import DiscountProducts from './Pages/DiscountProducts/DiscountProducts';
+import BrandsProducts from './Pages/Brand/BrandsProducts/BrandsProducts';
 
 
 function App() {
@@ -73,6 +79,12 @@ function App() {
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
           <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
           <Route path="/search" element={<Search/>} />
+          <Route path="/brand" element={<Brands/>} />
+          <Route path="/brand/:name/:id" element={<BrandsProducts/>} />
+          <Route path="/discount-products" element={<DiscountProducts/>} />
+          <Route path="/best-selling" element={<BestSelling/>} />
+          <Route path="/new-arrival" element={<NewArrival/>} />
+          <Route path="/top-rated" element={<TopRated/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         
           <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>

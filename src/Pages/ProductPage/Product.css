@@ -3,6 +3,7 @@
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 24px;
   min-height: 30vh;
+  /* position: relative; */
 }
 /* no product content */
 .no_product_content{
@@ -16,8 +17,9 @@
   height: 335px;
   z-index: -1;
 }
-/* -----Responsive Design----- */
 
+
+/* -----Responsive Design----- */
 @media screen and (max-width: 1400px) {
   .product-content{
     display: grid;

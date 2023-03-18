@@ -14,6 +14,7 @@ import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import addToCartGif from "../../../Assets/Images/addtocart.gif";
 
 Modal.setAppElement("#root");
 
@@ -46,10 +47,7 @@ const ProductCard = ({ product }) => {
     product;
   // console.log(product);
 
-
-  const newChoiceOption = product?.choice_options?.find(
-    (option) => option
-  );
+  const newChoiceOption = product?.choice_options?.find((option) => option);
 
   // const newStaticProductUnit = newChoiceOption?.concat(productUnitStatic);
   // console.log(product?.choice_options)
@@ -70,6 +68,12 @@ const ProductCard = ({ product }) => {
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
 
+
+      // setInterval(() => {
+      //   document.querySelector('.addToCartGif').style.display = "block"
+      // }, 1000);
+      
+    
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 5000,
@@ -172,6 +176,9 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <div className="product_card_content">
+        {/* <div className="addToCartGif_container">
+          <img className="addToCartGif" src={addToCartGif} alt="" />
+        </div> */}
         <div className="product-card">
           {current_stock > 0 ? (
             <>

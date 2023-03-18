@@ -1,20 +1,23 @@
 import React from "react";
-import './HomeFilterBtnHeader.css';
+import "./HomeFilterBtnHeader.css";
+import { Link } from "react-router-dom";
 
 const HomeFilterBtnHeader = () => {
- 
-  
   return (
     <>
       <div className="homeFilterBtnHeader-container-section">
         <div className="header_btn">
           <div>
-            <button >Brand</button>
+            <Link to="/brand">
+              <button>Brand</button>
+            </Link>
           </div>
           <div>
-            <button>Discounted Products</button>
+            <Link to="/discount-products">
+              <button>Discounted Products</button>
+            </Link>
           </div>
-          
+
           <div className="dropdown">
             <button
               className="dropdown-toggle"
@@ -26,25 +29,25 @@ const HomeFilterBtnHeader = () => {
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a className="dropdown-item" href="#">
+                <Link className="dropdown-item" to="/new-arrival">
                   New Arrival
-                </a>
+                </Link>
               </li>
               <li>
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <Link className="dropdown-item" to="top-rated">
                   Top Rated
-                </a>
+                </Link>
               </li>
               <li>
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <Link className="dropdown-item" to="/best-selling">
                   Best Selling
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -59,7 +62,10 @@ const HomeFilterBtnHeader = () => {
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a className="dropdown-item" href="https://backend.bppshop.com.bd/shop/apply">
+                <a
+                  className="dropdown-item"
+                  href="https://backend.bppshop.com.bd/shop/apply"
+                >
                   Become a seller
                 </a>
               </li>
@@ -67,12 +73,15 @@ const HomeFilterBtnHeader = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="https://backend.bppshop.com.bd/seller/auth/login">
+                <a
+                  className="dropdown-item"
+                  href="https://backend.bppshop.com.bd/seller/auth/login"
+                >
                   Seller Login
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="https://agent.bppshop.com.bd">
                   Become a Agent
                 </a>
               </li>
@@ -80,7 +89,7 @@ const HomeFilterBtnHeader = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="https://agent.bppshop.com.bd/login">
                   Agent Login
                 </a>
               </li>

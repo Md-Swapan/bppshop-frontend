@@ -159,7 +159,7 @@ const CartDetailsView = () => {
                         >
                           {/* - */}
                           {/* <i class="bi bi-dash-lg"></i> */}
-                          <i class="bi bi-dash-square-fill"></i>
+                          <i className="bi bi-dash-square-fill"></i>
                         </span>
                         <span className="qtyCount-number">
                           {item?.quantity}
@@ -175,7 +175,7 @@ const CartDetailsView = () => {
                           className="cartPlusBtn"
                         >
                           {/* + */}
-                          <i class="bi bi-plus-square-fill"></i>
+                          <i className="bi bi-plus-square-fill"></i>
                           {/* <i class="bi bi-plus-lg"></i> */}
                         </span>
                       </div>

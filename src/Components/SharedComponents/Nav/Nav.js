@@ -53,7 +53,7 @@ const Nav = () => {
   //search functionality.......
   // const [loading,setloading]=useState(true)
   let offset = 1;
-  let limit = 10;
+  let limit = 100;
   // const url = baseUrl + "/products/search";
 
   const handleSearchByKeyUp = (e) => {
@@ -72,8 +72,8 @@ const Nav = () => {
 
     const searchData = {
       name: `${e.target.value}`,
-      // limit: `${limit}`,
-      // offset: `${offset}`,
+      limit: `${limit}`,
+      offset: `${offset}`,
     };
     dispatch(searchProduct(searchData));
 
@@ -148,13 +148,13 @@ const Nav = () => {
             <div className="searchInput">
               {/* <form onChange={handleSearch}> */}
               <input
-                onChange={handleSearchByKeyUp}
+                onKeyUp={handleSearchByKeyUp}
                 type="text"
                 name="search"
                 id="dynamic-placeholder"
                 className="search"
                 placeholder="Search Product..."
-                defaultValue={suggestion}
+                // value={suggestion}
               />
               <span className="searchIcon">
                 <button
