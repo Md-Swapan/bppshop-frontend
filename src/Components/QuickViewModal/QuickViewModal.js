@@ -3,14 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import "./QuickViewModal.css";
 import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemsToCart } from "./../../Redux/Actions/CartAction";
+import { addItemsToCart,addItemsToCartAfterLogin } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import ReactImageMagnify from "react-image-magnify";
 
+
 const QuickViewModal = ({ pid }) => {
+  const token = localStorage.getItem("token");
   const { slug, subSlug, subSubSlug } = useParams();
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
@@ -126,7 +128,32 @@ const QuickViewModal = ({ pid }) => {
   };
 
   const addToCartHandler = (productDetail, quantityCount) => {
-    dispatch(addItemsToCart(productDetail, quantityCount));
+    let color = productDetail?.colors?.map((color) => color?.code);
+    let choice_19 = productDetail?.choice_options?.map((list) => list?.options);
+    let option = choice_19?.map((option) => option[0]);
+
+    const addItemsToCartDataWithColor = {
+      id: `${productDetail?.id}`,
+      color: `${color[0]}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantityCount}`,
+    };
+
+    const addItemsToCartDataWithoutColor = {
+      id: `${productDetail.id}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantityCount}`,
+    };
+
+    if (token) {
+      productDetail?.colors?.length
+        ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
+          dispatch(addItemsToCart(productDetail, quantityCount))
+        : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
+          dispatch(addItemsToCart(productDetail, quantityCount));
+    } else {
+      dispatch(addItemsToCart(productDetail, quantityCount));
+    }
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 3000,
@@ -312,7 +339,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="quickViewMinusBtn"
                         >
-                          <i class="bi bi-dash-lg"></i>
+                          <i className="bi bi-dash-lg"></i>
                         </span>
                       ) : (
                         <span
@@ -325,7 +352,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="minus"
                         >
-                          <i class="bi bi-dash-lg"></i>
+                          <i className="bi bi-dash-lg"></i>
                         </span>
                       )}
                       <span className="count-number">
@@ -344,7 +371,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="quickViewPlusBtn"
                         >
-                          <i class="bi bi-plus-lg"></i>
+                          <i className="bi bi-plus-lg"></i>
                         </span>
                       ) : (
                         <span
@@ -364,7 +391,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="plus"
                         >
-                         <i class="bi bi-plus-lg"></i>
+                         <i className="bi bi-plus-lg"></i>
                         </span>
                       )}
                     </div>

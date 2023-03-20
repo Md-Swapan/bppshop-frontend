@@ -109,6 +109,7 @@ const ProductCard = ({ product }) => {
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
+    
 
     // Animate the product image to the cart container
     const productImage = document.querySelector(".product-card-body img");

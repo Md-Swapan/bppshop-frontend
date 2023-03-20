@@ -7,7 +7,10 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { addItemsToCart, addItemsToCartAfterLogin } from "./../../Redux/Actions/CartAction";
+import {
+  addItemsToCart,
+  addItemsToCartAfterLogin,
+} from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
@@ -31,9 +34,9 @@ const ProductDetailsPage = ({ allCategory }) => {
   }, [id]);
 
   // const cartItemQty = cartItems.map((i) => i.quantity);
-  const cartItemsId = cartItems.map((i) => i.product.id);
+  const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
-  const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
+  const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
@@ -177,11 +180,33 @@ const ProductDetailsPage = ({ allCategory }) => {
   };
 
   const addToCartHandler = (productDetail, quantityCount) => {
+    let color = productDetail?.colors?.map((color) => color?.code);
+    let choice_19 = productDetail?.choice_options?.map((list) => list?.options);
+    let option = choice_19?.map((option) => option[0]);
+
+    const addItemsToCartDataWithColor = {
+      id: `${productDetail?.id}`,
+      color: `${color[0]}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantityCount}`,
+    };
+
+    const addItemsToCartDataWithoutColor = {
+      id: `${productDetail.id}`,
+      choice_19: `${option[0]}`,
+      quantity: `${quantityCount}`,
+    };
+
     if (token) {
-      dispatch(addItemsToCartAfterLogin(productDetail, quantityCount));
+      productDetail?.colors?.length
+        ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
+          dispatch(addItemsToCart(productDetail, quantityCount))
+        : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
+          dispatch(addItemsToCart(productDetail, quantityCount));
     } else {
       dispatch(addItemsToCart(productDetail, quantityCount));
     }
+
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 3000,
@@ -389,7 +414,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                           }
                           className="detailsViewMinusBtn"
                         >
-                          <i class="bi bi-dash-lg"></i>
+                          <i className="bi bi-dash-lg"></i>
                         </span>
                       ) : (
                         <span
@@ -404,7 +429,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                           }
                           className="minus"
                         >
-                          <i class="bi bi-dash-lg"></i>
+                          <i className="bi bi-dash-lg"></i>
                         </span>
                       )}
                       <span className="count-number">
@@ -423,7 +448,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                           }
                           className="detailsViewPlusBtn"
                         >
-                          <i class="bi bi-plus-lg"></i>
+                          <i className="bi bi-plus-lg"></i>
                         </span>
                       ) : (
                         <span
@@ -436,7 +461,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                           }
                           className="plus"
                         >
-                          <i class="bi bi-plus-lg"></i>
+                          <i className="bi bi-plus-lg"></i>
                         </span>
                       )}
                     </div>
@@ -485,7 +510,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                         <i className="bi bi-cart-plus"></i> Add To Cart
                       </button>
                     )}
-                    <button class="addWishListBtn">
+                    <button className="addWishListBtn">
                       <i className="bi bi-heart"></i>
                     </button>
                   </div>

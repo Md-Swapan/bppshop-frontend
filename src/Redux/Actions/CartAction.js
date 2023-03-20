@@ -82,55 +82,11 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   }
 };
 
+
+
 // add to cart after login.
 export const addItemsToCartAfterLogin =
-  (product, quantity) => async (dispatch, getState) => {
-
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
-        product,
-        quantity,
-      },
-    });
-    localStorage.setItem(
-      "cartItems",
-      JSON.stringify(getState().cart.cartItems)
-    );
-
-    const productId = product.id;
-    const cartGroupItem = getState().cartGroup.cartGroupItems;
-
-    const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
-
-    const cartUpdateInfo = {
-      key: `${isItemExist.id}`,
-      quantity: `${quantity}`,
-    };
-
-    if (isItemExist) {
-      const token = localStorage.getItem("token");
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-
-      const { data } = await axios.post(
-        `${baseUrl}/cart/update`,
-        cartUpdateInfo,
-        config
-      );
-
-      dispatch({
-        type: "UPDATE_CART",
-        payload: data,
-      });
-    }
-
-
-
-    const addItemToCartDataAfterLogin = {
-
-    }
-     
-
+  (addItemToCartAfterLoginData) => async (dispatch, getState) => {
     try {
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_REQUEST" });
       const token = localStorage.getItem("token");
@@ -138,7 +94,7 @@ export const addItemsToCartAfterLogin =
 
       const { data } = await axios.post(
         `${baseUrl}/cart/add`,
-        addItemToCartDataAfterLogin,
+        addItemToCartAfterLoginData,
         config
       );
 
@@ -156,6 +112,8 @@ export const addItemsToCartAfterLogin =
       });
     }
   };
+
+
 
 // get cart data.
 export const getCartData = () => async (dispatch, getState) => {
