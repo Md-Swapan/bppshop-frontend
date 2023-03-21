@@ -16,6 +16,8 @@ const CheckoutShopCart = () => {
     return state.cart.cartItems;
   });
 
+  console.log(cartItems);
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -84,12 +86,13 @@ const CheckoutShopCart = () => {
                       <td>
                         {" "}
                         {item?.product?.discount > 0 ? (
-                          <del>
+                          <div style={{ fontSize: "11px" }}>
                             {" "}
-                            <span style={{ fontSize: "11px" }}>
-                              ৳ {item?.product?.unit_price}
+                            <span className="m-1">
+                              ৳ {item?.product?.unit_price -item?.product?.discount } 
                             </span>
-                          </del>
+                            <span className="m-1"><del>৳ {item?.product?.unit_price}</del></span>
+                          </div>
                         ) : (
                           <span>৳ {item?.product?.unit_price}</span>
                         )}

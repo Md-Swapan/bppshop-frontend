@@ -13,10 +13,14 @@ const TrackOrderDetails = () => {
     dispatch(loadUserOrderDetails(id));
   }, [dispatch, id]);
   const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
+  const { deliveryCharge } = useSelector((state) => state?.deliveryCharge);
+  const deliveryCost = deliveryCharge?.delivery_charge;
+  // console.log(deliveryCost);
 
   const productDetails = userOrderDetails?.map(
     (orderDetail) => orderDetail?.product_details
   );
+  console.log(productDetails);
   let subTotal = 0;
   let shippingCost = 0;
   let taxAmount = 0;
@@ -38,6 +42,7 @@ const TrackOrderDetails = () => {
         <table className="table">
           <tbody>
             {productDetails?.map((item) => {
+              console.log(shippingCost)
               subTotal += item.min_qty * item.unit_price;
               shippingCost += item.shipping_cost;
               taxAmount += item.tax;
@@ -113,7 +118,7 @@ const TrackOrderDetails = () => {
           <div className="col-6 col-md-3 text-center">
             <div className="px-2 py-1">
               <span className="text-muted">Shipping : </span>
-              <span className="track_amount_value">৳{shippingCost}.00</span>
+              <span className="track_amount_value">৳{deliveryCost}.00</span>
             </div>
           </div>
           <div className="col-6 col-md-3 text-center">
@@ -142,7 +147,7 @@ const TrackOrderDetails = () => {
             <div className="px-2 py-1">
               <span className="text-muted">Total: </span>
               <span className="track_amount_value">
-                ৳{subTotal + shippingCost + taxAmount - discountAmount}.00
+                ৳{subTotal + deliveryCost + taxAmount - discountAmount}.00
               </span>
             </div>
           </div>

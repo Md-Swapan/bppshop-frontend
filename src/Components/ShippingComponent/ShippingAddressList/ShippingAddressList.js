@@ -19,7 +19,7 @@ const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
   const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
 
-  console.log(allShippingAddressInfo)
+  // console.log(allShippingAddressInfo)
   // console.log(shippingAddressInfo)
 
   const handleSetDefaultAddress = (address_id) => {
