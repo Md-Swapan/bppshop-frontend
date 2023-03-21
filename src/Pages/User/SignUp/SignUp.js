@@ -16,6 +16,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
+  console.log(token);
 
   const onSubmit = (data) => {
     dispatch(userRegister(data));
@@ -35,6 +36,8 @@ const SignUp = () => {
       let from = location?.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     }
+   
+
   }, [isAuthenticated, navigate, token, location]);
 
   return (

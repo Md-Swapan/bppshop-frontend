@@ -35,23 +35,22 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       loginData,
       config
     );
-    
-// console.log(data);
+
+    // console.log(data);
     // const loginResponse = data.message
 
     // console.log(loginResponse)
-    
-    dispatch({ type: LOGIN_SUCCESS, payload: data});
+
+    dispatch({ type: LOGIN_SUCCESS, payload: data });
     localStorage.setItem("token", data.token);
     const token = localStorage.getItem("token");
 
     if (token) {
-      dispatch(loadUser())
+      dispatch(loadUser());
       dispatch(addItemsToCartWithLogin());
     }
 
     // dispatch({ type: LOGIN_FAIL, payload: loginResponse});
-
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.message });
   }
@@ -69,13 +68,16 @@ export const userRegister = (userData) => async (dispatch) => {
       userData,
       config
     );
-console.log(data);
-    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
-    localStorage.setItem("token", data.token);
-    const token = localStorage.getItem("token");
+    // console.log(data);
+    if (data.status === "success") {
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+      localStorage.setItem("token", data.token);
+    }
 
+    const token = localStorage.getItem("token");
+    console.log(token);
     if (token) {
-      dispatch(loadUser())
+      dispatch(loadUser());
       dispatch(addItemsToCartWithLogin());
     }
   } catch (error) {

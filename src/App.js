@@ -16,7 +16,7 @@ import ProfileHome from "./Components/ProfileComponent/ProfileHome/ProfileHome";
 import OrderHome from "./Components/ProfileComponent/OrderHome/OrderHome";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
-import { loadUser } from './Redux/Actions/UserAction';
+import { loadUser, logout } from './Redux/Actions/UserAction';
 import { loadUserOrders } from './Redux/Actions/UserOrderAction';
 import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
 import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';
@@ -46,6 +46,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
   const token = localStorage.getItem("token");
+  console.log(token);
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -55,6 +56,9 @@ function App() {
       setAllCategory(res.data.data);
       setLoading(false);
     });
+    if (token==="undefined") {
+      localStorage.removeItem("token")
+    }
 
   }, [token]);
 
