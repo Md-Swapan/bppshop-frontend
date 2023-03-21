@@ -72,7 +72,7 @@ export const loadUserOrderCancelRequest = (id) => async (dispatch) => {
       order_id,
       config
     );
-    console.log(data);
+    // console.log(data);
 
     dispatch({ type: LOAD_USER_ORDERS_CANCEL_SUCCESS, payload: data });
   } catch (error) {

@@ -85,7 +85,7 @@ const Sidebar = () => {
         : [...expandedCategories, categoryIndex]
     );
 
-    console.log(categoryIndex.id)
+    // console.log(categoryIndex.id)
     if (activeCategory) {
       const subMenu = document.querySelector(".subMenu");
       const subSubMenu = document.querySelector(".subSubMenu");
