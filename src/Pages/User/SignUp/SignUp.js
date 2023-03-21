@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./SignUp.css";
@@ -7,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { userRegister } from "../../../Redux/Actions/UserAction";
 import { useSelector } from "react-redux";
 import MetaData from "../../Layout/MetaData";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -15,15 +15,27 @@ const SignUp = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
+  const token = localStorage.getItem("token");
 
   const onSubmit = (data) => {
     dispatch(userRegister(data));
   };
 
-  if (isAuthenticated === true) {
-    let from = location?.state?.from?.pathname || "/";
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (isAuthenticated === true && token) {
+      toast.success(`Sign-Up Successfully Done`, {
+        duration: 3000,
+
+        style: {
+          width: "100%",
+          height: "80px",
+          padding: "0px 20px",
+        },
+      });
+      let from = location?.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, token, location]);
 
   return (
     <>

@@ -69,8 +69,15 @@ export const userRegister = (userData) => async (dispatch) => {
       userData,
       config
     );
-
+console.log(data);
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+    localStorage.setItem("token", data.token);
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      dispatch(loadUser())
+      dispatch(addItemsToCartWithLogin());
+    }
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
