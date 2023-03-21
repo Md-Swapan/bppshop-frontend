@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Layout from "./Pages/Layout/Layout";
 import SubCategory from "./Pages/CategoryPage/SubCategory/SubCategory";
@@ -39,6 +39,7 @@ import NewArrival from './Pages/NewArrival/NewArrival';
 import TopRated from "./Pages/TopRated/TopRated";
 import DiscountProducts from './Pages/DiscountProducts/DiscountProducts';
 import BrandsProducts from './Pages/Brand/BrandsProducts/BrandsProducts';
+import AgentLand from './Pages/AgentLand/AgentLand';
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home allCategory={allCategory} loading={loading} />}/>
+          
           <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
@@ -112,6 +114,8 @@ function App() {
           <Route path="/recover-password" element={<ForgetPassWord />}></Route>
           <Route path="/404" element={<PageNotFound />} />
           <Route path="*" element={<navigate to="/404" replace />} />
+
+          <Route path="/customer/force-login-by-agent/:agentToken" element={<AgentLand />}/>
         </Routes>
       </Layout>
     </div>

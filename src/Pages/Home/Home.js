@@ -3,8 +3,6 @@ import "./Home.css";
 import Category from "./../CategoryPage/Category/Category";
 import MetaData from "../Layout/MetaData";
 
-
-
 const Home = ({ allCategory, loading }) => {
   return (
     <>
