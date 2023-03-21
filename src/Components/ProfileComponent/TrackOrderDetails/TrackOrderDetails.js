@@ -20,7 +20,7 @@ const TrackOrderDetails = () => {
   const productDetails = userOrderDetails?.map(
     (orderDetail) => orderDetail?.product_details
   );
-  console.log(productDetails);
+  // console.log(productDetails);
   let subTotal = 0;
   let shippingCost = 0;
   let taxAmount = 0;
@@ -42,7 +42,6 @@ const TrackOrderDetails = () => {
         <table className="table">
           <tbody>
             {productDetails?.map((item) => {
-              console.log(shippingCost)
               subTotal += item.min_qty * item.unit_price;
               shippingCost += item.shipping_cost;
               taxAmount += item.tax;

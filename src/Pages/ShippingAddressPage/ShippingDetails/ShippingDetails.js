@@ -12,18 +12,26 @@ const ShippingDetails = () => {
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
   });
+  // console.log(cartItems);
   const { deliveryCharge } = useSelector((state) => state?.deliveryCharge);
   const deliveryCost = deliveryCharge?.delivery_charge;
 
+  const totalDiscount = parseInt(
+    `${cartItems?.reduce(
+      (acc, item) => acc + item?.quantity *  item?.product?.discount,
+      0
+    )}`
+  );
+  // console.log(totalDiscount);
   const totalPrice = parseInt(
     `${cartItems?.reduce(
-      (acc, item) => acc + item?.quantity * (item?.product?.unit_price - item?.product?.discount),
+      (acc, item) => acc + item?.quantity * (item?.product?.unit_price),
       0
     )}`
   );
   let grandTotalPrice = totalPrice;
   if (deliveryCost > 0) {
-    grandTotalPrice = totalPrice + deliveryCost;
+    grandTotalPrice = totalPrice + deliveryCost - totalDiscount;
   }
 
   return (
@@ -43,7 +51,7 @@ const ShippingDetails = () => {
                     ৳
                     {`${cartItems?.reduce(
                       (acc, item) =>
-                        acc + item?.quantity * (item?.product?.unit_price - item?.product?.discount),
+                        acc + item?.quantity * (item?.product?.unit_price),
                       0
                     )}`}
                     .00
@@ -61,7 +69,8 @@ const ShippingDetails = () => {
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>
-                  <div className="amount_text">-৳ 0.00</div>
+                  <div className="amount_text">-৳ {totalDiscount?totalDiscount:0}.00
+                  </div>
                 </div>
                 <div>
                   <input
