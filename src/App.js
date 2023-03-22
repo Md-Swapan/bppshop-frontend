@@ -46,7 +46,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -56,10 +56,9 @@ function App() {
       setAllCategory(res.data.data);
       setLoading(false);
     });
-    if (token==="undefined") {
+    if (token==="undefined" || token===null || token==="") {
       localStorage.removeItem("token")
     }
-
   }, [token]);
 
 

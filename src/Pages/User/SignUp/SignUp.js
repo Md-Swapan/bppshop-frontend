@@ -11,12 +11,11 @@ import { toast } from "react-hot-toast";
 const SignUp = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const [signUpError, setSignUpError] = useState("");
+  const { signupRes } = useSelector((state) => state.signupRes);
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
-  console.log(token);
 
   const onSubmit = (data) => {
     dispatch(userRegister(data));
@@ -24,13 +23,14 @@ const SignUp = () => {
 
   useEffect(() => {
     if (isAuthenticated === true && token) {
-      toast.success(`Sign-Up Successfully Done`, {
-        duration: 3000,
-
+      signupRes?.status==="success" &&   toast.success(`${signupRes?.message}`, {
+        duration: 5000,
         style: {
           width: "100%",
           height: "80px",
           padding: "0px 20px",
+          background: "#86bc19",
+          color: "#fff",
         },
       });
       let from = location?.state?.from?.pathname || "/";
@@ -38,7 +38,7 @@ const SignUp = () => {
     }
    
 
-  }, [isAuthenticated, navigate, token, location]);
+  }, [isAuthenticated, navigate, token, location,signupRes]);
 
   return (
     <>
@@ -113,7 +113,9 @@ const SignUp = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="d-flex justify-content-between"> */}
+                {signupRes?.status === "failed" && (
+                  <small className="text-danger">{signupRes?.message}</small>
+                )}
                 <div className="form-group d-flex flex-wrap justify-content-between">
                   <div className="form-group my-3">
                     <strong>
@@ -128,7 +130,7 @@ const SignUp = () => {
                       I agree to Your Terms and condition
                     </label>
                   </div>
-                  <div id="invalid-feedback">{signUpError}</div>
+                  {/* <div id="invalid-feedback">{signUpError}</div> */}
                 </div>
 
                 <div className="sign_up_btn mt-2">

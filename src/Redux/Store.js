@@ -12,6 +12,7 @@ import deliveryChargeReducers from "./Reducers/DeliveryChargeReducer";
 import { loginResReducer } from './Reducers/loginResponse';
 import { cancelOrderResponseReducer } from "./Reducers/CancelOrderResponse";
 import searchProductReducer from "./Reducers/SearchReducers";
+import { signUpResReducer } from "./Reducers/SignUpResponse";
 
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   cartGroup: CartGroupReducers,
   user: userReducer,
   loginRes: loginResReducer,
+  signupRes: signUpResReducer,
   userOrders: userOrderReducers,
   userOrderDetails:userOrderDetailReducers,
   cancelOrdersResponse:cancelOrderResponseReducer,

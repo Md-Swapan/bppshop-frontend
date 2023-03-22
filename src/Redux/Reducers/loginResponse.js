@@ -27,6 +27,7 @@ export const loginResReducer = (state = { loginRes: {} }, action) => {
         loading: false,
         isAuthenticated: true,
         loginRes: action.payload,
+        // error: null,
       };
 
     case LOGIN_FAIL:
@@ -35,7 +36,6 @@ export const loginResReducer = (state = { loginRes: {} }, action) => {
         loading: false,
         isAuthenticated: false,
         loginRes: action.payload,
-        error: action.payload,
       };
 
 
@@ -48,6 +48,7 @@ export const loginResReducer = (state = { loginRes: {} }, action) => {
       return {
         loading: false,
         loginRes: null,
+        signupRes:null,
         isAuthenticated: false,
       };
     case LOGOUT_FAIL:

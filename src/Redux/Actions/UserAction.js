@@ -27,42 +27,37 @@ import { addItemsToCartWithLogin } from "./CartAction.js";
 export const userLogin = (loginData) => async (dispatch, getState) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
-
     const config = { headers: { "Content-Type": "application/json" } };
-
     const { data } = await axios.post(
       `${baseUrl}/auth/login`,
       loginData,
       config
     );
-
     // console.log(data);
-    // const loginResponse = data.message
+    if (data.status === "success") {
+      dispatch({ type: LOGIN_SUCCESS, payload: data });
+      localStorage.setItem("token", data.token);
+    }else{
+      dispatch({ type: LOGIN_FAIL, payload: data });
+    }
 
-    // console.log(loginResponse)
-
-    dispatch({ type: LOGIN_SUCCESS, payload: data });
-    localStorage.setItem("token", data.token);
     const token = localStorage.getItem("token");
-
     if (token) {
       dispatch(loadUser());
       dispatch(addItemsToCartWithLogin());
     }
-
-    // dispatch({ type: LOGIN_FAIL, payload: loginResponse});
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.message });
   }
 };
 
+
+
 // Register
 export const userRegister = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
-
     const config = { headers: { "Content-Type": "multipart/form-data" } };
-
     const { data } = await axios.post(
       `${baseUrl}/auth/register`,
       userData,
@@ -70,20 +65,22 @@ export const userRegister = (userData) => async (dispatch) => {
     );
     // console.log(data);
     if (data.status === "success") {
-      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data});
       localStorage.setItem("token", data.token);
+    }else{
+      dispatch({ type: REGISTER_USER_FAIL, payload: data });
     }
 
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       dispatch(loadUser());
       dispatch(addItemsToCartWithLogin());
     }
   } catch (error) {
+    // console.log(error.response.data);
     dispatch({
       type: REGISTER_USER_FAIL,
-      payload: error.response.data.message,
+      payload: error.response.data,
     });
   }
 };
@@ -92,14 +89,14 @@ export const userRegister = (userData) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
-
     const token = localStorage.getItem("token");
-
     const { data } = await axios.get(`${baseUrl}/customer/profile`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    dispatch({ type: LOAD_USER_SUCCESS, payload: data.data });
+    // console.log(data);
+    if (data.status === "success") {
+      dispatch({ type: LOAD_USER_SUCCESS, payload: data.data });
+    }
   } catch (error) {
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
   }
@@ -111,9 +108,7 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_REQUEST });
     const token = localStorage.getItem("token");
     const data = await axios.get(`${baseUrl}/customer/logout`, token);
-
     // console.log(data);
-
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
