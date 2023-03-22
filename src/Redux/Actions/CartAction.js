@@ -159,7 +159,7 @@ export const removeItemsFromCart =
         cartId,
         config
       );
-      console.log(data)
+      // console.log(data)
       dispatch({
         type: "REMOVE_ITEM_FROM_CART_SUCCESS",
         payload: productId,

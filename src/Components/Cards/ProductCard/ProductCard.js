@@ -67,13 +67,6 @@ const ProductCard = ({ product }) => {
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
-
-
-      // setInterval(() => {
-      //   document.querySelector('.addToCartGif').style.display = "block"
-      // }, 1000);
-      
-    
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 5000,
@@ -88,22 +81,29 @@ const ProductCard = ({ product }) => {
     });
 
     let color = colors?.map((color) => color?.code);
-    let choice_19 = product.choice_options?.map((list) => list?.options);
-    let option = choice_19?.map((option) => option[0]);
+    let choiceOptions = product.choice_options?.map((list) => list?.options);
+    let option = choiceOptions?.map((option) => option[0]);
+    // console.log(option);
+    // console.log(choiceOptions[1][0]);
+
+    // for (const choiceOpt of choiceOptions) {
+    //   console.log(choiceOpt[0]);
+    // }
+    
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
-      choice_19: `${option[0]}`,
+      choiceOptions: `${option[0]}`,
       quantity: `${quantity}`,
     };
 
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
-      choice_19: `${option[0]}`,
+      choiceOptions: `${option}`,
       quantity: `${quantity}`,
     };
-
+    console.log(addItemsToCartDataWithoutColor);
     if (token) {
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))

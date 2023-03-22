@@ -14,7 +14,7 @@ const ShippingDetails = () => {
   });
   // console.log(cartItems);
   const { deliveryCharge } = useSelector((state) => state?.deliveryCharge);
-  const deliveryCost = deliveryCharge?.delivery_charge;
+  const deliveryCost = parseInt(deliveryCharge?.delivery_charge);
 
   const totalDiscount = parseInt(
     `${cartItems?.reduce(

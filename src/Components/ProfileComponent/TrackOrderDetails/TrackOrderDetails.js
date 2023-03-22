@@ -15,7 +15,7 @@ const TrackOrderDetails = () => {
   const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
   const { deliveryCharge } = useSelector((state) => state?.deliveryCharge);
   const deliveryCost = deliveryCharge?.delivery_charge;
-  console.log(userOrderDetails);
+  // console.log(userOrderDetails);
 
   //   const qty = userOrderDetails?.map(order=>order?.qty)
   // console.log(qty);
