@@ -2,8 +2,6 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAIL,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
@@ -27,7 +25,6 @@ export const loginResReducer = (state = { loginRes: {} }, action) => {
         loading: false,
         isAuthenticated: true,
         loginRes: action.payload,
-        // error: null,
       };
 
     case LOGIN_FAIL:
@@ -37,28 +34,6 @@ export const loginResReducer = (state = { loginRes: {} }, action) => {
         isAuthenticated: false,
         loginRes: action.payload,
       };
-
-
-      // case LOGOUT_REQUEST:
-      // return {
-      //   loading: true,
-      //   isAuthenticated: false,
-      // };
-    case LOGOUT_SUCCESS:
-      return {
-        loading: false,
-        loginRes: null,
-        signupRes:null,
-        isAuthenticated: false,
-      };
-    case LOGOUT_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-
-
     default:
       return state;
   }
@@ -134,5 +109,3 @@ export const forgotPasswordReducer = (state = {}, action) => {
       return state;
   }
 };
-
-

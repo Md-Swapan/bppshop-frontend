@@ -11,12 +11,6 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-  UPDATE_PROFILE_REQUEST,
-  UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL,
-  FORGOT_PASSWORD_REQUEST,
-  FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAIL,
   CLEAR_ERRORS,
 } from "../Constants/UserConstants.js";
 import axios from "axios";
@@ -33,7 +27,6 @@ export const userLogin = (loginData) => async (dispatch, getState) => {
       loginData,
       config
     );
-    // console.log(data);
     if (data.status === "success") {
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       localStorage.setItem("token", data.token);
@@ -63,7 +56,6 @@ export const userRegister = (userData) => async (dispatch) => {
       userData,
       config
     );
-    // console.log(data);
     if (data.status === "success") {
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data});
       localStorage.setItem("token", data.token);
@@ -77,7 +69,6 @@ export const userRegister = (userData) => async (dispatch) => {
       dispatch(addItemsToCartWithLogin());
     }
   } catch (error) {
-    // console.log(error.response.data);
     dispatch({
       type: REGISTER_USER_FAIL,
       payload: error.response.data,
@@ -93,7 +84,6 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axios.get(`${baseUrl}/customer/profile`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    // console.log(data);
     if (data.status === "success") {
       dispatch({ type: LOAD_USER_SUCCESS, payload: data.data });
     }
@@ -108,7 +98,7 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_REQUEST });
     const token = localStorage.getItem("token");
     const data = await axios.get(`${baseUrl}/customer/logout`, token);
-    // console.log(data);
+    console.log(data);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });

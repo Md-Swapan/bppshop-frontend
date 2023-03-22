@@ -101,7 +101,6 @@ const Nav = () => {
   //Logout functionality........
   const handleLogout = () => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
-
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
       if (res.data.status === "success") {
         navigate("/");

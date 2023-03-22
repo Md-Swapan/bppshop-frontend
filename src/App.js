@@ -16,7 +16,7 @@ import ProfileHome from "./Components/ProfileComponent/ProfileHome/ProfileHome";
 import OrderHome from "./Components/ProfileComponent/OrderHome/OrderHome";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import store from "./Redux/Store";
-import { loadUser, logout } from './Redux/Actions/UserAction';
+import { loadUser } from './Redux/Actions/UserAction';
 import { loadUserOrders } from './Redux/Actions/UserOrderAction';
 import TrackOrder from './Components/ProfileComponent/TrackOrder/TrackOrder';
 import AddressHome from './Components/ProfileComponent/AddressHome/AddressHome';

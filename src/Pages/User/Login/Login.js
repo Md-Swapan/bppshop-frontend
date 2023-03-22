@@ -20,7 +20,6 @@ const Login = () => {
   const onSubmit = (data) => {
     dispatch(userLogin(data));
   };
-  console.log(loginRes);
 
   useEffect(() => {
     if (isAuthenticated === true && token) {
@@ -104,11 +103,6 @@ const Login = () => {
                   <i className="fa fa-user-circle"></i> Sign Up
                 </Link>
               </div>
-              {/* <div className="sign_up_path">
-              <Link to="/sign-up">
-                <i className="fa fa-user-circle"></i> Sign Up
-              </Link>
-            </div> */}
             </div>
           </div>
         </div>
