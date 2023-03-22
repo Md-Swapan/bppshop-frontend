@@ -17,7 +17,7 @@ const notify = () =>
       height: "80px",
       padding: "0px 20px",
       background: "#86bc19",
-      color: "#fff"
+      color: "#fff",
     },
   });
 
@@ -85,14 +85,13 @@ const CartDetailsView = () => {
     );
 
     cartDetailsViewSectionOverlay.style.display = "none";
-     cartDetailsViewContainer.classList.toggle(
+    cartDetailsViewContainer.classList.toggle(
       "cartDetailsView-container-toggle"
     );
 
     //onclick placeorder go to top of the page
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-
   };
 
   const CartEmptyAlert = () => {

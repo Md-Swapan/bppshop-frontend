@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./OrderDetails.css";
-import productImg from "../../../Assets/Images/categoryImg/download (1).png";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
@@ -22,7 +21,6 @@ const OrderDetails = () => {
 
   // console.log(OrderDetails);
 
-  let totalItem = 0;
   let subTotal = 0;
   let taxFee = 0;
   let shippingFee = 0;

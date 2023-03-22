@@ -6,7 +6,7 @@ import Genuine from "../../../Assets/Images/shiping-icons/Genuine.png";
 import Payment from "../../../Assets/Images/shiping-icons/Payment.png";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import MetaData from './../../Layout/MetaData';
+import MetaData from "./../../Layout/MetaData";
 
 const ShippingDetails = () => {
   const cartItems = useSelector((state) => {
@@ -18,25 +18,24 @@ const ShippingDetails = () => {
 
   const totalDiscount = parseInt(
     `${cartItems?.reduce(
-      (acc, item) => acc + item?.quantity *  item?.product?.discount,
+      (acc, item) => acc + item?.quantity * item?.product?.discount,
       0
     )}`
   );
-  // console.log(totalDiscount);
   const totalPrice = parseInt(
     `${cartItems?.reduce(
-      (acc, item) => acc + item?.quantity * (item?.product?.unit_price),
+      (acc, item) => acc + item?.quantity * item?.product?.unit_price,
       0
     )}`
   );
-  let grandTotalPrice = totalPrice;
+  let grandTotalPrice = totalPrice - totalDiscount;
   if (deliveryCost > 0) {
     grandTotalPrice = totalPrice + deliveryCost - totalDiscount;
   }
 
   return (
     <>
-    <MetaData title="Choose-Delivery-Address - BPPShop" />
+      <MetaData title="Choose-Delivery-Address - BPPShop" />
       <div className="shiping-view-section">
         <div className="container">
           <div className="row">
@@ -51,7 +50,7 @@ const ShippingDetails = () => {
                     ৳
                     {`${cartItems?.reduce(
                       (acc, item) =>
-                        acc + item?.quantity * (item?.product?.unit_price),
+                        acc + item?.quantity * item?.product?.unit_price,
                       0
                     )}`}
                     .00
@@ -69,7 +68,8 @@ const ShippingDetails = () => {
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>
-                  <div className="amount_text">-৳ {totalDiscount?totalDiscount:0}.00
+                  <div className="amount_text">
+                    -৳ {totalDiscount ? totalDiscount : 0}.00
                   </div>
                 </div>
                 <div>
