@@ -7,24 +7,26 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {
-  addItemsToCart,
-  addItemsToCartAfterLogin,
-} from "./../../Redux/Actions/CartAction";
+import {addItemsToCart, addItemsToCartAfterLogin} from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
+
+
 
 const ProductDetailsPage = ({ allCategory }) => {
   const { slug, subSlug, subSubSlug, id } = useParams();
   let newId = parseInt(id);
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
+  const [activeOption, setActiveOption] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [variantChoiceOption, setVariantChoiceOption] = useState([])
+
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
@@ -37,14 +39,19 @@ const ProductDetailsPage = ({ allCategory }) => {
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
-  const choiceOptions = productDetail?.choice_options?.map(
-    (list) => list?.options
-  );
+  const choiceOptions = productDetail?.choice_options?.map((list) => list?.options);
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
-  const [activeOption, setActiveOption] = useState("");
-  // console.log(choiceOptions?.[index]?.[0]);
-  // console.log(choiceOptions?.[1]?.[0]);
+
+  // const firstChoiceOptions = choiceOptions[0];
+  // const secondChoiceOptions = choiceOptions[1];
+  // const thirdChoiceOptions = choiceOptions[2];
+
+  // setVariantChoiceOption(firstChoiceOptions, secondChoiceOptions, thirdChoiceOptions);
+
+  console.log(choiceOptions);
+
+
   // console.log(choiceOptions?.[2]?.[0]);
   // let activeOption = localStorage.getItem("activeOption");
 
@@ -65,29 +72,7 @@ const ProductDetailsPage = ({ allCategory }) => {
   // console.log(productDetail?.id)
   // console.log(productDetail?.id.toString())
 
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!loading && !productDetailsPath) {
-      navigate("/404", { replace: true });
-    }
-  }, [productDetailsPath, loading, navigate]);
-
-  const increaseQuantity = (id, quantity, stock) => {
-    const newQty = quantity + 1;
-    if (stock <= quantity) {
-      return;
-    }
-    dispatch(addItemsToCart(id, newQty));
-  };
-
-  const decreaseQuantity = (id, quantity) => {
-    const newQty = quantity - 1;
-    if (1 >= quantity) {
-      return;
-    }
-    dispatch(addItemsToCart(id, newQty));
-  };
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
@@ -98,6 +83,7 @@ const ProductDetailsPage = ({ allCategory }) => {
     });
   }, [id]);
 
+
   // const choiceOptions = productDetail?.choice_options?.map(
   //   (list) => list?.options
   // );
@@ -106,11 +92,9 @@ const ProductDetailsPage = ({ allCategory }) => {
 
   const priceVariantHandlerByChoiceOption = (option, indx) => {
     localStorage.setItem("activeOption", option);
-
-    // console.log(option, indx)
-
     const newActiveOption = localStorage.getItem("activeOption");
     setActiveOption(newActiveOption);
+
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       choice_19: `${defaultOption[0]}`,
@@ -178,6 +162,33 @@ const ProductDetailsPage = ({ allCategory }) => {
       refs.current.push(el);
     }
   };
+
+
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !productDetailsPath) {
+      navigate("/404", { replace: true });
+    }
+  }, [productDetailsPath, loading, navigate]);
+
+  const increaseQuantity = (id, quantity, stock) => {
+    const newQty = quantity + 1;
+    if (stock <= quantity) {
+      return;
+    }
+    dispatch(addItemsToCart(id, newQty));
+  };
+
+  const decreaseQuantity = (id, quantity) => {
+    const newQty = quantity - 1;
+    if (1 >= quantity) {
+      return;
+    }
+    dispatch(addItemsToCart(id, newQty));
+  };
+
 
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
@@ -361,7 +372,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                                     ? option === activeOption
                                       ? `activeOption`
                                       : `option`
-                                    : option === defaultOption[0]
+                                    :choiceOptions[0]
                                     ? `activeOption`
                                     : `option`
                                 }

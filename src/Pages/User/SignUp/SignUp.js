@@ -19,7 +19,10 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     dispatch(userRegister(data));
+
   };
+
+  
 
   useEffect(() => {
     if (isAuthenticated === true && token) {
@@ -33,10 +36,11 @@ const SignUp = () => {
           color: "#fff",
         },
       });
-      let from = location?.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
-    }
-   
+
+      // let from = location?.state?.from?.pathname || "/";
+      // navigate(from, { replace: true });
+      navigate("/login");
+    } 
 
   }, [isAuthenticated, navigate, token, location,signupRes]);
 

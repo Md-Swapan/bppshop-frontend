@@ -16,7 +16,7 @@ const NewArrival = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/products/best-sellings?${limit}&${offset}`)
+      .get(`${baseUrl}/products/latest?${limit}&${offset}`)
       .then((res) => setNewArrivalProduct(res?.data?.products));
     setLoading(false);
   }, []);
