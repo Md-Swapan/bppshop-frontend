@@ -54,7 +54,7 @@
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   transition: all 0.3s;
-  /* margin-left: 29%; */
+  margin-left: -15.70%;
 }
 
 .searchIcon {
@@ -147,24 +147,20 @@
   .nav-content {
     margin: 10px 13px 10px 30px;
   }
-  .searchInput {
-    position: relative;
-    width: 50%;
-    justify-content: center;
-  }
-}
-
-@media only screen and (max-width: 668px) {
-  .searchInput {
-    margin-left: -160px;
-  }
   .bpshopsLogo {
     display: none;
   }
   .bppshopShortLogo {
     display: block;
   }
+  .searchInput {
+    position: relative;
+    width: 60%;
+    justify-content: center;
+    margin-left: -55px;
+  }
 }
+
 
 @media only screen and (max-width: 576px) {
   .searchIcon {

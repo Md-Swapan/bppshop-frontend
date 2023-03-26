@@ -111,7 +111,7 @@ const CartDetailsView = () => {
         </div>
         <div className="cartDetailsView-content">
           {cartItems?.length < 1 ? (
-            <h4 className="mt-4 text-center cartEmptyAlert">
+            <h4 className=" text-center cartEmptyAlert">
               You have no items in your cart!
             </h4>
           ) : (

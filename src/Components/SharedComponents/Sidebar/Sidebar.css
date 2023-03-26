@@ -169,7 +169,7 @@
   font-weight: 600 !important;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1550px) {
   #sidebarMenu {
     height: 100%;
     width: 270px;

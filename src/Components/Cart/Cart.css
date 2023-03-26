@@ -27,14 +27,14 @@
 @media only screen and (max-width: 1600px) {
   .cart {
     margin-left: 92%;
-    bottom: 380px;
+    bottom: 300px;
   }
 }
 @media only screen and (max-width: 1500px) {
   .cart {
     width: 90px;
     margin-left: 93%;
-    bottom: 380px;
+    bottom: 300px;
   }
 }
 @media only screen and (max-width: 1400px) {
