@@ -32,7 +32,7 @@
   cursor: pointer;
 }
 .cartDetailsView-content{
-  height: 70%;
+  height: 75%;
   overflow: scroll;
 }
 .cartDetailsView-content::-webkit-scrollbar {
@@ -117,7 +117,7 @@
 }
 
 .cart-total-container{
-  height: 20%;
+  height: 15%;
   background: rgb(150, 150, 150);
   color: #ffffff;
   bottom: 0;
