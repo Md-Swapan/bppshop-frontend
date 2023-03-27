@@ -52,7 +52,8 @@ const QuickViewModal = ({ pid }) => {
   const variantPrice = priceVariant?.data?.price;
 
   useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
+    axios.get(`${baseUrl}/products/details/${pid}`)
+    .then((res) => {
       setProductDetail(res?.data?.data);
     });
   }, [pid]);

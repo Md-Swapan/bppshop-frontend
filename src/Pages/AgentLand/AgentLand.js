@@ -9,12 +9,10 @@ const AgentLand = () => {
   const { agentToken } = useParams();
   console.log(agentToken);
 
-  const [agentInfo, setAgentInfo] = useState();
+  // const [agentInfo, setAgentInfo] = useState();
 
   useEffect(() => {
-    axios.post( `${baseUrl}/auth/agent-login/`,{
-      token: agentToken,
-    })
+    axios.get( `${baseUrl}/auth/agentlogin/?token=` +agentToken)
     .then((res) => console.log(res));
   }, [agentToken]);
 

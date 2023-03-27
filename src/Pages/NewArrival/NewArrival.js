@@ -1,28 +1,29 @@
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { baseUrl } from './../../BaseUrl/BaseUrl';
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import ProductCard from './../../Components/Cards/ProductCard/ProductCard';
-
+import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 
 const NewArrival = () => {
   const [newArrivalProduct, setNewArrivalProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const limit = 10;
-  const offset = 1;
+  // const paginateItems = {
+  //   limit: 10,
+  //   offset: 1,
+  // };
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/products/latest?${limit}&${offset}`)
+      .get(`${baseUrl}/products/latest`,  { params: { limit: 10, offset: 1 } })
       .then((res) => setNewArrivalProduct(res?.data?.products));
     setLoading(false);
   }, []);
 
-  console.log(newArrivalProduct);
-  
+  // console.log(newArrivalProduct);
+
   return (
     <>
       <div className="newArrival_container">

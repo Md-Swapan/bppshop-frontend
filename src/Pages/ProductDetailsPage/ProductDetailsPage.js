@@ -16,7 +16,7 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
 
-const ProductDetailsPage = ({ allCategory }) => {
+const ProductDetailsPage = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
   let newId = parseInt(id);
   const [productDetail, setProductDetail] = useState([]);
@@ -31,10 +31,13 @@ const ProductDetailsPage = ({ allCategory }) => {
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
-      setProductDetail(res?.data?.data);
+      console.log(res.data.data);
+      setProductDetail(res.data.data);
       setLoading(false);
     });
   }, [id]);
+
+  // console.log(productDetail.choice_options)
 
   // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i?.product?.id);
@@ -43,16 +46,17 @@ const ProductDetailsPage = ({ allCategory }) => {
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
-  const defaultOption = choiceOptions?.map((option) => option[0]);
+
+  // const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
 
-  // const firstChoiceOptions = choiceOptions[0];
+  // const firstChoiceOptions = productDetail?.choice_options;
   // const secondChoiceOptions = choiceOptions[1];
   // const thirdChoiceOptions = choiceOptions[2];
 
-  // setVariantChoiceOption(firstChoiceOptions, secondChoiceOptions, thirdChoiceOptions);
+  const optionUnit = productDetail?.choice_options?.map((i) => i);
 
-  // console.log(choiceOptions);
+  // setVariantChoiceOption(firstChoiceOptions, secondChoiceOptions, thirdChoiceOptions);
 
   // console.log(choiceOptions?.[2]?.[0]);
   // let activeOption = localStorage.getItem("activeOption");
@@ -89,8 +93,34 @@ const ProductDetailsPage = ({ allCategory }) => {
   // const defaultOption = choiceOptions?.map((option) => option[0]);
   // const colors = productDetail?.colors?.map((color) => color?.code);
 
+  var [selectedOption, setSelectedOption] = useState([]);
+  console.log(selectedOption);
+
   const OptionSelectHandler = (e) => {
-    console.log(e.target.value);
+    const name = e.target.value.split("@");
+
+    const newName = {
+      name: name[0],
+      option: name[1],
+    };
+
+    const isItemExist = selectedOption.filter((i) => i.name == newName.name);
+
+    if (isItemExist) {
+
+      // console.log(selectedOption.map)
+      // setSelectedOption(selectedOption.);
+    }
+    
+    setSelectedOption([...selectedOption, newName]);
+
+    //   return {
+    //     ...selectedOption,
+    //     selectedOption: selectedOption.name == isItemExist.name && name[1],
+    //   };
+    // } else {
+    //   setSelectedOption([...selectedOption, newName]);
+    // }
   };
 
   const priceVariantHandlerByChoiceOption = (option, indx) => {
@@ -100,7 +130,7 @@ const ProductDetailsPage = ({ allCategory }) => {
 
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
-      choice_19: `${defaultOption[0]}`,
+      // choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
@@ -117,13 +147,13 @@ const ProductDetailsPage = ({ allCategory }) => {
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
-      choice_19: `${defaultOption[0]}`,
+      // choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
     const priceVariantData = {
       product_id: `${id}`,
-      choice_19: `${defaultOption[0]}`,
+      // choice_19: `${defaultOption[0]}`,
       color: `${selectedColor}`,
       quantity: `${quantityCount}`,
     };
@@ -135,7 +165,7 @@ const ProductDetailsPage = ({ allCategory }) => {
   const priceVariantHandlerByQty = () => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
-      choice_19: `${defaultOption[0]}`,
+      // choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
@@ -355,9 +385,7 @@ const ProductDetailsPage = ({ allCategory }) => {
                     >
                       {productDetail?.choice_options?.map((list, index) => (
                         <div key={list?.id} className="choiceOptionList">
-                          <h5>
-                            {list?.title}:{/* {index} */}
-                          </h5>
+                          <h5>{list?.title}:</h5>
                           <div className="choiceOptionSelection">
                             {/* {list?.options?.map((option, indx) => (
                               <span
@@ -387,7 +415,10 @@ const ProductDetailsPage = ({ allCategory }) => {
                             >
                               <option value="">Choose {list?.title} </option>
                               {list?.options?.map((option, indx) => (
-                                <option value={option} key={indx}>
+                                <option
+                                  value={list?.name + "@" + option}
+                                  key={indx}
+                                >
                                   {option}
                                 </option>
                               ))}
@@ -395,6 +426,66 @@ const ProductDetailsPage = ({ allCategory }) => {
                           </div>
                         </div>
                       ))}
+
+                      {/* <div className="choiceOptionList">
+                          <h5>
+                            {optionUnit[0]?.title}
+                          </h5>
+                          <div className="choiceOptionSelection">
+                            <select
+                              name="options"
+                              onChange={(e) => OptionSelectHandler(e)}
+                            >
+                              <option value="">Choose {optionUnit[0]?.title} </option>
+                              {optionUnit[0]?.options?.map((option, indx) => (
+                                <option value={option} key={indx}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+
+                        {optionUnit[1] && <div className="choiceOptionList">
+                          <h5>
+                            {optionUnit[1]?.title}
+                          </h5>
+                          <div className="choiceOptionSelection">
+                            <select
+                              name="options"
+                              onChange={(e) => OptionSelectHandler(e)}
+                            >
+                              <option value="">Choose {optionUnit[1]?.title} </option>
+                              {optionUnit[1]?.options?.map((option, indx) => (
+                                <option value={option} key={indx}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>}
+
+                        {
+                          optionUnit[2] && <div className="choiceOptionList">
+                          <h5>
+                            {optionUnit[2]?.title}
+                          </h5>
+                          <div className="choiceOptionSelection">
+                            <select
+                              name="options"
+                              onChange={(e) => OptionSelectHandler(e)}
+                            >
+                              <option value="">Choose {optionUnit[2]?.title} </option>
+                              {optionUnit[2]?.options?.map((option, indx) => (
+                                <option value={option} key={indx}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        } */}
                     </div>
                     <div
                       className={
