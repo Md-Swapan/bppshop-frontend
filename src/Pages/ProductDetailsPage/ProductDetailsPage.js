@@ -7,13 +7,14 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {addItemsToCart, addItemsToCartAfterLogin} from "./../../Redux/Actions/CartAction";
+import {
+  addItemsToCart,
+  addItemsToCartAfterLogin,
+} from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
-
-
 
 const ProductDetailsPage = ({ allCategory }) => {
   const { slug, subSlug, subSubSlug, id } = useParams();
@@ -22,7 +23,7 @@ const ProductDetailsPage = ({ allCategory }) => {
   const [quantityCount, setQuantityCount] = useState(1);
   const [activeOption, setActiveOption] = useState("");
   const [loading, setLoading] = useState(true);
-  const [variantChoiceOption, setVariantChoiceOption] = useState([])
+  const [variantChoiceOption, setVariantChoiceOption] = useState([]);
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -39,7 +40,9 @@ const ProductDetailsPage = ({ allCategory }) => {
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
-  const choiceOptions = productDetail?.choice_options?.map((list) => list?.options);
+  const choiceOptions = productDetail?.choice_options?.map(
+    (list) => list?.options
+  );
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
 
@@ -49,8 +52,7 @@ const ProductDetailsPage = ({ allCategory }) => {
 
   // setVariantChoiceOption(firstChoiceOptions, secondChoiceOptions, thirdChoiceOptions);
 
-  console.log(choiceOptions);
-
+  // console.log(choiceOptions);
 
   // console.log(choiceOptions?.[2]?.[0]);
   // let activeOption = localStorage.getItem("activeOption");
@@ -72,8 +74,6 @@ const ProductDetailsPage = ({ allCategory }) => {
   // console.log(productDetail?.id)
   // console.log(productDetail?.id.toString())
 
-
-
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
 
@@ -83,12 +83,15 @@ const ProductDetailsPage = ({ allCategory }) => {
     });
   }, [id]);
 
-
   // const choiceOptions = productDetail?.choice_options?.map(
   //   (list) => list?.options
   // );
   // const defaultOption = choiceOptions?.map((option) => option[0]);
   // const colors = productDetail?.colors?.map((color) => color?.code);
+
+  const OptionSelectHandler = (e) => {
+    console.log(e.target.value);
+  };
 
   const priceVariantHandlerByChoiceOption = (option, indx) => {
     localStorage.setItem("activeOption", option);
@@ -163,8 +166,6 @@ const ProductDetailsPage = ({ allCategory }) => {
     }
   };
 
-
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -188,7 +189,6 @@ const ProductDetailsPage = ({ allCategory }) => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
-
 
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
@@ -228,12 +228,6 @@ const ProductDetailsPage = ({ allCategory }) => {
       },
     });
   };
-
-  // onclick go to top of the page
-  // const scrollTop = () => {
-  //   document.body.scrollTop = 0;
-  //   document.documentElement.scrollTop = 0;
-  // }
 
   return (
     <>
@@ -364,8 +358,8 @@ const ProductDetailsPage = ({ allCategory }) => {
                           <h5>
                             {list?.title}:{/* {index} */}
                           </h5>
-                          <div className="choiceOption">
-                            {list?.options?.map((option, indx) => (
+                          <div className="choiceOptionSelection">
+                            {/* {list?.options?.map((option, indx) => (
                               <span
                                 onClick={() =>
                                   priceVariantHandlerByChoiceOption(
@@ -378,15 +372,26 @@ const ProductDetailsPage = ({ allCategory }) => {
                                     ? option === activeOption
                                       ? `activeOption`
                                       : `option`
-                                    :choiceOptions[0]
+                                    : choiceOptions[0]
                                     ? `activeOption`
                                     : `option`
                                 }
                               >
                                 {option}
-                                {/* {indx} */}
                               </span>
-                            ))}
+                            ))} */}
+
+                            <select
+                              name="options"
+                              onChange={(e) => OptionSelectHandler(e)}
+                            >
+                              <option value="">Choose {list?.title} </option>
+                              {list?.options?.map((option, indx) => (
+                                <option value={option} key={indx}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                       ))}
