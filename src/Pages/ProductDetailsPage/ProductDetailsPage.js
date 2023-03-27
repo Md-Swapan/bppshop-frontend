@@ -229,6 +229,12 @@ const ProductDetailsPage = ({ allCategory }) => {
     });
   };
 
+  // onclick go to top of the page
+  // const scrollTop = () => {
+  //   document.body.scrollTop = 0;
+  //   document.documentElement.scrollTop = 0;
+  // }
+
   return (
     <>
       <nav aria-label="breadcrumb">

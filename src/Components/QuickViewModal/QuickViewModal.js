@@ -165,6 +165,12 @@ const QuickViewModal = ({ pid }) => {
     });
   };
 
+
+  const scrollTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  
   return (
     <>
       <div className="modal-container">
@@ -447,7 +453,7 @@ const QuickViewModal = ({ pid }) => {
                   )}
 
                   <Link to={`/${slug}/${subSlug}/${subSubSlug}/${pid}`}>
-                    <button className="btn_before_add_cart ms-3">
+                    <button onClick={scrollTop} className="btn_before_add_cart ms-3">
                       <i className="bi bi-eye-fill"></i> View Details
                     </button>
                   </Link>
