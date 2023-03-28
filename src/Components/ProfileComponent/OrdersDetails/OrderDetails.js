@@ -14,6 +14,7 @@ const OrderDetails = () => {
   const { userOrders } = useSelector((state) => state?.userOrders);
   const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
   const userOrder = userOrders?.find((order) => order?.id === parseInt(id));
+  const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
   // const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -25,9 +26,7 @@ const OrderDetails = () => {
     // .then(res => console.log(res))
   }, [dispatch, id]);
 
-  const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
-
-
+  
   let subTotal = 0;
   let taxFee = 0;
   let shippingFee = 0;
