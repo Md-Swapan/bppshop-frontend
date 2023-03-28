@@ -81,34 +81,40 @@ const ProductCard = ({ product }) => {
     //default choise option
     const choice_options = product.choice_options;
     const choice_options_name = choice_options.map((option) => option.name);
-    console.log(choice_options_name);
+    // console.log(choice_options_name);
     const choice_options_defaultvalue = choice_options.map(
       (option) => option.options[0]
     );
-    console.log(choice_options_defaultvalue);
-    const choices = choice_options_name.map((name, index) => ({
+    // console.log(choice_options_defaultvalue);
+    const defaultChoices = choice_options_name.map((name, index) => ({
       name,
       options: choice_options_defaultvalue[index],
     }));
-    console.log(choices);
+    console.log(defaultChoices);
+
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
-      choice_33: `${option[0]}`,
       quantity: `${quantity}`,
     };
+
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
-      choice_33: `${option[0]}`,
       quantity: `${quantity}`,
     };
+
+    defaultChoices.forEach(element => {
+      addItemsToCartDataWithoutColor[element.name] = `${element.options}`.trim();
+    });
+    
 
     if (token) {
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
+
 
     // Animate the product image to the cart container
     const productImage = document.querySelector(".product-card-body img");
