@@ -14,7 +14,6 @@ import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import addToCartGif from "../../../Assets/Images/addtocart.gif";
 
 Modal.setAppElement("#root");
 
@@ -45,14 +44,9 @@ const ProductCard = ({ product }) => {
   const token = localStorage.getItem("token");
   const { id, name, unit_price, colors, discount, current_stock, thumbnail } =
     product;
-  // console.log(product);
 
   const newChoiceOption = product?.choice_options?.find((option) => option);
-
-  // const newStaticProductUnit = newChoiceOption?.concat(productUnitStatic);
-  // console.log(product?.choice_options)
-  // console.log(newChoiceOption.title)
-
+  
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
     setPid(pid);
@@ -83,33 +77,38 @@ const ProductCard = ({ product }) => {
     let color = colors?.map((color) => color?.code);
     let choiceOptions = product.choice_options?.map((list) => list?.options);
     let option = choiceOptions?.map((option) => option[0]);
-    // console.log(option);
-    // console.log(choiceOptions[1][0]);
 
-    // for (const choiceOpt of choiceOptions) {
-    //   console.log(choiceOpt[0]);
-    // }
-    
+    //default choise option
+    const choice_options = product.choice_options;
+    const choice_options_name = choice_options.map((option) => option.name);
+    console.log(choice_options_name);
+    const choice_options_defaultvalue = choice_options.map(
+      (option) => option.options[0]
+    );
+    console.log(choice_options_defaultvalue);
+    const choices = choice_options_name.map((name, index) => ({
+      name,
+      options: choice_options_defaultvalue[index],
+    }));
+    console.log(choices);
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
-      choiceOptions: `${option[0]}`,
+      choice_33: `${option[0]}`,
+      quantity: `${quantity}`,
+    };
+    const addItemsToCartDataWithoutColor = {
+      id: `${product.id}`,
+      choice_33: `${option[0]}`,
       quantity: `${quantity}`,
     };
 
-    const addItemsToCartDataWithoutColor = {
-      id: `${product.id}`,
-      choiceOptions: `${option}`,
-      quantity: `${quantity}`,
-    };
-    console.log(addItemsToCartDataWithoutColor);
     if (token) {
       product.colors.length
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
-    
 
     // Animate the product image to the cart container
     const productImage = document.querySelector(".product-card-body img");
