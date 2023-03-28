@@ -3,13 +3,15 @@ import React, { useEffect, useRef, useState } from "react";
 import "./QuickViewModal.css";
 import { baseUrl, imgBaseUrl } from "../../BaseUrl/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemsToCart,addItemsToCartAfterLogin } from "./../../Redux/Actions/CartAction";
+import {
+  addItemsToCart,
+  addItemsToCartAfterLogin,
+} from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import ReactImageMagnify from "react-image-magnify";
-
 
 const QuickViewModal = ({ pid }) => {
   const token = localStorage.getItem("token");
@@ -21,13 +23,29 @@ const QuickViewModal = ({ pid }) => {
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === pid);
 
-  const isItemExist = cartItems.find((i) => i.product.id === addedItemId);
+  const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
 
+  useEffect(() => {
+    axios.get(`${baseUrl}/products/details/${pid}`).then((res) => {
+      setProductDetail(res?.data?.data);
+    });
+  }, [pid]);
+
+  
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
+
+  //default choise option
+  const defaultOptionName = productDetail?.choice_options?.map(
+    (list) => list?.name
+  );
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
+  const defaultChoices = defaultOptionName?.map((name, index) => ({
+    name,
+    options: defaultOption[index],
+  }));
 
   const [activeOption, setActiveOption] = useState();
 
@@ -48,60 +66,79 @@ const QuickViewModal = ({ pid }) => {
   };
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
-
   const variantPrice = priceVariant?.data?.price;
 
-  useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${pid}`)
-    .then((res) => {
-      setProductDetail(res?.data?.data);
-    });
-  }, [pid]);
+  
 
-  const priceVariantHandlerByChoiceOption = (option) => {
-    setActiveOption(option);
+  const [selectedOption, setSelectedOption] = useState([]);
+
+  const OptionSelectHandler = (e) => {
+    const selectOption = e.target.value.split("@");
+    const newName = {
+      name: selectOption[0],
+      option: selectOption[1],
+    };
+    if (selectedOption.findIndex((f) => f.name === newName.name) === -1) {
+      setSelectedOption((element) => [...selectedOption, newName]);
+    } else {
+      const newSelectedOption = [...selectedOption];
+      const filterArray = newSelectedOption.filter(
+        (f) => f.name !== newName.name
+      );
+      setSelectedOption((element) => [...filterArray, newName]);
+    }
+
+    priceVariantHandlerByChoiceOption();
+  };
+
+  const priceVariantHandlerByChoiceOption = () => {
+    // localStorage.setItem("activeOption", option);
+    // const newActiveOption = localStorage.getItem("activeOption");
+    // setActiveOption(newActiveOption);
 
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
-      choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
+    defaultChoices &&
+      defaultChoices.forEach((element) => {
+        priceVariantDefaultOptionData[element.name] =
+          `${element.options}`.trim();
+      });
+
     const priceVariantData = {
       product_id: `${pid}`,
-      choice_19: `${option}`,
       quantity: `${quantityCount}`,
     };
-    option
+
+    selectedOption &&
+      selectedOption.forEach((element) => {
+        priceVariantData[element.name] = `${element.option}`.trim();
+      });
+
+    selectedOption
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultOptionData));
+
+    console.log(priceVariantDefaultOptionData);
+    console.log(priceVariantData);
   };
 
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${pid}`,
-      choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
     const priceVariantData = {
       product_id: `${pid}`,
-      choice_19: `${defaultOption[0]}`,
       color: `${selectedColor}`,
       quantity: `${quantityCount}`,
     };
     selectedColor
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultColorData));
-  };
-  const priceVariantHandlerByQty = () => {
-    const priceVariantDefaultColorData = {
-      product_id: `${pid}`,
-      choice_19: `${defaultOption[0]}`,
-      color: `${colors[0]}`,
-      quantity: `${quantityCount}`,
-    };
-    dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
   const newData = productDetail?.images?.map((img) => ({
@@ -166,12 +203,11 @@ const QuickViewModal = ({ pid }) => {
     });
   };
 
-
   const scrollTop = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-  }
-  
+  };
+
   return (
     <>
       <div className="modal-container">
@@ -197,7 +233,8 @@ const QuickViewModal = ({ pid }) => {
                             smallImage: {
                               alt: "Wristwatch by Ted Baker London",
                               isFluidWidth: true,
-                              sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px',
+                              sizes:
+                                "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
                               src: img
                                 ? `https://backend.bppshop.com.bd/storage/product/${img}`
                                 : newData[0].image,
@@ -206,8 +243,8 @@ const QuickViewModal = ({ pid }) => {
                               src: img
                                 ? `https://backend.bppshop.com.bd/storage/product/${img}`
                                 : newData[0].image,
-                                width: 1526,
-                                height: 2000
+                              width: 1526,
+                              height: 2000,
                             },
                             enlargedImageContainerDimensions: {
                               width: "120%",
@@ -275,13 +312,13 @@ const QuickViewModal = ({ pid }) => {
                     className={
                       productDetail?.choice_options?.length < 1
                         ? "d-none"
-                        : "size"
+                        : "choiceOptionListContainer size"
                     }
                   >
                     {productDetail?.choice_options?.map((list) => (
-                      <div key={list.id} className="">
+                      <div key={list.id} className="choiceOptionList">
                         <h5>{list?.title}: </h5>
-                        <div className="d-flex flex-wrap">
+                        {/* <div className="d-flex flex-wrap">
                           {list?.options?.map((option) => (
                             <span
                               onClick={() =>
@@ -300,6 +337,26 @@ const QuickViewModal = ({ pid }) => {
                               {option}
                             </span>
                           ))}
+                        </div> */}
+
+                        <div className="choiceOptionSelection">
+                      
+                          <select
+                            name="options"
+                            onChange={(e) => OptionSelectHandler(e)}
+                          >
+                            <option value="none" selected disabled hidden>
+                              Choose {list?.title}{" "}
+                            </option>
+                            {list?.options?.map((option, indx) => (
+                              <option
+                                value={list?.name + "@" + option}
+                                key={indx}
+                              >
+                                {option}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                     ))}
@@ -398,7 +455,7 @@ const QuickViewModal = ({ pid }) => {
                           }
                           className="plus"
                         >
-                         <i className="bi bi-plus-lg"></i>
+                          <i className="bi bi-plus-lg"></i>
                         </span>
                       )}
                     </div>
@@ -408,7 +465,8 @@ const QuickViewModal = ({ pid }) => {
                       <h5>
                         {productDetail?.discount > 0 ? (
                           <span className="mx-2 text-end">
-                            ৳{isItemExist?.quantity *
+                            ৳
+                            {isItemExist?.quantity *
                               (productDetail?.unit_price -
                                 productDetail?.discount)}
                           </span>
@@ -420,7 +478,8 @@ const QuickViewModal = ({ pid }) => {
                       </h5>
                     ) : (
                       <h5>
-                        Total Price: ৳{variantPrice && isItemExist
+                        Total Price: ৳
+                        {variantPrice && isItemExist
                           ? variantPrice
                           : quantityCount *
                             (productDetail?.unit_price -
@@ -446,7 +505,8 @@ const QuickViewModal = ({ pid }) => {
                   ) : (
                     <button
                       className="btn_before_add_cart"
-                      onClick={() =>addToCartHandler(productDetail, quantityCount)
+                      onClick={() =>
+                        addToCartHandler(productDetail, quantityCount)
                       }
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
@@ -454,7 +514,10 @@ const QuickViewModal = ({ pid }) => {
                   )}
 
                   <Link to={`/${slug}/${subSlug}/${subSubSlug}/${pid}`}>
-                    <button onClick={scrollTop} className="btn_before_add_cart ms-3">
+                    <button
+                      onClick={scrollTop}
+                      className="btn_before_add_cart ms-3"
+                    >
                       <i className="bi bi-eye-fill"></i> View Details
                     </button>
                   </Link>

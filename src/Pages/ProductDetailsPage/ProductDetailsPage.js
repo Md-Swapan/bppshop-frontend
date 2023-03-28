@@ -60,15 +60,8 @@ const ProductDetailsPage = () => {
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId == paramId;
 
-
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
-
-  useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
-      setProductDetail(res?.data?.data);
-    });
-  }, [id]);
 
   
 
@@ -106,6 +99,7 @@ const ProductDetailsPage = () => {
   // };
 
   //select option handlers
+ 
   const [selectedOption, setSelectedOption] = useState([]);
   
   console.log(selectedOption)
@@ -125,7 +119,6 @@ const ProductDetailsPage = () => {
       );
       setSelectedOption((element) => [...filterArray, newName]);
     }
-
 
     priceVariantHandlerByChoiceOption()
 
@@ -158,7 +151,6 @@ const ProductDetailsPage = () => {
     });
 
 
-
     selectedOption? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultOptionData));
 
@@ -167,6 +159,7 @@ const ProductDetailsPage = () => {
       console.log(priceVariantData)
     };
 
+    
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
