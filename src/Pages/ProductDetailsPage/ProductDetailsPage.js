@@ -31,15 +31,12 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
-      console.log(res.data.data);
       setProductDetail(res.data.data);
       setLoading(false);
     });
   }, [id]);
 
-  // console.log(productDetail.choice_options)
 
-  // const cartItemQty = cartItems.map((i) => i.quantity);
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
@@ -47,36 +44,27 @@ const ProductDetailsPage = () => {
     (list) => list?.options
   );
 
-  // const defaultOption = choiceOptions?.map((option) => option[0]);
+  //default choise option
+  const defaultOptionName = productDetail?.choice_options?.map((list) => list?.name);
+  const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
+  const defaultChoices = defaultOptionName?.map((name, index) => ({
+    name,
+    options: defaultOption[index],
+  }));
 
-  // const firstChoiceOptions = productDetail?.choice_options;
-  // const secondChoiceOptions = choiceOptions[1];
-  // const thirdChoiceOptions = choiceOptions[2];
+  console.log(defaultChoices);
 
-  const optionUnit = productDetail?.choice_options?.map((i) => i);
+  
 
-  // setVariantChoiceOption(firstChoiceOptions, secondChoiceOptions, thirdChoiceOptions);
 
-  // console.log(choiceOptions?.[2]?.[0]);
-  // let activeOption = localStorage.getItem("activeOption");
 
-  // const categories = allCategory.find((item) => item.slug === slug);
-  // const subCategories = categories?.childes?.find(
-  //   (item) => item.slug === subSlug
-  // );
-  // const subSubCategories = subCategories?.childes?.find(
-  //   (item) => item.slug === subSubSlug
-  // );
 
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId == paramId;
 
-  // console.log(productDetailsPath)
-
-  // console.log(productDetail?.id)
-  // console.log(productDetail?.id.toString())
+  
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
@@ -87,40 +75,61 @@ const ProductDetailsPage = () => {
     });
   }, [id]);
 
-  // const choiceOptions = productDetail?.choice_options?.map(
-  //   (list) => list?.options
-  // );
-  // const defaultOption = choiceOptions?.map((option) => option[0]);
-  // const colors = productDetail?.colors?.map((color) => color?.code);
+  
 
-  var [selectedOption, setSelectedOption] = useState([]);
+  // const [selectedOption, setSelectedOption] = useState([]);
+
+  // console.log(selectedOption);
+
+  // const OptionSelectHandler = (e) => {
+  //   const selectOption = e.target.value.split("@");
+  //   const nam = selectOption[0];
+  //   const optn = selectOption[1];
+
+  //   const selectedItems = {
+  //     name: nam,
+  //     option: optn,
+  //   };
+
+  //   const findExistingItem = selectedOption.find((item) => {
+  //     return item.name === nam;
+  //   });
+
+  //   if (findExistingItem) {
+  //     findExistingItem.name = nam;
+  //     findExistingItem.option = optn;
+  //   }
+
+  //   const names = selectedOption.map((o) => o.name);
+  //   const filtered = selectedOption.filter(
+  //     ({ name }, index) => !names.includes(name, index + 1)
+  //   );
+
+  //   console.log(filtered);
+
+  //   setSelectedOption([...selectedOption, selectedItems]);
+  // };
+
+  //select option handlers
+  const [selectedOption, setSelectedOption] = useState([]);
+
   console.log(selectedOption);
 
   const OptionSelectHandler = (e) => {
-    const name = e.target.value.split("@");
-
+    const selectOption = e.target.value.split("@");
     const newName = {
-      name: name[0],
-      option: name[1],
+      name: selectOption[0],
+      option: selectOption[1],
     };
-
-    const isItemExist = selectedOption.filter((i) => i.name == newName.name);
-
-    if (isItemExist) {
-
-      // console.log(selectedOption.map)
-      // setSelectedOption(selectedOption.);
+    if (selectedOption.findIndex((f) => f.name === newName.name) === -1) {
+      setSelectedOption((element) => [...selectedOption, newName]);
+    } else {
+      const newSelectedOption = [...selectedOption];
+      const filterArray = newSelectedOption.filter(
+        (f) => f.name !== newName.name
+      );
+      setSelectedOption((element) => [...filterArray, newName]);
     }
-    
-    setSelectedOption([...selectedOption, newName]);
-
-    //   return {
-    //     ...selectedOption,
-    //     selectedOption: selectedOption.name == isItemExist.name && name[1],
-    //   };
-    // } else {
-    //   setSelectedOption([...selectedOption, newName]);
-    // }
   };
 
   const priceVariantHandlerByChoiceOption = (option, indx) => {
@@ -413,7 +422,9 @@ const ProductDetailsPage = () => {
                               name="options"
                               onChange={(e) => OptionSelectHandler(e)}
                             >
-                              <option value="">Choose {list?.title} </option>
+                              <option value="none" selected disabled hidden>
+                                Choose {list?.title}{" "}
+                              </option>
                               {list?.options?.map((option, indx) => (
                                 <option
                                   value={list?.name + "@" + option}
