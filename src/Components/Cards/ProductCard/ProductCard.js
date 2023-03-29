@@ -46,7 +46,7 @@ const ProductCard = ({ product }) => {
     product;
 
   const newChoiceOption = product?.choice_options?.find((option) => option);
-  
+
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {
     setPid(pid);
@@ -61,6 +61,7 @@ const ProductCard = ({ product }) => {
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
+    // console.log(product);
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 5000,
@@ -75,8 +76,7 @@ const ProductCard = ({ product }) => {
     });
 
     let color = colors?.map((color) => color?.code);
-    let choiceOptions = product.choice_options?.map((list) => list?.options);
-    let option = choiceOptions?.map((option) => option[0]);
+    // console.log(color);
 
     //default choise option
     const choice_options = product.choice_options;
@@ -90,31 +90,34 @@ const ProductCard = ({ product }) => {
       name,
       options: choice_options_defaultvalue[index],
     }));
-    console.log(defaultChoices);
-
+    // console.log(defaultChoices);
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
       quantity: `${quantity}`,
     };
-
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
       quantity: `${quantity}`,
     };
 
-    defaultChoices.forEach(element => {
-      addItemsToCartDataWithoutColor[element.name] = `${element.options}`.trim();
+    defaultChoices.forEach((element) => {
+      addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
     });
-    
+    // console.log(addItemsToCartDataWithColor);
+
+    defaultChoices.forEach((element) => {
+      addItemsToCartDataWithoutColor[element.name] =
+        `${element.options}`.trim();
+    });
+    // console.log(addItemsToCartDataWithoutColor);
 
     if (token) {
-      product.colors.length
+      product?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }
-
 
     // Animate the product image to the cart container
     const productImage = document.querySelector(".product-card-body img");
