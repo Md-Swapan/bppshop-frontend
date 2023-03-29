@@ -68,7 +68,6 @@ const QuickViewModal = ({ pid }) => {
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
 
-  
 
   const [selectedOption, setSelectedOption] = useState([]);
 
@@ -165,23 +164,50 @@ const QuickViewModal = ({ pid }) => {
     }
   };
 
+  // add to cart with price variant options.....
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
-    let choice_19 = productDetail?.choice_options?.map((list) => list?.options);
-    let option = choice_19?.map((option) => option[0]);
 
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
       color: `${color[0]}`,
-      choice_19: `${option[0]}`,
       quantity: `${quantityCount}`,
     };
+    selectedOption.length > 0
+      ? selectedOption.forEach((element) => {
+          addItemsToCartDataWithColor[element.name] =
+            `${element.option}`.trim();
+        })
+      : defaultChoices.forEach((element) => {
+          addItemsToCartDataWithColor[element.name] =
+            `${element.options}`.trim();
+        });
+
+    const existDefault = defaultChoices.map((element) => element);
+    const existSelectedOption = selectedOption.map((element) => element);
+
+    console.log(existDefault);
+    console.log(existSelectedOption);
+
+    const matchOptions = existSelectedOption.filter(
+      (obj) => existDefault.indexOf(obj.name) !== obj.name
+    );
+
+    console.log(matchOptions);
 
     const addItemsToCartDataWithoutColor = {
       id: `${productDetail.id}`,
-      choice_19: `${option[0]}`,
       quantity: `${quantityCount}`,
     };
+    selectedOption.length > 0
+      ? selectedOption.forEach((element) => {
+          addItemsToCartDataWithoutColor[element.name] =
+            `${element.option}`.trim();
+        })
+      : defaultChoices.forEach((element) => {
+          addItemsToCartDataWithoutColor[element.name] =
+            `${element.options}`.trim();
+        });
 
     if (token) {
       productDetail?.colors?.length
@@ -192,6 +218,7 @@ const QuickViewModal = ({ pid }) => {
     } else {
       dispatch(addItemsToCart(productDetail, quantityCount));
     }
+
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 3000,

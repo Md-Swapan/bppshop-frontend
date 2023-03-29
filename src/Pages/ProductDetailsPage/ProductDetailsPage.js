@@ -218,10 +218,6 @@ const ProductDetailsPage = () => {
     dispatch(addItemsToCart(id, newQty));
   };
 
-  // const existSelectedOption = selectedOption.map((element) => element);
-  // const existDefault = defaultChoices.map((element) => element);
-
-  // console.log(existSelectedOption, existDefault)
 
   // add to cart with price variant options.....
   const addToCartHandler = (productDetail, quantityCount) => {
