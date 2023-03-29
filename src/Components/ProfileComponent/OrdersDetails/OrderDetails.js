@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import MetaData from "../../../Pages/Layout/MetaData";
+// import { baseUrl } from './../../../BaseUrl/BaseUrl';
+// import axios from "axios";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
@@ -12,15 +14,19 @@ const OrderDetails = () => {
   const { userOrders } = useSelector((state) => state?.userOrders);
   const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
   const userOrder = userOrders?.find((order) => order?.id === parseInt(id));
+  const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
+  // const token = localStorage.getItem("token");
 
   useEffect(() => {
     dispatch(loadUserOrderDetails(id));
+    // axios.get(`${baseUrl}/customer/order/details/${id}`,{
+    //     headers: { Authorization: `Bearer ${token}` }
+    //   }
+    // )
+    // .then(res => console.log(res))
   }, [dispatch, id]);
 
-  const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
-
-  // console.log(OrderDetails);
-
+  
   let subTotal = 0;
   let taxFee = 0;
   let shippingFee = 0;

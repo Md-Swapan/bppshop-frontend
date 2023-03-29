@@ -61,6 +61,7 @@ const ProductCard = ({ product }) => {
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
+    // console.log(product);
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 5000,
@@ -75,6 +76,7 @@ const ProductCard = ({ product }) => {
     });
 
     let color = colors?.map((color) => color?.code);
+    // console.log(color);
 
     //default choise option
     const choice_options = product.choice_options;
@@ -84,32 +86,35 @@ const ProductCard = ({ product }) => {
       (option) => option.options[0]
     );
     // console.log(choice_options_defaultvalue);
-    const choices = choice_options_name.map((name, index) => ({
+    const defaultChoices = choice_options_name.map((name, index) => ({
       name,
       options: choice_options_defaultvalue[index],
     }));
-    console.log(choices);
+    // console.log(defaultChoices);
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
       quantity: `${quantity}`,
     };
-    // console.log(addItemsToCartDataWithColor);
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
       quantity: `${quantity}`,
     };
 
+    defaultChoices.forEach((element) => {
+      addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
+    });
+    // console.log(addItemsToCartDataWithColor);
 
-    choices.forEach(element => {
-      addItemsToCartDataWithColor[element.name]=`${element.options}`.trim();
-   });          
-console.log(addItemsToCartDataWithoutColor);
-
+    defaultChoices.forEach((element) => {
+      addItemsToCartDataWithoutColor[element.name] =
+        `${element.options}`.trim();
+    });
+    // console.log(addItemsToCartDataWithoutColor);
 
     if (token) {
-      product.colors.length
+      product?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor));
     }

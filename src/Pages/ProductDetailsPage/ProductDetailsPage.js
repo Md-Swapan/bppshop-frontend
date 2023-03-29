@@ -55,25 +55,13 @@ const ProductDetailsPage = () => {
 
   console.log(defaultChoices);
 
-  
-
-
-
 
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId == paramId;
 
-  
-
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
-
-  useEffect(() => {
-    axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
-      setProductDetail(res?.data?.data);
-    });
-  }, [id]);
 
   
 
@@ -111,9 +99,10 @@ const ProductDetailsPage = () => {
   // };
 
   //select option handlers
+ 
   const [selectedOption, setSelectedOption] = useState([]);
-
-  console.log(selectedOption);
+  
+  console.log(selectedOption)
 
   const OptionSelectHandler = (e) => {
     const selectOption = e.target.value.split("@");
@@ -130,39 +119,55 @@ const ProductDetailsPage = () => {
       );
       setSelectedOption((element) => [...filterArray, newName]);
     }
+
+    priceVariantHandlerByChoiceOption()
+
   };
 
-  const priceVariantHandlerByChoiceOption = (option, indx) => {
-    localStorage.setItem("activeOption", option);
-    const newActiveOption = localStorage.getItem("activeOption");
-    setActiveOption(newActiveOption);
+
+  const priceVariantHandlerByChoiceOption = () => {
+    // localStorage.setItem("activeOption", option);
+    // const newActiveOption = localStorage.getItem("activeOption");
+    // setActiveOption(newActiveOption);
+
 
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
-      // choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
+    defaultChoices && defaultChoices.forEach(element => {
+      priceVariantDefaultOptionData[element.name] = `${element.options}`.trim();
+    });
+
+
     const priceVariantData = {
       product_id: `${id}`,
-      choice_19: `${option}`,
       quantity: `${quantityCount}`,
     };
-    option
-      ? dispatch(getPriceVariant(priceVariantData))
-      : dispatch(getPriceVariant(priceVariantDefaultOptionData));
-  };
 
+    selectedOption && selectedOption.forEach(element => {
+      priceVariantData[element.name] = `${element.option}`.trim();
+    });
+
+
+    selectedOption? dispatch(getPriceVariant(priceVariantData))
+      : dispatch(getPriceVariant(priceVariantDefaultOptionData));
+
+
+      console.log(priceVariantDefaultOptionData)
+      console.log(priceVariantData)
+    };
+
+    
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
-      // choice_19: `${defaultOption[0]}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
     const priceVariantData = {
       product_id: `${id}`,
-      // choice_19: `${defaultOption[0]}`,
       color: `${selectedColor}`,
       quantity: `${quantityCount}`,
     };
@@ -171,15 +176,7 @@ const ProductDetailsPage = () => {
       : dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
-  const priceVariantHandlerByQty = () => {
-    const priceVariantDefaultColorData = {
-      product_id: `${id}`,
-      // choice_19: `${defaultOption[0]}`,
-      color: `${colors[0]}`,
-      quantity: `${quantityCount}`,
-    };
-    dispatch(getPriceVariant(priceVariantDefaultColorData));
-  };
+
 
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
@@ -196,6 +193,7 @@ const ProductDetailsPage = () => {
       }
     }
   };
+
 
   const refs = useRef([]);
   refs.current = [];
@@ -229,6 +227,7 @@ const ProductDetailsPage = () => {
     dispatch(addItemsToCart(id, newQty));
   };
 
+
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
     let choice_19 = productDetail?.choice_options?.map((list) => list?.options);
@@ -240,12 +239,20 @@ const ProductDetailsPage = () => {
       choice_19: `${option[0]}`,
       quantity: `${quantityCount}`,
     };
+    defaultChoices && defaultChoices.forEach(element => {
+      addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
+    });
+
 
     const addItemsToCartDataWithoutColor = {
       id: `${productDetail.id}`,
-      choice_19: `${option[0]}`,
       quantity: `${quantityCount}`,
     };
+    defaultChoices && defaultChoices.forEach(element => {
+      addItemsToCartDataWithoutColor[element.name] = `${element.options}`.trim();
+    });
+
+    console.log(addItemsToCartDataWithoutColor)
 
     if (token) {
       productDetail?.colors?.length
