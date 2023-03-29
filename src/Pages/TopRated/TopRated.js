@@ -11,12 +11,9 @@ const TopRated = () => {
   const [topRatedProduct, setTopRatedProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const limit = 10;
-  const offset = 1;
-
   useEffect(() => {
     axios
-      .get(`${baseUrl}/products/top-rated?${limit}&${offset}`)
+      .get(`${baseUrl}/products/top-rated`, { params: { limit: 200, offset: 1 } })
       .then((res) => setTopRatedProduct(res?.data?.products));
     setLoading(false);
   }, []);

@@ -20,7 +20,9 @@ const AgentLand = () => {
     .then((res) => {
       // setAgentInfo(res.data.data)
       // dispatch(AgentLogin(res.data.data))
-      navigate('/')
+
+      console.log(res)
+      // navigate('/')
     });
   }, [agentToken]);
 

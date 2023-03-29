@@ -54,7 +54,7 @@ const ProductDetailsPage = () => {
     options: defaultOption[index],
   }));
 
-  // console.log(defaultChoices);
+  console.log(productDetail);
 
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
@@ -100,7 +100,7 @@ const ProductDetailsPage = () => {
 
   const [selectedOption, setSelectedOption] = useState([]);
 
-  // console.log(selectedOption);
+  console.log(selectedOption);
 
   const OptionSelectHandler = (e) => {
     const selectOption = e.target.value.split("@");

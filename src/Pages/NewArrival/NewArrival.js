@@ -17,7 +17,7 @@ const NewArrival = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/products/latest`,  { params: { limit: 10, offset: 1 } })
+      .get(`${baseUrl}/products/latest`,  { params: { limit: 200, offset: 1 } })
       .then((res) => setNewArrivalProduct(res?.data?.products));
     setLoading(false);
   }, []);
