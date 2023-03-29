@@ -3,6 +3,14 @@
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 20px;
 }
+.brand_container::-webkit-scrollbar {
+  display: none;
+ }
+ /* Hide scrollbar for IE, Edge and Firefox */
+ .brand_container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+ }
 .brand_content {
   border: 1px solid gainsboro;
   border-radius: 7px;

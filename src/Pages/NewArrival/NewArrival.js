@@ -5,30 +5,55 @@ import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
+import { useRef } from "react";
 
 const NewArrival = () => {
-  const [newArrivalProduct, setNewArrivalProduct] = useState([]);
+    const [newArrivalProduct, setNewArrivalProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // const paginateItems = {
-  //   limit: 10,
-  //   offset: 1,
-  // };
+  const listInnerRef = useRef();
+  const [currPage, setCurrPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [lastList, setLastList] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/products/latest`,  { params: { limit: 200, offset: 1 } })
-      .then((res) => setNewArrivalProduct(res?.data?.products));
-    setLoading(false);
-  }, []);
+    let limit = 100;
+    const fetchData = async () => {
+      const response = await axios.get(
+        `${baseUrl}/products/latest?limit=${limit}&offset=${currPage}`
+      );
+      console.log(response);
+      response && setLoading(false);
+      if (!response.data.products.length) {
+        setLastList(true);
+        return;
+      }
+      setPrevPage(currPage);
+      setNewArrivalProduct([...newArrivalProduct, ...response.data.products]);
+    };
+    if (!lastList && prevPage !== currPage) {
+      fetchData();
+    }
+  }, [currPage, lastList, prevPage, newArrivalProduct]);
 
-  // console.log(newArrivalProduct);
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        setCurrPage(currPage + 1);
+      }
+    }
+  };
 
   return (
     <>
       <div className="newArrival_container">
         <h4>New Arrival Products:</h4>
-        <div className="product-container mt-4">
+        <div
+          onScroll={onScroll}
+          ref={listInnerRef}
+          style={{ height: "100vh", overflowY: "auto" }}
+          className="product-container mt-4"
+        >
           {/* <div className="product-content"> */}
           <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
             {loading ? (

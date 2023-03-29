@@ -5,23 +5,68 @@ import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
+import { useRef } from "react";
 
 const BestSelling = () => {
+  // const [bestSellingProduct, setBestSellingProduct] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  // const limit = 10;
+  // const offset = 1;
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`${baseUrl}/products/best-sellings?${limit}&${offset}`)
+  //     .then((res) => setBestSellingProduct(res?.data?.products));
+  //   setLoading(false);
+  // }, []);
+
+  // console.log(bestSellingProduct);
   const [bestSellingProduct, setBestSellingProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const listInnerRef = useRef();
+  const [currPage, setCurrPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [lastList, setLastList] = useState(false);
 
   useEffect(() => {
-    axios.get(`${baseUrl}/products/best-sellings`, { params: { limit: 150, offset: 1 } })
-      .then((res) => setBestSellingProduct(res?.data?.products));
-    setLoading(false);
-  }, []);
+    let limit = 100;
+    const fetchData = async () => {
+      const response = await axios.get(
+        `${baseUrl}/products/best-sellings?limit=${limit}&offset=${currPage}`
+      );
+      response && setLoading(false);
+      if (!response.data.products.length) {
+        setLastList(true);
+        return;
+      }
+      setPrevPage(currPage);
+      setBestSellingProduct([...bestSellingProduct, ...response.data.products]);
+    };
+    if (!lastList && prevPage !== currPage) {
+      fetchData();
+    }
+  }, [currPage, lastList, prevPage, bestSellingProduct]);
 
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        setCurrPage(currPage + 1);
+      }
+    }
+  };
 
   return (
     <>
       <div className="best_selling_container">
         <h4>Best Selling Products:</h4>
-        <div className="product-container mt-4">
+        <div
+          onScroll={onScroll}
+          ref={listInnerRef}
+          style={{ height: "100vh", overflowY: "auto" }}
+          className="product-container mt-4"
+        >
           {/* <div className="product-content"> */}
           <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
             {loading ? (

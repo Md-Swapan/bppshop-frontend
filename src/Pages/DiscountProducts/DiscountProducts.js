@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -7,22 +7,49 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 
 const DiscountProducts = () => {
+  //onscrool paginations
   const [discountProduct, setDiscountProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const listInnerRef = useRef();
+  const [currPage, setCurrPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [lastList, setLastList] = useState(false);
 
   useEffect(() => {
-    axios.get(`${baseUrl}/products/discounted-product`, { params: { limit: 150, offset: 1 } })
-    .then((res) => {
-      setDiscountProduct(res?.data.products)});
-    setLoading(false)
-  }, []);
+    let limit = 100;
+    const fetchData = async () => {
+      const response = await axios.get(
+        `${baseUrl}/products/discounted-product?limit=${limit}&offset=${currPage}`
+      );
+      response && setLoading(false);
+      if (!response.data.products.length) {
+        setLastList(true);
+        return;
+      }
+      setPrevPage(currPage);
+      setDiscountProduct([...discountProduct, ...response.data.products]);
+    };
+    if (!lastList && prevPage !== currPage) {
+      fetchData();
+    }
+  }, [currPage, lastList, prevPage, discountProduct]);
 
-
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        setCurrPage(currPage + 1);
+      }
+    }
+  };
 
   return (
     <div>
       <h4>Discount Products:</h4>
       <div
+        onScroll={onScroll}
+        ref={listInnerRef}
+        style={{ height: "100vh", overflowY: "auto" }}
         className="product-container mt-4"
       >
         {/* <div className="product-content"> */}
