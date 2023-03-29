@@ -3,6 +3,16 @@
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
 }
+
+.product-container::-webkit-scrollbar {
+  display: none;
+ }
+ /* Hide scrollbar for IE, Edge and Firefox */
+ .product-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+ }
+
 @media screen and (max-width: 992px) {
   .product-container {
     display: grid;

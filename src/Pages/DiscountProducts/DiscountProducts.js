@@ -1,62 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
-import { useRef } from "react";
 
 const DiscountProducts = () => {
-  const listInnerRef = useRef();
+  //onscrool paginations
   const [discountProduct, setDiscountProduct] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [prevPage, setPrevPage] = useState(0);
-  const [wasLastList, setWasLastList] = useState(false);
   const [loading, setLoading] = useState(true);
+  const listInnerRef = useRef();
+  const [currPage, setCurrPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [lastList, setLastList] = useState(false);
 
   useEffect(() => {
-    axios.get(`${baseUrl}/products/discounted-product`, { params: { limit: 150, offset: currentPage } })
-    .then((res) => {
-      if (!res.data.products) {
-              setWasLastList(true);
-              return;
-            }
-            setPrevPage(currentPage);
-            setDiscountProduct([...discountProduct, ...res.data.products]);
-      setDiscountProduct(res?.data.products)});
-    setLoading(false)
-
-    if (!wasLastList && prevPage !== currentPage) {
-      // fetchData();
+    let limit = 100;
+    const fetchData = async () => {
+      const response = await axios.get(
+        `${baseUrl}/products/discounted-product?limit=${limit}&offset=${currPage}`
+      );
+      response && setLoading(false);
+      if (!response.data.products.length) {
+        setLastList(true);
+        return;
+      }
+      setPrevPage(currPage);
+      setDiscountProduct([...discountProduct, ...response.data.products]);
+    };
+    if (!lastList && prevPage !== currPage) {
+      fetchData();
     }
+  }, [currPage, lastList, prevPage, discountProduct]);
 
-  }, [currentPage]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await axios.get(
-  //       `${baseUrl}/products/discounted-product`,
-  //       { params: { limit: 16, offset: currentPage } }
-  //     );
-  //     setLoading(false);
-  //     if (!response.data.products) {
-  //       setWasLastList(true);
-  //       return;
-  //     }
-  //     setPrevPage(currentPage);
-  //     setDiscountProduct([...discountProduct, ...response.data.products]);
-  //   };
-  //   if (!wasLastList && prevPage !== currentPage) {
-  //     fetchData();
-  //   }
-  // }, [currentPage, wasLastList, prevPage, discountProduct]);
-
-  const productPaginateByScroll = () => {
+  const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
       if (scrollTop + clientHeight === scrollHeight) {
-        setCurrentPage(currentPage + 1)
+        setCurrPage(currPage + 1);
       }
     }
   };
@@ -65,8 +47,9 @@ const DiscountProducts = () => {
     <div>
       <h4>Discount Products:</h4>
       <div
-        onScroll={productPaginateByScroll}
+        onScroll={onScroll}
         ref={listInnerRef}
+        style={{ height: "100vh", overflowY: "auto" }}
         className="product-container mt-4"
       >
         {/* <div className="product-content"> */}
