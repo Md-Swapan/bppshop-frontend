@@ -67,6 +67,7 @@ const QuickViewModal = ({ pid }) => {
 
   const { priceVariant } = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.data?.price;
+  console.log(variantPrice);
 
 
 

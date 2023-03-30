@@ -40,10 +40,12 @@ const ProductDetailsPage = () => {
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId == paramId;
-  const { priceVariant } = useSelector((state) => state?.priceVariant);
-  const variantPrice = priceVariant?.data?.price;
+  const  priceVariant  = useSelector((state) => state?.priceVariant);
+  const variantPrice = priceVariant?.priceVariant?.data?.price;
   const choiceOptions = productDetail?.choice_options?.map((list) => list?.options);
   const colors = productDetail?.colors?.map((color) => color?.code);
+
+  console.log(variantPrice);
 
 
   //default choice option..............................
@@ -492,11 +494,11 @@ const ProductDetailsPage = () => {
                       ) : (
                         <h5>
                           Total Price: ৳
-                          {variantPrice && isItemExist
-                            ? variantPrice
-                            : quantityCount *
-                              (productDetail?.unit_price -
-                                productDetail?.discount)}
+                          {
+                            variantPrice && isItemExist ? variantPrice :quantityCount *
+                            (productDetail?.unit_price -
+                              productDetail?.discount)
+                          }
                         </h5>
                       )}
                     </div>
