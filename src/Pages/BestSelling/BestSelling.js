@@ -8,20 +8,6 @@ import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 import { useRef } from "react";
 
 const BestSelling = () => {
-  // const [bestSellingProduct, setBestSellingProduct] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
-  // const limit = 10;
-  // const offset = 1;
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${baseUrl}/products/best-sellings?${limit}&${offset}`)
-  //     .then((res) => setBestSellingProduct(res?.data?.products));
-  //   setLoading(false);
-  // }, []);
-
-  // console.log(bestSellingProduct);
   const [bestSellingProduct, setBestSellingProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const listInnerRef = useRef();
