@@ -231,15 +231,6 @@ const OptionSelectHandler = (e) => {
           <div className="row">
             <div className="col-sm-5">
               <div className="imageView">
-                {/* {newData?.length && (
-                  <SliderImage
-                    data={newData}
-                    width="375px"
-                    showDescription={true}
-                    direction="right"
-                  />
-                )} */}
-
                 {newData?.length > 0 && (
                   <div className="imgZoomContainer">
                     <div className="left_2">
@@ -334,29 +325,7 @@ const OptionSelectHandler = (e) => {
                     {productDetail?.choice_options?.map((list) => (
                       <div key={list.id} className="choiceOptionList">
                         <h5>{list?.title}: </h5>
-                        {/* <div className="d-flex flex-wrap">
-                          {list?.options?.map((option) => (
-                            <span
-                              onClick={() =>
-                                priceVariantHandlerByChoiceOption(option)
-                              }
-                              className={
-                                activeOption
-                                  ? option === activeOption
-                                    ? `activeOption`
-                                    : `option`
-                                  : option === defaultOption[0]
-                                  ? `activeOption`
-                                  : `option`
-                              }
-                            >
-                              {option}
-                            </span>
-                          ))}
-                        </div> */}
-
                         <div className="choiceOptionSelection">
-                      
                           <select
                             name="options"
                             onChange={(e) => OptionSelectHandler(e)}
@@ -462,12 +431,6 @@ const OptionSelectHandler = (e) => {
                                   ? quantityCount + 1
                                   : quantityCount
                               )
-
-                            // setQuantityCount((currentQty) => {
-                            //   return productDetail.current_stock > quantityCount
-                            //     ? currentQty + 1
-                            //     : quantityCount;
-                            //   });
                           }
                           className="plus"
                         >
@@ -495,8 +458,9 @@ const OptionSelectHandler = (e) => {
                     ) : (
                       <h5>
                         Total Price: ৳
-                        {variantPrice && isItemExist
-                          ? variantPrice
+                        {/* {variantPrice && isItemExist */}
+                        {variantPrice
+                          ? variantPrice * quantityCount
                           : quantityCount *
                             (productDetail?.unit_price -
                               productDetail?.discount)}
