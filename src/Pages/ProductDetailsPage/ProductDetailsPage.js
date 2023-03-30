@@ -21,10 +21,8 @@ const ProductDetailsPage = () => {
   let newId = parseInt(id);
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
-  const [activeOption, setActiveOption] = useState("");
   const [loading, setLoading] = useState(true);
-  const [variantChoiceOption, setVariantChoiceOption] = useState([]);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
@@ -39,79 +37,44 @@ const ProductDetailsPage = () => {
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
-  const choiceOptions = productDetail?.choice_options?.map(
-    (list) => list?.options
-  );
-
-  //default choise option
-  const defaultOptionName = productDetail?.choice_options?.map(
-    (list) => list?.name
-  );
-  const defaultOption = choiceOptions?.map((option) => option[0]);
+  const paramId = id;
+  const productDetailsPathId = productDetail?.id?.toString();
+  const productDetailsPath = productDetailsPathId == paramId;
+  const { priceVariant } = useSelector((state) => state?.priceVariant);
+  const variantPrice = priceVariant?.data?.price;
+  const choiceOptions = productDetail?.choice_options?.map((list) => list?.options);
   const colors = productDetail?.colors?.map((color) => color?.code);
-  const defaultChoices = defaultOptionName?.map((name, index) => ({
+
+
+  //default choice option..............................
+  const defaultOptionName = productDetail?.choice_options?.map((list) => list?.name);
+  const defaultOption = choiceOptions?.map((option) => option[0]);
+  const choices = defaultOptionName?.map((name, index) => ({
     name,
     options: defaultOption[index],
   }));
 
-  console.log(productDetail);
+  let defaultChoices = choices;
 
-  const paramId = id;
-  const productDetailsPathId = productDetail?.id?.toString();
-  const productDetailsPath = productDetailsPathId == paramId;
 
-  const { priceVariant } = useSelector((state) => state?.priceVariant);
-  const variantPrice = priceVariant?.data?.price;
-
-  // const [selectedOption, setSelectedOption] = useState([]);
-
-  // console.log(selectedOption);
-
-  // const OptionSelectHandler = (e) => {
-  //   const selectOption = e.target.value.split("@");
-  //   const nam = selectOption[0];
-  //   const optn = selectOption[1];
-
-  //   const selectedItems = {
-  //     name: nam,
-  //     option: optn,
-  //   };
-
-  //   const findExistingItem = selectedOption.find((item) => {
-  //     return item.name === nam;
-  //   });
-
-  //   if (findExistingItem) {
-  //     findExistingItem.name = nam;
-  //     findExistingItem.option = optn;
-  //   }
-
-  //   const names = selectedOption.map((o) => o.name);
-  //   const filtered = selectedOption.filter(
-  //     ({ name }, index) => !names.includes(name, index + 1)
-  //   );
-
-  //   console.log(filtered);
-
-  //   setSelectedOption([...selectedOption, selectedItems]);
-  // };
-
-  //select option handlers
-
+//Function For Select choice option .........................................
   const [selectedOption, setSelectedOption] = useState([]);
 
-  console.log(selectedOption);
+  if (selectedOption.length > 0) {
+    defaultChoices = selectedOption;
+  }
 
   const OptionSelectHandler = (e) => {
     const selectOption = e.target.value.split("@");
     const newName = {
       name: selectOption[0],
-      option: selectOption[1],
+      options: selectOption[1].trim(),
     };
-    if (selectedOption.findIndex((f) => f.name === newName.name) === -1) {
-      setSelectedOption((element) => [...selectedOption, newName]);
+    defaultChoices.push(newName);
+    if (defaultChoices.findIndex((f) => f.name === newName.name) === -1) {
+      setSelectedOption((element) => [...defaultChoices, newName]);
     } else {
-      const newSelectedOption = [...selectedOption];
+      const newSelectedOption = [...defaultChoices];
       const filterArray = newSelectedOption.filter(
         (f) => f.name !== newName.name
       );
@@ -121,16 +84,20 @@ const ProductDetailsPage = () => {
     priceVariantHandlerByChoiceOption();
   };
 
+
+  // Get Price variant function.............................................
   const priceVariantHandlerByChoiceOption = () => {
+
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
+
     defaultChoices &&
       defaultChoices.forEach((element) => {
         priceVariantDefaultOptionData[element.name] =
-          `${element.options}`.trim();
+          `${element.options}`;
       });
 
     const priceVariantDataWithSelectedOption = {
@@ -138,38 +105,39 @@ const ProductDetailsPage = () => {
       quantity: `${quantityCount}`,
     };
 
-    // console.log(priceVariantDataWithSelectedOption);
+    defaultChoices &&
+    defaultChoices.forEach((element) => {
+      priceVariantDataWithSelectedOption[element.name] =
+        `${element.options}`;
+    });
 
-    selectedOption &&
-      selectedOption.forEach((element) => {
-        priceVariantDataWithSelectedOption[element.name] =
-          `${element.option}`.trim();
-      });
 
-    selectedOption
-      ? dispatch(getPriceVariant(priceVariantDataWithSelectedOption))
-      : dispatch(getPriceVariant(priceVariantDefaultOptionData));
-
-    // console.log(priceVariantDefaultOptionData);
-    // console.log(priceVariantDataWithSelectedOption);
+    colors.length > 0 ? defaultChoices &&  dispatch(getPriceVariant(priceVariantDefaultOptionData)) :
+    defaultChoices &&  dispatch(getPriceVariant(priceVariantDataWithSelectedOption));
   };
 
+
+ // Get Price variant function .............................................
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
+
     const priceVariantData = {
       product_id: `${id}`,
       color: `${selectedColor}`,
       quantity: `${quantityCount}`,
     };
+
     selectedColor
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
+
+  // Product Images Zoom Slider Functions...................................
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
   }));
@@ -194,14 +162,16 @@ const ProductDetailsPage = () => {
     }
   };
 
-  const navigate = useNavigate();
 
+  // 404 function...................................
   useEffect(() => {
     if (!loading && !productDetailsPath) {
       navigate("/404", { replace: true });
     }
   }, [productDetailsPath, loading, navigate]);
 
+
+  // cart item increase decrease function..............................
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -219,7 +189,7 @@ const ProductDetailsPage = () => {
   };
 
 
-  // add to cart with price variant options.....
+  // add to cart with price variant options..........................................
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
 
@@ -228,44 +198,27 @@ const ProductDetailsPage = () => {
       color: `${color[0]}`,
       quantity: `${quantityCount}`,
     };
-    selectedOption.length > 0
-      ? selectedOption.forEach((element) => {
+
+  
+    defaultChoices && defaultChoices.forEach((element) => {
           addItemsToCartDataWithColor[element.name] =
-            `${element.option}`.trim();
-        })
-      : defaultChoices.forEach((element) => {
-          addItemsToCartDataWithColor[element.name] =
-            `${element.options}`.trim();
+            `${element.options}`;
         });
 
-    const existDefault = defaultChoices.map((element) => element);
-    const existSelectedOption = selectedOption.map((element) => element);
-
-    console.log(existDefault);
-    console.log(existSelectedOption);
-
-    const matchOptions = existSelectedOption.filter(
-      (obj) => existDefault.indexOf(obj.name) !== obj.name
-    );
-
-    console.log(matchOptions);
 
     const addItemsToCartDataWithoutColor = {
       id: `${productDetail.id}`,
       quantity: `${quantityCount}`,
     };
-    selectedOption.length > 0
-      ? selectedOption.forEach((element) => {
-          addItemsToCartDataWithoutColor[element.name] =
-            `${element.option}`.trim();
-        })
-      : defaultChoices.forEach((element) => {
+ 
+    defaultChoices && defaultChoices.forEach((element) => {
           addItemsToCartDataWithoutColor[element.name] =
             `${element.options}`.trim();
         });
 
     if (token) {
-      productDetail?.colors?.length
+
+      productDetail?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
           dispatch(addItemsToCart(productDetail, quantityCount))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
@@ -313,14 +266,6 @@ const ProductDetailsPage = () => {
             <div className="row">
               <div className="col-md-4">
                 <div className="product_details_page_img_container">
-                  {/* {newData?.length && (
-                  <SliderImage
-                    data={newData}
-                    width="375px"
-                    showDescription={true}
-                    direction="right"
-                  />
-                )} */}
 
                   {newData?.length && (
                     <div className="imgZoomContainer">
@@ -413,27 +358,6 @@ const ProductDetailsPage = () => {
                         <div key={list?.id} className="choiceOptionList">
                           <h5>{list?.title}:</h5>
                           <div className="choiceOptionSelection">
-                            {/* {list?.options?.map((option, indx) => (
-                              <span
-                                onClick={() =>
-                                  priceVariantHandlerByChoiceOption(
-                                    option,
-                                    indx
-                                  )
-                                }
-                                className={
-                                  activeOption
-                                    ? option === activeOption
-                                      ? `activeOption`
-                                      : `option`
-                                    : choiceOptions[0]
-                                    ? `activeOption`
-                                    : `option`
-                                }
-                              >
-                                {option}
-                              </span>
-                            ))} */}
 
                             <select
                               name="options"
@@ -455,65 +379,6 @@ const ProductDetailsPage = () => {
                         </div>
                       ))}
 
-                      {/* <div className="choiceOptionList">
-                          <h5>
-                            {optionUnit[0]?.title}
-                          </h5>
-                          <div className="choiceOptionSelection">
-                            <select
-                              name="options"
-                              onChange={(e) => OptionSelectHandler(e)}
-                            >
-                              <option value="">Choose {optionUnit[0]?.title} </option>
-                              {optionUnit[0]?.options?.map((option, indx) => (
-                                <option value={option} key={indx}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-
-
-                        {optionUnit[1] && <div className="choiceOptionList">
-                          <h5>
-                            {optionUnit[1]?.title}
-                          </h5>
-                          <div className="choiceOptionSelection">
-                            <select
-                              name="options"
-                              onChange={(e) => OptionSelectHandler(e)}
-                            >
-                              <option value="">Choose {optionUnit[1]?.title} </option>
-                              {optionUnit[1]?.options?.map((option, indx) => (
-                                <option value={option} key={indx}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>}
-
-                        {
-                          optionUnit[2] && <div className="choiceOptionList">
-                          <h5>
-                            {optionUnit[2]?.title}
-                          </h5>
-                          <div className="choiceOptionSelection">
-                            <select
-                              name="options"
-                              onChange={(e) => OptionSelectHandler(e)}
-                            >
-                              <option value="">Choose {optionUnit[2]?.title} </option>
-                              {optionUnit[2]?.options?.map((option, indx) => (
-                                <option value={option} key={indx}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-                        } */}
                     </div>
                     <div
                       className={

@@ -6,10 +6,7 @@ import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addItemsToCart,
-  addItemsToCartAfterLogin,
-} from "./../../../Redux/Actions/CartAction";
+import {addItemsToCart, addItemsToCartAfterLogin} from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -32,36 +29,28 @@ const customStyles = {
 };
 
 const ProductCard = ({ product }) => {
-  const { slug, subSlug, subSubSlug } = useParams();
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+  function openModal() {setIsOpen(true)}
+  function closeModal() {setIsOpen(false)}
 
+  const { slug, subSlug, subSubSlug } = useParams();
   const token = localStorage.getItem("token");
-  const { id, name, unit_price, colors, discount, current_stock, thumbnail } =
-    product;
 
-  const newChoiceOption = product?.choice_options?.find((option) => option);
-
+  const { id, name, unit_price, colors, discount, current_stock, thumbnail } = product;
   const [pid, setPid] = useState(null);
-  const productDetailsView = (pid) => {
-    setPid(pid);
-  };
-
-  const dispatch = useDispatch();
+  const productDetailsView = (pid) => {setPid(pid)};
+  
+  const newChoiceOption = product?.choice_options?.find((option) => option);
   const [quantity, setQuantity] = useState(1);
 
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === id);
 
   const addToCartHandler = (product, quantity) => {
     dispatch(addItemsToCart(product, quantity));
-    // console.log(product);
+
     // toaster
     toast.success(`Product added to cart successfully`, {
       duration: 5000,
@@ -76,27 +65,26 @@ const ProductCard = ({ product }) => {
     });
 
     let color = colors?.map((color) => color?.code);
-    // console.log(color);
 
     //default choise option
     const choice_options = product.choice_options;
     const choice_options_name = choice_options.map((option) => option.name);
-    // console.log(choice_options_name);
-    const choice_options_defaultvalue = choice_options.map(
+
+    const choice_options_defaultValue = choice_options.map(
       (option) => option.options[0]
     );
-    // console.log(choice_options_defaultvalue);
+
     const defaultChoices = choice_options_name.map((name, index) => ({
       name,
-      options: choice_options_defaultvalue[index],
+      options: choice_options_defaultValue[index],
     }));
-    // console.log(defaultChoices);
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
       color: `${color[0]}`,
       quantity: `${quantity}`,
     };
+
     const addItemsToCartDataWithoutColor = {
       id: `${product.id}`,
       quantity: `${quantity}`,
@@ -105,13 +93,11 @@ const ProductCard = ({ product }) => {
     defaultChoices.forEach((element) => {
       addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
     });
-    // console.log(addItemsToCartDataWithColor);
 
     defaultChoices.forEach((element) => {
       addItemsToCartDataWithoutColor[element.name] =
         `${element.options}`.trim();
     });
-    // console.log(addItemsToCartDataWithoutColor);
 
     if (token) {
       product?.colors?.length > 0
@@ -145,42 +131,9 @@ const ProductCard = ({ product }) => {
     animation.onfinish = () => {
       productImageClone.remove();
     };
-
-    // Show the cart container
   };
 
-  // document.querySelector(".product-card").addEventListener("onMouseOver", () => {
-  //   document.querySelector(".quickView_AddToCart_overlay").style.display = "block"
-  // })
-
-  // const productUnitStatic = [
-  //   "kg",
-  //   "pc",
-  //   "mg",
-  //   "gm",
-  //   "gms",
-  //   "ltrs",
-  //   "ml",
-  //   "pcs",
-  //   "bundle",
-  //   "pair",
-  //   "box",
-  //   "carton",
-  //   "dozen",
-  //   "set",
-  // ];
-
-  // const optionTitle = product.choice_options?.map((list) => list?.title);
-  // const title = optionTitle.map((i) => i);
-  // const unit = OptionUnit.find((i) => i === title[0]);
-
-  // const options = product.choice_options?.map((list) => list?.options);
-  // const op = options.map((i) => i[0]);
-
-  // const optns = product.choice_options?.find((i) => i?.op[0]);
-  // const unitOptions = OprionUnit.find(i => i === op[0])
-
-  // console.log(optns)
+  
 
   return (
     <>
