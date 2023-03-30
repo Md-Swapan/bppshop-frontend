@@ -220,11 +220,11 @@ const ProductDetailsPage = () => {
 
       productDetail?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
-          dispatch(addItemsToCart(productDetail, quantityCount))
+          dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
-          dispatch(addItemsToCart(productDetail, quantityCount));
+          dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices));
     } else {
-      dispatch(addItemsToCart(productDetail, quantityCount));
+      dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices));
     }
 
     // toaster

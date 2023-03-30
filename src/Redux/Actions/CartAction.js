@@ -49,11 +49,8 @@ export const addItemsToCart =
 // add to cart with login.
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   const cartItemList = getState().cart.cartItems;
-  console.log(cartItemList)
 
   let bulk = [];
-
-  
 
   cartItemList.forEach((element) => {
     let product = {};
