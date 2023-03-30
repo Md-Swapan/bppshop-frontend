@@ -22,7 +22,6 @@ const QuickViewModal = ({ pid }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === pid);
-
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
 
   useEffect(() => {
@@ -36,18 +35,19 @@ const QuickViewModal = ({ pid }) => {
     (list) => list?.options
   );
 
-  //default choise option
+  //default choice option..............................
   const defaultOptionName = productDetail?.choice_options?.map(
     (list) => list?.name
   );
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const colors = productDetail?.colors?.map((color) => color?.code);
-  const defaultChoices = defaultOptionName?.map((name, index) => ({
+  const choices = defaultOptionName?.map((name, index) => ({
     name,
     options: defaultOption[index],
   }));
 
-  const [activeOption, setActiveOption] = useState();
+  let defaultChoices = choices;
+
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -69,37 +69,42 @@ const QuickViewModal = ({ pid }) => {
   const variantPrice = priceVariant?.data?.price;
 
 
-  const [selectedOption, setSelectedOption] = useState([]);
 
-  const OptionSelectHandler = (e) => {
-    const selectOption = e.target.value.split("@");
-    const newName = {
-      name: selectOption[0],
-      option: selectOption[1],
-    };
-    if (selectedOption.findIndex((f) => f.name === newName.name) === -1) {
-      setSelectedOption((element) => [...selectedOption, newName]);
-    } else {
-      const newSelectedOption = [...selectedOption];
-      const filterArray = newSelectedOption.filter(
-        (f) => f.name !== newName.name
-      );
-      setSelectedOption((element) => [...filterArray, newName]);
-    }
+//Function For Select choice option .........................................
+const [selectedOption, setSelectedOption] = useState([]);
 
-    priceVariantHandlerByChoiceOption();
+if (selectedOption.length > 0) {
+  defaultChoices = selectedOption;
+}
+
+const OptionSelectHandler = (e) => {
+  const selectOption = e.target.value.split("@");
+  const newName = {
+    name: selectOption[0],
+    options: selectOption[1].trim(),
   };
+  defaultChoices.push(newName);
+  if (defaultChoices.findIndex((f) => f.name === newName.name) === -1) {
+    setSelectedOption((element) => [...defaultChoices, newName]);
+  } else {
+    const newSelectedOption = [...defaultChoices];
+    const filterArray = newSelectedOption.filter(
+      (f) => f.name !== newName.name
+    );
+    setSelectedOption((element) => [...filterArray, newName]);
+  }
 
+  priceVariantHandlerByChoiceOption();
+};
+
+// Get Price variant function.............................................
   const priceVariantHandlerByChoiceOption = () => {
-    // localStorage.setItem("activeOption", option);
-    // const newActiveOption = localStorage.getItem("activeOption");
-    // setActiveOption(newActiveOption);
-
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
       color: `${colors[0]}`,
       quantity: `${quantityCount}`,
     };
+
     defaultChoices &&
       defaultChoices.forEach((element) => {
         priceVariantDefaultOptionData[element.name] =
@@ -111,19 +116,19 @@ const QuickViewModal = ({ pid }) => {
       quantity: `${quantityCount}`,
     };
 
-    selectedOption &&
-      selectedOption.forEach((element) => {
-        priceVariantData[element.name] = `${element.option}`.trim();
-      });
+    defaultChoices &&
+    defaultChoices.forEach((element) => {
+      priceVariantData[element.name] =
+        `${element.options}`.trim();
+    });
 
-    selectedOption
-      ? dispatch(getPriceVariant(priceVariantData))
-      : dispatch(getPriceVariant(priceVariantDefaultOptionData));
 
-    console.log(priceVariantDefaultOptionData);
-    console.log(priceVariantData);
+      colors.length > 0 ? defaultChoices &&  dispatch(getPriceVariant(priceVariantDefaultOptionData)) :
+    defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
+  
+// Get Price variant function .............................................
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${pid}`,
@@ -164,7 +169,7 @@ const QuickViewModal = ({ pid }) => {
     }
   };
 
-  // add to cart with price variant options.....
+  //Function for add to cart .......................
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
 
@@ -173,44 +178,25 @@ const QuickViewModal = ({ pid }) => {
       color: `${color[0]}`,
       quantity: `${quantityCount}`,
     };
-    selectedOption.length > 0
-      ? selectedOption.forEach((element) => {
-          addItemsToCartDataWithColor[element.name] =
-            `${element.option}`.trim();
-        })
-      : defaultChoices.forEach((element) => {
+    
+    defaultChoices && defaultChoices.forEach((element) => {
           addItemsToCartDataWithColor[element.name] =
             `${element.options}`.trim();
         });
 
-    const existDefault = defaultChoices.map((element) => element);
-    const existSelectedOption = selectedOption.map((element) => element);
-
-    console.log(existDefault);
-    console.log(existSelectedOption);
-
-    const matchOptions = existSelectedOption.filter(
-      (obj) => existDefault.indexOf(obj.name) !== obj.name
-    );
-
-    console.log(matchOptions);
 
     const addItemsToCartDataWithoutColor = {
       id: `${productDetail.id}`,
       quantity: `${quantityCount}`,
     };
-    selectedOption.length > 0
-      ? selectedOption.forEach((element) => {
-          addItemsToCartDataWithoutColor[element.name] =
-            `${element.option}`.trim();
-        })
-      : defaultChoices.forEach((element) => {
+
+       defaultChoices.forEach((element) => {
           addItemsToCartDataWithoutColor[element.name] =
             `${element.options}`.trim();
         });
 
     if (token) {
-      productDetail?.colors?.length
+      productDetail?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
           dispatch(addItemsToCart(productDetail, quantityCount))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
