@@ -3,12 +3,15 @@ import { baseUrl } from "./../../BaseUrl/BaseUrl";
 
 // ADD TO CART without login
 export const addItemsToCart =
-  (product, quantity) => async (dispatch, getState) => {
+  (product, quantity,defaultChoices) => async (dispatch, getState) => {
+
+    console.log(defaultChoices)
     dispatch({
       type: "ADD_TO_CART",
       payload: {
         product,
         quantity,
+        defaultChoices
       },
     });
     localStorage.setItem(
@@ -46,19 +49,25 @@ export const addItemsToCart =
 // add to cart with login.
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   const cartItemList = getState().cart.cartItems;
+  console.log(cartItemList)
+
   let bulk = [];
+
+  
 
   cartItemList.forEach((element) => {
     let product = {};
+    let choiceOption = element.defaultChoices
+
     product.id = element.product.id;
-    if (element.product.colors.length) {
-      product.color = element.product.colors[0].code;
-    }
-    product.choice_19 = element.product.choice_options[0].options[0];
     product.quantity = element.quantity;
+    choiceOption.forEach((element) => {
+      product[element.name] = `${element.options}`.trim();
+    });
 
     bulk.push(product);
   });
+
 
   try {
     dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });

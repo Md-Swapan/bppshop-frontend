@@ -49,7 +49,21 @@ const ProductCard = ({ product }) => {
   const addedItemId = cartItemsId.find((i) => i === id);
 
   const addToCartHandler = (product, quantity) => {
-    dispatch(addItemsToCart(product, quantity));
+
+     //default choise option
+     const choice_options = product.choice_options;
+     const choice_options_name = choice_options.map((option) => option.name);
+ 
+     const choice_options_defaultValue = choice_options.map(
+       (option) => option.options[0]
+     );
+ 
+     const defaultChoices = choice_options_name.map((name, index) => ({
+       name,
+       options: choice_options_defaultValue[index],
+     }));
+
+    dispatch(addItemsToCart(product, quantity, defaultChoices));
 
     // toaster
     toast.success(`Product added to cart successfully`, {
@@ -66,18 +80,7 @@ const ProductCard = ({ product }) => {
 
     let color = colors?.map((color) => color?.code);
 
-    //default choise option
-    const choice_options = product.choice_options;
-    const choice_options_name = choice_options.map((option) => option.name);
-
-    const choice_options_defaultValue = choice_options.map(
-      (option) => option.options[0]
-    );
-
-    const defaultChoices = choice_options_name.map((name, index) => ({
-      name,
-      options: choice_options_defaultValue[index],
-    }));
+   
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,

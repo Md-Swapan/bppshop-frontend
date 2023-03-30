@@ -127,7 +127,7 @@ const OptionSelectHandler = (e) => {
     defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
-  
+
 // Get Price variant function .............................................
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
@@ -220,6 +220,8 @@ const OptionSelectHandler = (e) => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   };
+
+  
 
   return (
     <>
