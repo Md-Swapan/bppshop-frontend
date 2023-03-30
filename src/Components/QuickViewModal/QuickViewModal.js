@@ -231,6 +231,7 @@ const OptionSelectHandler = (e) => {
           <div className="row">
             <div className="col-sm-5">
               <div className="imageView">
+               
                 {newData?.length > 0 && (
                   <div className="imgZoomContainer">
                     <div className="left_2">
@@ -325,14 +326,14 @@ const OptionSelectHandler = (e) => {
                     {productDetail?.choice_options?.map((list) => (
                       <div key={list.id} className="choiceOptionList">
                         <h5>{list?.title}: </h5>
+                        
+
                         <div className="choiceOptionSelection">
                           <select
                             name="options"
                             onChange={(e) => OptionSelectHandler(e)}
                           >
-                            {/* <option value="none" selected disabled hidden>
-                              Choose {list?.title}{" "}
-                            </option> */}
+                            
                             {list?.options?.map((option, indx) => (
                               <option
                                 value={list?.name + "@" + option}
@@ -458,9 +459,8 @@ const OptionSelectHandler = (e) => {
                     ) : (
                       <h5>
                         Total Price: ৳
-                        {/* {variantPrice && isItemExist */}
                         {variantPrice
-                          ? variantPrice * quantityCount
+                          ? variantPrice
                           : quantityCount *
                             (productDetail?.unit_price -
                               productDetail?.discount)}
