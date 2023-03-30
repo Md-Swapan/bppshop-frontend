@@ -40,16 +40,19 @@ const ProductDetailsPage = () => {
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId == paramId;
-  const  priceVariant  = useSelector((state) => state?.priceVariant);
+  const priceVariant = useSelector((state) => state?.priceVariant);
   const variantPrice = priceVariant?.priceVariant?.data?.price;
-  const choiceOptions = productDetail?.choice_options?.map((list) => list?.options);
+  const choiceOptions = productDetail?.choice_options?.map(
+    (list) => list?.options
+  );
   const colors = productDetail?.colors?.map((color) => color?.code);
 
-  console.log(variantPrice);
-
+  console.log(colors);
 
   //default choice option..............................
-  const defaultOptionName = productDetail?.choice_options?.map((list) => list?.name);
+  const defaultOptionName = productDetail?.choice_options?.map(
+    (list) => list?.name
+  );
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const choices = defaultOptionName?.map((name, index) => ({
     name,
@@ -58,8 +61,7 @@ const ProductDetailsPage = () => {
 
   let defaultChoices = choices;
 
-
-//Function For Select choice option .........................................
+  //Function For Select choice option .........................................
   const [selectedOption, setSelectedOption] = useState([]);
 
   if (selectedOption.length > 0) {
@@ -98,8 +100,7 @@ const ProductDetailsPage = () => {
 
     defaultChoices &&
       defaultChoices.forEach((element) => {
-        priceVariantDefaultOptionData[element.name] =
-          `${element.options}`;
+        priceVariantDefaultOptionData[element.name] = `${element.options}`;
       });
 
     const priceVariantDataWithSelectedOption = {
@@ -108,18 +109,20 @@ const ProductDetailsPage = () => {
     };
 
     defaultChoices &&
-    defaultChoices.forEach((element) => {
-      priceVariantDataWithSelectedOption[element.name] =
-        `${element.options}`;
-    });
+      defaultChoices.forEach((element) => {
+        priceVariantDataWithSelectedOption[element.name] = `${element.options}`;
+      });
 
-
-    colors.length > 0 ? defaultChoices &&  dispatch(getPriceVariant(priceVariantDefaultOptionData)) :
-    defaultChoices &&  dispatch(getPriceVariant(priceVariantDataWithSelectedOption));
+    colors.length > 0
+      ? defaultChoices &&
+        dispatch(getPriceVariant(priceVariantDefaultOptionData))
+      : defaultChoices &&
+        dispatch(getPriceVariant(priceVariantDataWithSelectedOption));
   };
 
 
- // Get Price variant function .............................................
+
+  //Function for Get Price variant by color .............................................
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
@@ -137,7 +140,6 @@ const ProductDetailsPage = () => {
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
-
 
   // Product Images Zoom Slider Functions...................................
   const newData = productDetail?.images?.map((img) => ({
@@ -164,14 +166,12 @@ const ProductDetailsPage = () => {
     }
   };
 
-
   // 404 function...................................
   useEffect(() => {
     if (!loading && !productDetailsPath) {
       navigate("/404", { replace: true });
     }
   }, [productDetailsPath, loading, navigate]);
-
 
   // cart item increase decrease function..............................
   const increaseQuantity = (id, quantity, stock) => {
@@ -190,7 +190,6 @@ const ProductDetailsPage = () => {
     dispatch(addItemsToCart(id, newQty));
   };
 
-
   // add to cart with price variant options..........................................
   const addToCartHandler = (productDetail, quantityCount) => {
     let color = productDetail?.colors?.map((color) => color?.code);
@@ -201,30 +200,30 @@ const ProductDetailsPage = () => {
       quantity: `${quantityCount}`,
     };
 
-  
-    defaultChoices && defaultChoices.forEach((element) => {
-          addItemsToCartDataWithColor[element.name] =
-            `${element.options}`;
-        });
-
+    defaultChoices &&
+      defaultChoices.forEach((element) => {
+        addItemsToCartDataWithColor[element.name] = `${element.options}`;
+      });
 
     const addItemsToCartDataWithoutColor = {
       id: `${productDetail.id}`,
       quantity: `${quantityCount}`,
     };
- 
-    defaultChoices && defaultChoices.forEach((element) => {
-          addItemsToCartDataWithoutColor[element.name] =
-            `${element.options}`.trim();
-        });
+
+    defaultChoices &&
+      defaultChoices.forEach((element) => {
+        addItemsToCartDataWithoutColor[element.name] =
+          `${element.options}`.trim();
+      });
 
     if (token) {
-
       productDetail?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
           dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
-          dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices));
+          dispatch(
+            addItemsToCart(productDetail, quantityCount, defaultChoices)
+          );
     } else {
       dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices));
     }
@@ -268,7 +267,6 @@ const ProductDetailsPage = () => {
             <div className="row">
               <div className="col-md-4">
                 <div className="product_details_page_img_container">
-
                   {newData?.length && (
                     <div className="imgZoomContainer">
                       <div className="left_2">
@@ -360,14 +358,10 @@ const ProductDetailsPage = () => {
                         <div key={list?.id} className="choiceOptionList">
                           <h5>{list?.title}:</h5>
                           <div className="choiceOptionSelection">
-
                             <select
                               name="options"
                               onChange={(e) => OptionSelectHandler(e)}
                             >
-                              <option value="none" selected disabled hidden>
-                                Choose {list?.title}{" "}
-                              </option>
                               {list?.options?.map((option, indx) => (
                                 <option
                                   value={list?.name + "@" + option}
@@ -380,7 +374,6 @@ const ProductDetailsPage = () => {
                           </div>
                         </div>
                       ))}
-
                     </div>
                     <div
                       className={
@@ -422,7 +415,7 @@ const ProductDetailsPage = () => {
                           }
                           className="detailsViewMinusBtn"
                         >
-                          <i className="bi bi-dash-lg"></i>
+                          <i className="bi bi-dash-lg" ></i>
                         </span>
                       ) : (
                         <span
@@ -433,11 +426,10 @@ const ProductDetailsPage = () => {
                                   ? quantityCount - 1
                                   : quantityCount
                               )
-                            // priceVariantHandlerByQty()
                           }
                           className="minus"
                         >
-                          <i className="bi bi-dash-lg"></i>
+                          <i className="bi bi-dash-lg" ></i>
                         </span>
                       )}
                       <span className="count-number">
@@ -456,16 +448,18 @@ const ProductDetailsPage = () => {
                           }
                           className="detailsViewPlusBtn"
                         >
-                          <i className="bi bi-plus-lg"></i>
+                          <i className="bi bi-plus-lg" ></i>
                         </span>
                       ) : (
                         <span
-                          onClick={() =>
+                          onClick={
+                            () => {
                             setQuantityCount(
                               productDetail?.current_stock > quantityCount
                                 ? quantityCount + 1
                                 : quantityCount
                             )
+                          }
                           }
                           className="plus"
                         >
@@ -494,11 +488,11 @@ const ProductDetailsPage = () => {
                       ) : (
                         <h5>
                           Total Price: ৳
-                          {
-                            variantPrice && isItemExist ? variantPrice :quantityCount *
-                            (productDetail?.unit_price -
-                              productDetail?.discount)
-                          }
+                          {variantPrice
+                            ? variantPrice 
+                            : quantityCount *
+                              (productDetail?.unit_price -
+                                productDetail?.discount)}
                         </h5>
                       )}
                     </div>
