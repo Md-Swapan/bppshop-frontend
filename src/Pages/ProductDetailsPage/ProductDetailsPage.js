@@ -362,6 +362,12 @@ const ProductDetailsPage = () => {
                               name="options"
                               onChange={(e) => OptionSelectHandler(e)}
                             >
+<<<<<<< HEAD
+=======
+                              {/* <option value="none" selected disabled hidden>
+                                Choose {list?.title}{" "}
+                              </option> */}
+>>>>>>> 9406d81f33cf8eeacb230376ae3f17431ff9e4d6
                               {list?.options?.map((option, indx) => (
                                 <option
                                   value={list?.name + "@" + option}
