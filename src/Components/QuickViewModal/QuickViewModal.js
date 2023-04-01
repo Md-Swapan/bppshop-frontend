@@ -140,22 +140,33 @@ const QuickViewModal = ({ pid }) => {
     // defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
-  // Get Price variant function .............................................
-  const priceVariantHandlerByColor = (selectedColor) => {
-    const priceVariantDefaultColorData = {
-      product_id: `${pid}`,
-      color: `${colors[0]}`,
-      quantity: `${quantityCount}`,
-    };
-    const priceVariantData = {
-      product_id: `${pid}`,
-      color: `${selectedColor}`,
-      quantity: `${quantityCount}`,
-    };
-    selectedColor
-      ? dispatch(getPriceVariant(priceVariantData))
-      : dispatch(getPriceVariant(priceVariantDefaultColorData));
+ //Function for Get Price variant by color .............................................
+ const priceVariantHandlerByColor = (selectedColor) => {
+  const priceVariantDefaultColorData = {
+    product_id: `${pid}`,
+    color: `${colors[0]}`,
+    quantity: `${quantityCount}`,
   };
+
+  defaultChoices &&
+  defaultChoices.forEach((element) => {
+    priceVariantDefaultColorData[element.name] = `${element.options}`;
+  });
+
+  const priceVariantData = {
+    product_id: `${pid}`,
+    color: `${selectedColor}`,
+    quantity: `${quantityCount}`,
+  };
+  defaultChoices &&
+  defaultChoices.forEach((element) => {
+    priceVariantData[element.name] = `${element.options}`;
+  });
+
+  selectedColor
+    ? dispatch(getPriceVariant(priceVariantData))
+    : dispatch(getPriceVariant(priceVariantDefaultColorData));
+};
 
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
@@ -359,10 +370,10 @@ const QuickViewModal = ({ pid }) => {
                     className={
                       productDetail?.colors?.length < 1
                         ? "d-none"
-                        : "d-flex color"
+                        : "mt-1 color"
                     }
                   >
-                    <h5>Color: </h5>
+                    <h5>Selected Color: </h5>
                     <div className="d-flex">
                       {productDetail.colors?.map((color) => (
                         <>

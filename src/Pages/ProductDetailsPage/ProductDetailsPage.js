@@ -144,16 +144,26 @@ const ProductDetailsPage = () => {
       quantity: `${quantityCount}`,
     };
 
+    defaultChoices &&
+    defaultChoices.forEach((element) => {
+      priceVariantDefaultColorData[element.name] = `${element.options}`;
+    });
+
     const priceVariantData = {
       product_id: `${id}`,
       color: `${selectedColor}`,
       quantity: `${quantityCount}`,
     };
+    defaultChoices &&
+    defaultChoices.forEach((element) => {
+      priceVariantData[element.name] = `${element.options}`;
+    });
 
     selectedColor
       ? dispatch(getPriceVariant(priceVariantData))
       : dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
+
 
   // Product Images Zoom Slider Functions...................................
   const newData = productDetail?.images?.map((img) => ({
@@ -399,10 +409,10 @@ const ProductDetailsPage = () => {
                       className={
                         productDetail?.colors?.length < 1
                           ? "d-none"
-                          : "d-flex color"
+                          : " mt-2 color"
                       }
                     >
-                      <h5>Color: </h5>
+                      <h5>Select Color: </h5>
                       <div className="d-flex">
                         {productDetail?.colors?.map((color) => (
                           <>

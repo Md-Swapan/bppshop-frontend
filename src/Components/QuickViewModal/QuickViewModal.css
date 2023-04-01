@@ -14,7 +14,6 @@
   width: 100%;
 }
 .productName_wishlist,
-.pc-size-color,
 .price_Stock_Code,
 .quantity-content {
   border: 0.3px solid gainsboro;
@@ -23,6 +22,15 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.pc-size-color {
+  border: 0.3px solid gainsboro;
+  padding: 8px;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+}
+
 .productName_wishlist span i {
   color: #f82828;
   font-size: 24px;
