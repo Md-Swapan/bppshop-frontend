@@ -19,9 +19,6 @@ const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
   const {shippingAddressInfo} = useSelector((state) => state.shippingInfo);
 
-  // console.log(allShippingAddressInfo)
-  // console.log(shippingAddressInfo)
-
   const handleSetDefaultAddress = (address_id) => {
     const addressId = {
       address_id : address_id
@@ -74,9 +71,9 @@ const ShippingAddressList = () => {
                   <div className="shiped_address">
                     <span className="home_text">home </span> { shippingAddInfo?.phone}{" "}
                     | {shippingAddInfo?.data?.address}{" "}
-                    {/* <span className="change_text">
+                    <span className="change_text">
                       <i className="bi bi-pencil-fill"></i> Edit
-                    </span> */}
+                    </span>
                   </div>
                 </div>
               </div>

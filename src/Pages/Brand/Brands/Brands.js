@@ -28,8 +28,6 @@ const Brands = () => {
   const [prevPage, setPrevPage] = useState(0);
   const [lastList, setLastList] = useState(false);
 
-  console.log(brands.length ,'1st');
-
   useEffect(() => {
     let limit = 100;
     const fetchData = async () => {

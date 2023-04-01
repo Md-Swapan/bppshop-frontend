@@ -113,7 +113,7 @@ const CheckoutPayment = () => {
   return (
     <>
       <MetaData title="Payment-Method - BPPShop" />
-      
+
       <div className="payment_method_container">
         <h3 className="mb-2">Payment Method</h3>
         <hr />
@@ -133,7 +133,7 @@ const CheckoutPayment = () => {
                   onChange={handleRadioClick}
                   onClick={cashOnDeliveryHandler}
                 />
-                <label for="cashOnDelivery">Cash On Delivery</label>
+                <label htmlFor="cashOnDelivery">Cash On Delivery</label>
               </div>
 
               <div className="cashOnDelivery_content">
@@ -157,7 +157,7 @@ const CheckoutPayment = () => {
                   onChange={handleRadioClick}
                   onClick={MobilePaymentOptionHandler}
                 />
-                <label for="mobilePayment">Mobile Payment</label>
+                <label htmlFor="mobilePayment">Mobile Payment</label>
               </div>
               <div className="payment-option-way">
                 <div className="payment-option">
@@ -183,7 +183,7 @@ const CheckoutPayment = () => {
                   onChange={handleRadioClick}
                   onClick={BankPaymentOptionHandler}
                 />
-                <label for="bankPayment">Bank Payment</label>
+                <label htmlFor="bankPayment">Bank Payment</label>
               </div>
               <div className="bankPayment-option-way">
                 <div className="bankPayment-option">
@@ -206,7 +206,7 @@ const CheckoutPayment = () => {
                   onChange={handleRadioClick}
                   onClick={AgentWalletPaymentHandler}
                 />
-                <label for="agentWalletPayment">Agent Wallet</label>
+                <label htmlFor="agentWalletPayment">Agent Wallet</label>
               </div>
               <div className="payment-option-way"></div>
             </div>
@@ -226,7 +226,9 @@ const CheckoutPayment = () => {
               type=""
               id="cashOnDeliveryNextBtn"
             >
-              Next
+            {/* Next */}
+              {/* {paymentType === "cashOnDelivery" ? "Confirm": "Next"} */}
+              {paymentType === "mobilePayment" || paymentType === "bankPayment" || paymentType === "agentWalletPayment" ? "Next": "Confirm"}
             </button>
           </div>
         </div>
