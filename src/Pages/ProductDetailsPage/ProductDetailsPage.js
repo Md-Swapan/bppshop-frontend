@@ -22,10 +22,13 @@ const ProductDetailsPage = () => {
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [variantRes,setVariantRes]=useState({})
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
+
+  // console.log(variantRes?.price);
 
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
@@ -39,15 +42,15 @@ const ProductDetailsPage = () => {
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
-  const productDetailsPath = productDetailsPathId == paramId;
-  const priceVariant = useSelector((state) => state?.priceVariant);
-  const variantPrice = priceVariant?.priceVariant?.data?.price;
+  const productDetailsPath = productDetailsPathId === paramId;
+  // const priceVariant = useSelector((state) => state?.priceVariant);
+  // const variantPrice = priceVariant?.priceVariant?.data?.price;
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
   const colors = productDetail?.colors?.map((color) => color?.code);
 
-  console.log(colors);
+  // console.log(quantityCount);
 
   //default choice option..............................
   const defaultOptionName = productDetail?.choice_options?.map(
@@ -88,14 +91,12 @@ const ProductDetailsPage = () => {
     priceVariantHandlerByChoiceOption();
   };
 
-
   // Get Price variant function.............................................
-  const priceVariantHandlerByChoiceOption = () => {
-
+  const priceVariantHandlerByChoiceOption = (newVarientQty) => {
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
-      quantity: `${quantityCount}`,
+      quantity: `${newVarientQty ? newVarientQty : quantityCount}`,
     };
 
     defaultChoices &&
@@ -105,22 +106,35 @@ const ProductDetailsPage = () => {
 
     const priceVariantDataWithSelectedOption = {
       product_id: `${id}`,
-      quantity: `${quantityCount}`,
+      quantity: `${newVarientQty ? newVarientQty : quantityCount}`,
     };
 
     defaultChoices &&
       defaultChoices.forEach((element) => {
         priceVariantDataWithSelectedOption[element.name] = `${element.options}`;
       });
+      const token = localStorage.getItem("token");
+      const config = { headers: { Authorization: `Bearer ${token}` } };
 
-    colors.length > 0
-      ? defaultChoices &&
-        dispatch(getPriceVariant(priceVariantDefaultOptionData))
-      : defaultChoices &&
-        dispatch(getPriceVariant(priceVariantDataWithSelectedOption));
+      if (colors?.length > 0) {
+        defaultChoices && axios.post(
+          `${baseUrl}/products/variant_price`,
+          priceVariantDefaultOptionData,
+          config
+        ).then(res=>setVariantRes(res.data.data))
+      }else{
+        defaultChoices &&   axios.post(
+          `${baseUrl}/products/variant_price`,
+          priceVariantDataWithSelectedOption,
+          config
+        ).then(res=>setVariantRes(res.data.data))
+      }
+    // colors.length > 0
+    //   ? defaultChoices &&
+    //     dispatch(getPriceVariant(priceVariantDefaultOptionData))
+    //   : defaultChoices &&
+    //     dispatch(getPriceVariant(priceVariantDataWithSelectedOption));
   };
-
-
 
   //Function for Get Price variant by color .............................................
   const priceVariantHandlerByColor = (selectedColor) => {
@@ -238,6 +252,12 @@ const ProductDetailsPage = () => {
       },
     });
   };
+
+  // if (productDetail) {
+  // useEffect(()=>{
+  //   priceVariantHandlerByChoiceOption();
+  // },[priceVariantHandlerByChoiceOption])
+  // }
 
   return (
     <>
@@ -415,21 +435,23 @@ const ProductDetailsPage = () => {
                           }
                           className="detailsViewMinusBtn"
                         >
-                          <i className="bi bi-dash-lg" ></i>
+                          <i className="bi bi-dash-lg"></i>
                         </span>
                       ) : (
                         <span
-                          onClick={
-                            () =>
-                              setQuantityCount(
-                                quantityCount > 1
-                                  ? quantityCount - 1
-                                  : quantityCount
-                              )
-                          }
+                          onClick={() => {
+                            setQuantityCount(
+                              quantityCount > 1
+                                ? quantityCount - 1
+                                : quantityCount
+                            );
+                            priceVariantHandlerByChoiceOption(
+                              quantityCount - 1
+                            );
+                          }}
                           className="minus"
                         >
-                          <i className="bi bi-dash-lg" ></i>
+                          <i className="bi bi-dash-lg"></i>
                         </span>
                       )}
                       <span className="count-number">
@@ -448,19 +470,20 @@ const ProductDetailsPage = () => {
                           }
                           className="detailsViewPlusBtn"
                         >
-                          <i className="bi bi-plus-lg" ></i>
+                          <i className="bi bi-plus-lg"></i>
                         </span>
                       ) : (
                         <span
-                          onClick={
-                            () => {
+                          onClick={() => {
                             setQuantityCount(
                               productDetail?.current_stock > quantityCount
                                 ? quantityCount + 1
                                 : quantityCount
-                            )
-                          }
-                          }
+                            );
+                            priceVariantHandlerByChoiceOption(
+                              quantityCount + 1
+                            );
+                          }}
                           className="plus"
                         >
                           <i className="bi bi-plus-lg"></i>
@@ -488,8 +511,8 @@ const ProductDetailsPage = () => {
                       ) : (
                         <h5>
                           Total Price: ৳
-                          {variantPrice
-                            ? variantPrice 
+                          {variantRes?.price
+                            ? variantRes?.price
                             : quantityCount *
                               (productDetail?.unit_price -
                                 productDetail?.discount)}
