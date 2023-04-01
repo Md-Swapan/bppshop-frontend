@@ -4,8 +4,6 @@ import { baseUrl } from "./../../BaseUrl/BaseUrl";
 // ADD TO CART without login
 export const addItemsToCart =
   (product, quantity,defaultChoices) => async (dispatch, getState) => {
-
-    console.log(defaultChoices)
     dispatch({
       type: "ADD_TO_CART",
       payload: {

@@ -72,7 +72,7 @@ const ShippingDetails = () => {
                     -৳ {totalDiscount ? totalDiscount : 0}.00
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   <input
                     className="coupon_input"
                     type="text"
@@ -81,7 +81,7 @@ const ShippingDetails = () => {
                 </div>
                 <div>
                   <button className="coupon_btn">Apply code</button>
-                </div>
+                </div> */}
                 <hr />
                 <div className="shiping_amount_content">
                   <div>Total</div>

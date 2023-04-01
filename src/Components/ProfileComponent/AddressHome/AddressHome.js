@@ -27,11 +27,11 @@ const AddressHome = () => {
         <div>
           <h4 className="">ADDRESSES</h4>
         </div>
-        <div>
+        {/* <div>
           <Link to="/profile/add-new-address">
             <button className="add_new_address_btn">Add new address</button>
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="address_card_container">
         {shipping_address_data?.map((sippingAdd) => (
@@ -48,14 +48,14 @@ const AddressHome = () => {
                   </span>
                 </div>
               </div>
-              <div className="d-flex justify-content-between">
+              {/* <div className="d-flex justify-content-between">
                 <div className="address_card_header_edit mx-1">
                   <i className="bi bi-pencil-square"></i>
                 </div>
                 <div className="address_card_header_delete mx-1">
                   <i className="bi bi-trash3-fill"></i>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="address_card_body">
               <h6>Name: {sippingAdd.contact_person_name}</h6>

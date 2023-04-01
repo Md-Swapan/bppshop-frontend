@@ -47,12 +47,12 @@ const ProductReview = () => {
                   <form action="">
                     <div className="input-container">
                       <div className="input-container-content">
-                        <label for="">Name</label>
+                        <label htmlFor="">Name</label>
                         <br />
                         <input type="text" />
                       </div>
                       <div className="input-container-content">
-                        <label for="">Email</label>
+                        <label htmlFor="">Email</label>
                         <br />
                         <input type="email" />
                       </div>
