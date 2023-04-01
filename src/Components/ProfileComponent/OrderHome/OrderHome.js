@@ -15,9 +15,6 @@ const OrderHome = () => {
   );
   const dispatch = useDispatch();
 
-
-  // console.log(cancelOrdersResponse);
-
   const handleOrderCancel = (id) => {
     dispatch(loadUserOrderCancelRequest(id));
   };
