@@ -18,6 +18,7 @@ const QuickViewModal = ({ pid }) => {
   const { slug, subSlug, subSubSlug } = useParams();
   const [quantityCount, setQuantityCount] = useState(1);
   const [productDetail, setProductDetail] = useState([]);
+  const [variantRes, setVariantRes] = useState({});
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartItemsId = cartItems.map((i) => i.product.id);
@@ -30,7 +31,6 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
@@ -48,7 +48,6 @@ const QuickViewModal = ({ pid }) => {
 
   let defaultChoices = choices;
 
-
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -65,45 +64,42 @@ const QuickViewModal = ({ pid }) => {
     dispatch(addItemsToCart(id, newQty));
   };
 
-  const { priceVariant } = useSelector((state) => state?.priceVariant);
-  const variantPrice = priceVariant?.data?.price;
-  console.log(variantPrice);
+  // const { priceVariant } = useSelector((state) => state?.priceVariant);
+  // const variantPrice = priceVariant?.data?.price;
 
+  //Function For Select choice option .........................................
+  const [selectedOption, setSelectedOption] = useState([]);
 
-
-//Function For Select choice option .........................................
-const [selectedOption, setSelectedOption] = useState([]);
-
-if (selectedOption.length > 0) {
-  defaultChoices = selectedOption;
-}
-
-const OptionSelectHandler = (e) => {
-  const selectOption = e.target.value.split("@");
-  const newName = {
-    name: selectOption[0],
-    options: selectOption[1].trim(),
-  };
-  defaultChoices.push(newName);
-  if (defaultChoices.findIndex((f) => f.name === newName.name) === -1) {
-    setSelectedOption((element) => [...defaultChoices, newName]);
-  } else {
-    const newSelectedOption = [...defaultChoices];
-    const filterArray = newSelectedOption.filter(
-      (f) => f.name !== newName.name
-    );
-    setSelectedOption((element) => [...filterArray, newName]);
+  if (selectedOption.length > 0) {
+    defaultChoices = selectedOption;
   }
 
-  priceVariantHandlerByChoiceOption();
-};
+  const OptionSelectHandler = (e) => {
+    const selectOption = e.target.value.split("@");
+    const newName = {
+      name: selectOption[0],
+      options: selectOption[1].trim(),
+    };
+    defaultChoices.push(newName);
+    if (defaultChoices.findIndex((f) => f.name === newName.name) === -1) {
+      setSelectedOption((element) => [...defaultChoices, newName]);
+    } else {
+      const newSelectedOption = [...defaultChoices];
+      const filterArray = newSelectedOption.filter(
+        (f) => f.name !== newName.name
+      );
+      setSelectedOption((element) => [...filterArray, newName]);
+    }
 
-// Get Price variant function.............................................
-  const priceVariantHandlerByChoiceOption = () => {
+    priceVariantHandlerByChoiceOption();
+  };
+
+  // Get Price variant function.............................................
+  const priceVariantHandlerByChoiceOption = (newVarientQty) => {
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
       color: `${colors[0]}`,
-      quantity: `${quantityCount}`,
+      quantity: `${newVarientQty ? newVarientQty : quantityCount}`,
     };
 
     defaultChoices &&
@@ -114,22 +110,37 @@ const OptionSelectHandler = (e) => {
 
     const priceVariantData = {
       product_id: `${pid}`,
-      quantity: `${quantityCount}`,
+      quantity: `${newVarientQty ? newVarientQty : quantityCount}`,
     };
 
     defaultChoices &&
-    defaultChoices.forEach((element) => {
-      priceVariantData[element.name] =
-        `${element.options}`.trim();
-    });
+      defaultChoices.forEach((element) => {
+        priceVariantData[element.name] = `${element.options}`.trim();
+      });
 
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+    if (colors?.length > 0) {
+      defaultChoices &&
+        axios
+          .post(
+            `${baseUrl}/products/variant_price`,
+            priceVariantDefaultOptionData,
+            config
+          )
+          .then((res) => setVariantRes(res.data.data));
+    } else {
+      defaultChoices &&
+        axios
+          .post(`${baseUrl}/products/variant_price`, priceVariantData, config)
+          .then((res) => setVariantRes(res.data.data));
+    }
 
-      colors.length > 0 ? defaultChoices &&  dispatch(getPriceVariant(priceVariantDefaultOptionData)) :
-    defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
+    //   colors.length > 0 ? defaultChoices &&  dispatch(getPriceVariant(priceVariantDefaultOptionData)) :
+    // defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
-
-// Get Price variant function .............................................
+  // Get Price variant function .............................................
   const priceVariantHandlerByColor = (selectedColor) => {
     const priceVariantDefaultColorData = {
       product_id: `${pid}`,
@@ -179,29 +190,30 @@ const OptionSelectHandler = (e) => {
       color: `${color[0]}`,
       quantity: `${quantityCount}`,
     };
-    
-    defaultChoices && defaultChoices.forEach((element) => {
-          addItemsToCartDataWithColor[element.name] =
-            `${element.options}`.trim();
-        });
 
+    defaultChoices &&
+      defaultChoices.forEach((element) => {
+        addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
+      });
 
     const addItemsToCartDataWithoutColor = {
       id: `${productDetail.id}`,
       quantity: `${quantityCount}`,
     };
 
-       defaultChoices.forEach((element) => {
-          addItemsToCartDataWithoutColor[element.name] =
-            `${element.options}`.trim();
-        });
+    defaultChoices.forEach((element) => {
+      addItemsToCartDataWithoutColor[element.name] =
+        `${element.options}`.trim();
+    });
 
     if (token) {
       productDetail?.colors?.length > 0
         ? dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithColor)) &&
           dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices))
         : dispatch(addItemsToCartAfterLogin(addItemsToCartDataWithoutColor)) &&
-          dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices));
+          dispatch(
+            addItemsToCart(productDetail, quantityCount, defaultChoices)
+          );
     } else {
       dispatch(addItemsToCart(productDetail, quantityCount, defaultChoices));
     }
@@ -222,8 +234,6 @@ const OptionSelectHandler = (e) => {
     document.documentElement.scrollTop = 0;
   };
 
-
-
   return (
     <>
       <div className="modal-container">
@@ -231,7 +241,6 @@ const OptionSelectHandler = (e) => {
           <div className="row">
             <div className="col-sm-5">
               <div className="imageView">
-               
                 {newData?.length > 0 && (
                   <div className="imgZoomContainer">
                     <div className="left_2">
@@ -326,14 +335,12 @@ const OptionSelectHandler = (e) => {
                     {productDetail?.choice_options?.map((list) => (
                       <div key={list.id} className="choiceOptionList">
                         <h5>{list?.title}: </h5>
-                        
 
                         <div className="choiceOptionSelection">
                           <select
                             name="options"
                             onChange={(e) => OptionSelectHandler(e)}
                           >
-                            
                             {list?.options?.map((option, indx) => (
                               <option
                                 value={list?.name + "@" + option}
@@ -393,13 +400,16 @@ const OptionSelectHandler = (e) => {
                         </span>
                       ) : (
                         <span
-                          onClick={() =>
+                          onClick={() => {
                             setQuantityCount(
                               quantityCount > 1
                                 ? quantityCount - 1
                                 : quantityCount
-                            )
-                          }
+                            );
+                            priceVariantHandlerByChoiceOption(
+                              quantityCount - 1
+                            );
+                          }}
                           className="minus"
                         >
                           <i className="bi bi-dash-lg"></i>
@@ -425,14 +435,16 @@ const OptionSelectHandler = (e) => {
                         </span>
                       ) : (
                         <span
-                          onClick={
-                            () =>
-                              setQuantityCount(
-                                productDetail.current_stock > quantityCount
-                                  ? quantityCount + 1
-                                  : quantityCount
-                              )
-                          }
+                          onClick={() => {
+                            setQuantityCount(
+                              productDetail?.current_stock > quantityCount
+                                ? quantityCount + 1
+                                : quantityCount
+                            );
+                            priceVariantHandlerByChoiceOption(
+                              quantityCount + 1
+                            );
+                          }}
                           className="plus"
                         >
                           <i className="bi bi-plus-lg"></i>
@@ -459,8 +471,8 @@ const OptionSelectHandler = (e) => {
                     ) : (
                       <h5>
                         Total Price: ৳
-                        {variantPrice
-                          ? variantPrice
+                        {variantRes?.price
+                          ? variantRes?.price
                           : quantityCount *
                             (productDetail?.unit_price -
                               productDetail?.discount)}
