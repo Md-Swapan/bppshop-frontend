@@ -30,7 +30,9 @@
   justify-content: space-between;
   align-items: center; */
 }
-
+/* .activeColor{
+  border: 2px solid #ef8341;
+} */
 .productName_wishlist span i {
   color: #f82828;
   font-size: 24px;

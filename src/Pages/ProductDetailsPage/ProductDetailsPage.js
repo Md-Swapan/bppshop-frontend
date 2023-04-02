@@ -137,7 +137,10 @@ const ProductDetailsPage = () => {
   };
 
   //Function for Get Price variant by color .............................................
+  const [selectedColor, setSelectedColor] = useState([]);
+
   const priceVariantHandlerByColor = (selectedColor) => {
+    setSelectedColor(selectedColor);
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
@@ -220,7 +223,7 @@ const ProductDetailsPage = () => {
 
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
-      color: `${color[0]}`,
+      color: selectedColor.length? `${selectedColor}` : `${color[0]}`,
       quantity: `${quantityCount}`,
     };
 

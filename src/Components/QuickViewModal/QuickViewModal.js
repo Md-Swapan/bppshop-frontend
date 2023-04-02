@@ -40,13 +40,15 @@ const QuickViewModal = ({ pid }) => {
     (list) => list?.name
   );
   const defaultOption = choiceOptions?.map((option) => option[0]);
-  const colors = productDetail?.colors?.map((color) => color?.code);
   const choices = defaultOptionName?.map((name, index) => ({
     name,
     options: defaultOption[index],
   }));
-
   let defaultChoices = choices;
+
+  //default choice colors..............................
+  const colors = productDetail?.colors?.map((color) => color?.code);
+  
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -110,6 +112,7 @@ const QuickViewModal = ({ pid }) => {
 
     const priceVariantData = {
       product_id: `${pid}`,
+      color: `${selectedColor}`,
       quantity: `${newVarientQty ? newVarientQty : quantityCount}`,
     };
 
@@ -140,33 +143,38 @@ const QuickViewModal = ({ pid }) => {
     // defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
- //Function for Get Price variant by color .............................................
- const priceVariantHandlerByColor = (selectedColor) => {
-  const priceVariantDefaultColorData = {
-    product_id: `${pid}`,
-    color: `${colors[0]}`,
-    quantity: `${quantityCount}`,
+
+  //Function for Get Price variant by color .............................................
+  const [selectedColor, setSelectedColor] = useState([]);
+
+  const priceVariantHandlerByColor = (selectedColor) => {
+    setSelectedColor(selectedColor);
+
+    const priceVariantDefaultColorData = {
+      product_id: `${pid}`,
+      color: `${colors[0]}`,
+      quantity: `${quantityCount}`,
+    };
+
+    defaultChoices &&
+      defaultChoices.forEach((element) => {
+        priceVariantDefaultColorData[element.name] = `${element.options}`;
+      });
+
+    const priceVariantData = {
+      product_id: `${pid}`,
+      color: `${selectedColor}`,
+      quantity: `${quantityCount}`,
+    };
+    defaultChoices &&
+      defaultChoices.forEach((element) => {
+        priceVariantData[element.name] = `${element.options}`;
+      });
+
+    selectedColor
+      ? dispatch(getPriceVariant(priceVariantData))
+      : dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
-
-  defaultChoices &&
-  defaultChoices.forEach((element) => {
-    priceVariantDefaultColorData[element.name] = `${element.options}`;
-  });
-
-  const priceVariantData = {
-    product_id: `${pid}`,
-    color: `${selectedColor}`,
-    quantity: `${quantityCount}`,
-  };
-  defaultChoices &&
-  defaultChoices.forEach((element) => {
-    priceVariantData[element.name] = `${element.options}`;
-  });
-
-  selectedColor
-    ? dispatch(getPriceVariant(priceVariantData))
-    : dispatch(getPriceVariant(priceVariantDefaultColorData));
-};
 
   const newData = productDetail?.images?.map((img) => ({
     image: imgBaseUrl + `/` + img,
@@ -198,7 +206,7 @@ const QuickViewModal = ({ pid }) => {
 
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
-      color: `${color[0]}`,
+      color: selectedColor.length? `${selectedColor}` : `${color[0]}`,
       quantity: `${quantityCount}`,
     };
 
@@ -377,14 +385,15 @@ const QuickViewModal = ({ pid }) => {
                     <div className="d-flex">
                       {productDetail.colors?.map((color) => (
                         <>
-                          <div
+                        
+                           <div
                             onClick={() =>
                               priceVariantHandlerByColor(color.code)
                             }
                             style={{
                               background: `${color.code}`,
                               margin: "0px 2px",
-                              cursor: "pointer",
+                              cursor: "pointer"
                             }}
                             className="color1"
                           ></div>

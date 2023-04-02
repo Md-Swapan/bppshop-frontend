@@ -11,20 +11,18 @@ const AgentLand = () => {
   const { agentToken } = useParams();
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  // const [agentInfo, setAgentInfo] = useState();
 
   useEffect(() => {
     dispatch(AgentLogin(agentToken))
 
+    
     axios.get( `${baseUrl}/auth/agentlogin/?token=` + agentToken)
     .then((res) => {
-      // setAgentInfo(res.data.data)
-      // dispatch(AgentLogin(res.data.data))
-
-      console.log(res)
-      // navigate('/')
+      console.log(res.data.data)
+      dispatch(AgentLogin(res.data.data))
+      navigate('/')
     });
-  }, [agentToken]);
+  }, [agentToken, navigate, dispatch]);
 
   return <div>
   </div>;
