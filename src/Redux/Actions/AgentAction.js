@@ -9,7 +9,8 @@ export const AgentLogin = (agentToken) => async (dispatch, getState) => {
     const { data } = await axios.post(
       `${baseUrl}/auth/agentlogin/?token=`+agentToken
     );
-    console.log(data)
+    // console.log(data)
+
     if (data.status === "success") {
       dispatch({ type: 'AGENT_LOGIN_SUCCESS', payload: data });
       localStorage.setItem("token", data.token);
@@ -25,3 +26,15 @@ export const AgentLogin = (agentToken) => async (dispatch, getState) => {
     dispatch({ type: 'AGENT_LOGIN_FAIL', payload: error.response.message });
   }
 };
+
+// Store agent info.
+export const AgentInfo = (agentInfo) => async (dispatch, getstate) => {
+  // console.log(agentInfo.data.agent_id);
+
+  try{
+    dispatch({type: 'STORE_AGENT_INFO', payload: agentInfo})
+    localStorage.setItem("agentId", agentInfo.data.agent_id);
+  }catch(error){
+
+  }
+} 

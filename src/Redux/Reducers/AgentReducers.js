@@ -1,60 +1,43 @@
-// export const AgentReducer = (state = { user: {} }, action) => {
-//   switch (action.type) {
-//     case LOGIN_REQUEST:
-//     case REGISTER_USER_REQUEST:
-//     case LOAD_USER_REQUEST:
-//       return {
-//         loading: true,
-//         isAuthenticated: false,
-//       };
-//     case LOGIN_SUCCESS:
-//     case REGISTER_USER_SUCCESS:
-//     case LOAD_USER_SUCCESS:
-//       return {
-//         ...state,
-//         loading: false,
-//         isAuthenticated: true,
-//         user: action.payload,
-//       };
+export const AgentReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case "AGENT_LOGIN_REQUEST":
+      return {
+        loading: true,
+        isAuthenticated: false,
+      };
+    case "AGENT_LOGIN_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: action.payload,
+      };
 
-//     case LOGOUT_SUCCESS:
-//       return {
-//         loading: false,
-//         user: {},
-//         isAuthenticated: false,
-//       };
-//     case LOGIN_FAIL:
-//     case REGISTER_USER_FAIL:
-//       return {
-//         ...state,
-//         loading: false,
-//         isAuthenticated: false,
-//         user: null,
-//         error: action.payload,
-//       };
+    case "AGENT_LOGIN_FAIL":
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: false,
+        user: null,
+        error: action.payload,
+      };
 
-//     case LOAD_USER_FAIL:
-//       return {
-//         loading: false,
-//         isAuthenticated: false,
-//         user: null,
-//         error: action.payload,
-//       };
+    default:
+      return state;
+  }
+};
 
-//     case LOGOUT_FAIL:
-//       return {
-//         ...state,
-//         loading: false,
-//         error: action.payload,
-//       };
 
-//     case CLEAR_ERRORS:
-//       return {
-//         ...state,
-//         error: null,
-//       };
 
-//     default:
-//       return state;
-//   }
-// };
+export const AgentInfoReducer = (state = { agentInfo: {} }, action) => {
+  switch (action.type) {
+    case "STORE_AGENT_INFO":
+      return {
+        ...state,
+        agentInfo: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

@@ -20,6 +20,7 @@ import OptionImg22 from "../../../Assets/Images/bankLogo/download (1).png";
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
   const token = localStorage.getItem("token");
+  const agentId = localStorage.getItem("agentId");
   const config = { headers: { Authorization: `Bearer ${token}` } };
   const dispatch = useDispatch();
 
@@ -108,7 +109,21 @@ const CheckoutPayment = () => {
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
+
+
+    // getAgentBalance()
   };
+
+  // console.log(agentId)
+
+  // const agentInfo = {
+  //   "agent_id": agentId
+  // }
+
+  // const getAgentBalance = () => {
+  //   axios.post('https://backend.bppshop.com.bd/api/v1/agent/balance', agentInfo)
+  //   .then(res => console.log(res))
+  // }
 
   return (
     <>
