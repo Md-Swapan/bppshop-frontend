@@ -104,13 +104,16 @@ const Nav = () => {
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
       if (res.data.status === "success") {
         navigate("/");
-        localStorage.removeItem("token");
-        window.location.reload();
+        
         dispatch(logout());
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
         dispatch(ClearCartGroupItems());
         dispatch(ClearDeliveryCharge());
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("agentId");
+        window.location.reload();
         // toaster
         toast.success(`Logout Successfull`, {
           duration: 3000,

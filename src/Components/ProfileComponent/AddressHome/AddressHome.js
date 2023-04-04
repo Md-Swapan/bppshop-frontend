@@ -25,12 +25,12 @@ const AddressHome = () => {
      <div>
       <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
         <div>
-          <h4 className="">ADDRESSES</h4>
+          <h4 className="">PREVIOUS ORDER ADDRESSES</h4>
         </div>
         <div>
-          <Link to="/profile/add-new-address">
+          {/* <Link to="/profile/add-new-address">
             <button className="add_new_address_btn">Add new address</button>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="address_card_container">
@@ -50,7 +50,7 @@ const AddressHome = () => {
               </div>
               <div className="d-flex justify-content-between">
                 <div className="address_card_header_edit mx-1">
-                  <i className="bi bi-pencil-square"></i>
+                  {/* <i className="bi bi-pencil-square"></i> */}
                 </div>
                 <div className="address_card_header_delete mx-1">
                   <i className="bi bi-trash3-fill"></i>
