@@ -40,6 +40,7 @@ import TopRated from "./Pages/TopRated/TopRated";
 import DiscountProducts from './Pages/DiscountProducts/DiscountProducts';
 import BrandsProducts from './Pages/Brand/BrandsProducts/BrandsProducts';
 import AgentLand from './Pages/AgentLand/AgentLand';
+import AgentPayment from "./Components/CheckoutComponent/AgentPayment/AgentPayment";
 
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
               <Route index element={<ShippingHome/>}></Route>
               <Route path="checkout-shop-cart" element={<CheckoutShopCart/>}></Route>
               <Route path="checkout-payment" element={<CheckoutPayment/>}></Route>
+              <Route path="agent-payment" element={<AgentPayment/>}></Route>
           </Route>
           <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComplete /></ProtectedRoute>}/>
 

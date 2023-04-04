@@ -12,10 +12,13 @@
 }
 .profile_left_container a {
     text-decoration: none;
-    font-size: 22px;
+    font-size: 18px;
     color: #3a3a3a;
     font-weight: bold;
     padding: 10px 0px;
+}
+.profile_left_container a p {
+    margin-top: 10px;
 }
 .profile_left_container a:hover {
     color: #EF8341;

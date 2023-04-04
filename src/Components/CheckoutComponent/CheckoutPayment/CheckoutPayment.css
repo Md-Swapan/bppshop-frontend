@@ -3,7 +3,7 @@
  font-size: 24px;
 }
 .payment-way-container {
-  margin: 40px 0px 0px 30px;
+  margin: 40px 0px 0px 0px;
 }
 .payment-way {
   margin: 30px 0px 0px 0px;
@@ -67,7 +67,7 @@
 }
 
 .payment_bottom_Btn {
-  margin: 80px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
 }
 .back_to_shipping {
   background: rgb(151, 151, 151);
@@ -91,4 +91,7 @@
 }
 #cashOnDeliveryNextBtn:hover {
   background: #e66f26;
+}
+.paymentErrorMessage{
+  color: red;
 }

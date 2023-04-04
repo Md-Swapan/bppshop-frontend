@@ -29,7 +29,8 @@ const CheckoutPayment = () => {
     const address_id = {
       address_id: id,
     };
-    axios.post(`${baseUrl}/cart/checkout`, address_id, config).then((res) => {
+    axios.post(`${baseUrl}/cart/checkout`, address_id, config)
+    .then((res) => {
       if (res.data.status === "success") {
         dispatch(ClearCart());
         // dispatch(clearShippingAddress());
@@ -58,6 +59,7 @@ const CheckoutPayment = () => {
     paymentOptionWayContent.style.display = "none";
     bankPaymentOptionWay.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "block";
+    document.querySelector('.paymentErrorMessage').innerHTML=""
   };
 
   const MobilePaymentOptionHandler = () => {
@@ -75,6 +77,7 @@ const CheckoutPayment = () => {
     codBtn.style.display = "none";
     bankPaymentOptionWay.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
+    document.querySelector('.paymentErrorMessage').innerHTML=""
   };
 
   const BankPaymentOptionHandler = () => {
@@ -92,6 +95,7 @@ const CheckoutPayment = () => {
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
+    document.querySelector('.paymentErrorMessage').innerHTML=""
   };
 
   const AgentWalletPaymentHandler = () => {
@@ -110,20 +114,17 @@ const CheckoutPayment = () => {
     paymentOptionWayContent.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
 
+    if(agentId){
+      NavigateAgentWallet();
 
-    // getAgentBalance()
+    }else{
+      document.querySelector('.paymentErrorMessage').innerHTML="You are not eligible for agent wallet payment."
+    }
   };
 
-  // console.log(agentId)
-
-  // const agentInfo = {
-  //   "agent_id": agentId
-  // }
-
-  // const getAgentBalance = () => {
-  //   axios.post('https://backend.bppshop.com.bd/api/v1/agent/balance', agentInfo)
-  //   .then(res => console.log(res))
-  // }
+  const NavigateAgentWallet = () => {
+      navigate("/shipping-details/agent-payment")
+  };
 
   return (
     <>
@@ -223,6 +224,7 @@ const CheckoutPayment = () => {
                 />
                 <label htmlFor="agentWalletPayment">Agent Wallet</label>
               </div>
+              <p className="paymentErrorMessage"></p>
               <div className="payment-option-way"></div>
             </div>
           </div>
@@ -241,9 +243,13 @@ const CheckoutPayment = () => {
               type=""
               id="cashOnDeliveryNextBtn"
             >
-            {/* Next */}
+              {/* Next */}
               {/* {paymentType === "cashOnDelivery" ? "Confirm": "Next"} */}
-              {paymentType === "mobilePayment" || paymentType === "bankPayment" || paymentType === "agentWalletPayment" ? "Next": "Confirm"}
+              {paymentType === "mobilePayment" ||
+              paymentType === "bankPayment" ||
+              paymentType === "agentWalletPayment"
+                ? "Next"
+                : "Confirm"}
             </button>
           </div>
         </div>
