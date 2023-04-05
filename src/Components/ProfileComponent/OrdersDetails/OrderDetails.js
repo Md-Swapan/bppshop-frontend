@@ -26,7 +26,6 @@ const OrderDetails = () => {
     // .then(res => console.log(res))
   }, [dispatch, id]);
 
-  
   let subTotal = 0;
   let taxFee = 0;
   let shippingFee = 0;
@@ -53,43 +52,35 @@ const OrderDetails = () => {
                   <td className="order_table_td">
                     <div className="order_table_info_div">
                       <div className="order_table_info_div_1 py-2">
-                        <span className="d-block spandHeadO">Order no: </span>
-                      </div>
-                      <div className="order_table_info_div_2">
-                        <span className="spanTr"> {userOrder?.id} </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="order_table_td">
-                    <div className="order_table_info_div">
-                      <div className="order_table_info_div_1 py-2">
-                        <span className="d-block spandHeadO">Order date: </span>
-                      </div>
-                      <div className="order_table_info_div_2">
-                        <span className="spanTr">
-                          {" "}
-                          {userOrder?.created_at?.slice(0, 10)}
-                        </span>
+                        <span>Order no: </span>
+                        <br />
+                        <span> {userOrder?.id} </span>
                       </div>
                     </div>
                   </td>
                   <td className="order_table_td">
                     <div className="order_table_info_div">
                       <div className="order_table_info_div_1 py-2">
-                        <span className="d-block spandHeadO">
-                          Delivery address:{" "}
-                        </span>
+                        <span>Order date: </span>
+                        <br />
+                        <span> {userOrder?.created_at?.slice(0, 10)}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="order_table_td">
+                    <div className="order_table_info_div">
+                      <div className="order_table_info_div_1">
+                        <span>Delivery address: </span>
                       </div>
 
                       <div className="order_table_info_div_2">
-                        <span className="spanTr">
+                        <span>
                           {
                             userOrder?.shipping_address_data
                               ?.contact_person_name
-                          }{" "}
+                          }
                           ({userOrder?.shipping_address_data?.phone}),{" "}
                           {userOrder?.shipping_address_data?.address},
-                          <br />
                           {userOrder?.shipping_address_data?.city} ,{" "}
                           {userOrder?.shipping_address_data?.thana},
                           {userOrder?.shipping_address_data?.zip}
@@ -101,13 +92,6 @@ const OrderDetails = () => {
               </thead>
             </table>
 
-            {/* <div className="row">
-              <div></div>
-            </div> */}
-            {/* <div className="col-md-4"></div>
-            <div className="col-md-2"></div>
-            <div className="col-md-2"></div> */}
-
             <div className="px-2">
               <table className="table table-borderless">
                 {OrderDetails?.map((order) => {
@@ -118,7 +102,7 @@ const OrderDetails = () => {
                   return (
                     <tbody key={order?.product_details?.id}>
                       <tr className="order_detail_list">
-                        <td className="col-2 for-tab-img">
+                        <td className="col-1 for-tab-img">
                           <img
                             src={
                               imgThumbnailBaseUrl +
@@ -127,20 +111,43 @@ const OrderDetails = () => {
                             alt=""
                           />
                         </td>
-                        <td className="col-10 ">
+                        <td className="col-5 ">
                           <span className="for-glaxy-name">
-                            {order?.product_details?.name}
+                            {order?.product_details?.name}... [
+                            {order?.product_details?.id}]
                           </span>
                           <br />
+                          <span className=" amount">
+                            Unit Price: ৳ {order?.product_details?.unit_price}{" "}
+                          </span>
+                          <br />
+                          <span>Qty: {order?.qty} </span>
+                          <br/>
+                          <span >Variant: {order.variant}</span>
                         </td>
-
-                        <td width="100%">
-                          <div className="text-right">
-                            <span className="font-weight-bold amount">
-                              ৳{order?.product_details?.unit_price}{" "}
+                        <td className="col-2 ">
+                          <div>
+                            Total:
+                            <br />{" "}
+                            <span>
+                              ৳{" "}
+                              {order?.qty * order?.product_details?.unit_price}
                             </span>
-                            <br />
-                            <span>Qty:{order?.qty} </span>
+                          </div>
+                        </td>
+                        <td className="col-2 ">
+                          <div>
+                            Discount Price:
+                            <br /> <span>৳ {order.discount}</span>
+                          </div>
+                        </td>
+                        <td className="col-1 ">
+                          <div className="text-right">
+                            <span className="font-weight-bold amount ">
+                              Price: <br /> ৳{" "}
+                              {order?.qty * order?.product_details?.unit_price -
+                                order.discount}
+                            </span>
                           </div>
                         </td>
                       </tr>

@@ -138,9 +138,12 @@ const ProductDetailsPage = () => {
 
   //Function for Get Price variant by color .............................................
   const [selectedColor, setSelectedColor] = useState([]);
+  const [activeColor, setActiveColor] = useState(0);
 
-  const priceVariantHandlerByColor = (selectedColor) => {
+  const priceVariantHandlerByColor = (selectedColor, index) => {
     setSelectedColor(selectedColor);
+    setActiveColor(index)
+
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
@@ -417,11 +420,11 @@ const ProductDetailsPage = () => {
                     >
                       <h5>Select Color: </h5>
                       <div className="d-flex">
-                        {productDetail?.colors?.map((color) => (
+                        {productDetail?.colors?.map((color, index) => (
                           <>
                             <div
                               onClick={() =>
-                                priceVariantHandlerByColor(color?.code)
+                                priceVariantHandlerByColor(color?.code, index)
                               }
                               style={{
                                 background: `${color?.code}`,
@@ -429,6 +432,7 @@ const ProductDetailsPage = () => {
                                 cursor: "pointer",
                               }}
                               className="color1"
+                              id={ index[0]? "activatedColor" : activeColor === index ? "activatedColor" :  "" }
                             ></div>
                           </>
                         ))}

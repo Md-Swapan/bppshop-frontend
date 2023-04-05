@@ -85,7 +85,7 @@ const ShippingAddressList = () => {
                     <div className="shipping_address_box">
                       <div className="shipped_person">
                         <div>
-                          Delivery to : {shippingAddInfo?.contact_person_name}
+                          <h6>Delivery to : {shippingAddInfo?.contact_person_name}</h6>
                         </div>
                         <div>
                           {shippingAddInfo?.is_billing === 1 ? (
@@ -115,9 +115,9 @@ const ShippingAddressList = () => {
                         </div>
                       </div>
                       <div className="shiped_address">
-                        <span className="home_text">home </span>{" "}
-                        {shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}
-                        <span className="change_text m-2">
+                        <span className="home_text ">Home </span>{" "}
+                        <span className="mx-2">{shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}</span>
+                        <span className="change_text mx-2">
                           <i className="bi bi-pencil-fill"></i> Edit
                         </span>
                         <span

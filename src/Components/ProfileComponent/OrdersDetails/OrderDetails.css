@@ -1,47 +1,55 @@
 .order_table_head {
-    background: #ef8341;
-    color: white;
+  background: #ef8341;
+  color: white;
+}
+.order_table_tr {
+  background: #ef8341;
+  color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .order_detail_card {
-    height: auto;
-    border: none;
-    border-radius: 7px;
-    font-family: "Kanit", sans-serif;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    overflow: hidden;
-    transition: all 0.3s;
+  height: auto;
+  border: none;
+  border-radius: 7px;
+  font-family: "Kanit", sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  overflow: hidden;
+  transition: all 0.3s;
 }
 
 .order_table_info_div {
-    text-align: end;
+  margin: 0px 10px;
+}
+.order_table_td {
+  display: flex;
+  align-items: center;
 }
 
 .order_detail_list {
-    border: 1px solid #ececfb;
+  border: 1px solid #ececfb;
 }
 
-
 .for-tab-img img {
-    height: 60px;
-    width: 60px;
-    cursor: pointer;
+  width: 95px;
+  cursor: pointer;
 }
 
 .for-glaxy-name {
-    text-align: center;
-    cursor: pointer;
+  text-align: center;
+  cursor: pointer;
 }
 
 .track_order_btn {
-    text-align: end;
-    margin-top: 20px;
+  text-align: end;
+  margin-top: 20px;
 }
-.track_order_btn button{
-    background: #ef8341;
-    color: white;
-    text-align: center;
-    padding: 10px 80px;
-    border-radius: 5px;
-    border: none;
+.track_order_btn button {
+  background: #ef8341;
+  color: white;
+  text-align: center;
+  padding: 10px 80px;
+  border-radius: 5px;
+  border: none;
 }

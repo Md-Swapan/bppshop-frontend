@@ -32,17 +32,19 @@ const ShippingHome = () => {
         {shippingAddressInfo?.data && shippingAddressInfo?.data?.is_billing === "1" ? (
           <div className="shipping_address_box">
             <div className="shipped_name">
-              Delivery to : {shippingAddressInfo?.data?.contact_person_name}
+              <h6>Delivery to : {shippingAddressInfo?.data?.contact_person_name}</h6>
             </div>
             <div className="shipped_address">
-              <span className="home_text"> home </span>
+              <span className="home_text"> Home </span>
+              <span className="mx-1">
               {shippingAddressInfo?.data?.phone} |{" "}
               {shippingAddressInfo?.data?.address}{" "}
+              </span>
               <span
                 onClick={() => changeShippingInfo()}
-                className="change_text"
+                className="change_text mx-3"
               >
-                <i className="bi bi-pencil-fill"></i> Change
+                <i className="bi bi-pencil-fill"></i> Change Delivery Address
               </span>
             </div>
           </div>
