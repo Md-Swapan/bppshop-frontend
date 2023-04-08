@@ -136,9 +136,6 @@ const QuickViewModal = ({ pid }) => {
           .post(`${baseUrl}/products/variant_price`, priceVariantData, config)
           .then((res) => setVariantRes(res.data.data));
     }
-
-    //   colors.length > 0 ? defaultChoices &&  dispatch(getPriceVariant(priceVariantDefaultOptionData)) :
-    // defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
   //Function for Get Price variant by color .............................................
@@ -151,7 +148,7 @@ const QuickViewModal = ({ pid }) => {
 
     const priceVariantDefaultColorData = {
       product_id: `${pid}`,
-      color: `${colors[0]}`,
+      color: `${selectedColor ? selectedColor : colors[0]}`,
       quantity: `${quantityCount}`,
     };
 
@@ -159,20 +156,7 @@ const QuickViewModal = ({ pid }) => {
       defaultChoices.forEach((element) => {
         priceVariantDefaultColorData[element.name] = `${element.options}`;
       });
-
-    const priceVariantData = {
-      product_id: `${pid}`,
-      color: `${selectedColor}`,
-      quantity: `${quantityCount}`,
-    };
-    defaultChoices &&
-      defaultChoices.forEach((element) => {
-        priceVariantData[element.name] = `${element.options}`;
-      });
-
-    selectedColor
-      ? dispatch(getPriceVariant(priceVariantData))
-      : dispatch(getPriceVariant(priceVariantDefaultColorData));
+    dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
   const newData = productDetail?.images?.map((img) => ({
@@ -238,11 +222,13 @@ const QuickViewModal = ({ pid }) => {
 
     // toaster
     toast.success(`Product added to cart successfully`, {
-      duration: 3000,
+      duration: 5000,
       style: {
         width: "100%",
         height: "80px",
         padding: "0px 20px",
+        background: "#86bc19",
+        color: "#fff",
       },
     });
   };
@@ -466,7 +452,11 @@ const QuickViewModal = ({ pid }) => {
                                 ? quantityCount + 1
                                 : quantityCount
                             );
-                            priceVariantHandlerByChoiceOption(productDetail?.current_stock >= quantityCount + 1?quantityCount + 1:quantityCount);
+                            priceVariantHandlerByChoiceOption(
+                              productDetail?.current_stock >= quantityCount + 1
+                                ? quantityCount + 1
+                                : quantityCount
+                            );
                           }}
                           className="plus"
                         >

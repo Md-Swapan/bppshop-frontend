@@ -28,8 +28,6 @@ const ProductDetailsPage = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
 
-  // console.log(variantRes?.price);
-
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res.data.data);
@@ -43,14 +41,10 @@ const ProductDetailsPage = () => {
   const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId === paramId;
-  // const priceVariant = useSelector((state) => state?.priceVariant);
-  // const variantPrice = priceVariant?.priceVariant?.data?.price;
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
   const colors = productDetail?.colors?.map((color) => color?.code);
-
-  // console.log(quantityCount);
 
   //default choice option..............................
   const defaultOptionName = productDetail?.choice_options?.map(
@@ -129,11 +123,6 @@ const ProductDetailsPage = () => {
           config
         ).then(res=>setVariantRes(res.data.data))
       }
-    // colors.length > 0
-    //   ? defaultChoices &&
-    //     dispatch(getPriceVariant(priceVariantDefaultOptionData))
-    //   : defaultChoices &&
-    //     dispatch(getPriceVariant(priceVariantDataWithSelectedOption));
   };
 
   //Function for Get Price variant by color .............................................
@@ -146,7 +135,7 @@ const ProductDetailsPage = () => {
 
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
-      color: `${colors[0]}`,
+      color: `${selectedColor?selectedColor:colors[0]}`,
       quantity: `${quantityCount}`,
     };
 
@@ -154,20 +143,7 @@ const ProductDetailsPage = () => {
     defaultChoices.forEach((element) => {
       priceVariantDefaultColorData[element.name] = `${element.options}`;
     });
-
-    const priceVariantData = {
-      product_id: `${id}`,
-      color: `${selectedColor}`,
-      quantity: `${quantityCount}`,
-    };
-    defaultChoices &&
-    defaultChoices.forEach((element) => {
-      priceVariantData[element.name] = `${element.options}`;
-    });
-
-    selectedColor
-      ? dispatch(getPriceVariant(priceVariantData))
-      : dispatch(getPriceVariant(priceVariantDefaultColorData));
+    dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
 
 
@@ -260,20 +236,16 @@ const ProductDetailsPage = () => {
 
     // toaster
     toast.success(`Product added to cart successfully`, {
-      duration: 3000,
+      duration: 5000,
       style: {
         width: "100%",
         height: "80px",
         padding: "0px 20px",
+        background: "#86bc19",
+        color: "#fff",
       },
     });
   };
-
-  // if (productDetail) {
-  // useEffect(()=>{
-  //   priceVariantHandlerByChoiceOption();
-  // },[priceVariantHandlerByChoiceOption])
-  // }
 
   return (
     <>
