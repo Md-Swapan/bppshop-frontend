@@ -55,7 +55,7 @@ const ShippingAddressList = () => {
           dispatch(loadAllShippingAddress());
           toast.success(res.data.message, {
             duration: 5000,
-      
+
             style: {
               width: "100%",
               height: "80px",
@@ -115,11 +115,15 @@ const ShippingAddressList = () => {
                         </div>
                       </div>
                       <div className="shiped_address">
-                        <span className="home_text ">Home </span>{" "}
-                        <span className="mx-2">{shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}</span>
-                        <span className="change_text mx-2">
-                          <i className="bi bi-pencil-fill"></i> Edit
-                        </span>
+                        <span className="home_text">home </span>{" "}
+                        {shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}
+                        <Link to={`/edit-shipping-address/${shippingAddInfo.id}`}>
+                          <span
+                            className="change_text m-2"
+                          >
+                            <i className="bi bi-pencil-fill"></i> Edit
+                          </span>
+                        </Link>
                         <span
                           onClick={() =>
                             handleDeleteAddress(
