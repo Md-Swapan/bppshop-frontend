@@ -498,7 +498,7 @@ const ProductDetailsPage = () => {
                                 : quantityCount
                             );
                             priceVariantHandlerByChoiceOption(
-                              quantityCount + 1
+                              productDetail?.current_stock >= quantityCount + 1 ? quantityCount + 1 : quantityCount
                             );
                           }}
                           className="plus"
