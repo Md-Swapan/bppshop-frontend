@@ -195,6 +195,16 @@ const ProductDetailsPage = () => {
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
+      toast.error("Stock Limited.", {
+        duration: 3000,
+        style: {
+          width: "100%",
+          height: "80px",
+          padding: "0px 20px",
+          background: "#86bc19",
+          color: "#fff",
+        },
+      });
       return;
     }
     dispatch(addItemsToCart(id, newQty));
