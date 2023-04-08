@@ -41,6 +41,7 @@ import DiscountProducts from './Pages/DiscountProducts/DiscountProducts';
 import BrandsProducts from './Pages/Brand/BrandsProducts/BrandsProducts';
 import AgentLand from './Pages/AgentLand/AgentLand';
 import AgentPayment from "./Components/CheckoutComponent/AgentPayment/AgentPayment";
+import EditShipping from "./Components/ShippingComponent/EditShipping/EditShipping";
 
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
 
       
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>
+          <Route path="/edit-shipping-address/:editId" element={<ProtectedRoute><EditShipping/></ProtectedRoute>}/>
           <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>

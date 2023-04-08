@@ -168,12 +168,12 @@ const AddShipping = () => {
                 <input
                   className="shipping_close_btn"
                   type="button"
-                  value="close"
+                  value="Close"
                 />
               </Link>
             </div>
             <div>
-              <input className="shipping_save_btn" type="submit" value="save" />
+              <input className="shipping_save_btn" type="submit" value="Save" />
             </div>
           </div>
         </form>
