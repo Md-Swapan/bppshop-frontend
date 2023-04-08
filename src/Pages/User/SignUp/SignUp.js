@@ -22,10 +22,8 @@ const SignUp = () => {
 
   };
 
-  
-
   useEffect(() => {
-    if (isAuthenticated === true && token) {
+    if (token) {
       signupRes?.status==="success" &&   toast.success(`${signupRes?.message}`, {
         duration: 5000,
         style: {
@@ -37,9 +35,8 @@ const SignUp = () => {
         },
       });
 
-      // let from = location?.state?.from?.pathname || "/";
-      // navigate(from, { replace: true });
-      navigate("/login");
+      let from = location?.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
     } 
 
   }, [isAuthenticated, navigate, token, location,signupRes]);
