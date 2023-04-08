@@ -210,25 +210,10 @@ const ProductDetailsPage = () => {
 
   // add to cart with price variant options..........................................
   const addToCartHandler = (productDetail, quantityCount) => {
-    console.log(productDetail,quantityCount);
-    // if (stock <= quantity) {
-    //   toast.error("Stock Limited.", {
-    //     duration: 3000,
-    //     style: {
-    //       width: "100%",
-    //       height: "80px",
-    //       padding: "0px 20px",
-    //       background: "#86bc19",
-    //       color: "#fff",
-    //     },
-    //   });
-    //   return;
-    // }
     let color = productDetail?.colors?.map((color) => color?.code);
-
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
-      color: selectedColor.length? `${selectedColor}` : `${color[0]}`,
+      color: `${selectedColor?selectedColor:color[0] }`,
       quantity: `${quantityCount}`,
     };
 
