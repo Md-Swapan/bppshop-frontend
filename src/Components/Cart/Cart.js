@@ -2,7 +2,6 @@ import React from "react";
 import "./Cart.css";
 import { useSelector } from "react-redux";
 import cartIcon from "../../Assets/Images/icons/download.png";
-import cartIcongif from "../../Assets/Images/icons/1615424075_16825_gif-url.gif";
 
 const Cart = () => {
   const cartItems = useSelector((state) => {

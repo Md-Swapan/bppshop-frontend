@@ -9,18 +9,6 @@ import {
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import toast from "react-hot-toast";
 
-const notify = () =>
-  toast.error("Stock Limited.", {
-    duration: 3000,
-    style: {
-      width: "100%",
-      height: "80px",
-      padding: "0px 20px",
-      background: "#86bc19",
-      color: "#fff",
-    },
-  });
-
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
@@ -32,7 +20,16 @@ const CartDetailsView = () => {
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
-      notify();
+      toast.error("Stock Limited.", {
+        duration: 3000,
+        style: {
+          width: "100%",
+          height: "80px",
+          padding: "0px 20px",
+          background: "#86bc19",
+          color: "#fff",
+        },
+      });
       return;
     }
 
@@ -161,8 +158,6 @@ const CartDetailsView = () => {
                           }
                           className="cartMinusBtn"
                         >
-                          {/* - */}
-                          {/* <i class="bi bi-dash-lg"></i> */}
                           <i className="bi bi-dash-square-fill"></i>
                         </span>
                         <span className="qtyCount-number">
@@ -178,9 +173,7 @@ const CartDetailsView = () => {
                           }
                           className="cartPlusBtn"
                         >
-                          {/* + */}
                           <i className="bi bi-plus-square-fill"></i>
-                          {/* <i class="bi bi-plus-lg"></i> */}
                         </span>
                       </div>
                       {item?.product?.discount > 0 ? (

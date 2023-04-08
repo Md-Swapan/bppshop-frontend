@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./OrderHome.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadUserOrderCancelRequest } from "../../../Redux/Actions/UserOrderAction";
-import store from "./../../../Redux/Store";
-import { loadUserOrders } from "./../../../Redux/Actions/UserOrderAction";
 import MetaData from "./../../../Pages/Layout/MetaData";
+import axios from "axios";
+import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { toast } from "react-hot-toast";
+import store from "../../../Redux/Store";
+import { loadUserOrders } from "../../../Redux/Actions/UserOrderAction";
+import { useEffect } from "react";
 
 const OrderHome = () => {
   // const { userOrders } = useSelector((state) => state?.userOrders);
@@ -48,6 +50,47 @@ const OrderHome = () => {
   //     });
   //   }
   // }, [cancelOrdersResponse?.status, cancelOrdersResponse?.message]);
+  const { userOrders } = useSelector((state) => state?.userOrders);
+
+  useEffect(() => {
+    store.dispatch(loadUserOrders());
+  }, []);
+
+  const handleOrderCancel = (id) => {
+    const order_id = {
+      order_id: `${id}`,
+    };
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+    axios
+      .post(`${baseUrl}/customer/order/cancel-order`, order_id, config)
+      .then((res) => {
+        if (res.data.status === "success") {
+          store.dispatch(loadUserOrders());
+          toast.success(res.data.message, {
+            duration: 5000,
+            style: {
+              width: "100%",
+              height: "80px",
+              padding: "0px 20px",
+              background: "#86bc19",
+              color: "#fff",
+            },
+          });
+        } else {
+          toast.success(res.data.message, {
+            duration: 5000,
+            style: {
+              width: "100%",
+              height: "80px",
+              padding: "0px 20px",
+              background: "#86bc19",
+              color: "#fff",
+            },
+          });
+        }
+      });
+  };
 
   return (
     <>
@@ -82,7 +125,9 @@ const OrderHome = () => {
                         {order?.order_status}
                       </span>
                     </td>
-                    <td data-label="Total">৳{order?.order_amount + order?.shipping_cost}</td>
+                    <td data-label="Total">
+                      ৳{order?.order_amount + order?.shipping_cost}
+                    </td>
                     <td data-label="Action">
                       <Link to={`/profile/orders-detail/${order?.id}`}>
                         <button className="my_order_view_btn">
