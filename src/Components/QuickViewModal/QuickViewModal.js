@@ -31,8 +31,6 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
-  console.log(productDetail.current_stock);
-
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
@@ -96,6 +94,18 @@ const QuickViewModal = ({ pid }) => {
 
   // Get Price variant function.............................................
   const priceVariantHandlerByChoiceOption = (newVarientQty) => {
+    if (productDetail.current_stock <= newVarientQty) {
+      toast.error("Stock Limited.", {
+        duration: 3000,
+        style: {
+          width: "100%",
+          height: "80px",
+          padding: "0px 20px",
+          background: "#86bc19",
+          color: "#fff",
+        },
+      });
+    }
     const priceVariantDefaultOptionData = {
       product_id: `${pid}`,
       color: `${colors[0]}`,
