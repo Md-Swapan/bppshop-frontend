@@ -31,6 +31,8 @@ const QuickViewModal = ({ pid }) => {
     });
   }, [pid]);
 
+  console.log(productDetail.current_stock);
+
   const choiceOptions = productDetail?.choice_options?.map(
     (list) => list?.options
   );
@@ -48,7 +50,6 @@ const QuickViewModal = ({ pid }) => {
 
   //default choice colors..............................
   const colors = productDetail?.colors?.map((color) => color?.code);
-  
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -65,9 +66,6 @@ const QuickViewModal = ({ pid }) => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
-
-  // const { priceVariant } = useSelector((state) => state?.priceVariant);
-  // const variantPrice = priceVariant?.data?.price;
 
   //Function For Select choice option .........................................
   const [selectedOption, setSelectedOption] = useState([]);
@@ -143,7 +141,6 @@ const QuickViewModal = ({ pid }) => {
     // defaultChoices &&  dispatch(getPriceVariant(priceVariantData));
   };
 
-
   //Function for Get Price variant by color .............................................
   const [selectedColor, setSelectedColor] = useState([]);
   const [activeColor, setActiveColor] = useState(0);
@@ -208,7 +205,7 @@ const QuickViewModal = ({ pid }) => {
 
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
-      color: selectedColor.length? `${selectedColor}` : `${color[0]}`,
+      color: selectedColor.length ? `${selectedColor}` : `${color[0]}`,
       quantity: `${quantityCount}`,
     };
 
@@ -387,18 +384,23 @@ const QuickViewModal = ({ pid }) => {
                     <div className="d-flex">
                       {productDetail.colors?.map((color, index) => (
                         <>
-                        
-                           <div
+                          <div
                             onClick={() =>
                               priceVariantHandlerByColor(color.code, index)
                             }
                             style={{
                               background: `${color.code}`,
                               margin: "0px 2px",
-                              cursor: "pointer"
+                              cursor: "pointer",
                             }}
                             className="color1"
-                            id={ index[0]? "activatedColor" : activeColor === index ? "activatedColor" :  "" }
+                            id={
+                              index[0]
+                                ? "activatedColor"
+                                : activeColor === index
+                                ? "activatedColor"
+                                : ""
+                            }
                           ></div>
                         </>
                       ))}
@@ -464,9 +466,7 @@ const QuickViewModal = ({ pid }) => {
                                 ? quantityCount + 1
                                 : quantityCount
                             );
-                            priceVariantHandlerByChoiceOption(
-                              quantityCount + 1
-                            );
+                            priceVariantHandlerByChoiceOption(productDetail?.current_stock >= quantityCount + 1?quantityCount + 1:quantityCount);
                           }}
                           className="plus"
                         >
