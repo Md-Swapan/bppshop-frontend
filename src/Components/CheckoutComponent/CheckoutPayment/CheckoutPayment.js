@@ -23,22 +23,41 @@ const CheckoutPayment = () => {
   const agentId = localStorage.getItem("agentId");
   const config = { headers: { Authorization: `Bearer ${token}` } };
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+
   const handleCheckoutConfirm = (id) => {
-    const address_id = {
+    const agent_checkout = {
       address_id: id,
+      agent_id: agentId
     };
-    axios.post(`${baseUrl}/cart/checkout`, address_id, config)
-    .then((res) => {
-      if (res.data.status === "success") {
-        dispatch(ClearCart());
-        // dispatch(clearShippingAddress());
-        dispatch(ClearCartGroupItems());
-        navigate("/checkout-complete");
-      }
-    });
+
+    if (agentId) {
+      axios.post(`${baseUrl}/cart/checkout`, agent_checkout, config)
+        .then((res) => {
+          if (res.data.status === "success") {
+            dispatch(ClearCart());
+            // dispatch(clearShippingAddress());
+            dispatch(ClearCartGroupItems());
+            navigate("/checkout-complete");
+          }
+        })
+    } else {
+      axios.post(`${baseUrl}/cart/checkout`, {address_id: id}, config)
+      .then((res) => {
+        if (res.data.status === "success") {
+          dispatch(ClearCart());
+          // dispatch(clearShippingAddress());
+          dispatch(ClearCartGroupItems());
+          navigate("/checkout-complete");
+        }
+      });
+    }
   };
+
+  // {
+  //     "agent_id": "saljfreowiufsdajflkjsaldjflsdajfljasd",
+  //     "address_id": 145585
+  // }
 
   const [paymentType, setPaymentType] = useState("");
   const isRadioSelected = (value) => paymentType === value;
@@ -59,7 +78,7 @@ const CheckoutPayment = () => {
     paymentOptionWayContent.style.display = "none";
     bankPaymentOptionWay.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "block";
-    document.querySelector('.paymentErrorMessage').innerHTML=""
+    document.querySelector(".paymentErrorMessage").innerHTML = "";
   };
 
   const MobilePaymentOptionHandler = () => {
@@ -77,7 +96,7 @@ const CheckoutPayment = () => {
     codBtn.style.display = "none";
     bankPaymentOptionWay.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
-    document.querySelector('.paymentErrorMessage').innerHTML=""
+    document.querySelector(".paymentErrorMessage").innerHTML = "";
   };
 
   const BankPaymentOptionHandler = () => {
@@ -95,7 +114,7 @@ const CheckoutPayment = () => {
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
-    document.querySelector('.paymentErrorMessage').innerHTML=""
+    document.querySelector(".paymentErrorMessage").innerHTML = "";
   };
 
   const AgentWalletPaymentHandler = () => {
@@ -114,16 +133,16 @@ const CheckoutPayment = () => {
     paymentOptionWayContent.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
 
-    if(agentId){
+    if (agentId) {
       NavigateAgentWallet();
-
-    }else{
-      document.querySelector('.paymentErrorMessage').innerHTML="You are not eligible for agent wallet payment."
+    } else {
+      document.querySelector(".paymentErrorMessage").innerHTML =
+        "You are not eligible for agent wallet payment.";
     }
   };
 
   const NavigateAgentWallet = () => {
-      navigate("/shipping-details/agent-payment")
+    navigate("/shipping-details/agent-payment");
   };
 
   return (

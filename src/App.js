@@ -41,6 +41,7 @@ import DiscountProducts from './Pages/DiscountProducts/DiscountProducts';
 import BrandsProducts from './Pages/Brand/BrandsProducts/BrandsProducts';
 import AgentLand from './Pages/AgentLand/AgentLand';
 import AgentPayment from "./Components/CheckoutComponent/AgentPayment/AgentPayment";
+import { loadAllShippingAddress } from "./Redux/Actions/ShippingAddressAction";
 
 
 function App() {
@@ -57,6 +58,9 @@ function App() {
       setAllCategory(res.data.data);
       setLoading(false);
     });
+    // if(token){
+    //   store.dispatch(loadAllShippingAddress());
+    // }
     if (token==="undefined" || token===null || token==="") {
       localStorage.removeItem("token")
     }
