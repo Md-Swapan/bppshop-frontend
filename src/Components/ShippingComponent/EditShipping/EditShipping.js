@@ -104,7 +104,7 @@ const EditShipping = () => {
 
           <div className="shipping_address_input_container">
             <div className="form-group">
-              <span>Contact person name *</span>
+              <span>Contact person name </span>
               <input
                 {...register("contact_person_name")}
                 name="contact_person_name"
@@ -114,7 +114,7 @@ const EditShipping = () => {
               />
             </div>
             <div className="form-group">
-              <span>Phone *</span>
+              <span>Phone </span>
               <input
                 {...register("phone")}
                 name="phone"
@@ -124,7 +124,7 @@ const EditShipping = () => {
               />
             </div>
             <div className="form-group">
-              <span>District/City*</span>
+              <span>District/City</span>
               <select
                 onChange={handleDistrictChange}
                 name="district_id"
@@ -142,7 +142,7 @@ const EditShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Upazila/Thana*</span>
+              <span>Upazila/Thana</span>
               <select
                 onChange={handleThanaChange}
                 name="upazila_id"
@@ -160,7 +160,7 @@ const EditShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Area*</span>
+              <span>Area</span>
               <select
                 {...register("area_id")}
                 name="area_id"
@@ -178,7 +178,7 @@ const EditShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Address *</span>
+              <span>Address </span>
               <input
                 {...register("address")}
                 name="address"
