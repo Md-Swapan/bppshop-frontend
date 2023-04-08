@@ -40,7 +40,7 @@ const OrderDetails = () => {
       <MetaData title="Orders-Details - BPPShop" />
       <div>
         <Link to="/profile/orders">
-          <button className="my-4 shadow-sm border-0 py-2 px-4 rounded-2">
+          <button className=" OrderListBackBtn  rounded-2 py-2 px-4 my-2 mb-3 ">
             <i className="bi bi-arrow-left-circle mr-2"></i> Back
           </button>
         </Link>

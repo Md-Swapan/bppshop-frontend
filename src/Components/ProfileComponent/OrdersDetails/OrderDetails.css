@@ -2,6 +2,9 @@
   background: #ef8341;
   color: white;
 }
+.OrderListBackBtn{
+  border: 1px solid gainsboro;
+}
 .order_table_tr {
   background: #ef8341;
   color: white;
@@ -11,10 +14,10 @@
 
 .order_detail_card {
   height: auto;
-  border: none;
+  border: 1px solid rgb(235, 235, 235);
   border-radius: 7px;
   font-family: "Kanit", sans-serif;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
   overflow: hidden;
   transition: all 0.3s;
 }
@@ -30,6 +33,9 @@
 .order_detail_list {
   border: 1px solid #ececfb;
 }
+.order_detail_list td {
+  font-size: 15px;
+}
 
 .for-tab-img img {
   width: 95px;
@@ -43,7 +49,7 @@
 
 .track_order_btn {
   text-align: end;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .track_order_btn button {
   background: #ef8341;
