@@ -74,7 +74,7 @@ const ShippingAddressList = () => {
       <div>
         <div className="shipping_container">
           <div className="shipping_content">
-            <div className="shipping_header">Delivery Address</div>
+            <div className="shipping_header">Choose Delivery Address or Add New Delivery Address</div>
           </div>
           <hr className="shipping_line" />
           <div className="address_content">
@@ -85,7 +85,7 @@ const ShippingAddressList = () => {
                     <div className="shipping_address_box">
                       <div className="shipped_person">
                         <div>
-                          Delivery to : {shippingAddInfo?.contact_person_name}
+                          <h6>Delivery to : {shippingAddInfo?.contact_person_name}</h6>
                         </div>
                         <div>
                           {shippingAddInfo?.is_billing === 1 ? (

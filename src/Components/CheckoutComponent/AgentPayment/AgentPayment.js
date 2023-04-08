@@ -10,11 +10,14 @@ const AgentPayment = () => {
   const agentInfo = {
     agent_id: agentId,
   };
+  const token = localStorage.getItem("token");
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const [agentWalletInfo, setAgentWalletInfo] = useState({});
+
   useEffect(() => {
     axios
-      .post("https://backend.bppshop.com.bd/api/v1/agent/balance", agentInfo)
+      .post("https://backend.bppshop.com.bd/api/v1/agent/balance", agentInfo, config)
       .then((res) => {
         setAgentWalletInfo(res?.data?.data);
       });

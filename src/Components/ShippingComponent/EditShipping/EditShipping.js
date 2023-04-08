@@ -66,7 +66,7 @@ const EditShipping = () => {
     const upazila_id = thanaId;
     const id = editId;
     const newData = { ...data, district_id, upazila_id, id };
-    console.log(newData);
+    // console.log(newData);
     axios
       .post(baseUrl + `/shipping-address/update-address`, newData, {
         headers: { Authorization: `Bearer ${token}` },

@@ -58,6 +58,9 @@ function App() {
       setAllCategory(res.data.data);
       setLoading(false);
     });
+    // if(token){
+    //   store.dispatch(loadAllShippingAddress());
+    // }
     if (token==="undefined" || token===null || token==="") {
       localStorage.removeItem("token")
     }

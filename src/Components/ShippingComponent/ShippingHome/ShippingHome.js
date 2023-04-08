@@ -6,43 +6,49 @@ import { useNavigate } from "react-router-dom";
 
 const ShippingHome = () => {
   const navigate = useNavigate();
-  const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
-  // console.log(shippingAddressInfo)
 
+  const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
+  // const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
+
+  // console.log(allShippingAddressInfo.data.map(i => i.id))
+  
   const changeShippingInfo = () => {
     navigate("/shipping-address");
-
     window.location.reload(true);
   };
+
+  const addressSelectHandlerAlert = () => {
+    document.querySelector(".chooseAlert").innerHTML = "Please choose delivery address before proceed payment."
+    document.querySelector(".chooseDeliveryAlert").innerHTML = "Please choose delivery address"
+  }
+
   return (
     <div>
       <h2 className="shipping-heading">DELIVERY ADDRESS</h2>
       <hr className="shipping_billing_header_line" />
-      {/* <div className="progress_container">
-                <div
-                  className="progress_content"
-                  role="progressbar"
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div> */}
+
       <div className="shipping_container">
+        <p className="chooseAlert text-danger"></p>
         <div className="shipping-address-heading">Choose Delivery address</div>
-        {shippingAddressInfo?.data && shippingAddressInfo?.data?.is_billing === "1" ? (
+        {shippingAddressInfo?.data &&
+        shippingAddressInfo?.data?.is_billing === "1" ? (
           <div className="shipping_address_box">
             <div className="shipped_name">
-              Delivery to : {shippingAddressInfo?.data?.contact_person_name}
+              <h6>
+                Delivery to : {shippingAddressInfo?.data?.contact_person_name}
+              </h6>
             </div>
             <div className="shipped_address">
-              <span className="home_text"> home </span>
-              {shippingAddressInfo?.data?.phone} |{" "}
-              {shippingAddressInfo?.data?.address}{" "}
+              <span className="home_text"> Home </span>
+              <span className="mx-1">
+                {shippingAddressInfo?.data?.phone} |{" "}
+                {shippingAddressInfo?.data?.address}{" "}
+              </span>
               <span
                 onClick={() => changeShippingInfo()}
-                className="change_text"
+                className="change_text mx-3"
               >
-                <i className="bi bi-pencil-fill"></i> Change
+                <i className="bi bi-pencil-fill"></i> Change Address
               </span>
             </div>
           </div>
@@ -61,11 +67,16 @@ const ShippingHome = () => {
               <i className="bi bi-chevron-left"></i> Shopping cart
             </div>
           </Link>
-          <Link to="/shipping-details/checkout-payment">
+          {
+            shippingAddressInfo?.data?.is_billing === "1" ? <Link to="/shipping-details/checkout-payment">
             <div className="proceed_payment_btn">
               Proceed payment <i className="bi bi-chevron-right"></i>
             </div>
-          </Link>
+          </Link> : <div onClick={addressSelectHandlerAlert} className="proceed_payment_btn text-center text-white" style={{cursor: "pointer"}}>
+              <span className="chooseDeliveryAlert">Proceed payment <i className="bi bi-chevron-right"></i></span>
+            </div>
+          }
+          
         </div>
       </div>
     </div>
