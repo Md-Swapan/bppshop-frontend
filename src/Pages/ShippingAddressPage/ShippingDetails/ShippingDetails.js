@@ -47,8 +47,7 @@ const ShippingDetails = () => {
                 <div className="shiping_amount_content">
                   <div>Sub Total</div>
                   <div className="amount_text">
-                    ৳
-                    {`${cartItems?.reduce(
+                  &#2547; {`${cartItems?.reduce(
                       (acc, item) =>
                         acc + item?.quantity * item?.product?.unit_price,
                       0
@@ -58,18 +57,18 @@ const ShippingDetails = () => {
                 </div>
                 <div className="shiping_amount_content">
                   <div>Tax</div>
-                  <div className="amount_text">৳ 0.00</div>
+                  <div className="amount_text">&#2547; 0.00</div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Delivery</div>
                   <div className="amount_text">
-                    ৳ {deliveryCost ? deliveryCost : 0}.00
+                  &#2547; {deliveryCost ? deliveryCost : 0}.00
                   </div>
                 </div>
                 <div className="shiping_amount_content">
                   <div>Discount on product</div>
                   <div className="amount_text">
-                    -৳ {totalDiscount ? totalDiscount : 0}.00
+                    -&#2547; {totalDiscount ? totalDiscount : 0}.00
                   </div>
                 </div>
                 <div>
@@ -85,7 +84,7 @@ const ShippingDetails = () => {
                 <hr />
                 <div className="shiping_amount_content">
                   <div>Total</div>
-                  <div className="amount_text">৳ {grandTotalPrice}.00</div>
+                  <div className="amount_text">&#2547; {grandTotalPrice}.00</div>
                 </div>
                 <div className="container mt-4">
                   <div className="row">

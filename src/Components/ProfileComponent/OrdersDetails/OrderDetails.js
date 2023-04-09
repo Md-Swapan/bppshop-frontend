@@ -118,7 +118,7 @@ const OrderDetails = () => {
                           </span>
                           <br />
                           <span className=" amount">
-                            Unit Price: ৳ {order?.product_details?.unit_price}{" "}
+                            Unit Price: &#2547; {order?.product_details?.unit_price}{" "}
                           </span>
                           <br />
                           <span>Qty: {order?.qty} </span>
@@ -130,7 +130,7 @@ const OrderDetails = () => {
                             Total:
                             <br />{" "}
                             <span>
-                              ৳{" "}
+                            &#2547; {" "}
                               {order?.qty * order?.product_details?.unit_price}
                             </span>
                           </div>
@@ -138,13 +138,13 @@ const OrderDetails = () => {
                         <td className="col-2 ">
                           <div>
                             Discount Price:
-                            <br /> <span>৳ {order.discount}</span>
+                            <br /> <span>&#2547; {order.discount}</span>
                           </div>
                         </td>
                         <td className="col-1 ">
                           <div className="text-right">
                             <span className="font-weight-bold amount ">
-                              Price: <br /> ৳{" "}
+                              Price: <br />&#2547; {" "}
                               {order?.qty * order?.product_details?.unit_price -
                                 order.discount}
                             </span>
@@ -183,7 +183,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>৳ {subTotal}.00</span>
+                      <span>&#2547; {subTotal}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -196,7 +196,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>৳ {taxFee}.00</span>
+                      <span>&#2547; {taxFee}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -208,7 +208,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>৳ {shippingFee}.00</span>
+                      <span>&#2547; {shippingFee}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -221,7 +221,7 @@ const OrderDetails = () => {
                   </td>
                   <td>
                     <div className="text-right">
-                      <span>-৳ {discountAmount}.00</span>
+                      <span>-&#2547; {discountAmount}.00</span>
                     </div>
                   </td>
                 </tr>
@@ -248,7 +248,7 @@ const OrderDetails = () => {
                   <td>
                     <div className="text-right">
                       <span className="font-weight-bold amount ">
-                        ৳ {subTotal + shippingFee + taxFee - discountAmount}.00
+                      &#2547; {subTotal + shippingFee + taxFee - discountAmount}.00
                       </span>
                     </div>
                   </td>

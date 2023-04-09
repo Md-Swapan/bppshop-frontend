@@ -16,6 +16,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
+  const SignupRedirect = localStorage.getItem("SignupRedirect");
 
   const onSubmit = (data) => {
     dispatch(userRegister(data));
@@ -35,11 +36,21 @@ const SignUp = () => {
         },
       });
 
-      let from = location?.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
+      // let from = location?.state?.from?.pathname || "/";
+      // console.log(from)
+
+      // navigate(from, { replace: true });
+
+      if(SignupRedirect){
+        navigate("/shipping-details");
+        localStorage.removeItem("SignupRedirect");
+      }
     } 
 
-  }, [isAuthenticated, navigate, token, location,signupRes]);
+  }, [token, SignupRedirect, navigate,signupRes]);
+  // }, [isAuthenticated, navigate, token, location,signupRes]);
+
+  
 
   return (
     <>

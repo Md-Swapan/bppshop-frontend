@@ -89,12 +89,12 @@ const CheckoutShopCart = () => {
                           <div style={{ fontSize: "11px" }}>
                             {" "}
                             <span className="m-1">
-                              ৳ {item?.product?.unit_price -item?.product?.discount } 
+                            &#2547; {item?.product?.unit_price -item?.product?.discount } 
                             </span>
-                            <span className="m-1"><del>৳ {item?.product?.unit_price}</del></span>
+                            <span className="m-1"><del>&#2547; {item?.product?.unit_price}</del></span>
                           </div>
                         ) : (
-                          <span>৳ {item?.product?.unit_price}</span>
+                          <span>&#2547; {item?.product?.unit_price}</span>
                         )}
                       </td>
                       <td>
@@ -128,14 +128,14 @@ const CheckoutShopCart = () => {
                       <td>
                         {item?.product?.discount > 0 ? (
                           <span className="mx-2">
-                            Total :৳
+                            Total :&#2547;
                             {item?.quantity *
                               (item?.product?.unit_price -
                                 item?.product?.discount)}
                           </span>
                         ) : (
                           <span className="mx-2">
-                            Total :৳{" "}
+                            Total :&#2547;{" "}
                             {item?.quantity * item?.product?.unit_price}
                           </span>
                         )}

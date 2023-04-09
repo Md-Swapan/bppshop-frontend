@@ -120,7 +120,7 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/sign-up" element={<SignUp />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/recover-password" element={<ForgetPassWord />}></Route>
           <Route path="/404" element={<PageNotFound />} />
           <Route path="*" element={<navigate to="/404" replace />} />

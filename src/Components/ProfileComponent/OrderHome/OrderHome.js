@@ -126,7 +126,7 @@ const OrderHome = () => {
                       </span>
                     </td>
                     <td data-label="Total">
-                      ৳{order?.order_amount + order?.shipping_cost}
+                    &#2547; {order?.order_amount + order?.shipping_cost}
                     </td>
                     <td data-label="Action">
                       <Link to={`/profile/orders-detail/${order?.id}`}>
