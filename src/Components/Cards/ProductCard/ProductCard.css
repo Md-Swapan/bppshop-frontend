@@ -353,7 +353,7 @@
 @media screen and (max-width: 730px) {
   .cardFooterBtn {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 0px;
   }
