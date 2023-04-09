@@ -16,6 +16,8 @@ const EditShipping = () => {
   const { editId } = useParams();
   const [editAddress, setEditAddress] = useState([]);
 
+  // console.log(editAddress,'editAddress');
+
   //for view edit values
   useEffect(() => {
     axios

@@ -51,6 +51,7 @@ const AddNewAddress = () => {
     const district_id = districtId;
     const upazila_id = thanaId;
     const newData = { ...data, district_id, upazila_id };
+    console.log(newData);
 
     dispatch(addShippingAddress(newData));
 
