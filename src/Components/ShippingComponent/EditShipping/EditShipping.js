@@ -71,7 +71,7 @@ const EditShipping = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res?.data?.status === "success") {
           navigate("/shipping-address");
           // toaster
@@ -91,11 +91,12 @@ const EditShipping = () => {
         }
       });
   };
+  console.log(editAddress);
   return (
     <>
       <MetaData title="Edit-New-Delivery-Address - BPPShop" />
       <div className="shipping_Add_container">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/* <form onSubmit={handleSubmit(onSubmit)}>
           <div className="shipping_Add_content">
             <div className="shipping_Add_header">Update Delivery Address</div>
           </div>
@@ -195,6 +196,130 @@ const EditShipping = () => {
           <div className="shipping_add_close_btn">
             <div>
               <Link to="/shipping-details">
+                <input
+                  className="shipping_close_btn"
+                  type="button"
+                  value="Close"
+                />
+              </Link>
+            </div>
+            <div>
+              <input
+                className="shipping_save_btn"
+                type="submit"
+                value="Update"
+              />
+            </div>
+          </div>
+        </form> */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="shipping_Add_content">
+            <div className="shipping_Add_header">Update Delevery Address</div>
+          </div>
+          <hr className="shipping_Add_line" />
+
+          <div className="shipping_address_input_container">
+            <div className="form-group">
+              <span>Contact person name</span>
+              <input
+                {...register("contact_person_name")}
+                name="contact_person_name"
+                className="shipping_address_input"
+                type="text"
+                defaultValue={editAddress.contact_person_name}
+              />
+            </div>
+            <div className="form-group">
+              <span>Phone</span>
+              <input
+                {...register("phone")}
+                name="phone"
+                className="shipping_address_input"
+                type="text"
+                defaultValue={editAddress.phone}
+              />
+            </div>
+            <div className="form-group">
+              <span>District/City*</span>
+              <select
+                {...register("district_id", { required: true })}
+                onChange={handleDistrictChange}
+                required
+                name="district_id"
+                className="shipping_address_input"
+                aria-label="Default select example"
+              >
+                <option value={null} selected>
+                  {editAddress
+                    ? editAddress.city
+                    : "------Select District/City------"}
+                </option>
+                {districtDataOptions?.map((district) => (
+                  <option key={district.id} value={district.id}>
+                    {district.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <span>Upazila/Thana*</span>
+              <select
+                {...register("upazila_id", { required: true })}
+                onChange={handleThanaChange}
+                required
+                name="upazila_id"
+                className="shipping_address_input"
+                aria-label="Default select example"
+              >
+                <option value={null} selected>
+                  {thanaDataOptions.length > 1
+                    ? "------Select Upazila/Thana------"
+                    : editAddress.thana}
+                </option>
+                {thanaDataOptions.map((thana) => (
+                  <option key={thana.id} value={thana.id}>
+                    {thana.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <span>Area*</span>
+              <select
+                {...register("area_id", { required: true })}
+                name="area_id"
+                className=" shipping_address_input"
+                aria-label="Default select example"
+              >
+                <option selected>
+                  {thanaDataOptions.length > 1
+                    ? "------Select Area------ "
+                    : editAddress.zip}
+                </option>
+                {areaDataOptions.map((area) => (
+                  <option key={area.id} value={area.id}>
+                    {area.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <span>Address</span>
+              <input
+                {...register("address", { required: true })}
+                name="address"
+                className="shipping_address_input"
+                type="text"
+                // placeholder="House no. / Building /Street /Area"
+                defaultValue={editAddress.address}
+              />
+            </div>
+          </div>
+
+          <div className="shipping_add_close_btn">
+            <div>
+              <Link to="/shipping-address">
                 <input
                   className="shipping_close_btn"
                   type="button"
