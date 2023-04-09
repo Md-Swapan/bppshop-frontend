@@ -14,6 +14,7 @@ import { cancelOrderResponseReducer } from "./Reducers/CancelOrderResponse";
 import searchProductReducer from "./Reducers/SearchReducers";
 import { signUpResReducer } from "./Reducers/SignUpResponse";
 import { AgentInfoReducer } from "./Reducers/AgentReducers";
+import { SignupRedirectReducer } from "./Reducers/SignupRedirectReducer";
 
 
 const rootReducer = combineReducers({
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
   priceVariant: PriceVariantReducers,
   productDetails: productDetailsReducers,
   deliveryCharge:deliveryChargeReducers,
-  agentInfo: AgentInfoReducer
+  agentInfo: AgentInfoReducer,
+  signupRedirect: SignupRedirectReducer
 });
 
 let initialState = {

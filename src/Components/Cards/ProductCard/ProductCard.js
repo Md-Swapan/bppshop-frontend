@@ -119,12 +119,12 @@ const ProductCard = ({ product }) => {
     const productImageRect = productImage.getBoundingClientRect();
 
     const animation = productImageClone.animate(
-      [
-        {
-          transform: `translate(${productImageRect.left}px, ${productImageRect.top}px)`,
-        },
-        { transform: `translate(${cartRect.top}px, ${cartRect.top}px)` },
-      ],
+      // [
+      //   {
+      //     transform: `translate(${productImageRect.left}px, ${productImageRect.top}px)`,
+      //   },
+      //   { transform: `translate(${cartRect.top}px, ${cartRect.top}px)` },
+      // ],
       {
         duration: 100,
         easing: "ease-in-out",
@@ -181,6 +181,10 @@ const ProductCard = ({ product }) => {
                     )}
                   </div>
                 </div>
+                <Link
+                    to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                    addedItemId={addedItemId}
+                  >
                 <div
                   className="quickView_AddToCart_overlay"
                 >
@@ -190,7 +194,7 @@ const ProductCard = ({ product }) => {
                   >
                     <div className="overlayViewCartBtn">
                       <span>
-                        <i className="bi bi bi-eye"></i> <br/> View Details
+                      <i class="bi bi-eye-slash"></i> <br/> View Details
                       </span>
                     </div>
                   </Link>
@@ -208,6 +212,7 @@ const ProductCard = ({ product }) => {
                     </div>
                   )} */}
                 </div>
+                </Link>
               </div>
               <div className="card-footer product-card-footer">
                 {addedItemId ? (

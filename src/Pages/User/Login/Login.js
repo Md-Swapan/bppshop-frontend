@@ -99,7 +99,7 @@ const Login = () => {
             <div className="login_card_footer">
               <div className="needAccountToggleBtn">
                 <h6>Need an account?</h6>
-                <Link to="/sign-up">
+                <Link to="/signup">
                   <i className="fa fa-user-circle"></i> Sign Up
                 </Link>
               </div>

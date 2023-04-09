@@ -250,7 +250,7 @@ const Nav = () => {
                   <Link to="/login">
                     <li className="dropdown-item">Login</li>
                   </Link>
-                  <Link to="/sign-up">
+                  <Link to="/signup">
                     <li className="dropdown-item">Sign-Up</li>
                   </Link>
                 </div>

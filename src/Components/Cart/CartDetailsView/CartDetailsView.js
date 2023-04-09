@@ -8,6 +8,7 @@ import {
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import toast from "react-hot-toast";
+import { SignupRedirectAction } from "../../../Redux/Actions/SignUpRedirectAction";
 
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -74,6 +75,8 @@ const CartDetailsView = () => {
   };
 
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
+    dispatch(SignupRedirectAction(true))
+    
     const cartDetailsViewSectionOverlay = document.querySelector(
       ".cartDetailsView_section_overlay"
     );
