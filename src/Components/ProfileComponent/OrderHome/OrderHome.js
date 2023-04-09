@@ -11,6 +11,45 @@ import { loadUserOrders } from "../../../Redux/Actions/UserOrderAction";
 import { useEffect } from "react";
 
 const OrderHome = () => {
+  // const { userOrders } = useSelector((state) => state?.userOrders);
+  // const { cancelOrdersResponse } = useSelector(
+  //   (state) => state?.cancelOrdersResponse
+  // );
+  // const dispatch = useDispatch();
+
+  // const handleOrderCancel = (id) => {
+  //   dispatch(loadUserOrderCancelRequest(id));
+  // };
+  // useEffect(() => {
+  //   store.dispatch(loadUserOrders());
+  //   if (cancelOrdersResponse?.status === "success") {
+  //     store.dispatch(loadUserOrders());
+  //     toast.success(`${cancelOrdersResponse?.message}`, {
+  //       duration: 5000,
+  
+  //       style: {
+  //         width: "100%",
+  //         height: "80px",
+  //         padding: "0px 20px",
+  //         background: "#86bc19",
+  //         color: "#fff",
+  //       },
+  //     });
+  //   }
+  //   if (cancelOrdersResponse?.status === "failed") {
+  //     toast.success(`${cancelOrdersResponse?.message}`, {
+  //       duration: 5000,
+  
+  //       style: {
+  //         width: "100%",
+  //         height: "80px",
+  //         padding: "0px 20px",
+  //         background: "#86bc19",
+  //         color: "#fff",
+  //       },
+  //     });
+  //   }
+  // }, [cancelOrdersResponse?.status, cancelOrdersResponse?.message]);
   const { userOrders } = useSelector((state) => state?.userOrders);
 
   useEffect(() => {

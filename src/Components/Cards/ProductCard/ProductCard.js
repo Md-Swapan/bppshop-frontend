@@ -141,13 +141,9 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <div className="product_card_content">
-        {/* <div className="addToCartGif_container">
-          <img className="addToCartGif" src={addToCartGif} alt="" />
-        </div> */}
         <div className="product-card">
           {current_stock > 0 ? (
             <>
-              {/* <div className="Product_border_container"> */}
               <div className=" product-card-body">
                 <div className="productImg_container">
                   {thumbnail ? (
@@ -164,15 +160,6 @@ const ProductCard = ({ product }) => {
                   <small>{name.toString().substring(0, 15)}...</small>
                   <br />
                   <div className="product-card-body-content-unit-price">
-                    <span>
-                      {/* {choice_options?.map((list) => (
-                        <>
-                          {list?.title} : {list?.options[0]}
-                        </>
-                      ))} */}
-                      {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
-                      {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
-                    </span>
                     {newChoiceOption && (
                       <span>
                         {newChoiceOption?.title} : {newChoiceOption?.options[0]}
@@ -195,11 +182,7 @@ const ProductCard = ({ product }) => {
                   </div>
                 </div>
                 <div
-                  className={
-                    addedItemId
-                      ? `quickView_AddToCart_overlay_active`
-                      : `quickView_AddToCart_overlay`
-                  }
+                  className="quickView_AddToCart_overlay"
                 >
                   <Link
                     to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
@@ -207,12 +190,12 @@ const ProductCard = ({ product }) => {
                   >
                     <div className="overlayViewCartBtn">
                       <span>
-                        <i className="bi bi bi-eye"></i> view
+                        <i className="bi bi bi-eye"></i> <br/> View Details
                       </span>
                     </div>
                   </Link>
-
-                  {addedItemId ? (
+                  
+                  {/* {addedItemId ? (
                     <div className="overlayAddToCartBtn">
                       <img src={addedToCartImg} alt="" />
                     </div>
@@ -223,23 +206,9 @@ const ProductCard = ({ product }) => {
                     >
                       <img src={addToCartImg} alt="" />
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
-
-              {/* <span onClick={() => productDetailsView(id)}> */}
-              {/* <button className="quickViewBtn" onClick={openModal}> */}
-              {/* <button onClick={openModal} className="quickViewBtn">
-                  <i className="bi bi bi-eye"></i> <span>Quick View</span>
-                </button> */}
-
-              {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                  <button className="quickViewBtn">
-                    <i className="bi bi bi-eye"></i> View Details
-                  </button>
-                </Link> */}
-              {/* </span> */}
-
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
                   <div className="cardFooterBtn">
@@ -248,8 +217,7 @@ const ProductCard = ({ product }) => {
                     </button>
 
                     <span onClick={() => productDetailsView(id)}>
-                      {/* <button className="quickViewBtn" onClick={openModal}> */}
-                      <button onClick={openModal} className="quickViewBtn">
+                      {/* <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
                       </button>
                       <Link
@@ -259,7 +227,7 @@ const ProductCard = ({ product }) => {
                         <button className="detailsViewBtn">
                           <i className="bi bi bi-eye"></i>
                         </button>
-                      </Link>
+                      </Link> */}
 
                       {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                         <button className="quickViewBtn">
@@ -268,11 +236,6 @@ const ProductCard = ({ product }) => {
                       </Link> */}
                     </span>
 
-                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                      <button className="detailsViewBtn">
-                        <i className="bi bi bi-eye"></i>{" "}
-                      </button>
-                    </Link> */}
                   </div>
                 ) : (
                   <div className="cardFooterBtn">
@@ -284,18 +247,18 @@ const ProductCard = ({ product }) => {
                     </button>
                     <span onClick={() => productDetailsView(id)}>
                       {/* <button className="quickViewBtn" onClick={openModal}> */}
-                      <button onClick={openModal} className="quickViewBtn">
+                      {/* <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
-                      </button>
+                      </button> */}
 
-                      <Link
+                      {/* <Link
                         to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
                         addedItemId={addedItemId}
                       >
                         <button className="detailsViewBtn">
                           <i className="bi bi bi-eye"></i>
                         </button>
-                      </Link>
+                      </Link> */}
 
                       {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
@@ -304,15 +267,9 @@ const ProductCard = ({ product }) => {
                 </Link> */}
                     </span>
 
-                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                      <button className="detailsViewBtn">
-                        <i className="bi bi bi-eye"></i>{" "}
-                      </button>
-                    </Link> */}
                   </div>
                 )}
               </div>
-              {/* </div> */}
             </>
           ) : (
             <div>
@@ -326,15 +283,6 @@ const ProductCard = ({ product }) => {
                   <small>{name?.toString().substring(0, 20)}...</small>
                   <br />
                   <div className="product-card-body-content-unit-price">
-                    <span>
-                      {/* {choice_options?.map((list) => (
-                        <>
-                          {list?.title} : {list?.options[0]}
-                        </>
-                      ))} */}
-                      {/* {choice_options?.map((list) => productUnitStatic?.find(item=>item===list?.title))}:{choice_options[0]?.options[0]} */}
-                      {/* {newChoiseOption }:{choice_options[0]?.options[0]} */}
-                    </span>
                     {newChoiceOption && (
                       <span>
                         {newChoiceOption?.title} : {newChoiceOption?.options[0]}
@@ -351,9 +299,9 @@ const ProductCard = ({ product }) => {
                 </button>
                 <span onClick={() => productDetailsView(id)}>
                   {/* <button className="quickViewBtn" onClick={openModal}> */}
-                  <button onClick={openModal} className="btn_before_add_cart">
+                  {/* <button onClick={openModal} className="btn_before_add_cart">
                     <i className="bi bi bi-eye"></i>
-                  </button>
+                  </button> */}
 
                   {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">

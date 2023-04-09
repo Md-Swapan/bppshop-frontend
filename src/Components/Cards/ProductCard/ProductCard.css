@@ -96,14 +96,16 @@
   color: #ffffff;
   text-align: center;
   margin-top: 50%;
-  display: none;
   align-items: center;
   justify-content: center;
+}
+.overlayViewCartBtn i {
+  font-size: 30px;
 }
 
 .overlayAddToCartBtn span,
 .overlayViewCartBtn span {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .overlayAddToCartBtn img {
@@ -220,7 +222,7 @@
 
 .cardFooterBtn {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   margin: 0px 7px;
 }
@@ -295,7 +297,7 @@
   }
   .cardFooterBtn {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin: 0px;
   }
@@ -454,7 +456,7 @@
 @media screen and (max-width: 576px) {
   .cardFooterBtn {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin: 0px;
   }
@@ -492,7 +494,7 @@
 @media screen and (max-width: 476px) {
   .cardFooterBtn {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 0px;
   }
