@@ -136,6 +136,11 @@ const ProductCard = ({ product }) => {
     };
   };
 
+
+  const scrollTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
   
 
   return (
@@ -168,16 +173,16 @@ const ProductCard = ({ product }) => {
                     <br />
                     {discount ? (
                       <span>
-                        <strong> ৳ {unit_price - discount} </strong>
+                        <strong> &#2547; {unit_price - discount} </strong>
                         <del>
                           <strong className="text-danger ms-3">
                             {" "}
-                            ৳ {unit_price}
+                            &#2547; {unit_price}
                           </strong>
                         </del>
                       </span>
                     ) : (
-                      <strong> ৳ {unit_price}</strong>
+                      <strong> &#2547; {unit_price}</strong>
                     )}
                   </div>
                 </div>
@@ -187,6 +192,7 @@ const ProductCard = ({ product }) => {
                   >
                 <div
                   className="quickView_AddToCart_overlay"
+                  onClick={scrollTop}
                 >
                   <Link
                     to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
@@ -294,7 +300,7 @@ const ProductCard = ({ product }) => {
                       </span>
                     )}
                     <br />
-                    <strong> ৳ {unit_price}</strong>
+                    <strong> &#2547; {unit_price}</strong>
                   </div>
                 </div>
               </div>

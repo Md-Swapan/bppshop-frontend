@@ -48,7 +48,7 @@ const Cart = () => {
           </div>
           <div className="cartTotalPrice">
             <small>
-              ৳{" "}
+            &#2547;{" "}
               {`${cartItems?.reduce(
                 (acc, item) =>
                   acc +

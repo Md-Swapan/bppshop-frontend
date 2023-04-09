@@ -76,7 +76,7 @@ const CartDetailsView = () => {
 
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
     dispatch(SignupRedirectAction(true))
-    
+
     const cartDetailsViewSectionOverlay = document.querySelector(
       ".cartDetailsView_section_overlay"
     );
@@ -140,16 +140,16 @@ const CartDetailsView = () => {
                       <div className="d-flex justify-content-center align-items-center">
                         <span>
                           {" "}
-                          ৳{item?.product?.unit_price - item?.product?.discount}
+                          &#2547; {item?.product?.unit_price - item?.product?.discount}
                         </span>{" "}
                         <del className="text-danger ms-1">
-                          ৳{item?.product?.unit_price}
+                        &#2547; {item?.product?.unit_price}
                         </del>
                       </div>
                     ) : (
                       <div>
                         {" "}
-                        <span>৳{item?.product?.unit_price}</span>
+                        <span>&#2547; {item?.product?.unit_price}</span>
                       </div>
                     )}
 
@@ -181,14 +181,14 @@ const CartDetailsView = () => {
                       </div>
                       {item?.product?.discount > 0 ? (
                         <span className="mx-2 text-end">
-                          ৳
+                          &#2547; 
                           {item?.quantity *
                             (item?.product?.unit_price -
                               item?.product?.discount)}
                         </span>
                       ) : (
                         <span className="mx-2 text-end">
-                          ৳{item?.quantity * item?.product?.unit_price}
+                          &#2547; {item?.quantity * item?.product?.unit_price}
                         </span>
                       )}
                     </div>
@@ -202,7 +202,7 @@ const CartDetailsView = () => {
           <div className="d-flex justify-content-between">
             <h6>Grand Total: </h6>
             <h6>
-              ৳{" "}
+             = &#2547;{" "}
               {`${cartItems?.reduce(
                 (acc, item) =>
                   acc +
