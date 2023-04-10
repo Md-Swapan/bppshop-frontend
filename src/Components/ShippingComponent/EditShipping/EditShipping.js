@@ -16,8 +16,6 @@ const EditShipping = () => {
   const { editId } = useParams();
   const [editAddress, setEditAddress] = useState([]);
 
-  // console.log(editAddress,'editAddress');
-
   //for view edit values
   useEffect(() => {
     axios
@@ -29,7 +27,8 @@ const EditShipping = () => {
       });
   }, [editId, token]);
 
-  //thana distric selections
+  // distric thana area selections
+  const [districtChanged, setDistrictChanged] = useState(false);
   useEffect(() => {
     axios
       .get(baseUrl + "/location/districts", {
@@ -43,6 +42,7 @@ const EditShipping = () => {
   const handleDistrictChange = (e) => {
     e.preventDefault();
     const districtId = e.target.value;
+    setDistrictChanged(true);
     setDistrictId(e.target.value);
     axios
       .get(baseUrl + `/location/thanas/${districtId}`)
@@ -66,18 +66,20 @@ const EditShipping = () => {
     const upazila_id = thanaId;
     const id = editId;
     const newData = { ...data, district_id, upazila_id, id };
-    axios
+
+    if ((districtChanged===true && newData.upazila_id===null && newData.area_id==="") || (districtChanged===true && newData.upazila_id===null)|| (districtChanged===true && newData.area_id==="")) {
+      return document.getElementById("errorMsg").innerText="Please select address properly";
+    } else {
+      axios
       .post(baseUrl + `/shipping-address/update-address`, newData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        // console.log(res);
         if (res?.data?.status === "success") {
           navigate("/shipping-address");
           // toaster
           toast.success(res?.data?.message, {
             duration: 5000,
-
             style: {
               width: "100%",
               height: "80px",
@@ -86,132 +88,16 @@ const EditShipping = () => {
               color: "#fff",
             },
           });
-        } else {
-          document.getElementById("error_msg").innerText = res?.data?.message;
-        }
+        } 
       });
+    }
+
+   
   };
-  console.log(editAddress);
   return (
     <>
       <MetaData title="Edit-New-Delivery-Address - BPPShop" />
       <div className="shipping_Add_container">
-        {/* <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="shipping_Add_content">
-            <div className="shipping_Add_header">Update Delivery Address</div>
-          </div>
-          <hr className="shipping_Add_line" />
-
-          <div className="shipping_address_input_container">
-            <div className="form-group">
-              <span>Contact person name </span>
-              <input
-                {...register("contact_person_name")}
-                name="contact_person_name"
-                className="shipping_address_input"
-                type="text"
-                defaultValue={editAddress.contact_person_name}
-              />
-            </div>
-            <div className="form-group">
-              <span>Phone </span>
-              <input
-                {...register("phone")}
-                name="phone"
-                className="shipping_address_input"
-                type="text"
-                defaultValue={editAddress.phone}
-              />
-            </div>
-            <div className="form-group">
-              <span>District/City</span>
-              <select
-                onChange={handleDistrictChange}
-                name="district_id"
-                className="shipping_address_input"
-                aria-label="Default select example"
-              >
-                <option defaultValue={editAddress.district_id} selected>
-                  {editAddress.city}
-                </option>
-                {districtDataOptions?.map((district) => (
-                  <option key={district.id} value={district.id}>
-                    {district.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <span>Upazila/Thana</span>
-              <select
-                onChange={handleThanaChange}
-                name="upazila_id"
-                className="shipping_address_input"
-                aria-label="Default select example"
-              >
-                <option defaultValue={editAddress.upazila_id} selected>
-                  {editAddress.thana}
-                </option>
-                {thanaDataOptions.map((thana) => (
-                  <option key={thana.id} value={thana.id}>
-                    {thana.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <span>Area</span>
-              <select
-                {...register("area_id")}
-                name="area_id"
-                className=" shipping_address_input"
-                aria-label="Default select example"
-              >
-                <option defaultValue={editAddress.area_id} selected>
-                  {editAddress.zip}
-                </option>
-                {areaDataOptions.map((area) => (
-                  <option key={area.id} value={area.id}>
-                    {area.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <span>Address </span>
-              <input
-                {...register("address")}
-                name="address"
-                className="shipping_address_input"
-                type="text"
-                placeholder="House no. / Building /Street /Area"
-                defaultValue={editAddress.address}
-              />
-            </div>
-            <div>
-              <i id="error_msg" className="text-danger"></i>
-            </div>
-          </div>
-
-          <div className="shipping_add_close_btn">
-            <div>
-              <Link to="/shipping-details">
-                <input
-                  className="shipping_close_btn"
-                  type="button"
-                  value="Close"
-                />
-              </Link>
-            </div>
-            <div>
-              <input
-                className="shipping_save_btn"
-                type="submit"
-                value="Update"
-              />
-            </div>
-          </div>
-        </form> */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="shipping_Add_content">
             <div className="shipping_Add_header">Update Delevery Address</div>
@@ -240,19 +126,16 @@ const EditShipping = () => {
               />
             </div>
             <div className="form-group">
-              <span>District/City*</span>
+              <span>District/City</span>
               <select
-                {...register("district_id", { required: true })}
+                {...register("district_id")}
                 onChange={handleDistrictChange}
-                required
                 name="district_id"
                 className="shipping_address_input"
                 aria-label="Default select example"
               >
                 <option value={null} selected>
-                  {editAddress
-                    ? editAddress.city
-                    : "------Select District/City------"}
+                    {editAddress.city}
                 </option>
                 {districtDataOptions?.map((district) => (
                   <option key={district.id} value={district.id}>
@@ -262,17 +145,16 @@ const EditShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Upazila/Thana*</span>
+              <span>Upazila/Thana</span>
               <select
-                {...register("upazila_id", { required: true })}
+                {...register("upazila_id")}
                 onChange={handleThanaChange}
-                required
                 name="upazila_id"
                 className="shipping_address_input"
                 aria-label="Default select example"
               >
                 <option value={null} selected>
-                  {thanaDataOptions.length > 1
+                  {districtChanged===true
                     ? "------Select Upazila/Thana------"
                     : editAddress.thana}
                 </option>
@@ -284,15 +166,15 @@ const EditShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Area*</span>
+              <span>Area</span>
               <select
-                {...register("area_id", { required: true })}
+                {...register("area_id")}
                 name="area_id"
                 className=" shipping_address_input"
                 aria-label="Default select example"
               >
                 <option selected>
-                  {thanaDataOptions.length > 1
+                  {districtChanged===true
                     ? "------Select Area------ "
                     : editAddress.zip}
                 </option>
@@ -307,14 +189,16 @@ const EditShipping = () => {
             <div className="form-group">
               <span>Address</span>
               <input
-                {...register("address", { required: true })}
+                {...register("address")}
                 name="address"
                 className="shipping_address_input"
                 type="text"
-                // placeholder="House no. / Building /Street /Area"
                 defaultValue={editAddress.address}
               />
             </div>
+          </div>
+          <div>
+            <i id="errorMsg" className="text-danger"></i>
           </div>
 
           <div className="shipping_add_close_btn">
