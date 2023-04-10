@@ -38,9 +38,9 @@ const AddressHome = () => {
           <div key={sippingAdd?.id} className="address_card">
             <div className="address_card_header">
               <div className="d-flex">
-                <div className="address_card_header_pin">
+                {/* <div className="address_card_header_pin">
                   <i className="bi bi-pin-fill"></i>
-                </div>
+                </div> */}
                 <div className="home_shipping_address_title">
                   <span>
                     {" "}
@@ -48,14 +48,14 @@ const AddressHome = () => {
                   </span>
                 </div>
               </div>
-              <div className="d-flex justify-content-between">
+              {/* <div className="d-flex justify-content-between">
                 <div className="address_card_header_edit mx-1">
-                  {/* <i className="bi bi-pencil-square"></i> */}
+                  <i className="bi bi-pencil-square"></i>
                 </div>
                 <div className="address_card_header_delete mx-1">
                   <i className="bi bi-trash3-fill"></i>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="address_card_body">
               <h6>Name: {sippingAdd.contact_person_name}</h6>
