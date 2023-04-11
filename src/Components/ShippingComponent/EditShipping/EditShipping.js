@@ -11,8 +11,9 @@ const EditShipping = () => {
   const [districtDataOptions, setDistrictDataOptions] = useState([]);
   const [thanaDataOptions, setThanaDataOptions] = useState([]);
   const [areaDataOptions, setAreaDataOptions] = useState([]);
-  const [districtId, setDistrictId] = useState(null);
-  const [thanaId, setThanaId] = useState(null);
+  const [districtId, setDistrictId] = useState("");
+  const [thanaId, setThanaId] = useState("");
+  const [areaId, setAreaId] = useState("");
   const { editId } = useParams();
   const [editAddress, setEditAddress] = useState([]);
 
@@ -24,11 +25,13 @@ const EditShipping = () => {
       })
       .then((res) => {
         setEditAddress(res.data.address);
+        setDistrictId(res.data.address.district_id);
+        setThanaId(res.data.address.upazila_id);
+        setAreaId(res.data.address.area_id);
       });
   }, [editId, token]);
 
-  // distric thana area selections
-  const [districtChanged, setDistrictChanged] = useState(false);
+  // get all distric
   useEffect(() => {
     axios
       .get(baseUrl + "/location/districts", {
@@ -39,23 +42,29 @@ const EditShipping = () => {
       });
   }, [token]);
 
+  // distric thana area selections
   const handleDistrictChange = (e) => {
     e.preventDefault();
     const districtId = e.target.value;
-    setDistrictChanged(true);
     setDistrictId(e.target.value);
+    setThanaId("");
+    setAreaId("");
     axios
       .get(baseUrl + `/location/thanas/${districtId}`)
       .then((res) => setThanaDataOptions(res.data.data));
   };
-
   const handleThanaChange = (e) => {
     e.preventDefault();
     const thanaId = e.target.value;
     setThanaId(e.target.value);
+    setAreaId("");
     axios
       .get(baseUrl + `/location/areas/${thanaId}`)
       .then((res) => setAreaDataOptions(res.data.data));
+  };
+  const handleAreaChange = (e) => {
+    e.preventDefault();
+    setAreaId(e.target.value);
   };
 
   //update address and delevary charge set
@@ -64,13 +73,10 @@ const EditShipping = () => {
   const onSubmit = (data) => {
     const district_id = districtId;
     const upazila_id = thanaId;
+    const area_id = areaId;
     const id = editId;
-    const newData = { ...data, district_id, upazila_id, id };
-
-    if ((districtChanged===true && newData.upazila_id===null && newData.area_id==="") || (districtChanged===true && newData.upazila_id===null)|| (districtChanged===true && newData.area_id==="")) {
-      return document.getElementById("errorMsg").innerText="Please select address properly";
-    } else {
-      axios
+    const newData = { ...data, district_id, upazila_id, area_id, id };
+    axios
       .post(baseUrl + `/shipping-address/update-address`, newData, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -88,11 +94,10 @@ const EditShipping = () => {
               color: "#fff",
             },
           });
-        } 
+        } else {
+          document.getElementById("errorMsg").innerText = res?.data?.message;
+        }
       });
-    }
-
-   
   };
   return (
     <>
@@ -134,8 +139,10 @@ const EditShipping = () => {
                 className="shipping_address_input"
                 aria-label="Default select example"
               >
-                <option value={null} selected>
-                    {editAddress.city}
+                <option value="" selected>
+                  {districtId === ""
+                    ? "------Select District/City------"
+                    : editAddress.city}
                 </option>
                 {districtDataOptions?.map((district) => (
                   <option key={district.id} value={district.id}>
@@ -153,8 +160,8 @@ const EditShipping = () => {
                 className="shipping_address_input"
                 aria-label="Default select example"
               >
-                <option value={null} selected>
-                  {districtChanged===true
+                <option value="" selected>
+                  {thanaId === ""
                     ? "------Select Upazila/Thana------"
                     : editAddress.thana}
                 </option>
@@ -169,14 +176,13 @@ const EditShipping = () => {
               <span>Area</span>
               <select
                 {...register("area_id")}
+                onChange={handleAreaChange}
                 name="area_id"
                 className=" shipping_address_input"
                 aria-label="Default select example"
               >
-                <option selected>
-                  {districtChanged===true
-                    ? "------Select Area------ "
-                    : editAddress.zip}
+                <option value="" selected>
+                  {areaId === "" ? "------Select Area------ " : editAddress.zip}
                 </option>
                 {areaDataOptions.map((area) => (
                   <option key={area.id} value={area.id}>
