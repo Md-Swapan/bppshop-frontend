@@ -62,7 +62,7 @@ const CheckoutShopCart = () => {
                       <td>{index + 1}</td>
                       <td>
                         <img
-                          style={{ width: "60px" }}
+                          style={{ width: "40px" }}
                           src={
                             imgThumbnailBaseUrl + `/${item?.product?.thumbnail}`
                           }
@@ -157,11 +157,11 @@ const CheckoutShopCart = () => {
             </table>
           </div>
         </div>
-        <div className="my-3">
+        {/* <div className="my-3">
           <b>Shipping method</b> : Cash on Delivery
-        </div>
+        </div> */}
         <div className="my-2">
-          <div className="row">
+          {/* <div className="row">
             <div>
               <label className="ms-1">Order note (Optional)</label>
               <textarea
@@ -189,7 +189,7 @@ const CheckoutShopCart = () => {
                 id=""
               />
             </div>
-          </div>
+          </div> */}
           <div className="shop_payment_btn_content">
             <div className="shop_payment_btn">
               <Link to="/">
