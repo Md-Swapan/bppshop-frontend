@@ -12,9 +12,8 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { signupRes } = useSelector((state) => state.signupRes);
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const cartItems = useSelector((state) =>  state.cart.cartItems);
   const navigate = useNavigate();
-  const location = useLocation();
   const token = localStorage.getItem("token");
   const SignupRedirect = localStorage.getItem("SignupRedirect");
 
@@ -25,6 +24,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (token) {
+      navigate("/");
       signupRes?.status==="success" &&   toast.success(`${signupRes?.message}`, {
         duration: 5000,
         style: {
@@ -36,19 +36,27 @@ const SignUp = () => {
         },
       });
 
-      // let from = location?.state?.from?.pathname || "/";
-      // console.log(from)
+      if(cartItems.length < 1){
+        navigate("/");
+        // toast.error(`Your Cart Is Empty. Please add product in cart first.`, {
+        //   duration: 7000,
+        //   style: {
+        //     width: "100%",
+        //     height: "80px",
+        //     padding: "0px 20px",
+        //     background: "#ff4a32",
+        //     color: "#fff",
+        //   },
+        // });
+      }
 
-      // navigate(from, { replace: true });
-
-      if(SignupRedirect){
+      if(SignupRedirect && cartItems.length > 0){
         navigate("/shipping-details");
         localStorage.removeItem("SignupRedirect");
       }
     } 
 
-  }, [token, SignupRedirect, navigate,signupRes]);
-  // }, [isAuthenticated, navigate, token, location,signupRes]);
+  }, [token, SignupRedirect, navigate,signupRes, cartItems]);
 
   
 
