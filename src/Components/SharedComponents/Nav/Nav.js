@@ -186,12 +186,8 @@ const Nav = () => {
               )}
             </div>
 
-            {/* <div className="suggested_item_container">
-              {SuggestedCategory.map((suggestItem) => (
-                <div>
-                  <p>{suggestItem.name}</p>
-                </div>
-              ))}
+            {/* <div className="helpLine">
+            <i class="bi bi-headset"></i> <span>0177775467</span>
             </div> */}
 
             <div className="userProfileTab">
