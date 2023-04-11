@@ -66,13 +66,25 @@ const ShippingAddressList = () => {
       });
   };
 
+  const handleNavigateToShippingDetails = () => {
+    navigate("/shipping-details");
+    window.location.reload(true);
+  };
   return (
     <>
       <MetaData title="Choose-Default-Delivery-Address - BPPShop" />
       <div>
         <div className="shipping_container">
+          <button
+            onClick={handleNavigateToShippingDetails}
+            className="my-4 shadow-sm border-0 py-2 px-4 rounded-2"
+          >
+            <i className="bi bi-arrow-left-circle mr-2"></i> Back
+          </button>
           <div className="shipping_content">
-            <div className="shipping_header">Choose Delivery Address or Add New Delivery Address.</div>
+            <div className="shipping_header">
+              Choose Delivery Address or Add New Delivery Address.
+            </div>
           </div>
           <hr className="shipping_line" />
           <div className="address_content">
@@ -83,7 +95,9 @@ const ShippingAddressList = () => {
                     <div className="shipping_address_box">
                       <div className="shipped_person">
                         <div>
-                          <h6>Delivery to : {shippingAddInfo?.contact_person_name}</h6>
+                          <h6>
+                            Delivery to : {shippingAddInfo?.contact_person_name}
+                          </h6>
                         </div>
                         <div>
                           {shippingAddInfo?.is_billing === 1 ? (
@@ -114,7 +128,9 @@ const ShippingAddressList = () => {
                       </div>
                       <div className="shiped_address">
                         <span className="home_text">home </span>{" "}
-                        <span className="mx-1">{shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}</span>
+                        <span className="mx-1">
+                          {shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}
+                        </span>
                         <span
                           onClick={() =>
                             handleDeleteAddress(
@@ -134,7 +150,7 @@ const ShippingAddressList = () => {
 
             <Link to="/add-shipping-address">
               <button className="add_more_address_btn">
-                <i className="bi bi-plus"></i> Add Delivery Address
+                <i className="bi bi-plus"></i> Add New Delivery Address
               </button>
             </Link>
           </div>
