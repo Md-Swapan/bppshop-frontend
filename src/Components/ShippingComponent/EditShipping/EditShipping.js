@@ -16,6 +16,7 @@ const EditShipping = () => {
   const { editId } = useParams();
   const [editAddress, setEditAddress] = useState([]);
 
+
   //for view edit values
   useEffect(() => {
     axios
@@ -24,6 +25,7 @@ const EditShipping = () => {
       })
       .then((res) => {
         setEditAddress(res.data.address);
+        setDistrictId(res.data.address.district_id);
       });
   }, [editId, token]);
 
@@ -66,10 +68,6 @@ const EditShipping = () => {
     const upazila_id = thanaId;
     const id = editId;
     const newData = { ...data, district_id, upazila_id, id };
-
-    if ((districtChanged===true && newData.upazila_id===null && newData.area_id==="") || (districtChanged===true && newData.upazila_id===null)|| (districtChanged===true && newData.area_id==="")) {
-      return document.getElementById("errorMsg").innerText="Please select address properly";
-    } else {
       axios
       .post(baseUrl + `/shipping-address/update-address`, newData, {
         headers: { Authorization: `Bearer ${token}` },
@@ -88,12 +86,14 @@ const EditShipping = () => {
               color: "#fff",
             },
           });
-        } 
+        } else{
+          document.getElementById("errorMsg").innerText=res?.data?.message;
+        }
       });
     }
 
    
-  };
+  // };
   return (
     <>
       <MetaData title="Edit-New-Delivery-Address - BPPShop" />
