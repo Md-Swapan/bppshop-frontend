@@ -5,6 +5,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import MetaData from "../../../Pages/Layout/MetaData";
 import { toast } from "react-hot-toast";
+import { setDefaultShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
+import { useDispatch } from "react-redux";
 
 const EditShipping = () => {
   const token = localStorage.getItem("token");
@@ -16,6 +18,7 @@ const EditShipping = () => {
   const [areaId, setAreaId] = useState("");
   const { editId } = useParams();
   const [editAddress, setEditAddress] = useState([]);
+  const dispatch = useDispatch();
 
   //for view edit values
   useEffect(() => {
@@ -46,9 +49,13 @@ const EditShipping = () => {
   const handleDistrictChange = (e) => {
     e.preventDefault();
     const districtId = e.target.value;
+    if (e.target.value) {
+      setThanaId("");
+      setAreaId("");
+    }
+
     setDistrictId(e.target.value);
-    setThanaId("");
-    setAreaId("");
+
     axios
       .get(baseUrl + `/location/thanas/${districtId}`)
       .then((res) => setThanaDataOptions(res.data.data));
@@ -75,6 +82,11 @@ const EditShipping = () => {
     const upazila_id = thanaId;
     const area_id = areaId;
     const id = editId;
+    const setDefaultId = parseInt(editId);
+    const addressId = {
+      address_id: setDefaultId,
+    };
+
     const newData = { ...data, district_id, upazila_id, area_id, id };
     axios
       .post(baseUrl + `/shipping-address/update-address`, newData, {
@@ -82,7 +94,9 @@ const EditShipping = () => {
       })
       .then((res) => {
         if (res?.data?.status === "success") {
-          navigate("/shipping-address");
+          dispatch(setDefaultShippingAddress(addressId));
+          navigate("/shipping-details");
+
           // toaster
           toast.success(res?.data?.message, {
             duration: 5000,
@@ -140,9 +154,9 @@ const EditShipping = () => {
                 aria-label="Default select example"
               >
                 <option value="" selected>
-                  {districtId === ""
-                    ? "------Select District/City------"
-                    : editAddress.city}
+                  {districtId
+                    ? editAddress.city
+                    : "------Select District/City------"}
                 </option>
                 {districtDataOptions?.map((district) => (
                   <option key={district.id} value={district.id}>
@@ -161,9 +175,9 @@ const EditShipping = () => {
                 aria-label="Default select example"
               >
                 <option value="" selected>
-                  {thanaId === ""
-                    ? "------Select Upazila/Thana------"
-                    : editAddress.thana}
+                  {thanaId
+                    ? editAddress.thana
+                    : "------Select Upazila/Thana------"}
                 </option>
                 {thanaDataOptions.map((thana) => (
                   <option key={thana.id} value={thana.id}>
@@ -182,7 +196,7 @@ const EditShipping = () => {
                 aria-label="Default select example"
               >
                 <option value="" selected>
-                  {areaId === "" ? "------Select Area------ " : editAddress.zip}
+                  {areaId ? editAddress.zip : "------Select Area------ "}
                 </option>
                 {areaDataOptions.map((area) => (
                   <option key={area.id} value={area.id}>

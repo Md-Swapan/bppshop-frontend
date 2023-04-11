@@ -22,7 +22,6 @@ const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector(
     (state) => state.allShippingInfo
   );
-  // console.log(allShippingAddressInfo?.data);
   const { shippingAddressInfo } = useSelector((state) => state.shippingInfo);
 
   const handleSetDefaultAddress = (address_id) => {
@@ -50,7 +49,6 @@ const ShippingAddressList = () => {
     axios
       .post(`${baseUrl}/shipping-address/delete-address`, deleteData, config)
       .then((res) => {
-        // console.log(res);
         if (res.status === 200) {
           dispatch(loadAllShippingAddress());
           toast.success(res.data.message, {
@@ -117,13 +115,6 @@ const ShippingAddressList = () => {
                       <div className="shiped_address">
                         <span className="home_text">home </span>{" "}
                         <span className="mx-1">{shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}</span>
-                        <Link to={`/edit-shipping-address/${shippingAddInfo.id}`}>
-                          <span
-                            className="change_text m-2"
-                          >
-                            <i className="bi bi-pencil-fill"></i> Edit
-                          </span>
-                        </Link>
                         <span
                           onClick={() =>
                             handleDeleteAddress(
@@ -131,7 +122,7 @@ const ShippingAddressList = () => {
                               shippingAddInfo.customer_id
                             )
                           }
-                          className="change_text"
+                          className="change_text ms-2"
                         >
                           <i className="bi bi-trash3-fill"></i> Delete
                         </span>

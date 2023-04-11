@@ -8,19 +8,18 @@ const ShippingHome = () => {
   const navigate = useNavigate();
 
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
-  // const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
 
-  // console.log(allShippingAddressInfo.data.map(i => i.id))
-  
   const changeShippingInfo = () => {
     navigate("/shipping-address");
     window.location.reload(true);
   };
 
   const addressSelectHandlerAlert = () => {
-    document.querySelector(".chooseAlert").innerHTML = "Please choose delivery address before proceed payment."
-    document.querySelector(".chooseDeliveryAlert").innerHTML = "Please choose delivery address"
-  }
+    document.querySelector(".chooseAlert").innerHTML =
+      "Please choose delivery address before proceed payment.";
+    document.querySelector(".chooseDeliveryAlert").innerHTML =
+      "Please choose delivery address";
+  };
 
   return (
     <div>
@@ -44,11 +43,18 @@ const ShippingHome = () => {
                 {shippingAddressInfo?.data?.phone} |{" "}
                 {shippingAddressInfo?.data?.address}{" "}
               </span>
+              <Link
+                to={`/edit-shipping-address/${shippingAddressInfo?.data?.id}`}
+              >
+                <span className="change_text m-2">
+                  <i className="bi bi-pencil-fill"></i> Edit
+                </span>
+              </Link>
               <span
                 onClick={() => changeShippingInfo()}
                 className="change_text mx-3"
               >
-                <i className="bi bi-pencil-fill"></i> Change Address
+                <i class="bi bi-arrow-down-up"></i> Change Address
               </span>
             </div>
           </div>
@@ -67,16 +73,23 @@ const ShippingHome = () => {
               <i className="bi bi-chevron-left"></i> Shopping cart
             </div>
           </Link>
-          {
-            shippingAddressInfo?.data?.is_billing === "1" ? <Link to="/shipping-details/checkout-payment">
-            <div className="proceed_payment_btn">
-              Proceed payment <i className="bi bi-chevron-right"></i>
+          {shippingAddressInfo?.data?.is_billing === "1" ? (
+            <Link to="/shipping-details/checkout-payment">
+              <div className="proceed_payment_btn">
+                Proceed payment <i className="bi bi-chevron-right"></i>
+              </div>
+            </Link>
+          ) : (
+            <div
+              onClick={addressSelectHandlerAlert}
+              className="proceed_payment_btn text-center text-white"
+              style={{ cursor: "pointer" }}
+            >
+              <span className="chooseDeliveryAlert">
+                Proceed payment <i className="bi bi-chevron-right"></i>
+              </span>
             </div>
-          </Link> : <div onClick={addressSelectHandlerAlert} className="proceed_payment_btn text-center text-white" style={{cursor: "pointer"}}>
-              <span className="chooseDeliveryAlert">Proceed payment <i className="bi bi-chevron-right"></i></span>
-            </div>
-          }
-          
+          )}
         </div>
       </div>
     </div>
