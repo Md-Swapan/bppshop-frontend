@@ -20,6 +20,8 @@ const AddShipping = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { shippingAddressInfo } = useSelector((state) => state.shippingInfo);
+  const { user } = useSelector((state) => state.user);
+
 
   useEffect(() => {
     axios
@@ -62,6 +64,8 @@ const AddShipping = () => {
     }
   };
 
+  // console.log(user)
+
   return (
     <>
       <MetaData title="Add-New-Delivery-Address - BPPShop" />
@@ -81,6 +85,7 @@ const AddShipping = () => {
                 className="shipping_address_input"
                 type="text"
                 placeholder="Enter Your Name"
+                defaultValue={user.name}
               />
             </div>
             <div className="form-group">
@@ -91,6 +96,7 @@ const AddShipping = () => {
                 className="shipping_address_input"
                 type="text"
                 placeholder="Enter Your Phone Number"
+                defaultValue={user.phone}
               />
             </div>
             <div className="form-group">

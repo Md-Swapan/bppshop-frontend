@@ -19,12 +19,11 @@ const ShippingAddressList = () => {
     dispatch(loadAllShippingAddress());
   }, [dispatch]);
 
-  const { allShippingAddressInfo } = useSelector(
-    (state) => state.allShippingInfo
-  );
-  // console.log(allShippingAddressInfo?.data);
+  const { user } = useSelector((state) => state.user);
+  const { allShippingAddressInfo } = useSelector((state) => state.allShippingInfo);
   const { shippingAddressInfo } = useSelector((state) => state.shippingInfo);
 
+  
   const handleSetDefaultAddress = (address_id) => {
     const addressId = {
       address_id: address_id,
@@ -143,7 +142,7 @@ const ShippingAddressList = () => {
 
             <Link to="/add-shipping-address">
               <button className="add_more_address_btn">
-                <i className="bi bi-plus"></i> Add Delivery Address
+                <i className="bi bi-plus"></i> Add New Delivery Address
               </button>
             </Link>
           </div>
