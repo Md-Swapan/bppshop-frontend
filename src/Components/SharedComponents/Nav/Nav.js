@@ -187,7 +187,7 @@ const Nav = () => {
             </div>
 
             {/* <div className="helpLine">
-            <i class="bi bi-headset"></i> <span>0177775467</span>
+            <i className="bi bi-headset"></i> <span>0177775467</span>
             </div> */}
 
             <div className="userProfileTab">

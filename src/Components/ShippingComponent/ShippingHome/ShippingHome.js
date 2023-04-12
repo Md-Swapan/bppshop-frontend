@@ -54,7 +54,7 @@ const ShippingHome = () => {
                 onClick={() => changeShippingInfo()}
                 className="change_text mx-3"
               >
-                <i class="bi bi-arrow-down-up"></i> Change Address
+                <i className="bi bi-arrow-down-up"></i> Change Address
               </span>
             </div>
           </div>
