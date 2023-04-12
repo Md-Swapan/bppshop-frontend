@@ -13,9 +13,30 @@ const HomeFilterBtnHeader = () => {
             </Link>
           </div>
           <div>
-            <Link to="/discount-products">
-              <button>Discounted Products</button>
-            </Link>
+            <div className="dropdown">
+              <button
+                className="dropdown-toggle discountFlashSaleBTn"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span className="">Discounted Products/ Flash Sale</span>
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <li>
+                  <Link className="dropdown-item" to="/discount-products">Discounted Products</Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/flash-sale">Flash Sale</Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="dropdown">
@@ -84,7 +105,10 @@ const HomeFilterBtnHeader = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="https://agent.bppshop.com.bd">
+                <a
+                  className="dropdown-item"
+                  href="https://agent.bppshop.com.bd"
+                >
                   Become a Agent
                 </a>
               </li>
@@ -92,7 +116,10 @@ const HomeFilterBtnHeader = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="https://agent.bppshop.com.bd/login">
+                <a
+                  className="dropdown-item"
+                  href="https://agent.bppshop.com.bd/login"
+                >
                   Agent Login
                 </a>
               </li>

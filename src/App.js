@@ -42,6 +42,7 @@ import BrandsProducts from './Pages/Brand/BrandsProducts/BrandsProducts';
 import AgentLand from './Pages/AgentLand/AgentLand';
 import AgentPayment from "./Components/CheckoutComponent/AgentPayment/AgentPayment";
 import EditShipping from "./Components/ShippingComponent/EditShipping/EditShipping";
+import FlashSale from "./Pages/FlashSale/FlashSale";
 
 
 function App() {
@@ -92,6 +93,7 @@ function App() {
           <Route path="/brand" element={<Brands/>} />
           <Route path="/brand/:name/:id" element={<BrandsProducts/>} />
           <Route path="/discount-products" element={<DiscountProducts/>} />
+          <Route path="/flash-sale" element={<FlashSale/>} />
           <Route path="/best-selling" element={<BestSelling/>} />
           <Route path="/new-arrival" element={<NewArrival/>} />
           <Route path="/top-rated" element={<TopRated/>} />

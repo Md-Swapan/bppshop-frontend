@@ -25,11 +25,12 @@
 }
 
 .header_btn button {
-  width: 170px;
+  width: auto;
   height: 45px;
   background: #ef8341;
   border-radius: 4px;
   margin: 5px 10px;
+  padding: 5px 20px;
   color: #ffffff;
   font-size: 15px;
   font-weight: 700px;
@@ -51,11 +52,15 @@
   font-family: "Space Grotesk", sans-serif;
   /* font-family: "Varela Round", sans-serif; */
 }
+.discountFlashSaleBTn{
+  overflow: hidden;
+}
 
 .dropdown-menu {
   margin: 5px !important;
   font-family: "Space Grotesk", sans-serif;
 }
+
 
 .dropdown-toggle::after {
   font-size: 18px;
@@ -96,7 +101,15 @@ hr:not([size]) {
     margin: 5px 10px;
     font-size: 12px;
   }
-
+  /* .discountFlashSaleBTn{
+    width: 100px;
+  } */
+  
+  .discountFlashSale{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
   
 }
 @media only screen and (max-width: 576px) {
