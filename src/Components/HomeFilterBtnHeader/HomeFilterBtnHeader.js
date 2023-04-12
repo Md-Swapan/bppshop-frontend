@@ -81,6 +81,9 @@ const HomeFilterBtnHeader = () => {
                 </a>
               </li>
               <li>
+                <hr className="dropdown-divider" />
+              </li>
+              <li>
                 <a className="dropdown-item" href="https://agent.bppshop.com.bd">
                   Become a Agent
                 </a>

@@ -21,6 +21,9 @@
     border-radius: 5px;
     color: white;
 }
+.profile_update_btn:hover {
+    background: #e66f26;
+}
 .input_field {
     display: block;
     width: 100%;

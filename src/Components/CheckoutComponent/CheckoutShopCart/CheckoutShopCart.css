@@ -34,3 +34,13 @@
     font-weight: 700;
     cursor: pointer;
 }
+.proceed_payment_btn{
+    border: none;
+    outline: none;
+    color: #fff;
+}
+.shopCartEmptyAlert{
+    color: red;
+    font-weight: 500;
+    margin-top: 20px;
+}

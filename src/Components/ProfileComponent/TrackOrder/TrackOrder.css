@@ -36,3 +36,6 @@
     color: white;
     border-radius: 5px;
 }
+.view_track_order_details button:hover {
+    background: #e66f26;
+}

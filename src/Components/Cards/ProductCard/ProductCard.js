@@ -200,7 +200,7 @@ const ProductCard = ({ product }) => {
                   >
                     <div className="overlayViewCartBtn">
                       <span>
-                      <i className="bi bi-eye-slash"></i> <br/> View Details
+                      <i class="bi bi-eye-fill"></i> <br/> View Details
                       </span>
                     </div>
                   </Link>

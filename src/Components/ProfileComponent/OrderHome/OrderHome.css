@@ -21,8 +21,14 @@
 .my_order_view_btn {
   background: green;
 }
+.my_order_view_btn:hover {
+  background: rgb(0, 175, 0);
+}
 .my_order_cancel_btn {
   background: red;
+}
+.my_order_cancel_btn:hover {
+  background: rgb(192, 0, 0);
 }
 .my_order_view_btn,
 .my_order_cancel_btn {
