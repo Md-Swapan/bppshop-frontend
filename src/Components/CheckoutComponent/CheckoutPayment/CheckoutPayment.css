@@ -14,6 +14,12 @@
 .agent_Wallet_payment {
   text-align: left;
 }
+.cashOnDeliVery:hover label,
+.mobile_payment:hover label,
+.bank_payment:hover label,
+.agent_Wallet_payment:hover label{
+  color: #e66f26;
+}
 
 .cashOnDeliVery label,
 .mobile_payment label,

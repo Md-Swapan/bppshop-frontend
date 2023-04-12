@@ -33,6 +33,11 @@ const CheckoutShopCart = () => {
     }
     dispatch(addItemsToCart(id, newQty));
   };
+
+  const CartEmptyAlert = () => {
+    document.querySelector('.shopCartEmptyAlert').innerHTML = "Your cart is empty. Please add product in cart first."
+  };
+
   return (
     <>
       <MetaData title="Checkout-Shoping-Cart - BPPShop" />
@@ -89,9 +94,13 @@ const CheckoutShopCart = () => {
                           <div style={{ fontSize: "11px" }}>
                             {" "}
                             <span className="m-1">
-                            &#2547; {item?.product?.unit_price -item?.product?.discount } 
+                              &#2547;{" "}
+                              {item?.product?.unit_price -
+                                item?.product?.discount}
                             </span>
-                            <span className="m-1"><del>&#2547; {item?.product?.unit_price}</del></span>
+                            <span className="m-1">
+                              <del>&#2547; {item?.product?.unit_price}</del>
+                            </span>
                           </div>
                         ) : (
                           <span>&#2547; {item?.product?.unit_price}</span>
@@ -190,6 +199,8 @@ const CheckoutShopCart = () => {
               />
             </div>
           </div> */}
+
+          <p className="shopCartEmptyAlert"></p>
           <div className="shop_payment_btn_content">
             <div className="shop_payment_btn">
               <Link to="/">
@@ -197,11 +208,18 @@ const CheckoutShopCart = () => {
                   <i className="bi bi-chevron-left"></i> Continue shopping
                 </div>
               </Link>
-              <Link to="/shipping-details">
-                <div className="proceed_payment_btn">
+
+              {cartItems?.length < 1 ? (
+                <button onClick={CartEmptyAlert} className="proceed_payment_btn">
                   Checkout <i className="bi bi-chevron-right"></i>
-                </div>
-              </Link>
+                </button>
+              ) : (
+                <Link to="/shipping-details">
+                  <button className="proceed_payment_btn">
+                    Checkout <i className="bi bi-chevron-right"></i>
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

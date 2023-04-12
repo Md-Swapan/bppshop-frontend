@@ -16,6 +16,9 @@
   padding: 10px 0px;
   color: #ef8341;
 }
+/* .add_shipping_address_btn:hover {
+  background: #ef8341;
+} */
 
 .progress_container {
   display: flex;
@@ -82,6 +85,9 @@
   cursor: pointer;
   font-size: 13px;
 }
+.edit_address :hover,.change_text:hover{
+  color: #e05906;
+}
 
 .edit_address i,.change_text i {
   font-size: 15px;
@@ -113,7 +119,13 @@
 .shop_cart_btn {
   background: rgb(151, 151, 151);
 }
+.shop_cart_btn:hover {
+  background: rgb(117, 117, 117);
+}
 
 .proceed_payment_btn {
   background: #ef8341;
+}
+.proceed_payment_btn:hover {
+  background: #e05906;
 }

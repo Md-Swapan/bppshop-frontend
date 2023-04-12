@@ -133,6 +133,9 @@
   border-radius: 5px;
   margin-top: 10px;
 }
+.cart-total-container button:hover{
+  background: #e05906;
+}
 
 @media screen and (max-width: 1600px) {
   .cartDetailsView-container-toggle{
