@@ -73,7 +73,10 @@ const ShippingDetails = () => {
                   </div>
                 </div>
                 <div>
-                <i className="text-danger my-1">#Coupon is not available for this product</i>
+                <div className="my-2">
+                <hr />
+                </div>
+                <i className="text-danger my-1">#Coupon is not available now</i>
                   <input
                   disabled
                     className="coupon_input"
