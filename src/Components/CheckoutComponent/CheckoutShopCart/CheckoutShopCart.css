@@ -35,6 +35,7 @@
     cursor: pointer;
 }
 .proceed_payment_btn{
+    width: 100%;
     border: none;
     outline: none;
     color: #fff;
