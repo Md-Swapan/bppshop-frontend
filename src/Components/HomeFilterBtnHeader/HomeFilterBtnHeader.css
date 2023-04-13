@@ -1,15 +1,11 @@
 /* -------Header Button Design------- */
 .homeFilterBtnHeader-container-section {
   width: 40%;
-  /* height: 60px; */
   margin-top: 80px !important;
   margin-bottom: 40px !important;
   display: flex;
   justify-content: center;
   margin: auto;
-  /* position: fixed;
-  z-index: 9999;
-  background: #ffffff; */
 }
 
 .header_btn {
@@ -19,21 +15,16 @@
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
-  /* position: fixed;
-  z-index: 9999;
-  background: #ffffff; */
 }
 
 .header_btn button {
   width: auto;
-  height: 45px;
   background: #ef8341;
   border-radius: 4px;
   margin: 5px 10px;
-  padding: 5px 20px;
+  padding: 7px 20px;
   color: #ffffff;
   font-size: 15px;
-  font-weight: 700px;
   text-align: center;
   border: none;
   cursor: pointer;
@@ -43,13 +34,13 @@
   /* font-family: "DM Sans", sans-serif; */
   /* font-family: "Exo 2", sans-serif; */
   /* font-family: "Kanit", sans-serif; */
-  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Montserrat", sans-serif;
   /* font-family: "Prompt", sans-serif; */
   /* font-family: "Rajdhani", sans-serif; */
   /* font-family: "Roboto", sans-serif; */
   /* font-family: "Rubik", sans-serif; */
   /* font-family: "Signika Negative", sans-serif; */
-  font-family: "Space Grotesk", sans-serif;
+  /* font-family: "Space Grotesk", sans-serif; */
   /* font-family: "Varela Round", sans-serif; */
 }
 .discountFlashSaleBTn{
@@ -57,8 +48,12 @@
 }
 
 .dropdown-menu {
-  margin: 5px !important;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  padding: 2px 0px;
+}
+.dropdown-item{
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 
@@ -97,13 +92,10 @@ hr:not([size]) {
   }
   .header_btn button {
     width: 120px;
-    height: 42px;
+    /* height: 42px; */
     margin: 5px 10px;
     font-size: 12px;
   }
-  /* .discountFlashSaleBTn{
-    width: 100px;
-  } */
   
   .discountFlashSale{
     width: 100%;
@@ -143,7 +135,7 @@ hr:not([size]) {
 
   .header_btn button {
     width: 140px;
-    height: 42px;
+    /* height: 42px; */
     margin: 5px ;
     font-size: 12px;
   }
@@ -168,7 +160,7 @@ hr:not([size]) {
   }
   .header_btn button {
     width: 150px;
-    height: 42px;
+    /* height: 42px; */
     margin: 5px ;
     font-size: 12px;
   }
@@ -177,7 +169,7 @@ hr:not([size]) {
  
   .header_btn button {
     width: 140px;
-    height: 42px;
+    /* height: 42px; */
     margin: 5px;
     font-size: 12px;
   }
@@ -186,7 +178,7 @@ hr:not([size]) {
  
   .header_btn button {
     width: 130px;
-    height: 42px;
+    /* height: 42px; */
     margin: 5px;
     font-size: 12px;
   }

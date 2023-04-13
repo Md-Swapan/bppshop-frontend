@@ -22,11 +22,12 @@ const CategoryCard = ({ category }) => {
       >
         <div className="card">
           <div className="category_card-body">
-            {/* {img ? ( */}
-              <img src={categoryBaseUrl + `/${thumb}`} className="card-img-top" alt="" />
-            {/* ) : (
+            {!thumb? (
               <img src={defaultProImg} className="card-img-top" alt="" />
-            )} */}
+              ) : (
+               <img src={categoryBaseUrl + `/${thumb}`} className="card-img-top" alt="" />
+              
+            )} 
           </div>
           <div className="card-footer">{name}</div>
         </div>
