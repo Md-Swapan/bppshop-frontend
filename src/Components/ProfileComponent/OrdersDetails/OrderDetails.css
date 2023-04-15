@@ -46,6 +46,17 @@
   text-align: center;
   cursor: pointer;
 }
+.add_review_btn {
+  background: #ef8341;
+  border: none;
+  padding: 2px 15px;
+  color: white;
+  border-radius: 3px;
+}
+.add_review_btn:hover {
+  background: #e1bb69;
+}
+
 
 .track_order_btn {
   text-align: end;

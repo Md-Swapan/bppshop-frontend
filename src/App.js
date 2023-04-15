@@ -43,6 +43,7 @@ import AgentLand from './Pages/AgentLand/AgentLand';
 import AgentPayment from "./Components/CheckoutComponent/AgentPayment/AgentPayment";
 import EditShipping from "./Components/ShippingComponent/EditShipping/EditShipping";
 import FlashSale from "./Pages/FlashSale/FlashSale";
+import AddProductReview from "./Pages/Review/AddProductReview";
 
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
           <Route path="/best-selling" element={<BestSelling/>} />
           <Route path="/new-arrival" element={<NewArrival/>} />
           <Route path="/top-rated" element={<TopRated/>} />
+          <Route path="/addproductreview/:pid" element={<AddProductReview/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         
           <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>

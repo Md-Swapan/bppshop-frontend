@@ -99,6 +99,7 @@ const OrderDetails = () => {
                   taxFee += order?.product_details?.tax;
                   shippingFee = userOrder?.shipping_cost;
                   discountAmount += order?.discount;
+
                   return (
                     <tbody key={order?.product_details?.id}>
                       <tr className="order_detail_list">
@@ -117,13 +118,16 @@ const OrderDetails = () => {
                             {order?.product_details?.id}]
                           </span>
                           <br />
-                          <span className=" amount">
+                          <span className="amount">
                             Unit Price: &#2547; {order?.product_details?.unit_price}{" "}
                           </span>
                           <br />
                           <span>Qty: {order?.qty} </span>
                           <br/>
                           <span >Variant: {order.variant}</span>
+                          <br />
+                          <Link to={`/addproductreview/${order?.product_id}`}><button className="add_review_btn">Add Review {order?.product_id}</button></Link>
+                          
                         </td>
                         <td className="col-2 ">
                           <div>

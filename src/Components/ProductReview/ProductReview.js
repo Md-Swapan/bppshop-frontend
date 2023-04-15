@@ -2,7 +2,7 @@ import React from "react";
 import "./ProductReview.css";
 
 const ProductReview = ({ productDetail }) => {
-  console.log(productDetail);
+  // console.log(productDetail);
   return (
     <>
       <div className="review-section">
@@ -10,7 +10,8 @@ const ProductReview = ({ productDetail }) => {
           <div className="row">
             <div className="col-md-6">
               <div className="customer-qa">
-                <h2>Customers Q & A</h2>
+                {/* <h2>Customers Q & A</h2> */}
+                <h2>Customer Answers</h2>
                 <div>
                   {productDetail?.reviews?.map((review) => (
                     <div key={review.id} className="review-cart">
@@ -54,7 +55,7 @@ const ProductReview = ({ productDetail }) => {
                   ))}
                 </div>
 
-                <div className="comments-container">
+                {/* <div className="comments-container">
                   <h2>Leave a Comment</h2>
                   <form action="">
                     <div className="input-container">
@@ -79,7 +80,10 @@ const ProductReview = ({ productDetail }) => {
 
                     <button type="submit">Post Comment</button>
                   </form>
-                </div>
+                </div> */}
+
+
+
               </div>
             </div>
             <div className="col-md-6">
