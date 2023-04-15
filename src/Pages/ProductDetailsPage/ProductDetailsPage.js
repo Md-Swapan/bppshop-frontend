@@ -563,7 +563,7 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       )}
-      <ProductReview />
+      <ProductReview productDetail={productDetail}/>
     </>
   );
 };
