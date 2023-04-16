@@ -7,6 +7,7 @@ import { baseUrl } from "../../BaseUrl/BaseUrl";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { RatingStar } from "rating-star";
 
 const AddProductReview = () => {
   const token = localStorage.getItem("token");
@@ -84,6 +85,7 @@ const AddProductReview = () => {
           <textarea
             {...register("comment", { required: true })}
             name="comment"
+            placeholder="Enter Your Comment"
             id="textarea"
             cols="30"
             rows="3"
@@ -116,7 +118,8 @@ const AddProductReview = () => {
                       <i className="bi bi-clock"></i>{" "}
                       {review?.created_at.slice(0, 10)}
                     </p>
-                    <p className="rating-star">
+                    <RatingStar id={review?.id} rating={review?.rating} />
+                    {/* <p className="rating-star">
                       {(() => {
                         let userRating = [];
                         for (let i = 1; i <= review.rating; i++) {
@@ -130,7 +133,7 @@ const AddProductReview = () => {
                         }
                         return userRating;
                       })()}
-                    </p>
+                    </p> */}
                   </div>
                   <small>{review?.comment}</small>
                 </div>

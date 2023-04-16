@@ -1,10 +1,15 @@
 import React from "react";
 import "./ProductReview.css";
+import { RatingStar } from "rating-star";
+
+
 
 const ProductReview = ({ productDetail }) => {
-  // console.log(productDetail);
+  const reversedReviews = productDetail?.reviews?.map((_, index, arr) => arr[arr.length - 1 - index]);
+  // console.log(productDetail.reviews);
   return (
     <>
+    
       <div className="review-section">
         <div className="container-fluid reviewSection">
           <div className="row">
@@ -12,8 +17,8 @@ const ProductReview = ({ productDetail }) => {
               <div className="customer-qa">
                 {/* <h2>Customers Q & A</h2> */}
                 <h2>Customer Answers</h2>
-                <div>
-                  {productDetail?.reviews?.map((review) => (
+                <div className="customer_comment_reviews">
+                  {reversedReviews?.map((review) => (
                     <div key={review.id} className="review-cart">
                       <div className="user-img">
                         <img src="/img/userimg (1).webp" alt="" />
@@ -28,7 +33,8 @@ const ProductReview = ({ productDetail }) => {
                             <i className="bi bi-clock"></i>{" "}
                             {review?.created_at.slice(0, 10)}
                           </p>
-                          <p className="rating-star">
+                          <RatingStar id={review?.id} rating={review?.rating} />
+                          {/* <p className="rating-star">
                             {(() => {
                               let userRating = [];
                               for (let i = 1; i <= review.rating; i++) {
@@ -44,7 +50,7 @@ const ProductReview = ({ productDetail }) => {
                               }
                               return userRating;
                             })()}
-                          </p>
+                          </p> */}
                           {/* <button>
                           <i className="bi bi-arrow-90deg-left"></i> Replay
                         </button> */}
@@ -90,7 +96,8 @@ const ProductReview = ({ productDetail }) => {
                   <h1>{productDetail?.average_review}</h1>
                   <div>
                     <h2>Average Ratings</h2>
-                    <p className="rating-star">
+                    <RatingStar id={productDetail?.id} rating={productDetail?.average_review} />
+                    {/* <p className="rating-star">
                       {(() => {
                         let average = Math.floor(productDetail?.average_review);
                         let userRating = [];
@@ -105,7 +112,7 @@ const ProductReview = ({ productDetail }) => {
                         }
                         return userRating;
                       })()}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
                 <div className="star-progress-container">
