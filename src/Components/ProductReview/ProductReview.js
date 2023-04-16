@@ -81,9 +81,6 @@ const ProductReview = ({ productDetail }) => {
                     <button type="submit">Post Comment</button>
                   </form>
                 </div> */}
-
-
-
               </div>
             </div>
             <div className="col-md-6">
@@ -94,30 +91,45 @@ const ProductReview = ({ productDetail }) => {
                   <div>
                     <h2>Average Ratings</h2>
                     <p className="rating-star">
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill last"></i>
+                      {(() => {
+                        let average = Math.floor(productDetail?.average_review);
+                        let userRating = [];
+                        for (let i = 1; i <= average; i++) {
+                          userRating.push(<i className="bi bi-star-fill"></i>);
+                        }
+                        let remaining = 5 - average;
+                        for (let i = 1; i <= remaining; i++) {
+                          userRating.push(
+                            <i className="bi bi-star-fill last"></i>
+                          );
+                        }
+                        return userRating;
+                      })()}
                     </p>
                   </div>
                 </div>
                 <div className="star-progress-container">
                   {(() => {
-                    let userReviewTag = [];      
-                    let reviewCouter = [0,0,0,0,0];
-                    productDetail?.reviews?.map((review) => (
-                      reviewCouter[review.rating - 1] += 1
-                    ));
+                    let userReviewTag = [];
+                    let reviewCouter = [0, 0, 0, 0, 0];
+                    productDetail?.reviews?.map(
+                      (review) => (reviewCouter[review.rating - 1] += 1)
+                    );
                     let reviewPercent = 0;
                     for (let i = 0; i < reviewCouter.length; i++) {
-                      reviewPercent = (reviewCouter[i] / productDetail?.reviews_count)*100;
+                      reviewPercent =
+                        (reviewCouter[i] / productDetail?.reviews_count) * 100;
                       userReviewTag.push(
                         <div className="star-progress">
-                          <p>{i+1} Star </p>
+                          <p>{i + 1} Star </p>
                           <div className="progressbar">
-                            <div className="progress" style={{width: `${reviewPercent}%`}}>
-                              <span className="value">{reviewPercent.toFixed(1)}%</span>
+                            <div
+                              className="progress"
+                              style={{ width: `${reviewPercent}%` }}
+                            >
+                              <span className="value">
+                                {reviewPercent.toFixed(1)}%
+                              </span>
                             </div>
                           </div>
                         </div>
