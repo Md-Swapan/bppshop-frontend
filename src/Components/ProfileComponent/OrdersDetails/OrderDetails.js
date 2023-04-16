@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUserOrderDetails } from "../../../Redux/Actions/UserOrderAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
 import MetaData from "../../../Pages/Layout/MetaData";
-// import { baseUrl } from './../../../BaseUrl/BaseUrl';
-// import axios from "axios";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
@@ -15,25 +13,15 @@ const OrderDetails = () => {
   const { userOrderDetails } = useSelector((state) => state?.userOrderDetails);
   const userOrder = userOrders?.find((order) => order?.id === parseInt(id));
   const OrderDetails = userOrderDetails?.map((orderDetail) => orderDetail);
-  // const token = localStorage.getItem("token");
 
   useEffect(() => {
     dispatch(loadUserOrderDetails(id));
-    // axios.get(`${baseUrl}/customer/order/details/${id}`,{
-    //     headers: { Authorization: `Bearer ${token}` }
-    //   }
-    // )
-    // .then(res => console.log(res))
   }, [dispatch, id]);
 
   let subTotal = 0;
   let taxFee = 0;
   let shippingFee = 0;
   let discountAmount = 0;
-
-  // for (let i = 0; i < userOrderDetails?.length; i++) {
-  //   totalItem += userOrderDetails[i].qty;
-  // }
 
   return (
     <>
@@ -119,22 +107,26 @@ const OrderDetails = () => {
                           </span>
                           <br />
                           <span className="amount">
-                            Unit Price: &#2547; {order?.product_details?.unit_price}{" "}
+                            Unit Price: &#2547;{" "}
+                            {order?.product_details?.unit_price}{" "}
                           </span>
                           <br />
                           <span>Qty: {order?.qty} </span>
-                          <br/>
-                          <span >Variant: {order.variant}</span>
                           <br />
-                          <Link to={`/addproductreview/${order?.product_id}`}><button className="add_review_btn">Add Review</button></Link>
-                          
+                          <span>Variant: {order.variant}</span>
+                          <br />
+                          <Link to={`/addproductreview/${order?.product_id}`}>
+                            <button className="add_review_btn">
+                              Add Review
+                            </button>
+                          </Link>
                         </td>
                         <td className="col-2 ">
                           <div>
                             Total:
                             <br />{" "}
                             <span>
-                            &#2547; {" "}
+                              &#2547;{" "}
                               {order?.qty * order?.product_details?.unit_price}
                             </span>
                           </div>
@@ -148,7 +140,8 @@ const OrderDetails = () => {
                         <td className="col-1 ">
                           <div className="text-right">
                             <span className="font-weight-bold amount ">
-                              Price: <br />&#2547; {" "}
+                              Price: <br />
+                              &#2547;{" "}
                               {order?.qty * order?.product_details?.unit_price -
                                 order.discount}
                             </span>
@@ -252,7 +245,8 @@ const OrderDetails = () => {
                   <td>
                     <div className="text-right">
                       <span className="font-weight-bold amount ">
-                      &#2547; {subTotal + shippingFee + taxFee - discountAmount}.00
+                        &#2547;{" "}
+                        {subTotal + shippingFee + taxFee - discountAmount}.00
                       </span>
                     </div>
                   </td>

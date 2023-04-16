@@ -100,7 +100,6 @@ const AddProductReview = () => {
             type="submit"
             value="Post Comment"
           />
-          {/* <button type="button" onClick={() => reset()}>Reset</button> */}
         </form>
         <div>
           {reversedReviews &&

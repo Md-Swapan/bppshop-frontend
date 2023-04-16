@@ -6,7 +6,6 @@ import { RatingStar } from "rating-star";
 
 const ProductReview = ({ productDetail }) => {
   const reversedReviews = productDetail?.reviews?.map((_, index, arr) => arr[arr.length - 1 - index]);
-  // console.log(productDetail.reviews);
   return (
     <>
     
@@ -60,33 +59,6 @@ const ProductReview = ({ productDetail }) => {
                     </div>
                   ))}
                 </div>
-
-                {/* <div className="comments-container">
-                  <h2>Leave a Comment</h2>
-                  <form action="">
-                    <div className="input-container">
-                      <div className="input-container-content">
-                        <label htmlFor="">Name</label>
-                        <br />
-                        <input type="text" />
-                      </div>
-                      <div className="input-container-content">
-                        <label htmlFor="">Email</label>
-                        <br />
-                        <input type="email" />
-                      </div>
-                    </div>
-                    <br />
-                    <textarea
-                      name=""
-                      id="textarea"
-                      cols="30"
-                      rows="3"
-                    ></textarea>
-
-                    <button type="submit">Post Comment</button>
-                  </form>
-                </div> */}
               </div>
             </div>
             <div className="col-md-6">
@@ -120,7 +92,7 @@ const ProductReview = ({ productDetail }) => {
                     let userReviewTag = [];
                     let reviewCouter = [0, 0, 0, 0, 0];
                     productDetail?.reviews?.map(
-                      (review) => (reviewCouter[review.rating - 1] += 1)
+                      (review) => (reviewCouter[parseInt(review?.rating) - 1] += 1)
                     );
                     let reviewPercent = 0;
                     for (let i = 0; i < reviewCouter.length; i++) {
