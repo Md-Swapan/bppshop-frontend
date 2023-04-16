@@ -126,7 +126,7 @@ const OrderDetails = () => {
                           <br/>
                           <span >Variant: {order.variant}</span>
                           <br />
-                          <Link to={`/addproductreview/${order?.product_id}`}><button className="add_review_btn">Add Review {order?.product_id}</button></Link>
+                          <Link to={`/addproductreview/${order?.product_id}`}><button className="add_review_btn">Add Review</button></Link>
                           
                         </td>
                         <td className="col-2 ">

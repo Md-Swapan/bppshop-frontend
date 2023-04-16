@@ -3,59 +3,53 @@
   padding: 10px 0px;
   border-top: 1px solid gainsboro;
 }
-
 .customer-qa {
   border-right: 1px solid gainsboro;
   padding-right: 30px;
 }
-
 .review-cart {
-  display: flex;
   border: 1px solid gainsboro;
   padding: 10px 25px;
   border-radius: 10px;
   margin-top: 30px;
 }
-
+.users-content {
+  width: 100%;
+  display: flex;
+}
 .user-img img {
   width: 80px;
 }
-
 .user-qa-header {
+  width: 100%;
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-bottom: 1px solid gainsboro;
   justify-content: space-between;
-  padding: 10px 0px;
+  /* padding: 0px 0px 0px 0px; */
 }
-
 .rating-star {
   color: #ef8341;
 }
-
 .rating-star .last {
   color: #6d6d6d;
 }
-
 .user-qa-header button {
   background: none;
   border: none;
   font-family: "Rajdhani", sans-serif;
   cursor: pointer;
 }
-
 .comments-container {
   border: 1px solid gainsboro;
   padding: 25px;
   border-radius: 10px;
   margin: 20px 0px;
 }
-
 .input-container {
   display: flex;
   margin-top: 20px;
 }
-
 .input-container input {
   width: 100%;
   outline: none;
@@ -64,19 +58,15 @@
   border-radius: 8px;
   gap: 20px;
 }
-
 .input-container-content {
   width: 100%;
 }
-
 .input-container-content:first-child {
   margin-right: 10px;
 }
-
 .input-container-content:last-child {
   margin-left: 10px;
 }
-
 #textarea {
   width: 100%;
   outline: none;
@@ -85,7 +75,6 @@
   border: 1px solid gainsboro;
   color: #6d6d6d;
 }
-
 .comments-container button {
   border: none;
   padding: 12px 30px;
@@ -96,16 +85,24 @@
   font-family: "Rajdhani", sans-serif;
   transition: all 0.2s;
 }
-
 .comments-container button:hover {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
-
 .customer-reviews {
   margin: 0px 30px;
 }
+.customer_comment_reviews::-webkit-scrollbar {
+  display: none;
+}
 
+/* Hide scrollbar for IE, Edge and Firefox */
+.customer_comment_reviews {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  max-height: 450px;
+  overflow-y: scroll;
+}
 .averageRating-container {
   display: flex;
   margin-top: 10px;
@@ -172,7 +169,6 @@
   width: 85%;
 }
 
-
 @media screen and (max-width: 768px) {
   .review-section {
     width: 100%;
@@ -199,7 +195,7 @@
   .input-container-content:first-child {
     margin-right: 0px;
   }
-  
+
   .input-container-content:last-child {
     margin-left: 0px;
   }
@@ -207,7 +203,7 @@
   .customer-reviews {
     margin: 0px;
   }
-  .star-progress{
+  .star-progress {
     display: inline-block;
   }
   .progressbar {
