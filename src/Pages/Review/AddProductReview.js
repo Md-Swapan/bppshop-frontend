@@ -25,11 +25,15 @@ const AddProductReview = () => {
       setProductDetail(res?.data?.data);
     });
   };
-  const reversedReviews = productDetail?.reviews?.map((_, index, arr) => arr[arr.length - 1 - index]);
+
+  //reverse array of reviews
+  const reversedReviews = productDetail?.reviews?.map(
+    (_, index, arr) => arr[arr.length - 1 - index]
+  );
 
   //rating functionality
   const { register, handleSubmit, reset } = useForm();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState("");
   const handleRating = (rate) => {
     setRating(rate);
   };
@@ -49,6 +53,7 @@ const AddProductReview = () => {
           reset();
           setRating(rating);
           getProductsReviewDetails();
+          document.getElementById("errorMsg").innerText = "";
           // toaster
           toast.success(res?.data?.message, {
             duration: 5000,
@@ -60,10 +65,11 @@ const AddProductReview = () => {
               color: "#fff",
             },
           });
-          
-        } else {
-          document.getElementById("errorMsg").innerText = res?.data?.message;
         }
+      })
+      .catch((error) => {
+        document.getElementById("errorMsg").innerText =
+          error.response.data.errors[0].message;
       });
   };
 
@@ -83,7 +89,7 @@ const AddProductReview = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <textarea
-            {...register("comment", { required: true })}
+            {...register("comment")}
             name="comment"
             placeholder="Enter Your Comment"
             id="textarea"
@@ -92,7 +98,7 @@ const AddProductReview = () => {
           ></textarea>
 
           <div>
-            <i id="errorMsg" className="text-danger"></i>
+            <i id="errorMsg" className="text-danger py-2"></i>
           </div>
 
           <input

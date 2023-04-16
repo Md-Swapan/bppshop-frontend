@@ -91,7 +91,7 @@ const ProductReview = ({ productDetail }) => {
                   {(() => {
                     let userReviewTag = [];
                     let reviewCouter = [0, 0, 0, 0, 0];
-                    productDetail?.reviews?.map(
+                    reversedReviews?.map(
                       (review) => (reviewCouter[parseInt(review?.rating) - 1] += 1)
                     );
                     let reviewPercent = 0;
