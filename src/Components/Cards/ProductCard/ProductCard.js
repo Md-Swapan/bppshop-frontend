@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./ProductCard.css";
-import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
-import addedToCartImg from "../../../Assets/Images/icons/addedSucessfuly.png";
+// import addToCartImg from "../../../Assets/Images/icons/addToCart.png";
+// import addedToCartImg from "../../../Assets/Images/icons/addedSucessfuly.png";
 import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
-import Modal from "react-modal";
-import QuickViewModal from "../../QuickViewModal/QuickViewModal";
+// import Modal from "react-modal";
+// import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addItemsToCart,
@@ -16,40 +16,39 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { RatingStar } from "rating-star";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
-const customStyles = {
-  content: {
-    width: "1050px",
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
-    paddingBottom: "20px",
-  },
-};
+// const customStyles = {
+//   content: {
+//     width: "1050px",
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     borderRadius: "10px",
+//     paddingBottom: "20px",
+//   },
+// };
 
 const ProductCard = ({ product }) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // const [modalIsOpen, setIsOpen] = React.useState(false);
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
   const { slug, subSlug, subSubSlug } = useParams();
   const token = localStorage.getItem("token");
 
-  // console.log(product)
   const { id, name, unit_price, colors, discount, current_stock, thumbnail, reviews_count, rating  } = product;
-  const [pid, setPid] = useState(null);
-  const productDetailsView = (pid) => {
-    setPid(pid);
-  };
+  // const [pid, setPid] = useState(null);
+  // const productDetailsView = (pid) => {
+  //   setPid(pid);
+  // };
 
   const newChoiceOption = product?.choice_options?.find((option) => option);
   const [quantity, setQuantity] = useState(1);
@@ -122,9 +121,9 @@ const ProductCard = ({ product }) => {
     const productImageClone = productImage.cloneNode(true);
     document.body.appendChild(productImageClone);
 
-    const cart = document.querySelector(".cart");
-    const cartRect = cart.getBoundingClientRect();
-    const productImageRect = productImage.getBoundingClientRect();
+    // const cart = document.querySelector(".cart");
+    // const cartRect = cart.getBoundingClientRect();
+    // const productImageRect = productImage.getBoundingClientRect();
 
     const animation = productImageClone.animate(
       // [
@@ -241,7 +240,7 @@ const ProductCard = ({ product }) => {
                       <i className="bi bi-cart-plus"></i> Product in Cart
                     </button>
 
-                    <span onClick={() => productDetailsView(id)}>
+                    {/* <span onClick={() => productDetailsView(id)}> */}
                       {/* <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
                       </button>
@@ -259,7 +258,7 @@ const ProductCard = ({ product }) => {
                           <i className="bi bi bi-eye"></i> View Details
                         </button>
                       </Link> */}
-                    </span>
+                    {/* </span> */}
                   </div>
                 ) : (
                   <div className="cardFooterBtn">
@@ -269,7 +268,7 @@ const ProductCard = ({ product }) => {
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
-                    <span onClick={() => productDetailsView(id)}>
+                    {/* <span onClick={() => productDetailsView(id)}> */}
                       {/* <button className="quickViewBtn" onClick={openModal}> */}
                       {/* <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
@@ -289,7 +288,7 @@ const ProductCard = ({ product }) => {
                     <i className="bi bi bi-eye"></i> View Details
                   </button>
                 </Link> */}
-                    </span>
+                    {/* </span> */}
                   </div>
                 )}
               </div>
@@ -320,7 +319,7 @@ const ProductCard = ({ product }) => {
                 <button className="btn_before_add_cart">
                   <i className="bi bi-cart-plus"></i> Stock Out
                 </button>
-                <span onClick={() => productDetailsView(id)}>
+                {/* <span onClick={() => productDetailsView(id)}> */}
                   {/* <button className="quickViewBtn" onClick={openModal}> */}
                   {/* <button onClick={openModal} className="btn_before_add_cart">
                     <i className="bi bi bi-eye"></i>
@@ -331,7 +330,7 @@ const ProductCard = ({ product }) => {
                     <i className="bi bi bi-eye"></i> View Details
                   </button>
                 </Link> */}
-                </span>
+                {/* </span> */}
               </div>
               <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
                 <h3 className="text-center">
@@ -342,7 +341,7 @@ const ProductCard = ({ product }) => {
           )}
         </div>
       </div>
-      <Modal
+      {/* <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
@@ -354,7 +353,7 @@ const ProductCard = ({ product }) => {
         <br />
         <QuickViewModal pid={pid} />
         <br />
-      </Modal>
+      </Modal> */}
     </>
   );
 };
