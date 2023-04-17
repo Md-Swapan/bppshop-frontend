@@ -35,6 +35,9 @@ const ProductDetailsPage = () => {
     });
   }, [id]);
 
+  // console.log(productDetail);
+
+
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);

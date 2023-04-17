@@ -12,7 +12,7 @@ const ProductReview = ({ productDetail }) => {
             <div className="col-md-6">
               <div className="customer-qa">
                 {/* <h2>Customers Q & A</h2> */}
-                <h2>Customer Answers</h2>
+                <h2>Customer Reviews</h2>
                 <div className="customer_comment_reviews">
                   {reversedReviews?.map((review) => (
                     <div key={review.id} className="review-cart">
@@ -21,15 +21,17 @@ const ProductReview = ({ productDetail }) => {
                           <img src="/img/userimg (1).webp" alt="" />
                         </div>
                         <div className="user-qa-header">
+                          <div className="d-flex">
                           <p>
                             <i className="bi bi-person"></i>{" "}
                             {review?.customer?.name}
                           </p>
-                          <p className="mx-2">
+                          <p className="ms-4">
                             <i className="bi bi-clock"></i>{" "}
                             {review?.created_at.slice(0, 10)}
                           </p>
-                          <RatingStar id={review?.id} rating={review?.rating} />
+                          </div>
+                          <RatingStar id={review?.id} rating={review?.rating} size={17}/>
                           {/* <p className="rating-star">
                             {(() => {
                               let userRating = [];
@@ -60,7 +62,7 @@ const ProductReview = ({ productDetail }) => {
             </div>
             <div className="col-md-6">
               <div className="customer-reviews">
-                <h2>Customers Review</h2>
+                <h2>Customers Ratings</h2>
                 <div className="averageRating-container">
                   <h1>{productDetail?.average_review}</h1>
                   <div>
@@ -68,6 +70,7 @@ const ProductReview = ({ productDetail }) => {
                     <RatingStar
                       id={productDetail?.id}
                       rating={productDetail?.average_review}
+
                     />
                     {/* <p className="rating-star">
                       {(() => {

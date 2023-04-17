@@ -5,13 +5,13 @@
 }
 .customer-qa {
   border-right: 1px solid gainsboro;
-  padding-right: 30px;
+  padding-right: 50px;
 }
 .review-cart {
   border: 1px solid gainsboro;
   padding: 10px 25px;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .users-content {
   width: 100%;
@@ -91,6 +91,8 @@
 }
 .customer-reviews {
   margin: 0px 30px;
+  /* border-left: 1px solid gainsboro;
+  padding-left: 40px; */
 }
 .customer_comment_reviews::-webkit-scrollbar {
   display: none;
@@ -100,12 +102,12 @@
 .customer_comment_reviews {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  max-height: 450px;
+  max-height: 350px;
   overflow-y: scroll;
 }
 .averageRating-container {
   display: flex;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .averageRating-container h1 {
@@ -115,7 +117,8 @@
 }
 
 .averageRating-container h2 {
-  margin-top: 15px;
+  font-size: 25px;
+  margin-top: 10px;
   font-weight: 600;
 }
 
@@ -126,7 +129,6 @@
 .star-progress {
   display: flex;
   width: 100%;
-  margin-bottom: 10px;
 }
 
 .star-progress p {

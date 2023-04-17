@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
   const { slug, subSlug, subSubSlug } = useParams();
   const token = localStorage.getItem("token");
 
-  console.log(product)
+  // console.log(product)
   const { id, name, unit_price, colors, discount, current_stock, thumbnail, reviews_count, rating  } = product;
   const [pid, setPid] = useState(null);
   const productDetailsView = (pid) => {

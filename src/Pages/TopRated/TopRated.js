@@ -21,7 +21,7 @@ const TopRated = () => {
       const response = await axios.get(
         `${baseUrl}/products/top-rated?limit=${limit}&offset=${currPage}`
       );
-      console.log(response);
+      // console.log(response);
       response && setLoading(false);
       if (!response.data.products.length) {
         setLastList(true);
