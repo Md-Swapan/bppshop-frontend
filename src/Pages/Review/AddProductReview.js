@@ -133,13 +133,15 @@ const AddProductReview = () => {
                     <img src="/img/userimg (1).webp" alt="" />
                   </div>
                   <div className="user-qa-header">
-                    <p>
+                   <div className="d-flex">
+                   <p>
                       <i className="bi bi-person"></i> {review?.customer?.name}
                     </p>
-                    <p className="mx-2">
+                    <p className="mx-5">
                       <i className="bi bi-clock"></i>{" "}
                       {review?.created_at.slice(0, 10)}
                     </p>
+                   </div>
                     <RatingStar id={review?.id} rating={review?.rating} />
                     {/* <p className="rating-star">
                       {(() => {

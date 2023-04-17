@@ -6,11 +6,15 @@ import defaultProImg from "../../../Assets/Images/defaultImg.jpg";
 import Modal from "react-modal";
 import QuickViewModal from "../../QuickViewModal/QuickViewModal";
 import { useDispatch, useSelector } from "react-redux";
-import {addItemsToCart, addItemsToCartAfterLogin} from "./../../../Redux/Actions/CartAction";
+import {
+  addItemsToCart,
+  addItemsToCartAfterLogin,
+} from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { RatingStar } from "rating-star";
 
 Modal.setAppElement("#root");
 
@@ -30,16 +34,23 @@ const customStyles = {
 
 const ProductCard = ({ product }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {setIsOpen(true)}
-  function closeModal() {setIsOpen(false)}
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const { slug, subSlug, subSubSlug } = useParams();
   const token = localStorage.getItem("token");
 
-  const { id, name, unit_price, colors, discount, current_stock, thumbnail } = product;
+  console.log(product)
+  const { id, name, unit_price, colors, discount, current_stock, thumbnail, reviews_count, rating  } = product;
   const [pid, setPid] = useState(null);
-  const productDetailsView = (pid) => {setPid(pid)};
-  
+  const productDetailsView = (pid) => {
+    setPid(pid);
+  };
+
   const newChoiceOption = product?.choice_options?.find((option) => option);
   const [quantity, setQuantity] = useState(1);
 
@@ -49,19 +60,18 @@ const ProductCard = ({ product }) => {
   const addedItemId = cartItemsId.find((i) => i === id);
 
   const addToCartHandler = (product, quantity) => {
+    //default choise option
+    const choice_options = product.choice_options;
+    const choice_options_name = choice_options.map((option) => option.name);
 
-     //default choise option
-     const choice_options = product.choice_options;
-     const choice_options_name = choice_options.map((option) => option.name);
- 
-     const choice_options_defaultValue = choice_options.map(
-       (option) => option.options[0]
-     );
- 
-     const defaultChoices = choice_options_name.map((name, index) => ({
-       name,
-       options: choice_options_defaultValue[index],
-     }));
+    const choice_options_defaultValue = choice_options.map(
+      (option) => option.options[0]
+    );
+
+    const defaultChoices = choice_options_name.map((name, index) => ({
+      name,
+      options: choice_options_defaultValue[index],
+    }));
 
     dispatch(addItemsToCart(product, quantity, defaultChoices));
 
@@ -79,8 +89,6 @@ const ProductCard = ({ product }) => {
     });
 
     let color = colors?.map((color) => color?.code);
-
-   
 
     const addItemsToCartDataWithColor = {
       id: `${product.id}`,
@@ -136,12 +144,10 @@ const ProductCard = ({ product }) => {
     };
   };
 
-
   const scrollTop = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   };
-  
 
   return (
     <>
@@ -162,50 +168,58 @@ const ProductCard = ({ product }) => {
                   )}
                 </div>
                 <div className="product-card-body-content">
-                  <small>{name.toString().substring(0, 15)}...</small>
-                  <br />
-                  <div className="product-card-body-content-unit-price">
+                  <small>
+                    {name.toString().substring(0, 15)}...
                     {newChoiceOption && (
-                      <span>
-                        {newChoiceOption?.title} : {newChoiceOption?.options[0]}
+                      <span className="unitPrice_view">
+                        {newChoiceOption?.options[0]} : {newChoiceOption?.title}
                       </span>
                     )}
-                    <br />
+                  </small>
+                  {/* <br /> */}
+                  <div className="product-card-body-content-unit-price">
+                    {/* {newChoiceOption && (
+                      <span className="unitPrice_view">
+                        {newChoiceOption?.title} : {newChoiceOption?.options[0]}
+                      </span>
+                    )} */}
+                    {/* <br /> */}
                     {discount ? (
                       <span>
-                        <strong> &#2547; {unit_price - discount} </strong>
+                        <b> &#2547; {unit_price - discount} </b>
                         <del>
-                          <strong className="text-danger ms-3">
+                          <b className="text-danger ms-2">
                             {" "}
                             &#2547; {unit_price}
-                          </strong>
+                          </b>
                         </del>
                       </span>
                     ) : (
-                      <strong> &#2547; {unit_price}</strong>
+                      <b> &#2547; {unit_price}</b>
                     )}
                   </div>
+                  <RatingStar id={id} rating={rating?.map(r => r?.average)} size={14} /> <small>({reviews_count})</small>
                 </div>
                 <Link
-                    to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
-                    addedItemId={addedItemId}
-                  >
-                <div
-                  className="quickView_AddToCart_overlay"
-                  onClick={scrollTop}
+                  to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                  addedItemId={addedItemId}
                 >
-                  <Link
-                    to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
-                    addedItemId={addedItemId}
+                  <div
+                    className="quickView_AddToCart_overlay"
+                    onClick={scrollTop}
                   >
-                    <div className="overlayViewCartBtn">
-                      <span>
-                      <i class="bi bi-eye-fill"></i> <br/> View Details
-                      </span>
-                    </div>
-                  </Link>
-                  
-                  {/* {addedItemId ? (
+                    <Link
+                      to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                      addedItemId={addedItemId}
+                    >
+                      <div className="overlayViewCartBtn">
+                        <span>
+                          <i class="bi bi-eye-fill"></i> <br /> View Details
+                        </span>
+                      </div>
+                    </Link>
+
+                    {/* {addedItemId ? (
                     <div className="overlayAddToCartBtn">
                       <img src={addedToCartImg} alt="" />
                     </div>
@@ -217,7 +231,7 @@ const ProductCard = ({ product }) => {
                       <img src={addToCartImg} alt="" />
                     </div>
                   )} */}
-                </div>
+                  </div>
                 </Link>
               </div>
               <div className="card-footer product-card-footer">
@@ -246,7 +260,6 @@ const ProductCard = ({ product }) => {
                         </button>
                       </Link> */}
                     </span>
-
                   </div>
                 ) : (
                   <div className="cardFooterBtn">
@@ -277,7 +290,6 @@ const ProductCard = ({ product }) => {
                   </button>
                 </Link> */}
                     </span>
-
                   </div>
                 )}
               </div>
