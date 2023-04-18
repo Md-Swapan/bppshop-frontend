@@ -225,13 +225,13 @@ const EditShipping = () => {
 
           <div className="shipping_add_close_btn">
             <div>
-              <Link to="/shipping-details">
+              {/* <Link to="/shipping-details">
                 <input
                   className="shipping_close_btn"
                   type="button"
                   value="Close"
                 />
-              </Link>
+              </Link> */}
               {/* <Link to="/shipping-address">
                 <input
                   className="shipping_close_btn"
