@@ -55,7 +55,6 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadUserOrders())
-
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res.data.data);
       setLoading(false);
