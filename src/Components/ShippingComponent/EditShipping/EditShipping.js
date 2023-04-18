@@ -7,6 +7,7 @@ import MetaData from "../../../Pages/Layout/MetaData";
 import { toast } from "react-hot-toast";
 import { setDefaultShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 import { useDispatch } from "react-redux";
+import { getDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 
 const EditShipping = () => {
   const token = localStorage.getItem("token");
@@ -95,6 +96,7 @@ const EditShipping = () => {
       .then((res) => {
         if (res?.data?.status === "success") {
           dispatch(setDefaultShippingAddress(addressId));
+          dispatch(getDeliveryCharge(district_id));
           navigate("/shipping-details");
 
           // toaster
