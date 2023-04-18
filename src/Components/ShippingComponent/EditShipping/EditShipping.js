@@ -215,7 +215,7 @@ const EditShipping = () => {
                 name="address"
                 className="shipping_address_input"
                 type="text"
-                defaultValue={editAddress.address}
+                defaultValue={editAddress?.address}
               />
             </div>
           </div>
