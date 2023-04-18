@@ -28,10 +28,10 @@ const EditShipping = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setEditAddress(res.data.address);
-        setDistrictId(res.data.address.district_id);
-        setThanaId(res.data.address.upazila_id);
-        setAreaId(res.data.address.area_id);
+        setEditAddress(res?.data?.address);
+        setDistrictId(res?.data?.address?.district_id);
+        setThanaId(res?.data?.address?.upazila_id);
+        setAreaId(res?.data?.address?.area_id);
       });
   }, [editId, token]);
 
@@ -133,7 +133,7 @@ const EditShipping = () => {
                 name="contact_person_name"
                 className="shipping_address_input"
                 type="text"
-                defaultValue={editAddress.contact_person_name}
+                defaultValue={editAddress?.contact_person_name}
               />
             </div>
             <div className="form-group">
@@ -143,7 +143,7 @@ const EditShipping = () => {
                 name="phone"
                 className="shipping_address_input"
                 type="text"
-                defaultValue={editAddress.phone}
+                defaultValue={editAddress?.phone}
               />
             </div>
             <div className="form-group">
@@ -161,8 +161,8 @@ const EditShipping = () => {
                     : "------Select District/City------"}
                 </option>
                 {districtDataOptions?.map((district) => (
-                  <option key={district.id} value={district.id}>
-                    {district.name}
+                  <option key={district?.id} value={district?.id}>
+                    {district?.name}
                   </option>
                 ))}
               </select>
