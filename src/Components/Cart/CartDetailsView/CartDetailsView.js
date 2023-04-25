@@ -75,7 +75,7 @@ const CartDetailsView = () => {
   };
 
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
-    dispatch(SignupRedirectAction(true))
+    dispatch(SignupRedirectAction(true));
 
     const cartDetailsViewSectionOverlay = document.querySelector(
       ".cartDetailsView_section_overlay"
@@ -99,6 +99,8 @@ const CartDetailsView = () => {
       "Please add product in cart first.";
     document.querySelector(".cartEmptyAlert").style.color = "red";
   };
+
+  console.log(cartItems);
 
   return (
     <>
@@ -124,7 +126,15 @@ const CartDetailsView = () => {
                 <div className="cart-content-qty-container">
                   <div className="d-flex justify-content-between">
                     <small>
-                      {item?.product?.name?.toString().substring(0, 20)}...
+                      {item?.product?.name?.toString().substring(0, 17)}...
+                      <span>
+                        {item?.product?.choice_options?.map(
+                          (option) => option.options[0]
+                        )}
+                        {item?.product?.choice_options?.map(
+                          (option) => option.title
+                        )}
+                      </span>
                     </small>
                     <span
                       onClick={() =>
@@ -140,10 +150,11 @@ const CartDetailsView = () => {
                       <div className="d-flex justify-content-center align-items-center">
                         <span>
                           {" "}
-                          &#2547; {item?.product?.unit_price - item?.product?.discount}
+                          &#2547;{" "}
+                          {item?.product?.unit_price - item?.product?.discount}
                         </span>{" "}
                         <del className="text-danger ms-1">
-                        &#2547; {item?.product?.unit_price}
+                          &#2547; {item?.product?.unit_price}
                         </del>
                       </div>
                     ) : (
@@ -181,7 +192,7 @@ const CartDetailsView = () => {
                       </div>
                       {item?.product?.discount > 0 ? (
                         <span className="mx-2 text-end">
-                          &#2547; 
+                          &#2547;
                           {item?.quantity *
                             (item?.product?.unit_price -
                               item?.product?.discount)}
@@ -202,7 +213,7 @@ const CartDetailsView = () => {
           <div className="d-flex justify-content-between">
             <h6>Grand Total: </h6>
             <h6>
-             = &#2547;{" "}
+              = &#2547;{" "}
               {`${cartItems?.reduce(
                 (acc, item) =>
                   acc +

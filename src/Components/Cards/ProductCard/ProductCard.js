@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
   const token = localStorage.getItem("token");
   const location = useLocation();
 
-  console.log(location);
+  // console.log(location);
 
   const {
     id,

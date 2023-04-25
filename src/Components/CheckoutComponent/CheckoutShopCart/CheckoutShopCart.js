@@ -79,13 +79,19 @@ const CheckoutShopCart = () => {
                         <td>
                           {" "}
                           <small>
-                            {item?.product?.name?.toString().substring(0, 15)}
-                            ...
+                            {item?.product?.name?.toString().substring(0, 16)}
+                            ..
+                            
                           </small>
                         </td>
                         <td>
                           {" "}
                           <small>
+                          <small>
+                            {item?.product?.choice_options?.map(
+                              (option) => option.options[0]
+                            )}
+                          </small>
                             {item?.product?.choice_options?.map(
                               (option) => option.title
                             )}
