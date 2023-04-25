@@ -17,7 +17,7 @@ const PageNotFound = () => {
         <br/>
 
         <a href="/">
-        <button>Go Back</button>
+        <button>Back To Home</button>
         </a>
       </div>
     </div> 

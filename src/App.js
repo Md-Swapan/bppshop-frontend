@@ -44,13 +44,14 @@ import AgentPayment from "./Components/CheckoutComponent/AgentPayment/AgentPayme
 import EditShipping from "./Components/ShippingComponent/EditShipping/EditShipping";
 import FlashSale from "./Pages/FlashSale/FlashSale";
 import AddProductReview from "./Pages/Review/AddProductReview";
+import DiscountProductDetails from "./Pages/DiscountProducts/DiscountProductDetails";
+import BestSellingProductDetails from "./Pages/BestSelling/BestSellingProductDetails";
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [allCategory, setAllCategory] = useState([]);
   const token = localStorage.getItem("token");
-  // console.log(token);
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -60,26 +61,13 @@ function App() {
       setAllCategory(res.data.data);
       setLoading(false);
     });
-    // if(token){
-    //   store.dispatch(loadAllShippingAddress());
-    // }
+    
     if (token==="undefined" || token===null || token==="") {
       localStorage.removeItem("token")
     }
   }, [token]);
 
 
-  // const navigate = useNavigate();
-  // const { slug } = useParams();
-  // console.log(slug)
-
-  // useEffect(() => {
-  //   if (slug) {
-  //     navigate("/404", { replace: true });
-  //   }
-  // }, [slug, navigate]);
-
-  
   return (
     <div className="App">
       <Layout>
@@ -94,10 +82,14 @@ function App() {
           <Route path="/brand" element={<Brands/>} />
           <Route path="/brand/:name/:id" element={<BrandsProducts/>} />
           <Route path="/discount-products" element={<DiscountProducts/>} />
+          <Route path="/discount-products/:id" element={<DiscountProductDetails/>} />
           <Route path="/flash-sale" element={<FlashSale/>} />
           <Route path="/best-selling" element={<BestSelling/>} />
+          <Route path="/best-selling/:id" element={<BestSellingProductDetails/>} />
           <Route path="/new-arrival" element={<NewArrival/>} />
+          {/* <Route path="/new-arrival/:id" element={<DiscountProductDetails/>} /> */}
           <Route path="/top-rated" element={<TopRated/>} />
+          {/* <Route path="/top-rated/:id" element={<DiscountProductDetails/>} /> */}
           <Route path="/addproductreview/:pid" element={<AddProductReview/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         

@@ -11,7 +11,7 @@ import {
   addItemsToCartAfterLogin,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { RatingStar } from "rating-star";
@@ -43,8 +43,21 @@ const ProductCard = ({ product }) => {
 
   const { slug, subSlug, subSubSlug } = useParams();
   const token = localStorage.getItem("token");
+  const location = useLocation();
 
-  const { id, name, unit_price, colors, discount, current_stock, thumbnail, reviews_count, rating  } = product;
+  console.log(location);
+
+  const {
+    id,
+    name,
+    unit_price,
+    colors,
+    discount,
+    current_stock,
+    thumbnail,
+    reviews_count,
+    rating,
+  } = product;
   // const [pid, setPid] = useState(null);
   // const productDetailsView = (pid) => {
   //   setPid(pid);
@@ -197,41 +210,57 @@ const ProductCard = ({ product }) => {
                       <b> &#2547; {unit_price}</b>
                     )}
                   </div>
-                  <RatingStar id={id} rating={rating?.map(r => r?.average)} size={14} /> <small>({reviews_count})</small>
+                  <RatingStar
+                    id={id}
+                    rating={rating?.map((r) => r?.average)}
+                    size={14}
+                  />{" "}
+                  <small>({reviews_count})</small>
                 </div>
+
                 <Link
-                  to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                  to={
+                    (`/${slug}/${subSlug}/${subSubSlug}/${id}`)
+                  }
+                  // to={
+                  //   (location.pathname = "discount-products"
+                  //     ? `/discount-products/${id}`
+                  //     : location.pathname = "best-selling"
+                  //     ? `/best-selling/${id}`
+                  //     : `/${slug}/${subSlug}/${subSubSlug}/${id}`)
+                  // }
                   addedItemId={addedItemId}
                 >
                   <div
                     className="quickView_AddToCart_overlay"
                     onClick={scrollTop}
                   >
-                    <Link
-                      to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
-                      addedItemId={addedItemId}
-                    >
-                      <div className="overlayViewCartBtn">
-                        <span>
-                          <i class="bi bi-eye-fill"></i> <br /> View Details
-                        </span>
-                      </div>
-                    </Link>
-
-                    {/* {addedItemId ? (
-                    <div className="overlayAddToCartBtn">
-                      <img src={addedToCartImg} alt="" />
+                    <div className="overlayViewCartBtn">
+                      <span>
+                        <i class="bi bi-eye-fill"></i> <br /> View Details
+                      </span>
                     </div>
-                  ) : (
-                    <div
-                      onClick={() => addToCartHandler(product, quantity)}
-                      className="overlayAddToCartBtn"
-                    >
-                      <img src={addToCartImg} alt="" />
-                    </div>
-                  )} */}
                   </div>
                 </Link>
+                {/* <Link
+                  to={
+                    (location.pathname = "/best-selling"
+                      ? `/best-selling/${id}`
+                      : `/${slug}/${subSlug}/${subSubSlug}/${id}`)
+                  }
+                  addedItemId={addedItemId}
+                >
+                  <div
+                    className="quickView_AddToCart_overlay"
+                    onClick={scrollTop}
+                  >
+                    <div className="overlayViewCartBtn">
+                      <span>
+                        <i class="bi bi-eye-fill"></i> <br /> View Details
+                      </span>
+                    </div>
+                  </div>
+                </Link> */}
               </div>
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
@@ -241,7 +270,7 @@ const ProductCard = ({ product }) => {
                     </button>
 
                     {/* <span onClick={() => productDetailsView(id)}> */}
-                      {/* <button onClick={openModal} className="quickViewBtn">
+                    {/* <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
                       </button>
                       <Link
@@ -253,7 +282,7 @@ const ProductCard = ({ product }) => {
                         </button>
                       </Link> */}
 
-                      {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                         <button className="quickViewBtn">
                           <i className="bi bi bi-eye"></i> View Details
                         </button>
@@ -269,12 +298,12 @@ const ProductCard = ({ product }) => {
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
                     {/* <span onClick={() => productDetailsView(id)}> */}
-                      {/* <button className="quickViewBtn" onClick={openModal}> */}
-                      {/* <button onClick={openModal} className="quickViewBtn">
+                    {/* <button className="quickViewBtn" onClick={openModal}> */}
+                    {/* <button onClick={openModal} className="quickViewBtn">
                         <i className="bi bi bi-eye"></i>
                       </button> */}
 
-                      {/* <Link
+                    {/* <Link
                         to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
                         addedItemId={addedItemId}
                       >
@@ -283,7 +312,7 @@ const ProductCard = ({ product }) => {
                         </button>
                       </Link> */}
 
-                      {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
                     <i className="bi bi bi-eye"></i> View Details
                   </button>
@@ -320,12 +349,12 @@ const ProductCard = ({ product }) => {
                   <i className="bi bi-cart-plus"></i> Stock Out
                 </button>
                 {/* <span onClick={() => productDetailsView(id)}> */}
-                  {/* <button className="quickViewBtn" onClick={openModal}> */}
-                  {/* <button onClick={openModal} className="btn_before_add_cart">
+                {/* <button className="quickViewBtn" onClick={openModal}> */}
+                {/* <button onClick={openModal} className="btn_before_add_cart">
                     <i className="bi bi bi-eye"></i>
                   </button> */}
 
-                  {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
+                {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
                   <button className="quickViewBtn">
                     <i className="bi bi bi-eye"></i> View Details
                   </button>

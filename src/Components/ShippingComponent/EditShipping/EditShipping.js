@@ -113,6 +113,13 @@ const EditShipping = () => {
         }
       });
   };
+
+  const handleNavigateToShippingAddressList = () => {
+    navigate("/shipping-address");
+    window.location.reload(true);
+  };
+
+
   return (
     <>
       <MetaData title="Edit-New-Delivery-Address - BPPShop" />
@@ -223,13 +230,14 @@ const EditShipping = () => {
 
           <div className="shipping_add_close_btn">
             <div>
-              <Link to="/shipping-address">
+              {/* <Link to="/shipping-address"> */}
                 <input
                   className="shipping_close_btn"
                   type="button"
                   value="Close"
+                  onClick={handleNavigateToShippingAddressList}
                 />
-              </Link>
+              {/* </Link> */}
             </div>
             <div>
               <input

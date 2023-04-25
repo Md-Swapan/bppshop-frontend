@@ -3,7 +3,9 @@ import "./ProductReview.css";
 import { RatingStar } from "rating-star";
 
 const ProductReview = ({ productDetail }) => {
-  const reversedReviews = productDetail?.reviews?.map((_, index, arr) => arr[arr.length - 1 - index]);
+  const reversedReviews = productDetail?.reviews?.map(
+    (_, index, arr) => arr[arr.length - 1 - index]
+  );
   return (
     <>
       <div className="review-section">
@@ -13,26 +15,31 @@ const ProductReview = ({ productDetail }) => {
               <div className="customer-qa">
                 {/* <h2>Customers Q & A</h2> */}
                 <h2>Customer Reviews</h2>
-                <div className="customer_comment_reviews">
-                  {reversedReviews?.map((review) => (
-                    <div key={review.id} className="review-cart">
-                      <div className="users-content">
-                        <div className="user-img">
-                          <img src="/img/userimg (1).webp" alt="" />
-                        </div>
-                        <div className="user-qa-header">
-                          <div className="d-flex">
-                          <p>
-                            <i className="bi bi-person"></i>{" "}
-                            {review?.customer?.name}
-                          </p>
-                          <p className="ms-4">
-                            <i className="bi bi-clock"></i>{" "}
-                            {review?.created_at.slice(0, 10)}
-                          </p>
+                {productDetail?.average_review > 0 ? (
+                  <div className="customer_comment_reviews">
+                    {reversedReviews?.map((review) => (
+                      <div key={review.id} className="review-cart">
+                        <div className="users-content">
+                          <div className="user-img">
+                            <img src="/img/userimg (1).webp" alt="" />
                           </div>
-                          <RatingStar id={review?.id} rating={review?.rating} size={17}/>
-                          {/* <p className="rating-star">
+                          <div className="user-qa-header">
+                            <div className="d-flex">
+                              <p>
+                                <i className="bi bi-person"></i>{" "}
+                                {review?.customer?.name}
+                              </p>
+                              <p className="ms-4">
+                                <i className="bi bi-clock"></i>{" "}
+                                {review?.created_at.slice(0, 10)}
+                              </p>
+                            </div>
+                            <RatingStar
+                              id={review?.id}
+                              rating={review?.rating}
+                              size={17}
+                            />
+                            {/* <p className="rating-star">
                             {(() => {
                               let userRating = [];
                               for (let i = 1; i <= review.rating; i++) {
@@ -49,15 +56,20 @@ const ProductReview = ({ productDetail }) => {
                               return userRating;
                             })()}
                           </p> */}
-                          {/* <button>
+                            {/* <button>
                           <i className="bi bi-arrow-90deg-left"></i> Replay
                         </button> */}
+                          </div>
                         </div>
-                      </div>
                         <small>{review?.comment}</small>
-                    </div>
-                  ))}
-                </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mt-5 d-flex justify-content-center">
+                    <h5>No Reviews Yet.</h5>
+                  </div>
+                )}
               </div>
             </div>
             <div className="col-md-6">
@@ -70,7 +82,6 @@ const ProductReview = ({ productDetail }) => {
                     <RatingStar
                       id={productDetail?.id}
                       rating={productDetail?.average_review}
-
                     />
                     {/* <p className="rating-star">
                       {(() => {
@@ -95,7 +106,8 @@ const ProductReview = ({ productDetail }) => {
                     let userReviewTag = [];
                     let reviewCouter = [0, 0, 0, 0, 0];
                     reversedReviews?.map(
-                      (review) => (reviewCouter[parseInt(review?.rating) - 1] += 1)
+                      (review) =>
+                        (reviewCouter[parseInt(review?.rating) - 1] += 1)
                     );
                     let reviewPercent = 0;
                     for (let i = 0; i < reviewCouter.length; i++) {
