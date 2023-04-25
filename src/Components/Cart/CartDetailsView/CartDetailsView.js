@@ -100,7 +100,7 @@ const CartDetailsView = () => {
     document.querySelector(".cartEmptyAlert").style.color = "red";
   };
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   return (
     <>
