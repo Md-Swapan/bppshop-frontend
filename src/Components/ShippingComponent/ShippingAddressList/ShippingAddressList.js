@@ -20,9 +20,11 @@ const ShippingAddressList = () => {
   }, [dispatch]);
 
   const { allShippingAddressInfo } = useSelector(
-    (state) => state.allShippingInfo
+    (state) => state?.allShippingInfo
   );
-  const { shippingAddressInfo } = useSelector((state) => state.shippingInfo);
+  console.log(allShippingAddressInfo);
+  const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
+  // console.log(shippingAddressInfo);
 
   const handleSetDefaultAddress = (address_id) => {
     const addressId = {
@@ -51,7 +53,7 @@ const ShippingAddressList = () => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(loadAllShippingAddress());
-          toast.success(res.data.message, {
+          toast.success(res?.data?.message, {
             duration: 5000,
 
             style: {
@@ -134,8 +136,8 @@ const ShippingAddressList = () => {
                         <span
                           onClick={() =>
                             handleDeleteAddress(
-                              shippingAddInfo.id,
-                              shippingAddInfo.customer_id
+                              shippingAddInfo?.id,
+                              shippingAddInfo?.customer_id
                             )
                           }
                           className="change_text ms-2"
