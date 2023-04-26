@@ -86,24 +86,22 @@ function App() {
           <Route path="/best-selling" element={<BestSelling/>} />
           <Route path="/best-selling/:id" element={<BestSellingProductDetails/>} />
           <Route path="/new-arrival" element={<NewArrival/>} />
-          {/* <Route path="/new-arrival/:id" element={<DiscountProductDetails/>} /> */}
+          <Route path="/new-arrival/:id" element={<DiscountProductDetails/>} />
           <Route path="/top-rated" element={<TopRated/>} />
-          {/* <Route path="/top-rated/:id" element={<DiscountProductDetails/>} /> */}
+          <Route path="/top-rated/:id" element={<DiscountProductDetails/>} />
           <Route path="/addproductreview/:pid" element={<AddProductReview/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         
-          <Route path="/shipping-details" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>
+          <Route path="/shipping-address" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>
               <Route index element={<ShippingHome/>}></Route>
               <Route path="checkout-shop-cart" element={<CheckoutShopCart/>}></Route>
               <Route path="checkout-payment" element={<CheckoutPayment/>}></Route>
               <Route path="agent-payment" element={<AgentPayment/>}></Route>
           </Route>
           <Route path="/checkout-complete" element={<ProtectedRoute><CheckoutComplete /></ProtectedRoute>}/>
-
-      
           <Route path="/add-shipping-address" element={<ProtectedRoute><AddShipping/></ProtectedRoute>}/>
           <Route path="/edit-shipping-address/:editId" element={<ProtectedRoute><EditShipping/></ProtectedRoute>}/>
-          <Route path="/shipping-address" element={<ProtectedRoute><ShippingAddressList/></ProtectedRoute>}/>
+          <Route path="/choose-shipping-address" element={<ProtectedRoute><ShippingAddressList/></ProtectedRoute>}/>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
             <Route index element={<ProfileHome />}></Route>
             <Route path="orders" element={<OrderHome />}></Route>

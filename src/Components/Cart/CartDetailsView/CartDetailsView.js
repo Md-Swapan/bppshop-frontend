@@ -229,7 +229,7 @@ const CartDetailsView = () => {
               Place Order
             </button>
           ) : (
-            <Link to="shipping-details">
+            <Link to="/shipping-address">
               <button onClick={CartDetailsCloseHandlerAfterPlaceOrder} type="">
                 Place Order
               </button>

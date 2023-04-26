@@ -251,7 +251,7 @@ const CheckoutPayment = () => {
 
         <div className="payment_bottom_Btn">
           <div className="d-flex">
-            <Link to="/shipping-details">
+            <Link to="/shipping-address">
               <button className="back_to_shipping">Back to Shipping</button>
             </Link>
 

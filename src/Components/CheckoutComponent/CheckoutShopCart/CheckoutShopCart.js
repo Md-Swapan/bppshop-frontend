@@ -59,6 +59,7 @@ const CheckoutShopCart = () => {
                     <th className="font-weight-bold">Unit price</th>
                     <th className="font-weight-bold">Qty</th>
                     <th className="font-weight-bold">Price</th>
+                    {/* <th className="font-weight-bold">Action</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -100,36 +101,36 @@ const CheckoutShopCart = () => {
                         <td>
                           {" "}
                           {item?.product?.discount > 0 ? (
-                            <div style={{ fontSize: "11px" }}>
+                            <div >
                               {" "}
-                              <span className="m-1">
+                              <small className="m-1">
                                 &#2547;{" "}
                                 {item?.product?.unit_price -
                                   item?.product?.discount}
-                              </span>
-                              <span className="m-1">
+                              </small>
+                              <small className="m-1">
                                 <del>&#2547; {item?.product?.unit_price}</del>
-                              </span>
+                              </small>
                             </div>
                           ) : (
-                            <span>&#2547; {item?.product?.unit_price}</span>
+                            <small>&#2547; {item?.product?.unit_price}</small>
                           )}
                         </td>
                         <td>
                           {" "}
                           <div className="quantity-set">
-                            <span
+                            <small
                               onClick={() =>
                                 decreaseQuantity(item?.product, item?.quantity)
                               }
                               className="shopCartMinusBtn"
                             >
                               -
-                            </span>
-                            <span className="qtyCount-number">
+                            </small>
+                            <small className="qtyCount-number">
                               {item?.quantity}
-                            </span>
-                            <span
+                            </small>
+                            <small
                               onClick={() =>
                                 increaseQuantity(
                                   item?.product,
@@ -140,22 +141,22 @@ const CheckoutShopCart = () => {
                               className="shopCartPlusBtn"
                             >
                               +
-                            </span>
+                            </small>
                           </div>
                         </td>
                         <td>
                           {item?.product?.discount > 0 ? (
-                            <span className="mx-2">
-                              Total :&#2547;
+                            <small className="mx-2">
+                              Total : &#2547;
                               {item?.quantity *
                                 (item?.product?.unit_price -
                                   item?.product?.discount)}
-                            </span>
+                            </small>
                           ) : (
-                            <span className="mx-2">
-                              Total :&#2547;{" "}
+                            <small className="mx-2">
+                              Total : &#2547;{" "}
                               {item?.quantity * item?.product?.unit_price}
-                            </span>
+                            </small>
                           )}
                         </td>
                         <td>

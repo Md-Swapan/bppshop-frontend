@@ -10,7 +10,7 @@ const ShippingHome = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
 
   const changeShippingInfo = () => {
-    navigate("/shipping-address");
+    navigate("/choose-shipping-address");
     window.location.reload(true);
   };
 
@@ -59,7 +59,7 @@ const ShippingHome = () => {
             </div>
           </div>
         ) : (
-          <Link to="/shipping-address">
+          <Link to="/choose-shipping-address">
             <button className="add_shipping_address_btn">
               <i className="bi bi-plus"></i> Choose Delivery Address
             </button>
@@ -68,13 +68,13 @@ const ShippingHome = () => {
       </div>
       <div className="shop_payment_btn_content">
         <div className="shop_payment_btn">
-          <Link to="/shipping-details/checkout-shop-cart">
+          <Link to="/shipping-address/checkout-shop-cart">
             <div className="shop_cart_btn">
               <i className="bi bi-chevron-left"></i> Shopping cart
             </div>
           </Link>
           {shippingAddressInfo?.data?.is_billing === "1" ? (
-            <Link to="/shipping-details/checkout-payment">
+            <Link to="/shipping-address/checkout-payment">
               <div className="proceed_payment_btn">
                 Proceed payment <i className="bi bi-chevron-right"></i>
               </div>

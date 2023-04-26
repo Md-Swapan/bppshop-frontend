@@ -11,6 +11,7 @@ import axios from "axios";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { toast } from "react-hot-toast";
 
+
 const ShippingAddressList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,9 +23,8 @@ const ShippingAddressList = () => {
   const { allShippingAddressInfo } = useSelector(
     (state) => state?.allShippingInfo
   );
-  console.log(allShippingAddressInfo);
+
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
-  // console.log(shippingAddressInfo);
 
   const handleSetDefaultAddress = (address_id) => {
     const addressId = {
@@ -34,7 +34,7 @@ const ShippingAddressList = () => {
     dispatch(setDefaultShippingAddress(addressId));
 
     if (shippingAddressInfo?.status === "success") {
-      navigate("/shipping-details");
+      navigate("/shipping-address");
     }
   };
 
@@ -69,9 +69,10 @@ const ShippingAddressList = () => {
   };
 
   const handleNavigateToShippingDetails = () => {
-    navigate("/shipping-details");
+    navigate("/shipping-address");
     window.location.reload(true);
   };
+
   return (
     <>
       <MetaData title="Choose-Default-Delivery-Address - BPPShop" />

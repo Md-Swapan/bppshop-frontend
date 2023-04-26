@@ -60,7 +60,7 @@ const AddShipping = () => {
     dispatch(addShippingAddress(newData));
     dispatch(getDeliveryCharge(district_id));
     if (shippingAddressInfo?.status === "success") {
-      navigate("/shipping-details");
+      navigate("/shipping-address");
     }
   };
 
@@ -170,7 +170,7 @@ const AddShipping = () => {
 
           <div className="shipping_add_close_btn">
             <div>
-              <Link to="/shipping-details">
+              <Link to="/choose-shipping-address">
                 <input
                   className="shipping_close_btn"
                   type="button"

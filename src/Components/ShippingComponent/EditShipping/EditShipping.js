@@ -97,7 +97,7 @@ const EditShipping = () => {
         if (res?.data?.status === "success") {
           dispatch(setDefaultShippingAddress(addressId));
           dispatch(getDeliveryCharge(district_id));
-          navigate("/shipping-details");
+          navigate("/shipping-address");
 
           // toaster
           toast.success(res?.data?.message, {
