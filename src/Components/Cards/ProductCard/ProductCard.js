@@ -242,25 +242,7 @@ const ProductCard = ({ product }) => {
                     </div>
                   </div>
                 </Link>
-                {/* <Link
-                  to={
-                    (location.pathname = "/best-selling"
-                      ? `/best-selling/${id}`
-                      : `/${slug}/${subSlug}/${subSubSlug}/${id}`)
-                  }
-                  addedItemId={addedItemId}
-                >
-                  <div
-                    className="quickView_AddToCart_overlay"
-                    onClick={scrollTop}
-                  >
-                    <div className="overlayViewCartBtn">
-                      <span>
-                        <i class="bi bi-eye-fill"></i> <br /> View Details
-                      </span>
-                    </div>
-                  </div>
-                </Link> */}
+              
               </div>
               <div className="card-footer product-card-footer">
                 {addedItemId ? (
