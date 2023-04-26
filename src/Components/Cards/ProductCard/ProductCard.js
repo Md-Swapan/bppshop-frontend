@@ -219,16 +219,16 @@ const ProductCard = ({ product }) => {
                 </div>
 
                 <Link
-                  // to={
-                  //   (`/${slug}/${subSlug}/${subSubSlug}/${id}`)
-                  // }
                   to={
-                    (location.pathname = "discount-products"
-                      ? `/discount-products/${id}`
-                      : location.pathname = "best-selling"
-                      ? `/best-selling/${id}`
-                      : `/${slug}/${subSlug}/${subSubSlug}/${id}`)
+                    (`/${slug}/${subSlug}/${subSubSlug}/${id}`)
                   }
+                  // to={
+                  //   (location.pathname = "discount-products"
+                  //     ? `/discount-products/${id}`
+                  //     : location.pathname = "best-selling"
+                  //     ? `/best-selling/${id}`
+                  //     : `/${slug}/${subSlug}/${subSubSlug}/${id}`)
+                  // }
                   addedItemId={addedItemId}
                 >
                   <div
