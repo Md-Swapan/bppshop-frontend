@@ -7,7 +7,6 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 import MetaData from "./../Layout/MetaData";
-import addToCartGif from "../../Assets/Images/addtocart.gif";
 
 const Product = ({ allCategory, isLoading }) => {
   const { slug, subSlug, subSubSlug } = useParams();

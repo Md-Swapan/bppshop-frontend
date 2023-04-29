@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 import { useRef } from "react";
+import TopRatedProductCard from "./TopRatedProductCard";
 
 const TopRated = () => {
   const [topRatedProduct, setTopRatedProduct] = useState([]);
@@ -70,7 +70,7 @@ const TopRated = () => {
               </>
             ) : (
               topRatedProduct?.map((product) => (
-                <ProductCard key={product?.id} product={product} />
+                <TopRatedProductCard key={product?.id} product={product} />
               ))
             )}
           </SkeletonTheme>

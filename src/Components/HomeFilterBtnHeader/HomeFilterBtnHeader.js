@@ -8,7 +8,7 @@ const HomeFilterBtnHeader = () => {
       <div className="homeFilterBtnHeader-container-section">
         <div className="header_btn">
           <div>
-            <Link to="/brand">
+            <Link to="/brands">
               <button>Brand</button>
             </Link>
           </div>

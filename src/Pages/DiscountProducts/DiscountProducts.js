@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
+import DiscountProductCard from "./DiscountProductCard";
 
 const DiscountProducts = () => {
   //onscrool paginations
@@ -69,7 +69,7 @@ const DiscountProducts = () => {
             </>
           ) : (
             discountProduct.map((product) => (
-              <ProductCard key={product?.id} product={product} />
+              <DiscountProductCard key={product?.id} product={product} />
             ))
           )}
         </SkeletonTheme>

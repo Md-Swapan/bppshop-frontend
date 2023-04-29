@@ -16,7 +16,7 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
 
-const BestSellingProductDetails = () => {
+const NewArrivalProductDetails = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
   let newId = parseInt(id);
   const [productDetail, setProductDetail] = useState([]);
@@ -273,11 +273,11 @@ const BestSellingProductDetails = () => {
 
   return (
     <>
-    <h4>Best Selling Products:</h4>
+    <h4>New Arrival Products:</h4>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item" aria-current="page">
-            <Link to="/best-selling">Best Selling Products</Link>
+            <Link to="/new-arrival">New Arrival Products</Link>
           </li>
          
           <li className="breadcrumb-item active" aria-current="page">
@@ -563,4 +563,4 @@ const BestSellingProductDetails = () => {
     </>
   );
 };
-export default BestSellingProductDetails;
+export default NewArrivalProductDetails;

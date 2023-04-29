@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import "./ProductDetailsPage.css";
 import { useParams } from "react-router-dom";
 import { baseUrl, imgBaseUrl } from "./../../BaseUrl/BaseUrl";
@@ -16,9 +16,16 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
 
-const BestSellingProductDetails = () => {
-  const { slug, subSlug, subSubSlug, id } = useParams();
+const BrandProductDetails = () => {
+  const { brandId, name, id } = useParams();
+
+  const location = useLocation()
+
+  const newLocation = location.pathname.split("/")
+  const brandName = newLocation[2];
+
   let newId = parseInt(id);
+
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -35,7 +42,6 @@ const BestSellingProductDetails = () => {
     });
   }, [id]);
 
-  // console.log(productDetail);
 
 
   const cartItemsId = cartItems.map((i) => i?.product?.id);
@@ -49,10 +55,12 @@ const BestSellingProductDetails = () => {
   );
   const colors = productDetail?.colors?.map((color) => color?.code);
 
+
   //default choice option..............................
   const defaultOptionName = productDetail?.choice_options?.map(
     (list) => list?.name
   );
+
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const choices = defaultOptionName?.map((name, index) => ({
     name,
@@ -102,6 +110,7 @@ const BestSellingProductDetails = () => {
         },
       });
     }
+    
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
@@ -273,11 +282,14 @@ const BestSellingProductDetails = () => {
 
   return (
     <>
-    <h4>Best Selling Products:</h4>
+    <h4>Brand Products:</h4>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item" aria-current="page">
-            <Link to="/best-selling">Best Selling Products</Link>
+            <Link to="/brands">Brands</Link>
+          </li>
+          <li className="breadcrumb-item" aria-current="page">
+            <Link to={`/brands/${brandName}/${brandId}`}>{name} Products</Link>
           </li>
          
           <li className="breadcrumb-item active" aria-current="page">
@@ -563,4 +575,4 @@ const BestSellingProductDetails = () => {
     </>
   );
 };
-export default BestSellingProductDetails;
+export default BrandProductDetails;

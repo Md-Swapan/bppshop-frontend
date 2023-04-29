@@ -91,7 +91,7 @@ const Brands = () => {
           ) : (
             brands &&
             brands?.map((brand, index) => (
-              <Link key={brand?.id} to={`/brand/${brand?.name}/${brand?.id}`}>
+              <Link key={brand?.id} to={`/brands/${brand?.name}/${brand?.id}`}>
                 <div className="brand_content">
                   <img
                     src={`https://backend.bppshop.com.bd/storage/brand/${brand?.image}`}

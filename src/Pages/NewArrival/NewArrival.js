@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 import { useRef } from "react";
+import NewArrivalProductCard from "./NewArrivalProductCard";
 
 const NewArrival = () => {
     const [newArrivalProduct, setNewArrivalProduct] = useState([]);
@@ -71,7 +71,7 @@ const NewArrival = () => {
               </>
             ) : (
               newArrivalProduct?.map((product) => (
-                <ProductCard key={product?.id} product={product} />
+                <NewArrivalProductCard key={product?.id} product={product} />
               ))
             )}
           </SkeletonTheme>

@@ -46,6 +46,9 @@ import FlashSale from "./Pages/FlashSale/FlashSale";
 import AddProductReview from "./Pages/Review/AddProductReview";
 import DiscountProductDetails from "./Pages/DiscountProducts/DiscountProductDetails";
 import BestSellingProductDetails from "./Pages/BestSelling/BestSellingProductDetails";
+import NewArrivalProductDetails from "./Pages/NewArrival/NewArrivalProductDetails";
+import TopRatedProductDetails from "./Pages/TopRated/TopRatedProductDetails";
+import BrandProductDetails from "./Pages/Brand/BrandProductDetails";
 
 
 function App() {
@@ -78,17 +81,18 @@ function App() {
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
           <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
           <Route path="/search" element={<Search/>} />
-          <Route path="/brand" element={<Brands/>} />
-          <Route path="/brand/:name/:id" element={<BrandsProducts/>} />
+          <Route path="/brands" element={<Brands/>} />
+          <Route path="/brands/:brandName/:brandId" element={<BrandsProducts/>} />
+          <Route path="/brand/:name/:brandId/:id" element={<BrandProductDetails/>} />
           <Route path="/discount-products" element={<DiscountProducts/>} />
           <Route path="/discount-products/:id" element={<DiscountProductDetails/>} />
           <Route path="/flash-sale" element={<FlashSale/>} />
           <Route path="/best-selling" element={<BestSelling/>} />
           <Route path="/best-selling/:id" element={<BestSellingProductDetails/>} />
           <Route path="/new-arrival" element={<NewArrival/>} />
-          <Route path="/new-arrival/:id" element={<DiscountProductDetails/>} />
+          <Route path="/new-arrival/:id" element={<NewArrivalProductDetails/>} />
           <Route path="/top-rated" element={<TopRated/>} />
-          <Route path="/top-rated/:id" element={<DiscountProductDetails/>} />
+          <Route path="/top-rated/:id" element={<TopRatedProductDetails/>} />
           <Route path="/addproductreview/:pid" element={<AddProductReview/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         

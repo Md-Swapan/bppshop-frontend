@@ -3,26 +3,37 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { baseUrl, imgThumbnailBaseUrl } from "./../../../BaseUrl/BaseUrl";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./BrandsProducts.css";
-import ProductCard from "./../../../Components/Cards/ProductCard/ProductCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import BrandsProductsCard from "../BrandsProductsCard";
 
 const BrandsProducts = () => {
-  const { id, name } = useParams();
+  const { brandId, brandName } = useParams();
   const [brandProducts, setBrandProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/brands/products/${id}`)
+      .get(`${baseUrl}/brands/products/${brandId}`)
       .then((res) => setBrandProducts(res?.data.data));
     setLoading(false);
-  }, [id]);
+  }, [brandId]);
 
   return (
     <>
-      <h4>{name} Products :</h4>
+      <h4>{brandName} Products :</h4>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb my-4">
+          <li className="breadcrumb-item" aria-current="page">
+            <Link to="/brands">Brands </Link>
+          </li>
+         
+          <li className="breadcrumb-item active" aria-current="page">
+          {brandName} Products
+          </li>
+        </ol>
+      </nav>
       <div className="product-container mt-4">
         {/* <div className="product-content"> */}
         <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
@@ -41,7 +52,7 @@ const BrandsProducts = () => {
             </>
           ) : (
             brandProducts.map((product) => (
-              <ProductCard key={product?.id} product={product} />
+              <BrandsProductsCard key={product?.id} product={product}/>
             ))
           )}
         </SkeletonTheme>
