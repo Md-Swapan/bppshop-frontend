@@ -213,7 +213,8 @@ const ProductCard = ({ product }) => {
                   <RatingStar
                     id={id}
                     rating={rating?.map((r) => r?.average)}
-                    size={14}
+                    size={11}
+                    className="RatingStar"
                   />{" "}
                   <small>({reviews_count})</small>
                 </div>

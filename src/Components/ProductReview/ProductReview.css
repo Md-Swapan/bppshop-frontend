@@ -122,6 +122,10 @@
   font-weight: 600;
 }
 
+.ingakr {
+  padding: 0px !important;
+}
+
 .star-progress-container {
   margin-top: 20px;
 }

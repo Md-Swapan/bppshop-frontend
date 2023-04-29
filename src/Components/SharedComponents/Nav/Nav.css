@@ -46,9 +46,9 @@
 .search {
   width: 100%;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 7px;
   border: none;
-  padding: 8px 28px 8px 15px;
+  padding: 8px 30px 8px 15px;
   font-size: 14px;
   font-family: "Space Grotesk", sans-serif;
   outline: none;
@@ -59,7 +59,7 @@
 
 .searchIcon {
   position: absolute;
-  margin-left: -25px;
+  margin-left: -28px;
   margin-top: 8px;
   cursor: pointer;
 }

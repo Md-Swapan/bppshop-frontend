@@ -232,7 +232,7 @@ const CheckoutShopCart = () => {
                   Checkout <i className="bi bi-chevron-right"></i>
                 </button>
               ) : (
-                <Link to="/shipping-details">
+                <Link to="/shipping-address">
                   <button className="proceed_payment_btn">
                     Checkout <i className="bi bi-chevron-right"></i>
                   </button>

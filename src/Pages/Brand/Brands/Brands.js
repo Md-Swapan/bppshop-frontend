@@ -64,7 +64,7 @@ const Brands = () => {
         onScroll={onScroll}
         ref={listInnerRef}
         style={{ height: "100vh", overflowY: "auto" }}
-        className="brand_container mt-4"
+        className="brand_container mt-4 pb-5"
       >
         <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
           {loading ? (

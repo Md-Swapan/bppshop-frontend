@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
       <div onClick={searchSuggestionCloseHandler}>
         <HomeFilterBtnHeader />
         {/* <main className="layout_container" onClick={sidebarCloseGlobalHandler}>{children}</main> */}
-        <main className="layout_container">{children}</main>
+        <main className="layout_container ">{children}</main>
         <CartDetailsView />
         <Cart />
         <Footer />

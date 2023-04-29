@@ -9,9 +9,7 @@
   border-radius: 5px;
   text-align: center;
   font-family: "Poppins", sans-serif;
-  /* overflow: hidden; */
   border: 3px solid rgb(231, 85, 0);
-  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .cart i {
@@ -54,9 +52,6 @@
   }
 }
 @media only screen and (max-width: 1050px) {
-  /* .cart {
-    margin-left: 91%;
-  } */
   .cart {
     bottom: 0px;
     margin-left: 0;
@@ -64,6 +59,7 @@
     border-radius: 0px;
     width: 100%;
     display: flex;
+    border: 1px solid #d1d1d1;
   }
   .start-shopping-btn {
     display: block;
@@ -73,7 +69,7 @@
     border: none;
     padding: 20px 0px;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
   }
   .cartTotalPrice, .itemsForFullScreen {
     display: none;
@@ -86,15 +82,12 @@
   }
   .cartIcon img{
     margin-top: 20px;
-
-    /* font-size: 35px; */
   }
   .itemsForResScreen{
     display: block;
     position: absolute;
     margin-top: -20px;
     margin-left: 40px;
-    /* border: 2px solid #d4d4d4; */
     background: #ef8341;
     color: #fff;
     width: 25px;
@@ -123,7 +116,7 @@
     border: none;
     padding: 20px 0px;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
   }
   .cartTotalPrice, .itemsForFullScreen {
     display: none;
@@ -136,15 +129,12 @@
   }
   .cartIcon img{
     margin-top: 20px;
-
-    /* font-size: 35px; */
   }
   .itemsForResScreen{
     display: block;
     position: absolute;
     margin-top: -20px;
     margin-left: 40px;
-    /* border: 2px solid #d4d4d4; */
     background: #ef8341;
     color: #fff;
     width: 25px;
@@ -157,29 +147,23 @@
   }
 }
 @media only screen and (max-width: 468px) {
- 
   .cartIcon{
     margin-left: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-  
 }
 @media only screen and (max-width: 400px) {
- 
   .cartIcon{
     margin-left: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   
 }
 @media only screen and (max-width: 350px) {
- 
   .cartIcon{
     margin-left: 30px;
     display: flex;
@@ -187,27 +171,21 @@
     align-items: center;
   }
 
-  
 }
 @media only screen and (max-width: 320px) {
- 
   .cartIcon{
     margin-left: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-  
 }
+
 @media only screen and (max-width: 300px) {
- 
   .cartIcon{
     margin-left: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-  
 }

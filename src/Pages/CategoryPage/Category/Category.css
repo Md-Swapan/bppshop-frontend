@@ -8,11 +8,12 @@
   margin: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 25px;
+  grid-gap: 20px;
 }
 
 .card {
-  height: 350px;
+  height: 345px;
+  /* height: auto; */
   border: none;
   border-radius: 7px;
   cursor: pointer;

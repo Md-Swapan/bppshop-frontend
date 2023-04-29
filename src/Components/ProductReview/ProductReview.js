@@ -37,7 +37,7 @@ const ProductReview = ({ productDetail }) => {
                             <RatingStar
                               id={review?.id}
                               rating={review?.rating}
-                              size={17}
+                              size={14}
                             />
                             {/* <p className="rating-star">
                             {(() => {
@@ -82,6 +82,7 @@ const ProductReview = ({ productDetail }) => {
                     <RatingStar
                       id={productDetail?.id}
                       rating={productDetail?.average_review}
+                      size={17}
                     />
                     {/* <p className="rating-star">
                       {(() => {

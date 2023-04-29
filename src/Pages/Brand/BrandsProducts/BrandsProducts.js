@@ -30,7 +30,7 @@ const BrandsProducts = () => {
           </li>
          
           <li className="breadcrumb-item active" aria-current="page">
-          {brandName} Products
+          {brandName}
           </li>
         </ol>
       </nav>

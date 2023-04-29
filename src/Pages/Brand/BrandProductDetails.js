@@ -289,7 +289,7 @@ const BrandProductDetails = () => {
             <Link to="/brands">Brands</Link>
           </li>
           <li className="breadcrumb-item" aria-current="page">
-            <Link to={`/brands/${brandName}/${brandId}`}>{name} Products</Link>
+            <Link to={`/brands/${brandName}/${brandId}`}>{name}</Link>
           </li>
          
           <li className="breadcrumb-item active" aria-current="page">
