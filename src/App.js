@@ -49,6 +49,7 @@ import BestSellingProductDetails from "./Pages/BestSelling/BestSellingProductDet
 import NewArrivalProductDetails from "./Pages/NewArrival/NewArrivalProductDetails";
 import TopRatedProductDetails from "./Pages/TopRated/TopRatedProductDetails";
 import BrandProductDetails from "./Pages/Brand/BrandProductDetails";
+import FlashSaleProductDetails from "./Pages/FlashSale/FlashSaleProductDetails";
 
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
           <Route path="/discount-products" element={<DiscountProducts/>} />
           <Route path="/discount-products/:id" element={<DiscountProductDetails/>} />
           <Route path="/flash-sale" element={<FlashSale/>} />
+          <Route path="/flash-sale/:id" element={<FlashSaleProductDetails/>} />
           <Route path="/best-selling" element={<BestSelling/>} />
           <Route path="/best-selling/:id" element={<BestSellingProductDetails/>} />
           <Route path="/new-arrival" element={<NewArrival/>} />
