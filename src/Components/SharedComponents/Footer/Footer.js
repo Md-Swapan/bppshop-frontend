@@ -26,7 +26,7 @@ const Footer = () => {
               <h5>Start a Conversation__</h5>
               <div className="contact_content">
                 <p>
-                  <i className="bi bi-telephone-fill"></i> 01911655303
+                  <i className="bi bi-telephone-fill"></i> +8809610970706
                 </p>
                 <p>
                   <i className="bi bi-envelope-fill"></i> support@bppshop.com.bd
