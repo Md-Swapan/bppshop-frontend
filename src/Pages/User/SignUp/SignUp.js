@@ -51,7 +51,7 @@ const SignUp = () => {
       }
 
       if(SignupRedirect && cartItems.length > 0){
-        navigate("/shipping-details");
+        navigate("/shipping-address");
         localStorage.removeItem("SignupRedirect");
       }
     } 
