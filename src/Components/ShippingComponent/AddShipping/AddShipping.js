@@ -110,7 +110,7 @@ const AddShipping = () => {
                 aria-label="Default select example"
               >
                 <option value={null} selected>
-                  ------Select District/City------
+                  Select District/City------
                 </option>
                 {districtDataOptions?.map((district) => (
                   <option key={district.id} value={district.id}>
@@ -130,7 +130,7 @@ const AddShipping = () => {
                 aria-label="Default select example"
               >
                 <option value={null} selected>
-                  ------Select Upazila/Thana------
+                  Select Upazila/Thana------
                 </option>
                 {thanaDataOptions.map((thana) => (
                   <option key={thana.id} value={thana.id}>
@@ -147,7 +147,7 @@ const AddShipping = () => {
                 className=" shipping_address_input"
                 aria-label="Default select example"
               >
-                <option selected>------Select Area------</option>
+                <option selected>Select Area------</option>
                 {areaDataOptions.map((area) => (
                   <option key={area.id} value={area.id}>
                     {area.name}

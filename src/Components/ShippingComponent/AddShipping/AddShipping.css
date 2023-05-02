@@ -55,3 +55,12 @@
 .shipping_save_btn {
     background: #413d3a;
 }
+
+@media screen and (max-width: 768px) {
+    .shipping_address_input_container {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+}
