@@ -99,7 +99,7 @@ const OrderHome = () => {
         <h4>My Orders List</h4>
         {userOrders?.length < 1 ? (
           <div className="blank_order">
-            <h5>You Dont't Have Any Order...</h5>
+            <h5>You Don't Have Any Order...</h5>
           </div>
         ) : (
           <table className="table order_table">
