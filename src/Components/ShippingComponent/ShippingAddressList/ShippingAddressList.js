@@ -86,8 +86,10 @@ const ShippingAddressList = () => {
           </button>
           <div className="shipping_content">
             <div className="shipping_header">
-              Choose Delivery Address or Add New Delivery Address.
+              {/* Choose Delivery Address or Add New Delivery Address. */}
+              Choose Delivery Address.
             </div>
+            
           </div>
           <hr className="shipping_line" />
           <div className="address_content">

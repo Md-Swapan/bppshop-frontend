@@ -268,7 +268,7 @@ const CheckoutPayment = () => {
               paymentType === "bankPayment" ||
               paymentType === "agentWalletPayment"
                 ? "Next"
-                : "Confirm"}
+                : "Confirm Order"}
             </button>
           </div>
         </div>

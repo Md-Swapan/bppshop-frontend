@@ -1,10 +1,39 @@
 /* nav css start */
+.navbar-section{
+  top: 0;
+}
+/* .topBar_container{
+  height: 40px;
+  width: 100%;
+  background: #ef8341;
+  position: fixed;
+  top: 0;
+  transition: all 1s;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 7px;
+  color: #f1f1f1;
+}
+.topBar_container p{
+  margin-top: 10px;
+}
+.topBar_container i{
+  background: #fff;
+  color: #ef8341;
+  border-radius: 100px;
+  padding: 3px 5px;
+
+} */
 .nav {
   background: #ef8341;
+  /* border-top: 1px solid rgb(231, 231, 255); */
   width: 100%;
   height: 60px;
   position: fixed;
-  top: 0;
+  top: 0px;
   transition: all 1s;
   z-index: 9999;
 }
@@ -118,10 +147,10 @@
   font-size: 14px;
   cursor: pointer;
 }
+
 .suggested_item_container p i {
   margin-right: 5px;
 }
-
 
 .helpLine{
   position: absolute;
@@ -131,6 +160,7 @@
   color: #ef8341;
   margin-left: 80%;
 }
+
 .helpLine i{
   font-size: 20px;
   background: #ef8341;

@@ -17,6 +17,8 @@ const AddShipping = () => {
   const [areaDataOptions, setAreaDataOptions] = useState([]);
   const [districtId, setDistrictId] = useState(null);
   const [thanaId, setThanaId] = useState(null);
+  const [areaId, setAreaId] = useState(null);
+  const [address, setAddress] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { shippingAddressInfo } = useSelector((state) => state.shippingInfo);
@@ -33,14 +35,19 @@ const AddShipping = () => {
       });
   }, [token]);
 
+
   const handleDistrictChange = (e) => {
     e.preventDefault();
     const districtId = e.target.value;
     setDistrictId(e.target.value);
     axios
       .get(baseUrl + `/location/thanas/${districtId}`)
-      .then((res) => setThanaDataOptions(res.data.data));
+      .then((res) => {
+        
+        setThanaDataOptions(res.data.data)
+      });
   };
+
 
   const handleThanaChange = (e) => {
     e.preventDefault();
@@ -51,18 +58,38 @@ const AddShipping = () => {
       .then((res) => setAreaDataOptions(res.data.data));
   };
 
+
+  const handleAreaChange = (e) => {
+    const areaId  = e.target.value;
+    setAreaId(areaId)
+  }
+  const handleAddressChange = (e) => {
+    const address  = e.target.value;
+    setAddress(address)
+  }
+
+
+  const submitFailedBtn = () => {
+    document.querySelector(".submitFailedAlert").innerHTML = "Please Select District, Thana and Area."
+  }
+
+  if(areaId) {
+    document.querySelector(".submitFailedAlert").innerHTML = ""
+  }
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const district_id = districtId;
     const upazila_id = thanaId;
     const newData = { ...data, district_id, upazila_id };
-
+  
     dispatch(addShippingAddress(newData));
     dispatch(getDeliveryCharge(district_id));
     if (shippingAddressInfo?.status === "success") {
       navigate("/shipping-address");
-    }
+    }   
   };
+
 
   // console.log(user)
 
@@ -78,9 +105,10 @@ const AddShipping = () => {
 
           <div className="shipping_address_input_container">
             <div className="form-group">
-              <span>Contact person name *</span>
+              <span>Contact person name</span>
               <input
-                {...register("contact_person_name", { required: true })}
+                // {...register("contact_person_name", { required: true })}
+                {...register("contact_person_name")}
                 name="contact_person_name"
                 className="shipping_address_input"
                 type="text"
@@ -89,9 +117,10 @@ const AddShipping = () => {
               />
             </div>
             <div className="form-group">
-              <span>Phone *</span>
+              <span>Phone</span>
               <input
-                {...register("phone", { required: true })}
+                // {...register("phone", { required: true })}
+                {...register("phone")}
                 name="phone"
                 className="shipping_address_input"
                 type="text"
@@ -100,9 +129,9 @@ const AddShipping = () => {
               />
             </div>
             <div className="form-group">
-              <span>District/City*</span>
+              <span>District/City</span>
               <select
-                // {...register("district_id", { required: true })}
+                {...register("district_id", { required: true })}
                 onChange={handleDistrictChange}
                 required
                 name="district_id"
@@ -120,9 +149,9 @@ const AddShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Upazila/Thana*</span>
+              <span>Upazila/Thana</span>
               <select
-                // {...register("upazila_id", { required: true })}
+                {...register("upazila_id", { required: true })}
                 onChange={handleThanaChange}
                 required
                 name="upazila_id"
@@ -140,10 +169,12 @@ const AddShipping = () => {
               </select>
             </div>
             <div className="form-group">
-              <span>Area*</span>
+              <span>Area</span>
               <select
                 {...register("area_id", { required: true })}
+                onChange={handleAreaChange}
                 name="area_id"
+                required
                 className=" shipping_address_input"
                 aria-label="Default select example"
               >
@@ -157,9 +188,10 @@ const AddShipping = () => {
             </div>
 
             <div className="form-group">
-              <span>Address *</span>
+              <span>Address</span>
               <input
                 {...register("address", { required: true })}
+                onChange={handleAddressChange}
                 name="address"
                 className="shipping_address_input"
                 type="text"
@@ -167,7 +199,7 @@ const AddShipping = () => {
               />
             </div>
           </div>
-
+          <p className="submitFailedAlert text-danger mt-2"></p>
           <div className="shipping_add_close_btn">
             <div>
               <Link to="/choose-shipping-address">
@@ -178,8 +210,9 @@ const AddShipping = () => {
                 />
               </Link>
             </div>
+            
             <div>
-              <input className="shipping_save_btn" type="submit" value="Save" />
+              {address == null || areaId == null ? <input onClick={submitFailedBtn} className="submitFailedBtn" value="Save" /> : <input className="shipping_save_btn" type="submit" value="Save" />}
             </div>
           </div>
         </form>

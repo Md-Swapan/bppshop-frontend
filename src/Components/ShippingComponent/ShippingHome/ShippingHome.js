@@ -9,6 +9,8 @@ const ShippingHome = () => {
 
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
 
+  console.log(shippingAddressInfo);
+
   const changeShippingInfo = () => {
     navigate("/choose-shipping-address");
     window.location.reload(true);
@@ -23,12 +25,19 @@ const ShippingHome = () => {
 
   return (
     <div>
-      <h2 className="shipping-heading">DELIVERY ADDRESS</h2>
+      {shippingAddressInfo?.data?.is_billing === "1" ? (
+        <h2 className="shipping-heading">YOUR SELECTED DELIVERY ADDRESS</h2>
+      ) : (
+        <h2 className="shipping-heading">
+          CHOOSE DELIVERY ADDRESS / CREATE NEW DELIVERY ADDRESS
+        </h2>
+      )}
+
       <hr className="shipping_billing_header_line" />
 
       <div className="shipping_container">
         <p className="chooseAlert text-danger"></p>
-        <div className="shipping-address-heading">Choose Delivery address</div>
+        {/* <div className="shipping-address-heading">Choose Delivery address</div> */}
         {shippingAddressInfo?.data &&
         shippingAddressInfo?.data?.is_billing === "1" ? (
           <div className="shipping_address_box">
@@ -41,29 +50,42 @@ const ShippingHome = () => {
               <span className="home_text"> Home </span>
               <span className="mx-1">
                 {shippingAddressInfo?.data?.phone} |{" "}
+                {shippingAddressInfo?.data?.city} ,
+                {shippingAddressInfo?.data?.thana} ,
+                {shippingAddressInfo?.data?.zip} ,
                 {shippingAddressInfo?.data?.address}{" "}
               </span>
-              <Link
-                to={`/edit-shipping-address/${shippingAddressInfo?.data?.id}`}
-              >
-                <span className="change_text m-2">
-                  <i className="bi bi-pencil-fill"></i> Edit
+              <div className="mt-3">
+                <Link
+                  to={`/edit-shipping-address/${shippingAddressInfo?.data?.id}`}
+                >
+                  <span className="change_text m-2">
+                    <i className="bi bi-pencil-fill"></i> Edit
+                  </span>
+                </Link>
+                <span
+                  onClick={() => changeShippingInfo()}
+                  className="change_text mx-3"
+                >
+                  <i className="bi bi-arrow-down-up"></i> Change Address
                 </span>
-              </Link>
-              <span
-                onClick={() => changeShippingInfo()}
-                className="change_text mx-3"
-              >
-                <i className="bi bi-arrow-down-up"></i> Change Address
-              </span>
+              </div>
             </div>
           </div>
         ) : (
-          <Link to="/choose-shipping-address">
-            <button className="add_shipping_address_btn">
-              <i className="bi bi-plus"></i> Choose Delivery Address
-            </button>
-          </Link>
+          <div className="chooseAddressBtnAddNewAddressBtn">
+            <Link to="/choose-shipping-address">
+              <button className="add_shipping_address_btn">
+                <i className="bi bi-plus"></i> Choose Delivery Address
+              </button>
+            </Link>
+
+            <Link to="/add-shipping-address">
+              <button className="add_more_address_btn">
+                <i className="bi bi-plus"></i> Create New Delivery Address
+              </button>
+            </Link>
+          </div>
         )}
       </div>
       <div className="shop_payment_btn_content">
@@ -80,14 +102,17 @@ const ShippingHome = () => {
               </div>
             </Link>
           ) : (
-            <div
-              onClick={addressSelectHandlerAlert}
-              className="proceed_payment_btn text-center text-white"
-              style={{ cursor: "pointer" }}
-            >
-              <span className="chooseDeliveryAlert">
-                Proceed payment <i className="bi bi-chevron-right"></i>
-              </span>
+            <div>
+              <div
+                onClick={addressSelectHandlerAlert}
+                className="proceed_payment_btn text-center text-white"
+                style={{ cursor: "pointer" }}
+              >
+                <span className="chooseDeliveryAlert ">
+                  Proceed payment <i className="bi bi-chevron-right"></i>
+                </span>
+              </div>
+              {/* <span className="proceedPaymentOverLay"></span> */}
             </div>
           )}
         </div>

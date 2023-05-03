@@ -35,12 +35,11 @@
     display: flex;
     justify-content: end;
     align-items: baseline;
-    width: 98%;
 }
 
 .shipping_close_btn, .shipping_save_btn {
     margin: 5px;
-    padding: 5px 40px;
+    padding: 7px 40px;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -49,13 +48,23 @@
 }
 
 .shipping_close_btn {
-    background: #ef8341;
+    background: #4d4d4d;
+    padding: 8px 40px;
 }
 
 .shipping_save_btn {
-    background: #413d3a;
+    background: #56b122;
 }
-
+.submitFailedBtn{
+    border: none;
+    outline: none;
+    background: #413d3a93;
+    color: #ffffff;
+    text-align: center;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 0px 0px 0px 20px;
+}
 @media screen and (max-width: 768px) {
     .shipping_address_input_container {
         margin-top: 20px;

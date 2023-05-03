@@ -131,6 +131,11 @@ const Nav = () => {
   return (
     <>
       <div className="navbar-section">
+      {/* <div className='topBar_container'>
+        <p>
+          <i className="bi bi-telephone-fill"></i> +8809610970706
+        </p>
+      </div> */}
         <nav className="nav">
           <Sidebar />
           <div className="nav-content">
@@ -186,8 +191,8 @@ const Nav = () => {
               )}
             </div>
 
-            {/* <div className="helpLine">
-            <i className="bi bi-headset"></i> <span>0177775467</span>
+            {/* <div className="helpLine"> 
+            Help Line <i className="bi bi-headset"></i> <span> 0177775467</span>
             </div> */}
 
             <div className="userProfileTab">
