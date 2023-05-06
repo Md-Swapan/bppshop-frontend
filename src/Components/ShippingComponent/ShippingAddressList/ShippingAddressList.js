@@ -11,7 +11,6 @@ import axios from "axios";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { toast } from "react-hot-toast";
 
-
 const ShippingAddressList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,6 +72,13 @@ const ShippingAddressList = () => {
     window.location.reload(true);
   };
 
+  const scrollTop = () => {
+    //onclick placeorder go to top of the page
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+
   return (
     <>
       <MetaData title="Choose-Default-Delivery-Address - BPPShop" />
@@ -89,7 +95,6 @@ const ShippingAddressList = () => {
               {/* Choose Delivery Address or Add New Delivery Address. */}
               Choose Delivery Address.
             </div>
-            
           </div>
           <hr className="shipping_line" />
           <div className="address_content">
@@ -131,11 +136,12 @@ const ShippingAddressList = () => {
                           )}
                         </div>
                       </div>
-                      <div className="shiped_address">
+                      <div className="shiped_address mb-2">
                         <span className="home_text">home </span>{" "}
                         <span className="mx-1">
-                          {shippingAddInfo?.phone} | {shippingAddInfo?.address}{" "}
+                          {shippingAddInfo?.phone} |{" "}{ shippingAddInfo?.city}, { shippingAddInfo?.thana}, { shippingAddInfo?.zip}, { shippingAddInfo?.address}{" "}
                         </span>
+                      </div>
                         <span
                           onClick={() =>
                             handleDeleteAddress(
@@ -143,18 +149,17 @@ const ShippingAddressList = () => {
                               shippingAddInfo?.customer_id
                             )
                           }
-                          className="change_text ms-2"
+                          className="change_text"
                         >
                           <i className="bi bi-trash3-fill"></i> Delete
                         </span>
-                      </div>
                     </div>
                   </div>
                 ))}
             </div>
 
             <Link to="/add-shipping-address">
-              <button className="add_more_address_btn">
+              <button onClick={scrollTop} className="add_more_address_btn mt-3">
                 <i className="bi bi-plus"></i> Add New Delivery Address
               </button>
             </Link>

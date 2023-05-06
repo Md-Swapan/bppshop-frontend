@@ -119,8 +119,14 @@ const EditShipping = () => {
   const handleNavigateToShippingAddressList = () => {
     navigate("/shipping-address");
     window.location.reload(true);
+    
   };
 
+  const scrollTop = () => {
+    //onclick placeorder go to top of the page
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 
   return (
     <>
@@ -246,6 +252,7 @@ const EditShipping = () => {
                 className="shipping_save_btn"
                 type="submit"
                 value="Update"
+                onClick={scrollTop}
               />
             </div>
           </div>

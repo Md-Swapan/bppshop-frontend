@@ -83,15 +83,19 @@ const AddShipping = () => {
     const upazila_id = thanaId;
     const newData = { ...data, district_id, upazila_id };
   
-    dispatch(addShippingAddress(newData));
-    dispatch(getDeliveryCharge(district_id));
     if (shippingAddressInfo?.status === "success") {
       navigate("/shipping-address");
     }   
+    dispatch(addShippingAddress(newData));
+    dispatch(getDeliveryCharge(district_id));
+    
   };
 
-
-  // console.log(user)
+  const scrollTop = () => {
+    //onclick placeorder go to top of the page
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 
   return (
     <>
@@ -207,12 +211,13 @@ const AddShipping = () => {
                   className="shipping_close_btn"
                   type="button"
                   value="Close"
+                  onClick={scrollTop}
                 />
               </Link>
             </div>
             
             <div>
-              {address == null || areaId == null ? <input onClick={submitFailedBtn} className="submitFailedBtn" value="Save" /> : <input className="shipping_save_btn" type="submit" value="Save" />}
+              {address == null || areaId == null ? <input onClick={submitFailedBtn} className="submitFailedBtn" value="Save" /> : <input onClick={scrollTop} className="shipping_save_btn" type="submit" value="Save" />}
             </div>
           </div>
         </form>

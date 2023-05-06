@@ -3,7 +3,7 @@ import { baseUrl } from "./../../BaseUrl/BaseUrl";
 
 // ADD TO CART without login
 export const addItemsToCart =
-  (product, quantity,defaultChoices) => async (dispatch, getState) => {
+  (product, quantity, defaultChoices) => async (dispatch, getState) => {
     dispatch({
       type: "ADD_TO_CART",
       payload: {
@@ -18,12 +18,16 @@ export const addItemsToCart =
     );
 
     const productId = product.id;
-    const cartGroupItem = getState().cartGroup.cartGroupItems;
+    const carAllItems = getState().cart.cartItems;
+    // console.log(carAllItems)
 
-    const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
+    const cartGroupItems = getState().cartGroup.cartGroupItems;
 
+    const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
+
+    
     const cartUpdateInfo = {
-      key: `${isItemExist.id}`,
+      key: `${isItemExist?.id}`,
       quantity: `${quantity}`,
     };
 
@@ -44,9 +48,12 @@ export const addItemsToCart =
     }
   };
 
+
 // add to cart with login.
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   const cartItemList = getState().cart.cartItems;
+
+  console.log(cartItemList)
 
   let bulk = [];
 
@@ -140,6 +147,7 @@ export const getCartData = () => async (dispatch, getState) => {
 // REMOVE FROM CART
 export const removeItemsFromCart =
   (productId) => async (dispatch, getState) => {
+
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: productId,
@@ -151,7 +159,7 @@ export const removeItemsFromCart =
 
     const cartGroupItem = getState().cartGroup.cartGroupItems;
     const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
-    const cartId = { key: `${isItemExist.id}` };
+    const cartId = { key: `${isItemExist?.id}` };
 
     if (isItemExist) {
       dispatch({type: "REMOVE_ITEM_FROM_CART_REQUEST"} )

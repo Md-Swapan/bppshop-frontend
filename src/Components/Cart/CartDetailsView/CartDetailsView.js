@@ -60,6 +60,7 @@ const CartDetailsView = () => {
       },
     });
   };
+  
 
   const CartDetailsCloseHandler = () => {
     const cartDetailsViewContainer = document.querySelector(

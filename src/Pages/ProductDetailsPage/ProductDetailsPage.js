@@ -232,7 +232,7 @@ const ProductDetailsPage = () => {
 
     defaultChoices &&
       defaultChoices.forEach((element) => {
-        addItemsToCartDataWithColor[element.name] = `${element.options}`;
+        addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
       });
 
     const addItemsToCartDataWithoutColor = {

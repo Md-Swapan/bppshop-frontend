@@ -149,3 +149,22 @@
   border-radius: 5px;
   cursor: default;
 }
+
+@media screen and (max-width: 768px) {
+  .shop_payment_btn_content {
+    margin: 20px 0px;
+  }
+  .proceed_payment_btn {
+    background: #ef8341;
+    font-size: 12px;
+    padding: 10px 0px !important;
+  }
+  .chooseDeliveryAlert{
+    font-size: 12px;
+    padding: 10px 0px !important;
+  }
+  .shop_cart_btn{
+    font-size: 12px;
+    padding: 10px 0px !important;
+  }
+}

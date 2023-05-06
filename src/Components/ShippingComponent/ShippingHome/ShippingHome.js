@@ -23,6 +23,12 @@ const ShippingHome = () => {
       "Please choose delivery address";
   };
 
+  const scrollTop = () => {
+    //onclick placeorder go to top of the page
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
   return (
     <div>
       {shippingAddressInfo?.data?.is_billing === "1" ? (
@@ -49,13 +55,9 @@ const ShippingHome = () => {
             <div className="shipped_address">
               <span className="home_text"> Home </span>
               <span className="mx-1">
-                {shippingAddressInfo?.data?.phone} |{" "}
-                {shippingAddressInfo?.data?.city} ,
-                {shippingAddressInfo?.data?.thana} ,
-                {shippingAddressInfo?.data?.zip} ,
-                {shippingAddressInfo?.data?.address}{" "}
+                {shippingAddressInfo?.data?.phone} |{" "} { shippingAddressInfo?.data?.city}, { shippingAddressInfo?.data?.thana}, { shippingAddressInfo?.data?.zip}, { shippingAddressInfo?.data?.address}{" "}
               </span>
-              <div className="mt-3">
+              <div className="mt-2">
                 <Link
                   to={`/edit-shipping-address/${shippingAddressInfo?.data?.id}`}
                 >
@@ -81,7 +83,7 @@ const ShippingHome = () => {
             </Link>
 
             <Link to="/add-shipping-address">
-              <button className="add_more_address_btn">
+              <button onClick={scrollTop} className="add_more_address_btn">
                 <i className="bi bi-plus"></i> Create New Delivery Address
               </button>
             </Link>

@@ -33,6 +33,7 @@
 
 .shipping_add_close_btn {
     display: flex;
+    flex-wrap: wrap;
     justify-content: end;
     align-items: baseline;
 }
@@ -71,5 +72,25 @@
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 20px;
+    }
+
+    .shipping_add_close_btn {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        /* align-items: center; */
+    }
+    .shipping_close_btn{
+        margin-right: 12px !important;
+    }
+    .submitFailedBtn{
+        border: none;
+        outline: none;
+        background: #413d3a93;
+        color: #ffffff;
+        text-align: center;
+        padding: 7px;
+        border-radius: 5px;
+        margin: 10px 0px 0px 0px;
     }
 }
