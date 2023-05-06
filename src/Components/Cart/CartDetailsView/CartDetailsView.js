@@ -18,6 +18,23 @@ const CartDetailsView = () => {
     return state.cart.cartItems;
   });
 
+  //default choise option
+  const choice_options = cartItems.choice_options;
+  console.log(choice_options)
+  
+  // const choice_options_name = choice_options.map((option) => option.name);
+
+  // const choice_options_defaultValue = choice_options.map(
+  //   (option) => option.options[0]
+  // );
+
+  // const defaultChoices = choice_options_name.map((name, index) => ({
+  //   name,
+  //   options: choice_options_defaultValue[index],
+  // }));
+
+
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -60,7 +77,7 @@ const CartDetailsView = () => {
       },
     });
   };
-  
+
 
   const CartDetailsCloseHandler = () => {
     const cartDetailsViewContainer = document.querySelector(

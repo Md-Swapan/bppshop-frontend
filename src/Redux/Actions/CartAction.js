@@ -19,7 +19,7 @@ export const addItemsToCart =
 
     const productId = product.id;
     const carAllItems = getState().cart.cartItems;
-    // console.log(carAllItems)
+    console.log(carAllItems)
 
     const cartGroupItems = getState().cartGroup.cartGroupItems;
 
