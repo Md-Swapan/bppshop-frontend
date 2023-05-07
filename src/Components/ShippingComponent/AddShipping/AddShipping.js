@@ -85,7 +85,8 @@ const AddShipping = () => {
   
     if (shippingAddressInfo?.status === "success") {
       navigate("/shipping-address");
-    }   
+    }  
+     
     dispatch(addShippingAddress(newData));
     dispatch(getDeliveryCharge(district_id));
     

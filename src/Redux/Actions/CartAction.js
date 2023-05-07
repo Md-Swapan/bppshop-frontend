@@ -18,16 +18,14 @@ export const addItemsToCart =
     );
 
     const productId = product.id;
-    const carAllItems = getState().cart.cartItems;
-    console.log(carAllItems)
-
     const cartGroupItems = getState().cartGroup.cartGroupItems;
-
     const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
-
     
+    // console.log(isItemExist);
+    // console.log(isItemExist?.data?.id);
+
     const cartUpdateInfo = {
-      key: `${isItemExist?.id}`,
+      key: `${isItemExist?.data?.id}`,
       quantity: `${quantity}`,
     };
 
@@ -49,7 +47,7 @@ export const addItemsToCart =
   };
 
 
-// ADD TO CART without login
+// Update Cart without login
 export const updateItemsToCart =
   (product, quantity) => async (dispatch, getState) => {
     dispatch({
@@ -66,14 +64,10 @@ export const updateItemsToCart =
     );
 
     const productId = product.id;
-    const carAllItems = getState().cart.cartItems;
-    console.log(carAllItems)
-
     const cartGroupItems = getState().cartGroup.cartGroupItems;
-
     const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
 
-    
+
     const cartUpdateInfo = {
       key: `${isItemExist?.id}`,
       quantity: `${quantity}`,
@@ -101,7 +95,7 @@ export const updateItemsToCart =
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   const cartItemList = getState().cart.cartItems;
 
-  console.log(cartItemList)
+  // console.log(cartItemList)
 
   let bulk = [];
 
@@ -207,7 +201,7 @@ export const removeItemsFromCart =
 
     const cartGroupItem = getState().cartGroup.cartGroupItems;
     const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
-    const cartId = { key: `${isItemExist?.id}` };
+    const cartId = { key: `${isItemExist?.data?.id}` };
 
     if (isItemExist) {
       dispatch({type: "REMOVE_ITEM_FROM_CART_REQUEST"} )
