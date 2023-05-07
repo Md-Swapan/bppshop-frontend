@@ -49,6 +49,54 @@ export const addItemsToCart =
   };
 
 
+// ADD TO CART without login
+export const updateItemsToCart =
+  (product, quantity) => async (dispatch, getState) => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        product,
+        quantity
+        
+      },
+    });
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartItems)
+    );
+
+    const productId = product.id;
+    const carAllItems = getState().cart.cartItems;
+    console.log(carAllItems)
+
+    const cartGroupItems = getState().cartGroup.cartGroupItems;
+
+    const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
+
+    
+    const cartUpdateInfo = {
+      key: `${isItemExist?.id}`,
+      quantity: `${quantity}`,
+    };
+
+    if (isItemExist) {
+      const token = localStorage.getItem("token");
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      const { data } = await axios.post(
+        `${baseUrl}/cart/update`,
+        cartUpdateInfo,
+        config
+      );
+
+      dispatch({
+        type: "UPDATE_CART",
+        payload: data,
+      });
+    }
+  };
+
+
 // add to cart with login.
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   const cartItemList = getState().cart.cartItems;

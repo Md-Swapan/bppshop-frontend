@@ -4,6 +4,7 @@ import "./CartDetailsView.css";
 import { Link } from "react-router-dom";
 import {
   addItemsToCart,
+  updateItemsToCart,
   removeItemsFromCart,
 } from "./../../../Redux/Actions/CartAction";
 import { imgThumbnailBaseUrl } from "../../../BaseUrl/BaseUrl";
@@ -20,7 +21,7 @@ const CartDetailsView = () => {
 
   //default choise option
   const choice_options = cartItems.choice_options;
-  console.log(choice_options)
+  // console.log(choice_options)
   
   // const choice_options_name = choice_options.map((option) => option.name);
 
@@ -35,7 +36,7 @@ const CartDetailsView = () => {
 
 
 
-  const increaseQuantity = (id, quantity, stock) => {
+  const increaseQuantity = (id, quantity, stock, defaultChoices) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
       toast.error("Stock Limited.", {
@@ -51,15 +52,17 @@ const CartDetailsView = () => {
       return;
     }
 
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(addItemsToCart(id, newQty, defaultChoices));
+    // dispatch(updateItemsToCart(id, newQty));
   };
 
-  const decreaseQuantity = (id, quantity) => {
+  const decreaseQuantity = (id, quantity, defaultChoices) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
       return;
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(addItemsToCart(id, newQty, defaultChoices));
+    // dispatch(updateItemsToCart(id, newQty));
   };
 
   //cart item remove functionality
@@ -186,7 +189,11 @@ const CartDetailsView = () => {
                       <div className="quantity-set">
                         <span
                           onClick={() =>
-                            decreaseQuantity(item?.product, item?.quantity)
+                            decreaseQuantity(
+                              item?.product, 
+                              item?.quantity, 
+                              item?.product?.choice_options
+                              )
                           }
                           className="cartMinusBtn"
                         >
@@ -200,7 +207,8 @@ const CartDetailsView = () => {
                             increaseQuantity(
                               item?.product,
                               item?.quantity,
-                              item?.product?.current_stock
+                              item?.product?.current_stock,
+                              item?.product?.choice_options
                             )
                           }
                           className="cartPlusBtn"

@@ -195,7 +195,9 @@ const ProductDetailsPage = () => {
   }, [productDetailsPath, loading, navigate]);
 
   // cart item increase decrease function..............................
-  const increaseQuantity = (id, quantity, stock) => {
+  const increaseQuantity = (id, quantity, stock, defaultChoices) => {
+    console.log(defaultChoices)
+
     const newQty = quantity + 1;
     if (stock <= quantity) {
       toast.error("Stock Limited.", {
@@ -210,15 +212,15 @@ const ProductDetailsPage = () => {
       });
       return;
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(addItemsToCart(id, newQty, defaultChoices));
   };
 
-  const decreaseQuantity = (id, quantity) => {
+  const decreaseQuantity = (id, quantity, defaultChoices) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
       return;
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(addItemsToCart(id, newQty, defaultChoices));
   };
 
   // add to cart with price variant options..........................................
@@ -443,7 +445,9 @@ const ProductDetailsPage = () => {
                           onClick={() =>
                             decreaseQuantity(
                               productDetail,
-                              isItemExist?.quantity
+                              isItemExist?.quantity,
+                              defaultChoices
+                              // productDetail?.choice_options
                             )
                           }
                           className="detailsViewMinusBtn"
@@ -478,7 +482,9 @@ const ProductDetailsPage = () => {
                             increaseQuantity(
                               productDetail,
                               isItemExist?.quantity,
-                              productDetail?.current_stock
+                              productDetail?.current_stock,
+                              defaultChoices
+                              // productDetail?.choice_options
                             )
                           }
                           className="detailsViewPlusBtn"

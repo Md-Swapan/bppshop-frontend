@@ -211,7 +211,7 @@ const TopRatedProductDetails = () => {
       });
       return;
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(addItemsToCart(id, newQty, defaultChoices));
   };
 
   const decreaseQuantity = (id, quantity) => {
@@ -219,7 +219,7 @@ const TopRatedProductDetails = () => {
     if (1 >= quantity) {
       return;
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(addItemsToCart(id, newQty, defaultChoices));
   };
 
   // add to cart with price variant options..........................................
