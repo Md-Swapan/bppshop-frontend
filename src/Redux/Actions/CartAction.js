@@ -22,7 +22,7 @@ export const addItemsToCart =
     const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
     
     // console.log(isItemExist);
-    // console.log(isItemExist?.data?.id);
+    // console.log(isItemExist?.id);
 
     const cartUpdateInfo = {
       key: `${isItemExist?.data?.id}`,
@@ -69,7 +69,7 @@ export const updateItemsToCart =
 
 
     const cartUpdateInfo = {
-      key: `${isItemExist?.id}`,
+      key: `${isItemExist?.data?.id}`,
       quantity: `${quantity}`,
     };
 
@@ -109,6 +109,7 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
       product[element.name] = `${element.options}`.trim();
     });
 
+    // console.log(bulk)
     bulk.push(product);
   });
 
@@ -140,6 +141,8 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
 // add to cart after login.
 export const addItemsToCartAfterLogin =
   (addItemToCartAfterLoginData) => async (dispatch, getState) => {
+
+    // console.log(addItemToCartAfterLoginData)
     try {
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_REQUEST" });
       const token = localStorage.getItem("token");
@@ -152,7 +155,7 @@ export const addItemsToCartAfterLogin =
       );
 
       dispatch(getCartData());
-      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data.data });
+      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
 
       localStorage.setItem(
         "cartGroupItems",
@@ -177,9 +180,12 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-    // dispatch({ type: "GET_CART_SUCCESS", payload: data.data });
+    // dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
 
-    // localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
+    dispatch({ type: "GET_CART_SUCCESS", payload: data });
+
+    localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
+    
   } catch (error) {
     dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
   }

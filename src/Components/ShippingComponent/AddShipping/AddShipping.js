@@ -134,6 +134,17 @@ const AddShipping = () => {
               />
             </div>
             <div className="form-group">
+                  <span>Optional Phone</span>
+                  <input
+                    {...register("optional_phone")}
+                    name="optional_phone"
+                    className="shipping_address_input"
+                    type="text"
+                    placeholder="Enter Your Optional Phone Number"
+                    defaultValue={user?.optional_phone}
+                  />
+                </div>
+            <div className="form-group">
               <span>District/City</span>
               <select
                 {...register("district_id", { required: true })}

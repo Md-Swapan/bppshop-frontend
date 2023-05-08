@@ -92,6 +92,16 @@ const AddNewAddress = () => {
                   />
                 </div>
                 <div className="form-group">
+                  <span>Optional Phone *</span>
+                  <input
+                    {...register("optional_phone", { required: true })}
+                    name="optional_phone"
+                    className="shipping_address_input"
+                    type="text"
+                    placeholder="Enter Your Optional Phone Number"
+                  />
+                </div>
+                <div className="form-group">
                   <span>District/City*</span>
                   <select
                     // {...register("district_id", { required: true })}
