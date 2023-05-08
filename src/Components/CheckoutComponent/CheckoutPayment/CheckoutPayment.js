@@ -150,12 +150,12 @@ const CheckoutPayment = () => {
       <MetaData title="Payment-Method - BPPShop" />
 
       <div className="payment_method_container">
-        <h3 className="mb-2">Payment Method</h3>
+        <h3 className="mb-2">Choose Payment Method:</h3>
         <hr />
 
         <div className="payment-way-container">
           {/* <h4>Payment by : </h4> */}
-          <h4>Choose Payment Method: </h4>
+          {/* <h4>Choose Payment Method: </h4> */}
 
           <div className="payment-way">
             <div className="cashOnDeliVery">

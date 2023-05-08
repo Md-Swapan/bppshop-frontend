@@ -41,6 +41,8 @@ const BrandsProductsCard = ({product}) => {
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === id);
 
+  // console.log(addedItemId)
+
   const addToCartHandler = (product, quantity) => {
     //default choise option
     const choice_options = product.choice_options;
@@ -200,7 +202,7 @@ const BrandsProductsCard = ({product}) => {
                   >
                     <div className="overlayViewCartBtn">
                       <span>
-                        <i class="bi bi-eye-fill"></i> <br /> View Details
+                        <i className="bi bi-eye-fill"></i> <br /> View Details
                       </span>
                     </div>
                   </div>

@@ -32,7 +32,8 @@
 }
 
 .coupon_btn {
-  background: #86bc19;
+  /* background: #86bc19; */
+  background: #666666;
   width: 100%;
   padding: 10px 0px;
   border: none;

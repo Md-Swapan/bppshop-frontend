@@ -75,7 +75,7 @@ const FlashSale = () => {
   //   };
   // }, []);
 
-  console.log(flashDealsData.banner)
+  // console.log(flashDealsData.banner)
   return (
     <div className="flash_sale_container">
       <h4>Flash Sale Products:</h4>

@@ -97,16 +97,16 @@ const ShippingDetails = () => {
                 </div>
                 <div className="container mt-4">
                   <div className="row">
-                    <div className="col-md-3 p-0 text-center ">
+                    {/* <div className="col-md-3 p-0 text-center ">
                       <img
                         className="order-summery-footer-image"
                         src={delivery}
                         alt=""
                       />
                       <div className="deal-title">3 Days free delivery </div>
-                    </div>
+                    </div> */}
 
-                    <div className="col-md-3 p-0 text-center">
+                    <div className="col-md-4 p-0 text-center">
                       <img
                         className="order-summery-footer-image"
                         src={money}
@@ -114,7 +114,7 @@ const ShippingDetails = () => {
                       />
                       <div className="deal-title">Money back guarantee</div>
                     </div>
-                    <div className="col-md-3 p-0 text-center">
+                    <div className="col-md-4 p-0 text-center">
                       <img
                         className="order-summery-footer-image"
                         src={Genuine}
@@ -122,7 +122,7 @@ const ShippingDetails = () => {
                       />
                       <div className="deal-title">100% Genuine Product</div>
                     </div>
-                    <div className="col-md-3 p-0 text-center">
+                    <div className="col-md-4 p-0 text-center">
                       <img
                         className="order-summery-footer-image"
                         src={Payment}

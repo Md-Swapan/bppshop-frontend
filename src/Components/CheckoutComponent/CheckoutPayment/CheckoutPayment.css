@@ -1,12 +1,12 @@
 .payment_method_container h3{
  font-weight: 700;
- font-size: 24px;
+ font-size: 20px;
 }
 .payment-way-container {
-  margin: 40px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 .payment-way {
-  margin: 30px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 .cashOnDeliVery,
 .mobile_payment,
