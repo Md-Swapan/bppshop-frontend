@@ -134,12 +134,22 @@ const OrderHome = () => {
                           <i className="bi bi-eye-fill"></i> View
                         </button>
                       </Link>
+                      {order?.order_status == "canceled" ? 
                       <button
-                        onClick={() => handleOrderCancel(order?.id)}
-                        className="my_order_cancel_btn"
+                        // onClick={() => handleOrderCancel(order?.id)}
+                        className="my_order_canceled_btn"
                       >
-                        <i className="bi bi-trash3-fill"></i> Cancel
-                      </button>
+                        <i className="bi bi-trash3-fill"></i> Canceled
+                      </button> : 
+                      <button
+                      onClick={() => handleOrderCancel(order?.id)}
+                      className="my_order_cancel_btn"
+                    >
+                      <i className="bi bi-trash3-fill"></i> Cancel
+                    </button>
+                      }
+                      
+                      
                     </td>
                   </tr>
                 ))}

@@ -65,6 +65,8 @@ const CheckoutPayment = () => {
 
   const cashOnDeliveryHandler = () => {
     const codBtn = document.querySelector(".cashOnDelivery_content");
+    const cODelivery = document.querySelector("#cashOnDelivery").checked;
+   
     const paymentOptionWayContent = document.querySelector(
       ".payment-option-way"
     );
@@ -74,6 +76,7 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
+
     codBtn.style.display = "block";
     paymentOptionWayContent.style.display = "none";
     bankPaymentOptionWay.style.display = "none";
@@ -91,6 +94,9 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
+    const mobilePayment = document.querySelector(
+      "#mobilePayment"
+    ).checked;
     const codBtn = document.querySelector(".cashOnDelivery_content");
     paymentOptionWayContent.style.display = "block";
     codBtn.style.display = "none";
@@ -110,6 +116,9 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
+    const bankPayment = document.querySelector(
+      "#bankPayment"
+    ).checked;
     bankPaymentOptionWay.style.display = "block";
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
@@ -128,6 +137,8 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
+    const agentWalletPayment = document.querySelector("#agentWalletPayment").checked;
+
     bankPaymentOptionWay.style.display = "none";
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
@@ -167,8 +178,9 @@ const CheckoutPayment = () => {
                   checked={isRadioSelected("cashOnDelivery")}
                   onChange={handleRadioClick}
                   onClick={cashOnDeliveryHandler}
+                  id="cashOnDelivery"
                 />
-                <label htmlFor="cashOnDelivery">Cash On Delivery</label>
+                <label onClick={cashOnDeliveryHandler} htmlFor="cashOnDelivery">Cash On Delivery</label>
               </div>
 
               <div className="cashOnDelivery_content">
@@ -191,8 +203,9 @@ const CheckoutPayment = () => {
                   checked={isRadioSelected("mobilePayment")}
                   onChange={handleRadioClick}
                   onClick={MobilePaymentOptionHandler}
+                  id="mobilePayment"
                 />
-                <label htmlFor="mobilePayment">Mobile Payment</label>
+                <label onClick={MobilePaymentOptionHandler} htmlFor="mobilePayment">Mobile Payment</label>
               </div> */}
               <div className="payment-option-way">
                 <div className="payment-option">
@@ -217,8 +230,9 @@ const CheckoutPayment = () => {
                   checked={isRadioSelected("bankPayment")}
                   onChange={handleRadioClick}
                   onClick={BankPaymentOptionHandler}
+                  id="bankPayment"
                 />
-                <label htmlFor="bankPayment">Bank Payment</label>
+                <label onClick={BankPaymentOptionHandler} htmlFor="bankPayment">Bank Payment</label>
               </div> */}
               <div className="bankPayment-option-way">
                 <div className="bankPayment-option">
@@ -240,8 +254,9 @@ const CheckoutPayment = () => {
                   checked={isRadioSelected("agentWalletPayment")}
                   onChange={handleRadioClick}
                   onClick={AgentWalletPaymentHandler}
+                  id="agentWalletPayment"
                 />
-                <label htmlFor="agentWalletPayment">Agent Wallet</label>
+                <label  onClick={AgentWalletPaymentHandler} htmlFor="agentWalletPayment">Agent Wallet</label>
               </div>
               <p className="paymentErrorMessage"></p>
               <div className="payment-option-way"></div>

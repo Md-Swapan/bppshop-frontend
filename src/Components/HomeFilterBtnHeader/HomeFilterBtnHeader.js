@@ -58,7 +58,7 @@ const HomeFilterBtnHeader = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <Link className="dropdown-item" to="top-rated">
+                <Link className="dropdown-item" to="/top-rated">
                   Top Rated
                 </Link>
               </li>

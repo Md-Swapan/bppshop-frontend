@@ -133,7 +133,7 @@ const AddShipping = () => {
                 defaultValue={user?.phone}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
                   <span>Optional Phone</span>
                   <input
                     {...register("optional_phone")}
@@ -143,7 +143,7 @@ const AddShipping = () => {
                     placeholder="Enter Your Optional Phone Number"
                     defaultValue={user?.optional_phone}
                   />
-                </div>
+                </div> */}
             <div className="form-group">
               <span>District/City</span>
               <select

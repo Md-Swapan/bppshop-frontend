@@ -3,6 +3,7 @@ import "./Footer.css";
 import logo from "../../../Assets/Images/bpp shop logo fainal.png";
 import playstoreIcon from "../../../Assets/Images/images-1.webp";
 import appleIcon from "../../../Assets/Images/Apple-logo-1A9B9F20EA-seeklogo.com.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -41,10 +42,22 @@ const Footer = () => {
             <h5>SPECIAL</h5>
             <div className="special_content_list">
               <ul>
-                <li>Featured Products</li>
-                <li>Latest Products</li>
-                <li>Best Selling Products</li>
-                <li>Top Rated Products</li>
+              <Link to="/new-arrival">
+                  <li>New Arrival Products</li>
+                </Link>
+                <Link to="/best-selling">
+                  <li>Best Selling Products</li>
+                </Link>
+                <Link to="/top-rated">
+                  <li>Top Rated Products</li>
+                </Link>
+                <Link to="/discount-products">
+                  <li>Discount Products</li>
+                </Link>
+                <Link to="/flash-sale">
+                  <li>Flash Sale Products</li>
+                </Link>
+                
               </ul>
             </div>
           </div>
@@ -52,8 +65,12 @@ const Footer = () => {
             <h5>ACCOUNT & SHIPPING INFO</h5>
             <div className="account_shipping_info_list">
               <ul>
+                <Link to="/profile">
                 <li>Profile Info</li>
-                <li>Wish list</li>
+                </Link>
+                <Link to="/profile/orders">
+                <li>Order Info</li>
+                </Link>
                 <li>Track order</li>
               </ul>
             </div>
@@ -82,8 +99,7 @@ const Footer = () => {
             <div className="newsletter_container">
               <h6>NEWSLETTER</h6>
               <small>
-                Subscribe to our new channel to get latest updates, Total
-                Subscriber 6
+                Subscribe to our new channel to get latest updates.
               </small>
               <div className="d-flex mt-3">
                 <input type="email" name="" placeholder="Enter Your Email" />
@@ -91,7 +107,9 @@ const Footer = () => {
               </div>
 
               <div className="social_content">
+                <a href="https://www.facebook.com/bppshopofficial">
                 <i className="bi bi-facebook"></i>
+                </a>
                 <i className="bi bi-instagram"></i>
                 <i className="bi bi-twitter"></i>
               </div>
