@@ -88,7 +88,18 @@ const EditShipping = () => {
       address_id: setDefaultId,
     };
 
-    const newData = { ...data, district_id, upazila_id, area_id, id };
+    const newData = { 
+      ...data, 
+      contact_person_name : data.contact_person_name ? data.contact_person_name : editAddress?.name, 
+      phone: data.phone? data.phone : editAddress?.phone, 
+      optional_phone: data.optional_phone? data.optional_phone : editAddress.optional_phone,
+      address: data.address? data.address : editAddress.address,
+      district_id, 
+      upazila_id, 
+      area_id, 
+      id 
+    };
+
     axios
       .post(baseUrl + `/shipping-address/update-address`, newData, {
         headers: { Authorization: `Bearer ${token}` },
@@ -160,6 +171,16 @@ const EditShipping = () => {
               />
             </div>
             <div className="form-group">
+                  <span>Optional Phone</span>
+                  <input
+                    {...register("optional_phone")}
+                    name="optional_phone"
+                    className="shipping_address_input"
+                    type="text"
+                    defaultValue={editAddress?.optional_phone}
+                  />
+                </div>
+            <div className="form-group">
               <span>District/City</span>
               <select
                 {...register("district_id")}
@@ -221,7 +242,8 @@ const EditShipping = () => {
               </select>
             </div>
 
-            <div className="form-group">
+          </div>
+            <div className="form-group mt-3">
               <span>Address</span>
               <input
                 {...register("address")}
@@ -231,7 +253,6 @@ const EditShipping = () => {
                 defaultValue={editAddress?.address}
               />
             </div>
-          </div>
           <div>
             <i id="errorMsg" className="text-danger"></i>
           </div>

@@ -79,10 +79,21 @@ const AddShipping = () => {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
+
     const district_id = districtId;
     const upazila_id = thanaId;
-    const newData = { ...data, district_id, upazila_id };
+
+    const newData = {
+      ...data, 
+      contact_person_name : data.contact_person_name ? data.contact_person_name : user?.name, 
+      phone: data.phone? data.phone : user?.phone, 
+      optional_phone: data.optional_phone? data.optional_phone : user.optional_phone,
+      district_id, 
+      upazila_id 
+    };
   
+    console.log(newData)
+    
     if (shippingAddressInfo?.status === "success") {
       navigate("/shipping-address");
     }  
@@ -133,17 +144,17 @@ const AddShipping = () => {
                 defaultValue={user?.phone}
               />
             </div>
-            {/* <div className="form-group">
+            <div className="form-group">
                   <span>Optional Phone</span>
                   <input
                     {...register("optional_phone")}
                     name="optional_phone"
                     className="shipping_address_input"
                     type="text"
-                    placeholder="Enter Your Optional Phone Number"
+                    placeholder="Enter Optional Number"
                     defaultValue={user?.optional_phone}
                   />
-                </div> */}
+                </div>
             <div className="form-group">
               <span>District/City</span>
               <select
@@ -203,7 +214,8 @@ const AddShipping = () => {
               </select>
             </div>
 
-            <div className="form-group">
+          </div>
+            <div className="form-group mt-3">
               <span>Address</span>
               <input
                 {...register("address", { required: true })}
@@ -214,7 +226,6 @@ const AddShipping = () => {
                 placeholder="House no. / Building /Street /Area"
               />
             </div>
-          </div>
           <p className="submitFailedAlert text-danger mt-2"></p>
           <div className="shipping_add_close_btn">
             <div>
