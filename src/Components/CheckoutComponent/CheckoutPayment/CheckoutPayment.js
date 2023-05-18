@@ -265,7 +265,7 @@ const CheckoutPayment = () => {
         </div>
 
         <div className="payment_bottom_Btn">
-          <div className="d-flex">
+          {/* <div className="d-flex flex-wrap"> */}
             <Link to="/shipping-address">
               <button className="back_to_shipping">Back to Shipping</button>
             </Link>
@@ -285,7 +285,7 @@ const CheckoutPayment = () => {
                 ? "Next"
                 : "Confirm Order"}
             </button>
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </>
