@@ -75,7 +75,7 @@
 .search {
   width: 100%;
   background: #fff;
-  border-radius: 7px;
+  border-radius: 5px;
   border: none;
   padding: 8px 30px 8px 15px;
   font-size: 14px;
@@ -213,7 +213,13 @@
     position: relative;
     width: 60%;
     justify-content: center;
-    margin-left: -55px;
+    margin-left: -70px;
+  }
+}
+@media only screen and (max-width: 668px) {
+  
+  .searchInput {
+    margin-left: -75px;
   }
 }
 
@@ -224,6 +230,9 @@
   }
   .search {
     font-size: 13px;
+  }
+  .searchInput {
+    margin-left: -85px;
   }
   .user-profile {
     width: 35px;
@@ -236,6 +245,14 @@
 @media only screen and (max-width: 480px) {
   .searchIcon {
     font-size: 13px;
+  }
+  .searchInput {
+    margin-left: -90px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .searchInput {
+    margin-left: -100px;
   }
 }
 

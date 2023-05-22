@@ -50,6 +50,7 @@ import NewArrivalProductDetails from "./Pages/NewArrival/NewArrivalProductDetail
 import TopRatedProductDetails from "./Pages/TopRated/TopRatedProductDetails";
 import BrandProductDetails from "./Pages/Brand/BrandProductDetails";
 import FlashSaleProductDetails from "./Pages/FlashSale/FlashSaleProductDetails";
+import SearchProductDetails from "./Pages/Search/SearchProductDetails";
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
           <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
           <Route path="/search" element={<Search/>} />
+          <Route path="/search/:id" element={<SearchProductDetails/>} />
           <Route path="/brands" element={<Brands/>} />
           <Route path="/brands/:brandName/:brandId" element={<BrandsProducts/>} />
           <Route path="/brand/:name/:brandId/:id" element={<BrandProductDetails/>} />

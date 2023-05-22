@@ -3,6 +3,7 @@ import MetaData from "../Layout/MetaData";
 import { useSelector } from "react-redux";
 import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import SearchProductCard from "./SearchProductCard";
 
 const Search = () => {
   const { searchProducts, loading } = useSelector(
@@ -33,7 +34,7 @@ const Search = () => {
                 </>
               ) : (
                 searchProducts?.map((product) => (
-                  <ProductCard key={product?.id} product={product} />
+                  <SearchProductCard key={product?.id} product={product} />
                 ))
               )}
             </SkeletonTheme>

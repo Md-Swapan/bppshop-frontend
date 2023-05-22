@@ -2,7 +2,7 @@
 .cartDetailsView-container{
   position: fixed;
   width: 400px;
-  height: 94vh;
+  height: 95vh;
   padding: 5px;
   border: 1px solid gainsboro;
   background: #ffffff;
@@ -11,7 +11,6 @@
   transform: translateX(450px);
   transition: transform 250ms ease-in-out;
   font-weight: 500;
-
  
 }
 .cartDetailsView-container-toggle{
@@ -32,7 +31,7 @@
   cursor: pointer;
 }
 .cartDetailsView-content{
-  height: 75%;
+  height: 70%;
   overflow: scroll;
 }
 .cartDetailsView-content::-webkit-scrollbar {
@@ -117,10 +116,10 @@
 }
 
 .cart-total-container{
-  height: 15%;
+  height: 19%;
   background: rgb(150, 150, 150);
   color: #ffffff;
-  bottom: 0;
+  bottom: 5px;
   padding: 20px 10px 10px 10px;
   text-align: center;
 }
