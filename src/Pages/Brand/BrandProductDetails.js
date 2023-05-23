@@ -43,6 +43,18 @@ const BrandProductDetails = () => {
   }, [id]);
 
 
+  // Customer Audit log.........................
+  const auditLog = {
+    "product_id" : id
+  }
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  useEffect(() => {
+    token && axios.post(`${baseUrl}/customer/audit-log`, 
+    auditLog,
+    config
+    )
+  }, []) 
 
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);

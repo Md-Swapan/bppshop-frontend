@@ -27,7 +27,9 @@ const ProductDetailsPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
+  
 
+  // Product Details............................
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res.data.data);
@@ -35,7 +37,19 @@ const ProductDetailsPage = () => {
     });
   }, [id]);
 
-  // console.log(productDetail);
+
+  // Customer Audit log.........................
+  const auditLog = {
+    "product_id" : id
+  }
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  useEffect(() => {
+    token && axios.post(`${baseUrl}/customer/audit-log`, 
+    auditLog,
+    config
+    )
+  }, []) 
 
 
   const cartItemsId = cartItems.map((i) => i?.product?.id);
@@ -272,6 +286,8 @@ const ProductDetailsPage = () => {
       },
     });
   };
+
+
 
   return (
     <>
