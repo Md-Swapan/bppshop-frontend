@@ -1,10 +1,12 @@
 export const AgentReducer = (state = { user: {} }, action) => {
   switch (action.type) {
+    case "ADMIN_LOGIN_REQUEST":
     case "AGENT_LOGIN_REQUEST":
       return {
         loading: true,
         isAuthenticated: false,
       };
+    case "ADMIN_LOGIN_SUCCESS":
     case "AGENT_LOGIN_SUCCESS":
       return {
         ...state,
@@ -13,6 +15,7 @@ export const AgentReducer = (state = { user: {} }, action) => {
         user: action.payload,
       };
 
+    case "ADMIN_LOGIN_FAIL":
     case "AGENT_LOGIN_FAIL":
       return {
         ...state,

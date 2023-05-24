@@ -51,6 +51,7 @@ import TopRatedProductDetails from "./Pages/TopRated/TopRatedProductDetails";
 import BrandProductDetails from "./Pages/Brand/BrandProductDetails";
 import FlashSaleProductDetails from "./Pages/FlashSale/FlashSaleProductDetails";
 import SearchProductDetails from "./Pages/Search/SearchProductDetails";
+import AdminLandOnBehalfCustomerOrder from "./Pages/AdminLand/AdminLandOnBehalfCustomerOrder";
 
 
 function App() {
@@ -126,7 +127,8 @@ function App() {
           <Route path="/404" element={<PageNotFound />} />
           <Route path="*" element={<navigate to="/404" replace />} />
 
-          <Route path="/customer/force-login-by-agent/:agentToken" element={<AgentLand />}/>
+          <Route path="/customer/force-login-by-agent/:agentToken" element={<AgentLand />} />
+          <Route path="/forceLoginByAdmin/:token" element={<AdminLandOnBehalfCustomerOrder />} />
         </Routes>
       </Layout>
     </div>
