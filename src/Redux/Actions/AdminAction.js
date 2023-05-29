@@ -28,7 +28,7 @@ export const AdminLogin = (adminToken) => async (dispatch, getState) => {
 };
 
 // Store agent info.
-export const AdminInfo = (adminInfo) => async (dispatch, getstate) => {
+export const AdminInfo = (adminInfo) => async (dispatch, getState) => {
   // console.log(agentInfo.data.agent_id);
 
   try{

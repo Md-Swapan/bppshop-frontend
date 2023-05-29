@@ -11,6 +11,8 @@ const AgentLand = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  console.log(agentToken)
+
 
   useEffect(() => {
     dispatch(AgentLogin(agentToken))
