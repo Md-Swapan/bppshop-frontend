@@ -7,12 +7,12 @@ import { baseUrl } from '../../BaseUrl/BaseUrl';
 import { AdminLogin, AdminInfo } from "../../Redux/Actions/AdminAction";
 
 const AdminLandOnBehalfCustomerOrder = () => {
-  const { adminToken } = useParams();
+  const { token } = useParams();
 
-  console.log(adminToken);
+  console.log(token);
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  // const navigate = useNavigate()
+  // const dispatch = useDispatch()
 
 
   // useEffect(() => {
@@ -26,7 +26,7 @@ const AdminLandOnBehalfCustomerOrder = () => {
   //   });
   // }, [adminToken, navigate, dispatch]);
 
-  
+
   return (
     <div>
       
