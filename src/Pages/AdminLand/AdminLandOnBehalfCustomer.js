@@ -6,10 +6,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { baseUrl } from '../../BaseUrl/BaseUrl';
 import { AdminLogin, AdminInfo } from "../../Redux/Actions/AdminAction";
 
-const AdminLandOnBehalfCustomerOrder = () => {
-  const { token } = useParams();
+const AdminLandOnBehalfCustomer = () => {
+  const { adminToken } = useParams();
 
-  console.log(token);
+  console.log(adminToken);
 
   // const navigate = useNavigate()
   // const dispatch = useDispatch()
@@ -29,9 +29,9 @@ const AdminLandOnBehalfCustomerOrder = () => {
 
   return (
     <div>
-      
+      admin land
     </div>
   );
 };
 
-export default AdminLandOnBehalfCustomerOrder;
+export default AdminLandOnBehalfCustomer;
