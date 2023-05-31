@@ -6,8 +6,8 @@ import { loadUser } from './UserAction';
 export const AgentLogin = (agentToken) => async (dispatch, getState) => {
   try {
     dispatch({ type: 'AGENT_LOGIN_REQUEST' });
-    const { data } = await axios.post(
-      `${baseUrl}/auth/agentlogin/?token=`+agentToken
+    const { data } = await axios.get(
+      `${baseUrl}/auth/agent-login/?token=`+agentToken
     );
     // console.log(data)
 

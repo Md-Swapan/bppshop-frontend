@@ -3,30 +3,25 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { AgentInfo, AgentLogin } from "../../Redux/Actions/AgentAction";
 
 const AgentLand = () => {
   const { agentToken } = useParams();
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  console.log(agentToken)
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(AgentLogin(agentToken))
+    dispatch(AgentLogin(agentToken));
 
-    axios.get( `${baseUrl}/auth/agentlogin/?token=` + agentToken)
-    .then((res) => {
-      dispatch(AgentInfo(res))
-      
-      navigate('/')
-    });
+    axios.get(`${baseUrl}/auth/agent-login/?token=` + agentToken)
+      .then((res) => {
+        dispatch(AgentInfo(res));
+        navigate("/");
+      });
   }, [agentToken, navigate, dispatch]);
 
-  return <div>
-  </div>;
+  return <div></div>;
 };
 
 export default AgentLand;

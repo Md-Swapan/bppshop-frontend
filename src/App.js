@@ -127,12 +127,12 @@ function App() {
           <Route path="/404" element={<PageNotFound />} />
           <Route path="*" element={<navigate to="/404" replace />} />
 
-          <Route path="/forceLoginByAdmin/:adminToken" element={<AgentLand/>} />
+          <Route path="/forceLoginByAdmin/:adminToken" element={<AdminLandOnBehalfCustomer/>} />
           <Route path="/customer/force-login-by-agent/:agentToken" element={<AgentLand />} />
         </Routes>
       </Layout>
     </div>
   );
 }
-// http://localhost:3000/forceLoginByAdmin/?admin-token=eyJpdiI6IlVaMkxpbEZxWGlXUVVpQXA5WjlJOWc9PSIsInZhbHVlIjoiYkxqYnFtRGRDcEI3a2tYT29zUllNeENHQXU0dVRKOUwwS3A2NWU2Q3lTK3NTTWFYRittVkdXSE9zME9pb2tRVSIsIm1hYyI6ImU3NWFiMjgyYjNhM2FkYTBmY2IxMmQ3ZjZmY2NjZjAzMDIzYTFhZWEzMTA1YzgwYjVmNWZjYzhjM2M0ZDQ2MDEiLCJ0YWciOiIifQ==
+
 export default App;

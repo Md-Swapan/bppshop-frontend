@@ -6,7 +6,7 @@ import { loadUser } from './UserAction';
 export const AdminLogin = (adminToken) => async (dispatch, getState) => {
   try {
     dispatch({ type: 'ADMIN_LOGIN_REQUEST' });
-    const { data } = await axios.post(
+    const { data } = await axios.get(
       `${baseUrl}/auth/admin-login/?token=`+adminToken
     );
     // console.log(data)
