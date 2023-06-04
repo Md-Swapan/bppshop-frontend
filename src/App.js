@@ -52,6 +52,25 @@ import BrandProductDetails from "./Pages/Brand/BrandProductDetails";
 import FlashSaleProductDetails from "./Pages/FlashSale/FlashSaleProductDetails";
 import SearchProductDetails from "./Pages/Search/SearchProductDetails";
 import AdminLandOnBehalfCustomer from "./Pages/AdminLand/AdminLandOnBehalfCustomer";
+import Modal from "react-modal";
+
+
+
+Modal.setAppElement("#root");
+
+const customStyles = {
+  content: {
+    width: "550px",
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "0px",
+    paddingBottom: "20px",
+  },
+};
 
 
 function App() {
@@ -65,12 +84,26 @@ function App() {
     axios.get(`${baseUrl}/categories`).then((res) => {
       setAllCategory(res.data.data);
       setLoading(false);
+
+      // setTimeout(() => {
+        
+      // }, 5000);
+      openModal()
     });
     
     if (token==="undefined" || token===null || token==="") {
       localStorage.removeItem("token")
     }
   }, [token]);
+
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
 
   return (
@@ -131,6 +164,19 @@ function App() {
           <Route path="/customer/force-login-by-agent/:agentToken" element={<AgentLand />} />
         </Routes>
       </Layout>
+
+      {/* <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <span onClick={closeModal} className="modalCloseBtn">
+          <i className="bi bi-x-lg"></i>
+        </span>
+        Download app
+        <br />
+      </Modal> */}
     </div>
   );
 }
