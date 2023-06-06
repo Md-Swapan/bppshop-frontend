@@ -15,6 +15,8 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
+import ModalVideo from 'react-modal-video'
+
 
 const ProductDetailsPage = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
@@ -288,9 +290,13 @@ const ProductDetailsPage = () => {
   };
 
 
+  const [isOpen, setOpen] = useState(false)
+
+
 
   return (
     <>
+    
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item">
@@ -347,7 +353,9 @@ const ProductDetailsPage = () => {
                           />
                         )}
                       </div>
+
                       <div className="left_1">
+                      <button className="btn-primary" onClick={()=> setOpen(true)}>VIEW DEMO</button>
                         {productDetail?.images?.map((image, i) => (
                           <div
                             className={i === 0 ? "img_wrap active" : "img_wrap"}
@@ -362,6 +370,7 @@ const ProductDetailsPage = () => {
                           </div>
                         ))}
                       </div>
+                      
                     </div>
                   )}
                 </div>
@@ -586,6 +595,8 @@ const ProductDetailsPage = () => {
         </div>
       )}
       <ProductReview productDetail={productDetail}/>
+
+      <ModalVideo channel='youtube' openMessage autoplay isOpen={isOpen} onClose={() => setOpen(false)} />
     </>
   );
 };
