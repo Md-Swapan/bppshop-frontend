@@ -15,8 +15,9 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
-import ModalVideo from 'react-modal-video'
 
+import { IoCloseOutline } from "react-icons/io5";
+import { BiLoaderAlt } from "react-icons/bi";
 
 const ProductDetailsPage = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
@@ -24,12 +25,11 @@ const ProductDetailsPage = () => {
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [variantRes,setVariantRes]=useState({})
+  const [variantRes, setVariantRes] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
-  
 
   // Product Details............................
   useEffect(() => {
@@ -39,20 +39,15 @@ const ProductDetailsPage = () => {
     });
   }, [id]);
 
-
   // Customer Audit log.........................
   const auditLog = {
-    "product_id" : id
-  }
+    product_id: id,
+  };
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
-    token && axios.post(`${baseUrl}/customer/audit-log`, 
-    auditLog,
-    config
-    )
-  }, []) 
-
+    token && axios.post(`${baseUrl}/customer/audit-log`, auditLog, config);
+  }, []);
 
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
@@ -138,22 +133,28 @@ const ProductDetailsPage = () => {
       defaultChoices.forEach((element) => {
         priceVariantDataWithSelectedOption[element.name] = `${element.options}`;
       });
-      const token = localStorage.getItem("token");
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      if (colors?.length > 0) {
-        defaultChoices && axios.post(
-          `${baseUrl}/products/variant_price`,
-          priceVariantDefaultOptionData,
-          config
-        ).then(res=>setVariantRes(res.data.data))
-      }else{
-        defaultChoices &&   axios.post(
-          `${baseUrl}/products/variant_price`,
-          priceVariantDataWithSelectedOption,
-          config
-        ).then(res=>setVariantRes(res.data.data))
-      }
+    if (colors?.length > 0) {
+      defaultChoices &&
+        axios
+          .post(
+            `${baseUrl}/products/variant_price`,
+            priceVariantDefaultOptionData,
+            config
+          )
+          .then((res) => setVariantRes(res.data.data));
+    } else {
+      defaultChoices &&
+        axios
+          .post(
+            `${baseUrl}/products/variant_price`,
+            priceVariantDataWithSelectedOption,
+            config
+          )
+          .then((res) => setVariantRes(res.data.data));
+    }
   };
 
   //Function for Get Price variant by color .............................................
@@ -162,21 +163,20 @@ const ProductDetailsPage = () => {
 
   const priceVariantHandlerByColor = (selectedColor, index) => {
     setSelectedColor(selectedColor);
-    setActiveColor(index)
+    setActiveColor(index);
 
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
-      color: `${selectedColor?selectedColor:colors[0]}`,
+      color: `${selectedColor ? selectedColor : colors[0]}`,
       quantity: `${quantityCount}`,
     };
 
     defaultChoices &&
-    defaultChoices.forEach((element) => {
-      priceVariantDefaultColorData[element.name] = `${element.options}`;
-    });
+      defaultChoices.forEach((element) => {
+        priceVariantDefaultColorData[element.name] = `${element.options}`;
+      });
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
-
 
   // Product Images Zoom Slider Functions...................................
   const newData = productDetail?.images?.map((img) => ({
@@ -212,7 +212,7 @@ const ProductDetailsPage = () => {
 
   // cart item increase decrease function..............................
   const increaseQuantity = (id, quantity, stock, defaultChoices) => {
-    console.log(defaultChoices)
+    console.log(defaultChoices);
 
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -244,7 +244,7 @@ const ProductDetailsPage = () => {
     let color = productDetail?.colors?.map((color) => color?.code);
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
-      color: `${selectedColor?selectedColor:color[0] }`,
+      color: `${selectedColor ? selectedColor : color[0]}`,
       quantity: `${quantityCount}`,
     };
 
@@ -289,14 +289,21 @@ const ProductDetailsPage = () => {
     });
   };
 
+  const [isOpen, setOpen] = useState(false);
 
-  const [isOpen, setOpen] = useState(false)
+  const [modal, setModal] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
 
+  const openModal = () => {
+    setModal(!modal);
+  };
 
+  const spinner = () => {
+    setVideoLoading(!videoLoading);
+  };
 
   return (
     <>
-    
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item">
@@ -355,7 +362,47 @@ const ProductDetailsPage = () => {
                       </div>
 
                       <div className="left_1">
-                      <button className="btn-primary" onClick={()=> setOpen(true)}>VIEW DEMO</button>
+                        <div className="">
+                          <button onClick={openModal} className="btn-primary">
+                            Video Review
+                            {modal ? (
+                              <section className="modal__bg">
+                                <div className="modal__align">
+                                  <div className="modal__content" modal={modal}>
+                                    <IoCloseOutline
+                                      className="modal__close"
+                                      arial-label="Close modal"
+                                      onClick={setModal}
+                                    />
+                                    <div className="modal__video-align">
+                                      {videoLoading ? (
+                                        <div className="modal__spinner">
+                                          <BiLoaderAlt
+                                            className="modal__spinner-style"
+                                            fadeIn="none"
+                                          />
+                                        </div>
+                                      ) : null}
+                                      <iframe
+                                        className="modal__video-style"
+                                        onLoad={spinner}
+                                        loading="lazy"
+                                        width="800"
+                                        height="500"
+                                        src="https://www.youtube.com/embed/4UZrsTqkcW4"
+                                        title="YouTube video player"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                      ></iframe>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                            ) : null}
+                          </button>
+                        </div>
+
                         {productDetail?.images?.map((image, i) => (
                           <div
                             className={i === 0 ? "img_wrap active" : "img_wrap"}
@@ -370,7 +417,6 @@ const ProductDetailsPage = () => {
                           </div>
                         ))}
                       </div>
-                      
                     </div>
                   )}
                 </div>
@@ -395,14 +441,16 @@ const ProductDetailsPage = () => {
                   <div className="product_details_page_price">
                     {productDetail?.discount ? (
                       <h5 className="prices">
-                        &#2547; {productDetail?.unit_price - productDetail?.discount}{" "}
+                        &#2547;{" "}
+                        {productDetail?.unit_price - productDetail?.discount}{" "}
                         <del className="text-danger">
-                          
                           &#2547; {productDetail?.unit_price}
                         </del>
                       </h5>
                     ) : (
-                      <h5 className="prices">&#2547; {productDetail?.unit_price}</h5>
+                      <h5 className="prices">
+                        &#2547; {productDetail?.unit_price}
+                      </h5>
                     )}
                   </div>
                   <div className="product_details_page_pc_size_color">
@@ -455,7 +503,13 @@ const ProductDetailsPage = () => {
                                 cursor: "pointer",
                               }}
                               className="colorBox"
-                              id={ index[0]? "activatedColor" : activeColor === index ? "activatedColor" :  "" }
+                              id={
+                                index[0]
+                                  ? "activatedColor"
+                                  : activeColor === index
+                                  ? "activatedColor"
+                                  : ""
+                              }
                             ></div>
                           </>
                         ))}
@@ -525,7 +579,9 @@ const ProductDetailsPage = () => {
                                 : quantityCount
                             );
                             priceVariantHandlerByChoiceOption(
-                              productDetail?.current_stock >= quantityCount + 1 ? quantityCount + 1 : quantityCount
+                              productDetail?.current_stock >= quantityCount + 1
+                                ? quantityCount + 1
+                                : quantityCount
                             );
                           }}
                           className="plus"
@@ -539,20 +595,23 @@ const ProductDetailsPage = () => {
                         <h5>
                           {productDetail?.discount > 0 ? (
                             <span className="mx-2 text-end">
-                              &#2547; {isItemExist?.quantity *
+                              &#2547;{" "}
+                              {isItemExist?.quantity *
                                 (productDetail?.unit_price -
                                   productDetail?.discount)}
                             </span>
                           ) : (
                             <span className="mx-2 text-end">
-                              &#2547; {isItemExist?.quantity *
+                              &#2547;{" "}
+                              {isItemExist?.quantity *
                                 productDetail?.unit_price}
                             </span>
                           )}
                         </h5>
                       ) : (
                         <h5>
-                          Total Price: &#2547; {variantRes?.price
+                          Total Price: &#2547;{" "}
+                          {variantRes?.price
                             ? variantRes?.price
                             : quantityCount *
                               (productDetail?.unit_price -
@@ -594,9 +653,7 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       )}
-      <ProductReview productDetail={productDetail}/>
-
-      <ModalVideo channel='youtube' openMessage autoplay isOpen={isOpen} onClose={() => setOpen(false)} />
+      <ProductReview productDetail={productDetail} />
     </>
   );
 };
