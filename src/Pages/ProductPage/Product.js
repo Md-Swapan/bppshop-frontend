@@ -67,46 +67,7 @@ const Product = ({ allCategory, isLoading }) => {
           <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
             {loading ? (
               <>
-                {/* <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                />
-                <Skeleton
-                  className="skeletonLoader"
-                  borderRadius="10px"
-                  count={1}
-                /> */}
+             
                 <Skeleton height="335px" borderRadius="10px" count={1} />
                 <Skeleton height="335px" borderRadius="10px" count={1} />
                 <Skeleton height="335px" borderRadius="10px" count={1} />

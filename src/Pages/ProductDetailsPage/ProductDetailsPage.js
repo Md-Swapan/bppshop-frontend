@@ -17,6 +17,7 @@ import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
 
 import { IoCloseOutline } from "react-icons/io5";
+import { AiOutlineYoutube, AiFillPlayCircle} from "react-icons/ai";
 import { BiLoaderAlt } from "react-icons/bi";
 
 const ProductDetailsPage = () => {
@@ -302,6 +303,25 @@ const ProductDetailsPage = () => {
     setVideoLoading(!videoLoading);
   };
 
+
+  // youtube video embed code split function............
+
+  let embed_video_url;
+
+  const youtube_url = () => {
+    var video_url = productDetail.video_url
+    var split_video_url = video_url.split("=");
+    embed_video_url = split_video_url[1];
+  };
+
+  if(productDetail.video_url){
+    youtube_url();
+  }
+
+
+
+
+
   return (
     <>
       <nav aria-label="breadcrumb">
@@ -359,12 +379,10 @@ const ProductDetailsPage = () => {
                             }}
                           />
                         )}
-                      </div>
 
-                      <div className="left_1">
-                        <div className="">
-                          <button onClick={openModal} className="btn-primary">
-                            Video Review
+                        {productDetail.video_url && <div className="video_modal_btn">
+                          <button onClick={openModal} >
+                            <AiFillPlayCircle className="videoPlayerIcon"/>
                             {modal ? (
                               <section className="modal__bg">
                                 <div className="modal__align">
@@ -389,7 +407,7 @@ const ProductDetailsPage = () => {
                                         loading="lazy"
                                         width="800"
                                         height="500"
-                                        src="https://www.youtube.com/embed/4UZrsTqkcW4"
+                                        src={`https://www.youtube.com/embed/${embed_video_url}`}
                                         title="YouTube video player"
                                         frameBorder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -401,8 +419,10 @@ const ProductDetailsPage = () => {
                               </section>
                             ) : null}
                           </button>
-                        </div>
+                        </div>}
+                      </div>
 
+                      <div className="left_1">
                         {productDetail?.images?.map((image, i) => (
                           <div
                             className={i === 0 ? "img_wrap active" : "img_wrap"}

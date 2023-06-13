@@ -15,13 +15,16 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
+import { IoCloseOutline } from "react-icons/io5";
+import { AiOutlineYoutube } from "react-icons/ai";
+import { BiLoaderAlt } from "react-icons/bi";
 
 const BrandProductDetails = () => {
   const { brandId, name, id } = useParams();
 
-  const location = useLocation()
+  const location = useLocation();
 
-  const newLocation = location.pathname.split("/")
+  const newLocation = location.pathname.split("/");
   const brandName = newLocation[2];
 
   let newId = parseInt(id);
@@ -29,7 +32,7 @@ const BrandProductDetails = () => {
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [variantRes,setVariantRes]=useState({})
+  const [variantRes, setVariantRes] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -42,19 +45,15 @@ const BrandProductDetails = () => {
     });
   }, [id]);
 
-
   // Customer Audit log.........................
   const auditLog = {
-    "product_id" : id
-  }
+    product_id: id,
+  };
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
-    token && axios.post(`${baseUrl}/customer/audit-log`, 
-    auditLog,
-    config
-    )
-  }, []) 
+    token && axios.post(`${baseUrl}/customer/audit-log`, auditLog, config);
+  }, []);
 
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
@@ -66,7 +65,6 @@ const BrandProductDetails = () => {
     (list) => list?.options
   );
   const colors = productDetail?.colors?.map((color) => color?.code);
-
 
   //default choice option..............................
   const defaultOptionName = productDetail?.choice_options?.map(
@@ -122,7 +120,7 @@ const BrandProductDetails = () => {
         },
       });
     }
-    
+
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
@@ -143,22 +141,28 @@ const BrandProductDetails = () => {
       defaultChoices.forEach((element) => {
         priceVariantDataWithSelectedOption[element.name] = `${element.options}`;
       });
-      const token = localStorage.getItem("token");
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      if (colors?.length > 0) {
-        defaultChoices && axios.post(
-          `${baseUrl}/products/variant_price`,
-          priceVariantDefaultOptionData,
-          config
-        ).then(res=>setVariantRes(res.data.data))
-      }else{
-        defaultChoices &&   axios.post(
-          `${baseUrl}/products/variant_price`,
-          priceVariantDataWithSelectedOption,
-          config
-        ).then(res=>setVariantRes(res.data.data))
-      }
+    if (colors?.length > 0) {
+      defaultChoices &&
+        axios
+          .post(
+            `${baseUrl}/products/variant_price`,
+            priceVariantDefaultOptionData,
+            config
+          )
+          .then((res) => setVariantRes(res.data.data));
+    } else {
+      defaultChoices &&
+        axios
+          .post(
+            `${baseUrl}/products/variant_price`,
+            priceVariantDataWithSelectedOption,
+            config
+          )
+          .then((res) => setVariantRes(res.data.data));
+    }
   };
 
   //Function for Get Price variant by color .............................................
@@ -167,21 +171,20 @@ const BrandProductDetails = () => {
 
   const priceVariantHandlerByColor = (selectedColor, index) => {
     setSelectedColor(selectedColor);
-    setActiveColor(index)
+    setActiveColor(index);
 
     const priceVariantDefaultColorData = {
       product_id: `${id}`,
-      color: `${selectedColor?selectedColor:colors[0]}`,
+      color: `${selectedColor ? selectedColor : colors[0]}`,
       quantity: `${quantityCount}`,
     };
 
     defaultChoices &&
-    defaultChoices.forEach((element) => {
-      priceVariantDefaultColorData[element.name] = `${element.options}`;
-    });
+      defaultChoices.forEach((element) => {
+        priceVariantDefaultColorData[element.name] = `${element.options}`;
+      });
     dispatch(getPriceVariant(priceVariantDefaultColorData));
   };
-
 
   // Product Images Zoom Slider Functions...................................
   const newData = productDetail?.images?.map((img) => ({
@@ -247,7 +250,7 @@ const BrandProductDetails = () => {
     let color = productDetail?.colors?.map((color) => color?.code);
     const addItemsToCartDataWithColor = {
       id: `${productDetail?.id}`,
-      color: `${selectedColor?selectedColor:color[0] }`,
+      color: `${selectedColor ? selectedColor : color[0]}`,
       quantity: `${quantityCount}`,
     };
 
@@ -292,9 +295,34 @@ const BrandProductDetails = () => {
     });
   };
 
+  // youtube video embed code split function............
+
+  let embed_video_url;
+
+  const youtube_url = () => {
+    var video_url = productDetail.video_url;
+    var split_video_url = video_url.split("=");
+    embed_video_url = split_video_url[1];
+  };
+
+  if (productDetail.video_url) {
+    youtube_url();
+  }
+
+  const [modal, setModal] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
+
+  const openModal = () => {
+    setModal(!modal);
+  };
+
+  const spinner = () => {
+    setVideoLoading(!videoLoading);
+  };
+
   return (
     <>
-    <h4>Brand Products:</h4>
+      <h4>Brand Products:</h4>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item" aria-current="page">
@@ -303,7 +331,7 @@ const BrandProductDetails = () => {
           <li className="breadcrumb-item" aria-current="page">
             <Link to={`/brands/${brandName}/${brandId}`}>{name}</Link>
           </li>
-         
+
           <li className="breadcrumb-item active" aria-current="page">
             {productDetail?.name}
           </li>
@@ -344,6 +372,52 @@ const BrandProductDetails = () => {
                               },
                             }}
                           />
+                        )}
+
+                        {productDetail.video_url && (
+                          <div className="video_modal_btn">
+                            <button onClick={openModal}>
+                              <AiOutlineYoutube className="videoPlayerIcon" />
+                              {modal ? (
+                                <section className="modal__bg">
+                                  <div className="modal__align">
+                                    <div
+                                      className="modal__content"
+                                      modal={modal}
+                                    >
+                                      <IoCloseOutline
+                                        className="modal__close"
+                                        arial-label="Close modal"
+                                        onClick={setModal}
+                                      />
+                                      <div className="modal__video-align">
+                                        {videoLoading ? (
+                                          <div className="modal__spinner">
+                                            <BiLoaderAlt
+                                              className="modal__spinner-style"
+                                              fadeIn="none"
+                                            />
+                                          </div>
+                                        ) : null}
+                                        <iframe
+                                          className="modal__video-style"
+                                          onLoad={spinner}
+                                          loading="lazy"
+                                          width="800"
+                                          height="500"
+                                          src={`https://www.youtube.com/embed/${embed_video_url}`}
+                                          title="YouTube video player"
+                                          frameBorder="0"
+                                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                          allowfullscreen
+                                        ></iframe>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </section>
+                              ) : null}
+                            </button>
+                          </div>
                         )}
                       </div>
                       <div className="left_1">
@@ -445,7 +519,13 @@ const BrandProductDetails = () => {
                                 cursor: "pointer",
                               }}
                               className="color1"
-                              id={ index[0]? "activatedColor" : activeColor === index ? "activatedColor" :  "" }
+                              id={
+                                index[0]
+                                  ? "activatedColor"
+                                  : activeColor === index
+                                  ? "activatedColor"
+                                  : ""
+                              }
                             ></div>
                           </>
                         ))}
@@ -513,7 +593,9 @@ const BrandProductDetails = () => {
                                 : quantityCount
                             );
                             priceVariantHandlerByChoiceOption(
-                              productDetail?.current_stock >= quantityCount + 1 ? quantityCount + 1 : quantityCount
+                              productDetail?.current_stock >= quantityCount + 1
+                                ? quantityCount + 1
+                                : quantityCount
                             );
                           }}
                           className="plus"
@@ -585,7 +667,7 @@ const BrandProductDetails = () => {
           </div>
         </div>
       )}
-      <ProductReview productDetail={productDetail}/>
+      <ProductReview productDetail={productDetail} />
     </>
   );
 };
