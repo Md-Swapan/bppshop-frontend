@@ -9,7 +9,7 @@ const HomeFilterBtnHeader = () => {
         <div className="header_btn">
           <div>
             <Link to="/brands">
-              <button>Brand</button>
+              <button>Brand's</button>
             </Link>
           </div>
           <div>
