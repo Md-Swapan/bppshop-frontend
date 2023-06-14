@@ -274,7 +274,7 @@ const CheckoutPayment = () => {
               onClick={() =>
                 handleCheckoutConfirm(shippingAddressInfo?.data?.id)
               }
-              type=""
+              type="button"
               id="cashOnDeliveryNextBtn"
             >
               {/* Next */}
