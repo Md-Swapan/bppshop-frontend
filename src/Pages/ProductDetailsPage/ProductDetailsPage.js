@@ -16,9 +16,12 @@ import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
 
-import { IoCloseOutline } from "react-icons/io5";
+import ModalVideo from "react-modal-video";
+import "react-modal-video/scss/modal-video.scss";
+
+// import { IoCloseOutline } from "react-icons/io5";
 import { AiOutlineYoutube, AiFillPlayCircle} from "react-icons/ai";
-import { BiLoaderAlt } from "react-icons/bi";
+// import { BiLoaderAlt } from "react-icons/bi";
 
 const ProductDetailsPage = () => {
   const { slug, subSlug, subSubSlug, id } = useParams();
@@ -292,33 +295,37 @@ const ProductDetailsPage = () => {
 
   const [isOpen, setOpen] = useState(false);
 
-  const [modal, setModal] = useState(false);
-  const [videoLoading, setVideoLoading] = useState(true);
+  // const [modal, setModal] = useState(false);
+  // const [videoLoading, setVideoLoading] = useState(true);
 
-  const openModal = () => {
-    setModal(!modal);
-  };
+  // const openModal = () => {
+  //   setModal(!modal);
+  // };
 
-  const spinner = () => {
-    setVideoLoading(!videoLoading);
-  };
-
+  // const spinner = () => {
+  //   setVideoLoading(!videoLoading);
+  // };
 
   // youtube video embed code split function............
 
   let embed_video_url;
 
   const youtube_url = () => {
-    var video_url = productDetail.video_url
-    var split_video_url = video_url.split("=");
-    embed_video_url = split_video_url[1];
+    var video_url = productDetail.video_url;
+
+    if (video_url.includes("shorts")) {
+      var split_shorts_video_url = video_url.split("/");
+      embed_video_url = split_shorts_video_url[4];
+    }
+    if (video_url.includes("watch")) {
+      var split_video_url = video_url.split("=");
+      embed_video_url = split_video_url[1];
+    }
   };
 
-  if(productDetail.video_url){
+  if (productDetail.video_url) {
     youtube_url();
   }
-
-
 
 
 
@@ -380,7 +387,7 @@ const ProductDetailsPage = () => {
                           />
                         )}
 
-                        {productDetail.video_url && <div className="video_modal_btn">
+                        {/* {productDetail.video_url && <div className="video_modal_btn">
                           <button onClick={openModal} >
                             <AiFillPlayCircle className="videoPlayerIcon"/>
                             {modal ? (
@@ -419,16 +426,34 @@ const ProductDetailsPage = () => {
                               </section>
                             ) : null}
                           </button>
-                        </div>}
+                        </div>} */}
                       </div>
 
-                      <div className="left_1">
+                      <div className="left_1" id="productImgGallery">
+                        <ModalVideo
+                          channel="youtube"
+                          autoplay
+                          allowFullScreen="true"
+                          isOpen={isOpen}
+                          videoId={`${embed_video_url}`}
+                          onClose={() => setOpen(false)}
+                        />
+
+                        <button
+                          onClick={() => setOpen(true)}
+                          className="video_player_btn"
+                        >
+                          <img src={`https://backend.bppshop.com.bd/storage/product/thumbnail/${productDetail.thumbnail}`} alt=""/>
+                          <AiFillPlayCircle className="videoPlayerIcon"/>
+                        </button>
+
                         {productDetail?.images?.map((image, i) => (
                           <div
                             className={i === 0 ? "img_wrap active" : "img_wrap"}
                             key={i}
                             onClick={() => hoverHandler(image, i)}
                             ref={addRefs}
+                            
                           >
                             <img
                               src={`https://backend.bppshop.com.bd/storage/product/${image}`}
