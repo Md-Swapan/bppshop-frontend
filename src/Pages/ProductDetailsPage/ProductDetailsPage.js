@@ -439,13 +439,13 @@ const ProductDetailsPage = () => {
                           onClose={() => setOpen(false)}
                         />
 
-                        <button
+                        {productDetail.video_url && <button
                           onClick={() => setOpen(true)}
                           className="video_player_btn"
                         >
                           <img src={`https://backend.bppshop.com.bd/storage/product/thumbnail/${productDetail.thumbnail}`} alt=""/>
                           <AiFillPlayCircle className="videoPlayerIcon"/>
-                        </button>
+                        </button>}
 
                         {productDetail?.images?.map((image, i) => (
                           <div

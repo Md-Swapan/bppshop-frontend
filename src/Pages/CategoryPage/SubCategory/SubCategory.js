@@ -23,7 +23,7 @@ const SubCategory = ({ allCategory, loading }) => {
         {slug === "fashion" ? (
           <MetaData
             title="Online Fashion Store - Shopping for Women, Men, Kids"
-            description="Buy clothing dresses Online in Bppshops at best price for men, woman & Kids. 
+            description="Buy clothing dresses Online in BppShop at best price for men, woman & Kids. 
             Discover the latest fashion trends. T-shirts, Shirts, Saree, Three Pieces and many more"
           />
         ) : slug === "islamic" ? (
@@ -65,7 +65,7 @@ const SubCategory = ({ allCategory, loading }) => {
           />
         ) : slug === "shoe" ? (
           <MetaData
-            title="Buy Shoes, Boots, Sandels online in Bd at low prices"
+            title="Buy Shoes, Boots, Sandals online in Bd at low prices"
             description="Buy wide selection of high quality comfort shoe from Bpp Shop.
             Shop Sandals, Boots, Converse, Loafers, Ladies formal shoes, sports shoes, heels."
           />

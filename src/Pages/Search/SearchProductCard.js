@@ -149,8 +149,16 @@ const SearchProductCard = ({ product }) => {
                 </div>
                 <div className="product-card-body-content">
                   <small>
-                    {name.toString().substring(0, 15)}...
-                    {newChoiceOption && (
+                    {name.toString().substring(0, 26)}...
+                    {/* {newChoiceOption && (
+                      <span className="unitPrice_view">
+                        {newChoiceOption?.options[0]} : {newChoiceOption?.title}
+                      </span>
+                    )} */}
+                  </small>
+                  <br/>
+                  <small>
+                  {newChoiceOption && (
                       <span className="unitPrice_view">
                         {newChoiceOption?.options[0]} : {newChoiceOption?.title}
                       </span>
