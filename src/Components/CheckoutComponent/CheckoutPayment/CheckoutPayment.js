@@ -63,6 +63,11 @@ const CheckoutPayment = () => {
   const isRadioSelected = (value) => paymentType === value;
   const handleRadioClick = (event) => setPaymentType(event.target.value);
 
+
+  // let cashOnDeliveryPayment = false;
+
+  const [cashOnDeliveryPayment, setCashOnDeliveryPayment] = useState(0)
+
   const cashOnDeliveryHandler = () => {
     const codBtn = document.querySelector(".cashOnDelivery_content");
     const cODelivery = document.querySelector("#cashOnDelivery").checked;
@@ -80,8 +85,10 @@ const CheckoutPayment = () => {
     codBtn.style.display = "block";
     paymentOptionWayContent.style.display = "none";
     bankPaymentOptionWay.style.display = "none";
-    cashOnDeliveryNextBtn.style.display = "block";
+    // cashOnDeliveryNextBtn.style.display = "block";
     document.querySelector(".paymentErrorMessage").innerHTML = "";
+
+    setCashOnDeliveryPayment(1);
   };
 
   const MobilePaymentOptionHandler = () => {
@@ -103,6 +110,8 @@ const CheckoutPayment = () => {
     bankPaymentOptionWay.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
     document.querySelector(".paymentErrorMessage").innerHTML = "";
+
+    setCashOnDeliveryPayment(0);
   };
 
   const BankPaymentOptionHandler = () => {
@@ -124,6 +133,7 @@ const CheckoutPayment = () => {
     paymentOptionWayContent.style.display = "none";
     cashOnDeliveryNextBtn.style.display = "none";
     document.querySelector(".paymentErrorMessage").innerHTML = "";
+    setCashOnDeliveryPayment(0);
   };
 
   const AgentWalletPaymentHandler = () => {
@@ -142,8 +152,10 @@ const CheckoutPayment = () => {
     bankPaymentOptionWay.style.display = "none";
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
-    cashOnDeliveryNextBtn.style.display = "none";
+    // cashOnDeliveryNextBtn.style.display = "none";
+    setCashOnDeliveryPayment(0);
 
+    
     if (agentId) {
       NavigateAgentWallet();
     } else {
@@ -270,7 +282,7 @@ const CheckoutPayment = () => {
               <button className="back_to_shipping">Back to Shipping</button>
             </Link>
 
-            <button
+            {cashOnDeliveryPayment == 0 ? "" : <button
               onClick={() =>
                 handleCheckoutConfirm(shippingAddressInfo?.data?.id)
               }
@@ -284,7 +296,7 @@ const CheckoutPayment = () => {
               paymentType === "agentWalletPayment"
                 ? "Next"
                 : "Confirm Order"}
-            </button>
+            </button> }
           {/* </div> */}
         </div>
       </div>

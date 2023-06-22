@@ -131,7 +131,7 @@ function App() {
           <Route path="/new-arrival/:id" element={<NewArrivalProductDetails/>} />
           <Route path="/top-rated" element={<TopRated/>} />
           <Route path="/top-rated/:id" element={<TopRatedProductDetails/>} />
-          <Route path="/addproductreview/:pid" element={<AddProductReview/>} />
+          <Route path="add-product-review/:pid" element={<AddProductReview/>} />
           {/* <Route path="/search/:productName" element={<Search/>} /> */}
         
           <Route path="/shipping-address" element={<ProtectedRoute><ShippingDetails/></ProtectedRoute>}>

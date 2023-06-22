@@ -115,7 +115,7 @@ const OrderDetails = () => {
                           <br />
                           <span>Variant: {order.variant}</span>
                           <br />
-                          <Link to={`/addproductreview/${order?.product_id}`}>
+                          <Link to={`/add-product-review/${order?.product_id}`}>
                             <button className="add_review_btn">
                               Add Review
                             </button>
