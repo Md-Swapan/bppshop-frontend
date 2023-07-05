@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import {
   addItemsToCart,
   addItemsToCartAfterLogin,
+  updateItemsToCart,
 } from "./../../Redux/Actions/CartAction";
 import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
@@ -216,7 +217,7 @@ const ProductDetailsPage = () => {
 
   // cart item increase decrease function..............................
   const increaseQuantity = (id, quantity, stock, defaultChoices) => {
-    console.log(defaultChoices);
+    // console.log(defaultChoices);
 
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -233,6 +234,7 @@ const ProductDetailsPage = () => {
       return;
     }
     dispatch(addItemsToCart(id, newQty, defaultChoices));
+    dispatch(updateItemsToCart(id, newQty, defaultChoices));
   };
 
   const decreaseQuantity = (id, quantity, defaultChoices) => {
@@ -241,6 +243,7 @@ const ProductDetailsPage = () => {
       return;
     }
     dispatch(addItemsToCart(id, newQty, defaultChoices));
+    dispatch(updateItemsToCart(id, newQty, defaultChoices));
   };
 
   // add to cart with price variant options..........................................

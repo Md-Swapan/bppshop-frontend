@@ -65,13 +65,16 @@ export const updateItemsToCart =
 
     const productId = product.id;
     const cartGroupItems = getState().cartGroup.cartGroupItems;
-    const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
+    const isItemExist = cartGroupItems?.find((i) => (i.product_id || i.data.product_id) === productId);
 
 
     const cartUpdateInfo = {
       key: `${isItemExist?.data?.id}`,
       quantity: `${quantity}`,
     };
+
+    console.log(cartUpdateInfo);
+    
 
     if (isItemExist) {
       const token = localStorage.getItem("token");
@@ -193,8 +196,9 @@ export const getCartData = () => async (dispatch, getState) => {
 
 
 // REMOVE FROM CART
-export const removeItemsFromCart =
-  (productId) => async (dispatch, getState) => {
+export const removeItemsFromCart = (productId) => async (dispatch, getState) => {
+  
+  //  console.log(productId)
 
     dispatch({
       type: "REMOVE_FROM_CART",
@@ -206,8 +210,10 @@ export const removeItemsFromCart =
     );
 
     const cartGroupItem = getState().cartGroup.cartGroupItems;
-    const isItemExist = cartGroupItem.find((i) => i.product_id === productId);
+    const isItemExist = cartGroupItem?.find((i) => (i?.product_id || i.data.product_id) == productId);
     const cartId = { key: `${isItemExist?.data?.id}` };
+
+    // console.log(cartGroupItem)
 
     if (isItemExist) {
       dispatch({type: "REMOVE_ITEM_FROM_CART_REQUEST"} )

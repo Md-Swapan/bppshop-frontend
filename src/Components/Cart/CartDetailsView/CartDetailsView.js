@@ -53,21 +53,22 @@ const CartDetailsView = () => {
     }
 
     dispatch(addItemsToCart(id, newQty, defaultChoices));
-    // dispatch(updateItemsToCart(id, newQty));
+    dispatch(updateItemsToCart(id, newQty, defaultChoices));
   };
-
+ 
   const decreaseQuantity = (id, quantity, defaultChoices) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
       return;
     }
     dispatch(addItemsToCart(id, newQty, defaultChoices));
-    // dispatch(updateItemsToCart(id, newQty));
+    dispatch(updateItemsToCart(id, newQty, defaultChoices));
   };
 
   //cart item remove functionality
   const handleRemoveItemFormCart = (id) => {
     // console.log(id)
+
     dispatch(removeItemsFromCart(id));
     // toaster
     toast.success(`Item removed from cart successfully`, {

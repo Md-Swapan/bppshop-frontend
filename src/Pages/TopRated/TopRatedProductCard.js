@@ -150,11 +150,11 @@ const TopRatedProductCard = ({ product }) => {
                 <div className="product-card-body-content">
                   <small>
                     {name.toString().substring(0, 26)}...
-                    {newChoiceOption && (
+                    {/* {newChoiceOption && (
                       <span className="unitPrice_view">
                         {newChoiceOption?.options[0]} : {newChoiceOption?.title}
                       </span>
-                    )}
+                    )} */}
                   </small>
                   <br/>
                   <small>
