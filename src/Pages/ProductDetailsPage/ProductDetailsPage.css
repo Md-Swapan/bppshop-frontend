@@ -308,6 +308,11 @@
   color: #1b6aae;
 }
 
+.seller-product-suggestion-container{
+  width: 100%;
+  border: 1px solid gainsboro;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

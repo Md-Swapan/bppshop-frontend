@@ -53,6 +53,7 @@ import FlashSaleProductDetails from "./Pages/FlashSale/FlashSaleProductDetails";
 import SearchProductDetails from "./Pages/Search/SearchProductDetails";
 import AdminLandOnBehalfCustomer from "./Pages/AdminLand/AdminLandOnBehalfCustomer";
 import Modal from "react-modal";
+import AllSellerStore from "./Pages/SellerStore/AllSellerStore/AllSellerStore";
 
 
 
@@ -118,6 +119,7 @@ function App() {
           <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
           <Route path="/search" element={<Search/>} />
           <Route path="/search/:id" element={<SearchProductDetails/>} />
+          <Route path="/sellers-store" element={<AllSellerStore/>} />
           <Route path="/brands" element={<Brands/>} />
           <Route path="/brands/:brandName/:brandId" element={<BrandsProducts/>} />
           <Route path="/brand/:name/:brandId/:id" element={<BrandProductDetails/>} />

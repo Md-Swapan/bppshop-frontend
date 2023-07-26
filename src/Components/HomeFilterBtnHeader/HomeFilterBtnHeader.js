@@ -7,11 +7,17 @@ const HomeFilterBtnHeader = () => {
     <>
       <div className="homeFilterBtnHeader-container-section">
         <div className="header_btn">
+        <div>
+            <Link to="/sellers-store">
+              <button>Store</button>
+            </Link>
+          </div>
           <div>
             <Link to="/brands">
               <button>Brand's</button>
             </Link>
           </div>
+          
           <div>
             <div className="dropdown">
               <button

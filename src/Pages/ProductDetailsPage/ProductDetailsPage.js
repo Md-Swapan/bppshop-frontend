@@ -21,7 +21,7 @@ import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
 
 // import { IoCloseOutline } from "react-icons/io5";
-import { AiOutlineYoutube, AiFillPlayCircle} from "react-icons/ai";
+import { AiOutlineYoutube, AiFillPlayCircle } from "react-icons/ai";
 // import { BiLoaderAlt } from "react-icons/bi";
 
 const ProductDetailsPage = () => {
@@ -330,67 +330,69 @@ const ProductDetailsPage = () => {
     youtube_url();
   }
 
-
-
   return (
     <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb my-4">
-          <li className="breadcrumb-item">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            <Link to={`/${slug}`}>{slug}</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            <Link to={`/${slug}/${subSlug}`}>{subSlug}</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            <Link to={`/${slug}/${subSlug}/${subSubSlug}`}>{subSubSlug}</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {productDetail?.name}
-          </li>
-        </ol>
-      </nav>
-      <br />
-      {productDetailsPath === true && (
-        <div className="product_details_page_container">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-4">
-                <div className="product_details_page_img_container">
-                  {newData?.length && (
-                    <div className="imgZoomContainer">
-                      <div className="left_2">
-                        {productDetail?.images?.length && (
-                          <ReactImageMagnify
-                            {...{
-                              smallImage: {
-                                alt: "Wristwatch by Ted Baker London",
-                                isFluidWidth: true,
-                                sizes:
-                                  "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
-                                src: img
-                                  ? `https://backend.bppshop.com.bd/storage/product/${img}`
-                                  : newData[0].image,
-                              },
-                              largeImage: {
-                                src: img
-                                  ? `https://backend.bppshop.com.bd/storage/product/${img}`
-                                  : newData[0].image,
-                                width: 1526,
-                                height: 2000,
-                              },
-                              enlargedImageContainerDimensions: {
-                                width: "100%",
-                                height: "100%",
-                              },
-                            }}
-                          />
-                        )}
+      {/* <div className="row">
+        <div className="col-md-9"> */}
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb my-4">
+              <li className="breadcrumb-item">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                <Link to={`/${slug}`}>{slug}</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                <Link to={`/${slug}/${subSlug}`}>{subSlug}</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                <Link to={`/${slug}/${subSlug}/${subSubSlug}`}>
+                  {subSubSlug}
+                </Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                {productDetail?.name}
+              </li>
+            </ol>
+          </nav>
+          <br />
+          {productDetailsPath === true && (
+            <div className="product_details_page_container">
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="product_details_page_img_container">
+                      {newData?.length && (
+                        <div className="imgZoomContainer">
+                          <div className="left_2">
+                            {productDetail?.images?.length && (
+                              <ReactImageMagnify
+                                {...{
+                                  smallImage: {
+                                    alt: "Wristwatch by Ted Baker London",
+                                    isFluidWidth: true,
+                                    sizes:
+                                      "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                                    src: img
+                                      ? `https://backend.bppshop.com.bd/storage/product/${img}`
+                                      : newData[0].image,
+                                  },
+                                  largeImage: {
+                                    src: img
+                                      ? `https://backend.bppshop.com.bd/storage/product/${img}`
+                                      : newData[0].image,
+                                    width: 1526,
+                                    height: 2000,
+                                  },
+                                  enlargedImageContainerDimensions: {
+                                    width: "100%",
+                                    height: "100%",
+                                  },
+                                }}
+                              />
+                            )}
 
-                        {/* {productDetail.video_url && <div className="video_modal_btn">
+                            {/* {productDetail.video_url && <div className="video_modal_btn">
                           <button onClick={openModal} >
                             <AiFillPlayCircle className="videoPlayerIcon"/>
                             {modal ? (
@@ -430,277 +432,298 @@ const ProductDetailsPage = () => {
                             ) : null}
                           </button>
                         </div>} */}
-                      </div>
-
-                      <div className="left_1" id="productImgGallery">
-                        <ModalVideo
-                          channel="youtube"
-                          autoplay
-                          allowFullScreen="true"
-                          isOpen={isOpen}
-                          videoId={`${embed_video_url}`}
-                          onClose={() => setOpen(false)}
-                        />
-
-                        {productDetail.video_url && <button
-                          onClick={() => setOpen(true)}
-                          className="video_player_btn"
-                        >
-                          <img src={`https://backend.bppshop.com.bd/storage/product/thumbnail/${productDetail.thumbnail}`} alt=""/>
-                          <AiFillPlayCircle className="videoPlayerIcon"/>
-                        </button>}
-
-                        {productDetail?.images?.map((image, i) => (
-                          <div
-                            className={i === 0 ? "img_wrap active" : "img_wrap"}
-                            key={i}
-                            onClick={() => hoverHandler(image, i)}
-                            ref={addRefs}
-                            
-                          >
-                            <img
-                              src={`https://backend.bppshop.com.bd/storage/product/${image}`}
-                              alt=""
-                            />
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-8">
-                <div className="product_details_page_content">
-                  <h2>{productDetail?.name}</h2>
-                  <p>
-                    <span>
-                      Product Code: <strong>{productDetail?.code}</strong>
-                    </span>
-                    <span>
-                      {" "}
-                      Stock:{" "}
-                      {productDetail?.current_stock > 0 ? (
-                        <strong>Available</strong>
-                      ) : (
-                        <strong>Not Available</strong>
-                      )}
-                    </span>
-                  </p>
-                  <div className="product_details_page_price">
-                    {productDetail?.discount ? (
-                      <h5 className="prices">
-                        &#2547;{" "}
-                        {productDetail?.unit_price - productDetail?.discount}{" "}
-                        <del className="text-danger">
-                          &#2547; {productDetail?.unit_price}
-                        </del>
-                      </h5>
-                    ) : (
-                      <h5 className="prices">
-                        &#2547; {productDetail?.unit_price}
-                      </h5>
-                    )}
-                  </div>
-                  <div className="product_details_page_pc_size_color">
-                    <div
-                      className={
-                        productDetail?.choice_options?.length < 1
-                          ? "d-none"
-                          : "choiceOptionListContainer size"
-                      }
-                    >
-                      {productDetail?.choice_options?.map((list, index) => (
-                        <div key={list?.id} className="choiceOptionList">
-                          <h5>{list?.title}:</h5>
-                          <div className="choiceOptionSelection">
-                            <select
-                              name="options"
-                              onChange={(e) => OptionSelectHandler(e)}
-                            >
-                              {list?.options?.map((option, indx) => (
-                                <option
-                                  value={list?.name + "@" + option}
-                                  key={indx}
-                                >
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
+
+                          <div className="left_1" id="productImgGallery">
+                            <ModalVideo
+                              channel="youtube"
+                              autoplay
+                              allowFullScreen="true"
+                              isOpen={isOpen}
+                              videoId={`${embed_video_url}`}
+                              onClose={() => setOpen(false)}
+                            />
+
+                            {productDetail.video_url && (
+                              <button
+                                onClick={() => setOpen(true)}
+                                className="video_player_btn"
+                              >
+                                <img
+                                  src={`https://backend.bppshop.com.bd/storage/product/thumbnail/${productDetail.thumbnail}`}
+                                  alt=""
+                                />
+                                <AiFillPlayCircle className="videoPlayerIcon" />
+                              </button>
+                            )}
+
+                            {productDetail?.images?.map((image, i) => (
+                              <div
+                                className={
+                                  i === 0 ? "img_wrap active" : "img_wrap"
+                                }
+                                key={i}
+                                onClick={() => hoverHandler(image, i)}
+                                ref={addRefs}
+                              >
+                                <img
+                                  src={`https://backend.bppshop.com.bd/storage/product/${image}`}
+                                  alt=""
+                                />
+                              </div>
+                            ))}
                           </div>
                         </div>
-                      ))}
+                      )}
                     </div>
-                    <div
-                      className={
-                        productDetail?.colors?.length < 1
-                          ? "d-none"
-                          : " mt-2 color"
-                      }
-                    >
-                      <h5>Select Color: </h5>
-                      <div className="d-flex">
-                        {productDetail?.colors?.map((color, index) => (
-                          <>
-                            <div
+                  </div>
+                  <div className="col-md-5">
+                    <div className="product_details_page_content">
+                      <h2>{productDetail?.name}</h2>
+                      <p>
+                        <span>
+                          Product Code: <strong>{productDetail?.code}</strong>
+                        </span>
+                        <span>
+                          {" "}
+                          Stock:{" "}
+                          {productDetail?.current_stock > 0 ? (
+                            <strong>Available</strong>
+                          ) : (
+                            <strong>Not Available</strong>
+                          )}
+                        </span>
+                      </p>
+                      <div className="product_details_page_price">
+                        {productDetail?.discount ? (
+                          <h5 className="prices">
+                            &#2547;{" "}
+                            {productDetail?.unit_price -
+                              productDetail?.discount}{" "}
+                            <del className="text-danger">
+                              &#2547; {productDetail?.unit_price}
+                            </del>
+                          </h5>
+                        ) : (
+                          <h5 className="prices">
+                            &#2547; {productDetail?.unit_price}
+                          </h5>
+                        )}
+                      </div>
+                      <div className="product_details_page_pc_size_color">
+                        <div
+                          className={
+                            productDetail?.choice_options?.length < 1
+                              ? "d-none"
+                              : "choiceOptionListContainer size"
+                          }
+                        >
+                          {productDetail?.choice_options?.map((list, index) => (
+                            <div key={list?.id} className="choiceOptionList">
+                              <h5>{list?.title}:</h5>
+                              <div className="choiceOptionSelection">
+                                <select
+                                  name="options"
+                                  onChange={(e) => OptionSelectHandler(e)}
+                                >
+                                  {list?.options?.map((option, indx) => (
+                                    <option
+                                      value={list?.name + "@" + option}
+                                      key={indx}
+                                    >
+                                      {option}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div
+                          className={
+                            productDetail?.colors?.length < 1
+                              ? "d-none"
+                              : " mt-2 color"
+                          }
+                        >
+                          <h5>Select Color: </h5>
+                          <div className="d-flex">
+                            {productDetail?.colors?.map((color, index) => (
+                              <>
+                                <div
+                                  onClick={() =>
+                                    priceVariantHandlerByColor(
+                                      color?.code,
+                                      index
+                                    )
+                                  }
+                                  style={{
+                                    background: `${color?.code}`,
+                                    margin: "0px 2px",
+                                    cursor: "pointer",
+                                  }}
+                                  className="colorBox"
+                                  id={
+                                    index[0]
+                                      ? "activatedColor"
+                                      : activeColor === index
+                                      ? "activatedColor"
+                                      : ""
+                                  }
+                                ></div>
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="product_details_page_quantity_content ">
+                        <h5>Quantity: </h5>
+                        <div className="quantity">
+                          {isItemExist?.quantity ? (
+                            <span
                               onClick={() =>
-                                priceVariantHandlerByColor(color?.code, index)
+                                decreaseQuantity(
+                                  productDetail,
+                                  isItemExist?.quantity,
+                                  defaultChoices
+                                  // productDetail?.choice_options
+                                )
                               }
-                              style={{
-                                background: `${color?.code}`,
-                                margin: "0px 2px",
-                                cursor: "pointer",
+                              className="detailsViewMinusBtn"
+                            >
+                              <i className="bi bi-dash-lg"></i>
+                            </span>
+                          ) : (
+                            <span
+                              onClick={() => {
+                                setQuantityCount(
+                                  quantityCount > 1
+                                    ? quantityCount - 1
+                                    : quantityCount
+                                );
+                                priceVariantHandlerByChoiceOption(
+                                  quantityCount - 1
+                                );
                               }}
-                              className="colorBox"
-                              id={
-                                index[0]
-                                  ? "activatedColor"
-                                  : activeColor === index
-                                  ? "activatedColor"
-                                  : ""
+                              className="minus"
+                            >
+                              <i className="bi bi-dash-lg"></i>
+                            </span>
+                          )}
+                          <span className="count-number">
+                            {isItemExist?.quantity
+                              ? isItemExist?.quantity
+                              : quantityCount}
+                          </span>
+                          {isItemExist?.quantity ? (
+                            <span
+                              onClick={() =>
+                                increaseQuantity(
+                                  productDetail,
+                                  isItemExist?.quantity,
+                                  productDetail?.current_stock,
+                                  defaultChoices
+                                  // productDetail?.choice_options
+                                )
                               }
-                            ></div>
-                          </>
-                        ))}
+                              className="detailsViewPlusBtn"
+                            >
+                              <i className="bi bi-plus-lg"></i>
+                            </span>
+                          ) : (
+                            <span
+                              onClick={() => {
+                                setQuantityCount(
+                                  productDetail?.current_stock > quantityCount
+                                    ? quantityCount + 1
+                                    : quantityCount
+                                );
+                                priceVariantHandlerByChoiceOption(
+                                  productDetail?.current_stock >=
+                                    quantityCount + 1
+                                    ? quantityCount + 1
+                                    : quantityCount
+                                );
+                              }}
+                              className="plus"
+                            >
+                              <i className="bi bi-plus-lg"></i>
+                            </span>
+                          )}
+                        </div>
+                        <div className="totalPrice">
+                          {isItemExist?.quantity ? (
+                            <h5>
+                              {productDetail?.discount > 0 ? (
+                                <span className="mx-2 text-end">
+                                  &#2547;{" "}
+                                  {isItemExist?.quantity *
+                                    (productDetail?.unit_price -
+                                      productDetail?.discount)}
+                                </span>
+                              ) : (
+                                <span className="mx-2 text-end">
+                                  &#2547;{" "}
+                                  {isItemExist?.quantity *
+                                    productDetail?.unit_price}
+                                </span>
+                              )}
+                            </h5>
+                          ) : (
+                            <h5>
+                              Total Price: &#2547;{" "}
+                              {variantRes?.price
+                                ? variantRes?.price
+                                : quantityCount *
+                                  (productDetail?.unit_price -
+                                    productDetail?.discount)}
+                            </h5>
+                          )}
+                        </div>
+                      </div>
+                      <div className="product_details_page_btn_container">
+                        {addedItemId ? (
+                          <button disabled className="btn_after_added_cart">
+                            <i className="bi bi-cart-plus"></i> Added to Cart
+                          </button>
+                        ) : (
+                          <button
+                            className="btn_before_add_cart"
+                            onClick={() =>
+                              addToCartHandler(productDetail, quantityCount)
+                            }
+                          >
+                            <i className="bi bi-cart-plus"></i> Add To Cart
+                          </button>
+                        )}
+                        <button className="addWishListBtn">
+                          <i className="bi bi-heart"></i>
+                        </button>
+                      </div>
+                      <div className="product_details_page_product_description">
+                        <h5>Description :</h5>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: productDetail?.details,
+                          }}
+                        ></span>
                       </div>
                     </div>
                   </div>
-                  <div className="product_details_page_quantity_content ">
-                    <h5>Quantity: </h5>
-                    <div className="quantity">
-                      {isItemExist?.quantity ? (
-                        <span
-                          onClick={() =>
-                            decreaseQuantity(
-                              productDetail,
-                              isItemExist?.quantity,
-                              defaultChoices
-                              // productDetail?.choice_options
-                            )
-                          }
-                          className="detailsViewMinusBtn"
-                        >
-                          <i className="bi bi-dash-lg"></i>
-                        </span>
-                      ) : (
-                        <span
-                          onClick={() => {
-                            setQuantityCount(
-                              quantityCount > 1
-                                ? quantityCount - 1
-                                : quantityCount
-                            );
-                            priceVariantHandlerByChoiceOption(
-                              quantityCount - 1
-                            );
-                          }}
-                          className="minus"
-                        >
-                          <i className="bi bi-dash-lg"></i>
-                        </span>
-                      )}
-                      <span className="count-number">
-                        {isItemExist?.quantity
-                          ? isItemExist?.quantity
-                          : quantityCount}
-                      </span>
-                      {isItemExist?.quantity ? (
-                        <span
-                          onClick={() =>
-                            increaseQuantity(
-                              productDetail,
-                              isItemExist?.quantity,
-                              productDetail?.current_stock,
-                              defaultChoices
-                              // productDetail?.choice_options
-                            )
-                          }
-                          className="detailsViewPlusBtn"
-                        >
-                          <i className="bi bi-plus-lg"></i>
-                        </span>
-                      ) : (
-                        <span
-                          onClick={() => {
-                            setQuantityCount(
-                              productDetail?.current_stock > quantityCount
-                                ? quantityCount + 1
-                                : quantityCount
-                            );
-                            priceVariantHandlerByChoiceOption(
-                              productDetail?.current_stock >= quantityCount + 1
-                                ? quantityCount + 1
-                                : quantityCount
-                            );
-                          }}
-                          className="plus"
-                        >
-                          <i className="bi bi-plus-lg"></i>
-                        </span>
-                      )}
+                  <div className="col-md-3">
+                    <div className="seller-product-suggestion-container">
+
+                      
                     </div>
-                    <div className="totalPrice">
-                      {isItemExist?.quantity ? (
-                        <h5>
-                          {productDetail?.discount > 0 ? (
-                            <span className="mx-2 text-end">
-                              &#2547;{" "}
-                              {isItemExist?.quantity *
-                                (productDetail?.unit_price -
-                                  productDetail?.discount)}
-                            </span>
-                          ) : (
-                            <span className="mx-2 text-end">
-                              &#2547;{" "}
-                              {isItemExist?.quantity *
-                                productDetail?.unit_price}
-                            </span>
-                          )}
-                        </h5>
-                      ) : (
-                        <h5>
-                          Total Price: &#2547;{" "}
-                          {variantRes?.price
-                            ? variantRes?.price
-                            : quantityCount *
-                              (productDetail?.unit_price -
-                                productDetail?.discount)}
-                        </h5>
-                      )}
-                    </div>
-                  </div>
-                  <div className="product_details_page_btn_container">
-                    {addedItemId ? (
-                      <button disabled className="btn_after_added_cart">
-                        <i className="bi bi-cart-plus"></i> Added to Cart
-                      </button>
-                    ) : (
-                      <button
-                        className="btn_before_add_cart"
-                        onClick={() =>
-                          addToCartHandler(productDetail, quantityCount)
-                        }
-                      >
-                        <i className="bi bi-cart-plus"></i> Add To Cart
-                      </button>
-                    )}
-                    <button className="addWishListBtn">
-                      <i className="bi bi-heart"></i>
-                    </button>
-                  </div>
-                  <div className="product_details_page_product_description">
-                    <h5>Description :</h5>
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: productDetail?.details,
-                      }}
-                    ></span>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
+        {/* </div>
+        
+      </div> */}
+
       <ProductReview productDetail={productDetail} />
     </>
   );
