@@ -27,6 +27,11 @@ export const userOrderReducers = (state = { userOrders: [] }, action) => {
         error: action.payload,
       };
 
+      case "CLEAR_USER_ORDERS":
+        return {
+          userOrders: [],
+        };
+
     default:
       return state;
   }

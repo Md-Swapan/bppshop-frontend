@@ -10,7 +10,7 @@ import {
   ClearCart,
   ClearCartGroupItems,
 } from "./../../../Redux/Actions/CartAction";
-import { clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
+import { clearAllShippingAddress, clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import { logout } from "./../../../Redux/Actions/UserAction";
 import { searchProduct, searchProductByCategory } from "../../../Redux/Actions/SearchAction";
 import { useState } from "react";
+import { clearUserOrders } from "../../../Redux/Actions/UserOrderAction";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -103,17 +104,24 @@ const Nav = () => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
       if (res.data.status === "success") {
-        navigate("/");
+        
         
         dispatch(logout());
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
+        dispatch(clearAllShippingAddress());
         dispatch(ClearCartGroupItems());
         dispatch(ClearDeliveryCharge());
+        dispatch(clearUserOrders());
 
         localStorage.removeItem("token");
         localStorage.removeItem("agentId");
+        localStorage.removeItem("SignupRedirect");
+
+        navigate("/");
+
         window.location.reload();
+        
         // toaster
         toast.success(`Logout Successfull`, {
           duration: 3000,

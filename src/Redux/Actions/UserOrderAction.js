@@ -33,6 +33,16 @@ export const loadUserOrders = () => async (dispatch, getState) => {
   }
 };
 
+// Clear User Orders
+export const clearUserOrders = () => async (dispatch, getState) => {
+  dispatch({
+    type: "CLEAR_USER_ORDERS"
+  });
+
+  localStorage.setItem("userOrders", JSON.stringify(getState().userOrders.userOrders));
+};
+
+
 // Load user order details
 export const loadUserOrderDetails = (id) => async (dispatch) => {
   
