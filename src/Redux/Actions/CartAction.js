@@ -152,12 +152,12 @@ export const addItemsToCartAfterLogin =
         config
       );
 
-      console.log(data);
+      console.log(data.status)
 
       const cartGroupItems = getState().cartGroup.cartGroupItems;
       // const isItemExist = cartGroupItems?.find((i) => (i.product_id || i.data.product_id) === productId);
 
-      console.log(cartGroupItems);
+      // console.log(cartGroupItems);
 
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
       dispatch(getCartData());
@@ -193,11 +193,10 @@ export const getCartData = () => async (dispatch, getState) => {
   }
 };
 
+
 // REMOVE FROM CART
 export const removeItemsFromCart =
   (productId) => async (dispatch, getState) => {
-    //  console.log(productId)
-
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: productId,
@@ -213,8 +212,6 @@ export const removeItemsFromCart =
     );
     const cartId = { key: `${isItemExist?.data?.id}` };
 
-    // console.log(cartGroupItem)
-
     if (isItemExist) {
       dispatch({ type: "REMOVE_ITEM_FROM_CART_REQUEST" });
       const token = localStorage.getItem("token");
@@ -226,25 +223,25 @@ export const removeItemsFromCart =
         config
       );
 
-      // console.log(data)
-      if(data.status === "Success"){
-
+      // if(data.status === "Success"){
         dispatch({
           type: "REMOVE_ITEM_FROM_CART_SUCCESS",
           payload: productId,
         });
-      }
+      // }
+
+      console.log(data)
     }
+
     localStorage.setItem(
       "cartGroupItems",
       JSON.stringify(getState().cartGroup.cartGroupItems)
     );
 
-    // console.log(productId)
-
     
     dispatch(getCartData());
   };
+
 
 // CLEAR CART
 export const ClearCart = () => async (dispatch, getState) => {

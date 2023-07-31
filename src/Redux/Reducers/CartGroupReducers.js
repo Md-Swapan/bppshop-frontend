@@ -23,12 +23,12 @@ const CartGroupReducers = (state = { cartGroupItems: [] }, action) => {
         error: action.payload,
       };
 
-      case "REMOVE_ITEM_FROM_CART_REQUEST":
-      return {
-        loading: true,
-        ...state,
+      // case "REMOVE_ITEM_FROM_CART_REQUEST":
+      // return {
+      //   loading: true,
+      //   ...state,
         
-      };
+      // };
     case "REMOVE_ITEM_FROM_CART_SUCCESS":
       return {
         ...state,

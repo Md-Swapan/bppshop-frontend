@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
       options: choice_options_defaultValue[index],
     }));
 
-    dispatch(addItemsToCart(product, quantity, defaultChoices));
+    // dispatch(addItemsToCart(product, quantity, defaultChoices));
 
     // toaster
     toast.success(`Product added to cart successfully`, {
@@ -154,6 +154,13 @@ const ProductCard = ({ product }) => {
     animation.onfinish = () => {
       productImageClone.remove();
     };
+
+
+
+    // const addToCartBtn  = document.querySelector("#addToCartBtn");
+
+    // addToCartBtn.style.color = "green"
+
   };
 
   const scrollTop = () => {
@@ -285,6 +292,7 @@ const ProductCard = ({ product }) => {
                     <button
                       className="btn_before_add_cart"
                       onClick={() => addToCartHandler(product, quantity)}
+                      id="addToCartBtn"
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
