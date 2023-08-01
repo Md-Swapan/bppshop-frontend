@@ -1,52 +1,181 @@
 import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 
-// ADD TO CART without login
-export const addItemsToCart =
-  (product, quantity, defaultChoices) => async (dispatch, getState) => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
-        product,
-        quantity,
-        defaultChoices,
-      },
+// add to cart with login..........................................................
+export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
+  const cartItemList = getState().cart.cartItems;
+
+  let bulkItems = [];
+
+  cartItemList.forEach((element) => {
+    let product = {};
+    let choiceOption = element.defaultChoices;
+
+    product.id = element.product.id;
+    product.quantity = element.quantity;
+    choiceOption.forEach((element) => {
+      product[element.name] = `${element.options}`.trim();
     });
-    localStorage.setItem(
-      "cartItems",
-      JSON.stringify(getState().cart.cartItems)
+
+    bulkItems.push(product);
+  });
+
+  try {
+    dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
+    const token = localStorage.getItem("token");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    const { data } = await axios.post(
+      `${baseUrl}/cart/add-bulk`,
+      bulkItems,
+      config
     );
+    data.cart.forEach((element) => {
+      dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: element });
+    });
 
-    const productId = product.id;
-    const cartGroupItems = getState().cartGroup.cartGroupItems;
-    const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
+    localStorage.setItem(
+      "cartGroupItems",
+      JSON.stringify(getState().cartGroup.cartGroupItems)
+    );
+  } catch (error) {
+    dispatch({
+      type: "ADD_TO_CART_WITH_LOGIN_FAIL",
+      payload: error.response.data.message,
+    });
+  }
+};
 
-    // console.log(isItemExist);
-    // console.log(isItemExist?.id);
-
-    const cartUpdateInfo = {
-      key: `${isItemExist?.data?.id}`,
-      quantity: `${quantity}`,
-    };
-
-    if (isItemExist) {
+// add to cart after login....................................................
+export const addItemsToCartAfterLogin =
+  (addItemToCartAfterLoginData) => async (dispatch, getState) => {
+    // console.log(addItemToCartAfterLoginData)
+    try {
+      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_REQUEST" });
       const token = localStorage.getItem("token");
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       const { data } = await axios.post(
-        `${baseUrl}/cart/update`,
-        cartUpdateInfo,
+        `${baseUrl}/cart/add`,
+        addItemToCartAfterLoginData,
         config
       );
 
+      const cartGroupItems = getState().cartGroup.cartGroupItems;
+      // const isItemExist = cartGroupItems?.find((i) => (i.product_id || i.data.product_id) === productId);
+
+      // console.log(cartGroupItems);
+
+      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
+      dispatch(getCartData());
+
+      localStorage.setItem(
+        "cartGroupItems",
+        JSON.stringify(getState().cartGroup.cartGroupItems)
+      );
+    } catch (error) {
       dispatch({
-        type: "UPDATE_CART",
-        payload: data,
+        type: "ADD_TO_CART_AFTER_LOGIN_FAIL",
+        payload: error.response.data.message,
       });
     }
   };
 
-// Update Cart without login
+// ADD TO CART without login......................................................
+export const addItemsToCart =
+  (product, quantity, defaultChoices) => async (dispatch, getState) => {
+    const productId = product.id;
+    const cartGroupItems = getState().cartGroup.cartGroupItems;
+    const isItemExist = cartGroupItems?.find(
+      (i) => i.product_id || i.data.product_id === productId
+    );
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const cartUpdateInfo = {
+        key: `${isItemExist?.data?.id}`,
+        quantity: `${quantity}`,
+      };
+
+      if (isItemExist) {
+        const token = localStorage.getItem("token");
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: {
+            product,
+            quantity,
+            defaultChoices,
+          },
+        });
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().cart.cartItems)
+        );
+
+        const { data } = await axios.post(
+          `${baseUrl}/cart/update`,
+          cartUpdateInfo,
+          config
+        );
+
+        dispatch({
+          type: "UPDATE_CART",
+          payload: data,
+        });
+      }
+    } else {
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          product,
+          quantity,
+          defaultChoices,
+        },
+      });
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(getState().cart.cartItems)
+      );
+    }
+
+    // const cartUpdateInfo = {
+    //   key: `${isItemExist?.data?.id}`,
+    //   quantity: `${quantity}`,
+    // };
+
+    // if (isItemExist) {
+    //   const token = localStorage.getItem("token");
+    //   const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    //   dispatch({
+    //     type: "ADD_TO_CART",
+    //     payload: {
+    //       product,
+    //       quantity,
+    //       defaultChoices,
+    //     },
+    //   });
+    //   localStorage.setItem(
+    //     "cartItems",
+    //     JSON.stringify(getState().cart.cartItems)
+    //   );
+
+    //   const { data } = await axios.post(
+    //     `${baseUrl}/cart/update`,
+    //     cartUpdateInfo,
+    //     config
+    //   );
+
+    //   dispatch({
+    //     type: "UPDATE_CART",
+    //     payload: data,
+    //   });
+    // }
+  };
+
+// Update Cart without login....................................................
 export const updateItemsToCart =
   (product, quantity) => async (dispatch, getState) => {
     dispatch({
@@ -72,8 +201,6 @@ export const updateItemsToCart =
       quantity: `${quantity}`,
     };
 
-    // console.log(cartUpdateInfo);
-
     if (isItemExist) {
       const token = localStorage.getItem("token");
       const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -84,8 +211,6 @@ export const updateItemsToCart =
         config
       );
 
-      // console.log(data)
-
       dispatch({
         type: "UPDATE_CART",
         payload: data,
@@ -93,88 +218,7 @@ export const updateItemsToCart =
     }
   };
 
-// add to cart with login.
-export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
-  const cartItemList = getState().cart.cartItems;
-
-  // console.log(cartItemList)
-
-  let bulk = [];
-
-  cartItemList.forEach((element) => {
-    let product = {};
-    let choiceOption = element.defaultChoices;
-
-    product.id = element.product.id;
-    product.quantity = element.quantity;
-    choiceOption.forEach((element) => {
-      product[element.name] = `${element.options}`.trim();
-    });
-
-    // console.log(bulk)
-    bulk.push(product);
-  });
-
-  try {
-    dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
-    const token = localStorage.getItem("token");
-    const config = { headers: { Authorization: `Bearer ${token}` } };
-
-    const { data } = await axios.post(`${baseUrl}/cart/add-bulk`, bulk, config);
-    data.cart.forEach((element) => {
-      dispatch({ type: "ADD_TO_CART_WITH_LOGIN_SUCCESS", payload: element });
-    });
-
-    localStorage.setItem(
-      "cartGroupItems",
-      JSON.stringify(getState().cartGroup.cartGroupItems)
-    );
-  } catch (error) {
-    dispatch({
-      type: "ADD_TO_CART_WITH_LOGIN_FAIL",
-      payload: error.response.data.message,
-    });
-  }
-};
-
-// add to cart after login.
-export const addItemsToCartAfterLogin =
-  (addItemToCartAfterLoginData) => async (dispatch, getState) => {
-    // console.log(addItemToCartAfterLoginData)
-    try {
-      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_REQUEST" });
-      const token = localStorage.getItem("token");
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-
-      const { data } = await axios.post(
-        `${baseUrl}/cart/add`,
-        addItemToCartAfterLoginData,
-        config
-      );
-
-      console.log(data.status)
-
-      const cartGroupItems = getState().cartGroup.cartGroupItems;
-      // const isItemExist = cartGroupItems?.find((i) => (i.product_id || i.data.product_id) === productId);
-
-      // console.log(cartGroupItems);
-
-      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
-      dispatch(getCartData());
-
-      localStorage.setItem(
-        "cartGroupItems",
-        JSON.stringify(getState().cartGroup.cartGroupItems)
-      );
-    } catch (error) {
-      dispatch({
-        type: "ADD_TO_CART_AFTER_LOGIN_FAIL",
-        payload: error.response.data.message,
-      });
-    }
-  };
-
-// get cart data.
+// get cart data.......................................................................
 export const getCartData = () => async (dispatch, getState) => {
   try {
     dispatch({ type: "GET_CART_REQUEST" });
@@ -183,7 +227,7 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-    console.log(data)
+    console.log(data);
     // dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
 
     // dispatch({ type: "GET_CART_SUCCESS", payload: data });
@@ -194,8 +238,7 @@ export const getCartData = () => async (dispatch, getState) => {
   }
 };
 
-
-// REMOVE FROM CART
+// REMOVE FROM CART..............................................................
 export const removeItemsFromCart =
   (productId) => async (dispatch, getState) => {
     dispatch({
@@ -209,7 +252,7 @@ export const removeItemsFromCart =
 
     const cartGroupItem = getState().cartGroup.cartGroupItems;
     const isItemExist = cartGroupItem?.find(
-      (i) => (i?.product_id || i.data.product_id) === productId
+      (i) => (i.product_id || i.data.product_id) === productId
     );
     const cartId = { key: `${isItemExist?.data?.id}` };
 
@@ -224,27 +267,23 @@ export const removeItemsFromCart =
         config
       );
 
-      // if(data.status === "Success"){
-        dispatch({
-          type: "REMOVE_ITEM_FROM_CART_SUCCESS",
-          payload: productId,
-        });
-      // }
-
       console.log(data)
+
+      dispatch({
+        type: "REMOVE_ITEM_FROM_CART_SUCCESS",
+        payload: productId,
+      });
+
+      localStorage.setItem(
+        "cartGroupItems",
+        JSON.stringify(getState().cartGroup.cartGroupItems)
+      );
     }
 
-    localStorage.setItem(
-      "cartGroupItems",
-      JSON.stringify(getState().cartGroup.cartGroupItems)
-    );
-
-    
     dispatch(getCartData());
   };
 
-
-// CLEAR CART
+// CLEAR CART........................................................
 export const ClearCart = () => async (dispatch, getState) => {
   dispatch({
     type: "CLEAR_CART",

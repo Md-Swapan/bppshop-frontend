@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
       options: choice_options_defaultValue[index],
     }));
 
-    // dispatch(addItemsToCart(product, quantity, defaultChoices));
+    dispatch(addItemsToCart(product, quantity, defaultChoices));
 
     // toaster
     toast.success(`Product added to cart successfully`, {
