@@ -183,6 +183,7 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
+    console.log(data)
     // dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
 
     dispatch({ type: "GET_CART_SUCCESS", payload: data });
