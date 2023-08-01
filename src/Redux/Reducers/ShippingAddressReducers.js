@@ -67,7 +67,10 @@ export const loadAllShippingAddressReducers = (
         allShippingAddressInfo: null,
         error: action.payload,
       };
-
+      case "CLEAR_ALL_SHIPPING_ADDRESS":
+        return {
+          allShippingAddressInfo: {},
+        };
     default:
       return state;
   }

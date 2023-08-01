@@ -23,11 +23,18 @@ const CartGroupReducers = (state = { cartGroupItems: [] }, action) => {
         error: action.payload,
       };
 
-    case "REMOVE_ITEM_FROM_CART_GROUP":
+      // case "REMOVE_ITEM_FROM_CART_REQUEST":
+      // return {
+      //   loading: true,
+      //   ...state,
+        
+      // };
+    case "REMOVE_ITEM_FROM_CART_SUCCESS":
       return {
         ...state,
+        loading: false,
         cartGroupItems: state.cartGroupItems.filter(
-          (item) => item.product_id !== action.payload
+          (item) => item.product_id || item.data.product_id !== action.payload
         ),
       };
 

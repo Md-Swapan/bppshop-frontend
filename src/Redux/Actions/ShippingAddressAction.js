@@ -84,3 +84,12 @@ export const clearShippingAddress = () => async (dispatch, getState) => {
 
   localStorage.setItem("shippingAddressInfo", JSON.stringify(getState().shippingInfo.shippingAddressInfo));
 };
+
+// Clear All shipping address
+export const clearAllShippingAddress = () => async (dispatch, getState) => {
+  dispatch({
+    type: "CLEAR_ALL_SHIPPING_ADDRESS"
+  });
+
+  localStorage.setItem("allShippingAddressInfo", JSON.stringify(getState().allShippingInfo.allShippingAddressInfo));
+};

@@ -9,7 +9,7 @@ export const addItemsToCart =
       payload: {
         product,
         quantity,
-        defaultChoices
+        defaultChoices,
       },
     });
     localStorage.setItem(
@@ -20,7 +20,7 @@ export const addItemsToCart =
     const productId = product.id;
     const cartGroupItems = getState().cartGroup.cartGroupItems;
     const isItemExist = cartGroupItems?.find((i) => i.product_id === productId);
-    
+
     // console.log(isItemExist);
     // console.log(isItemExist?.id);
 
@@ -46,7 +46,6 @@ export const addItemsToCart =
     }
   };
 
-
 // Update Cart without login
 export const updateItemsToCart =
   (product, quantity) => async (dispatch, getState) => {
@@ -54,8 +53,7 @@ export const updateItemsToCart =
       type: "ADD_TO_CART",
       payload: {
         product,
-        quantity
-        
+        quantity,
       },
     });
     localStorage.setItem(
@@ -65,16 +63,16 @@ export const updateItemsToCart =
 
     const productId = product.id;
     const cartGroupItems = getState().cartGroup.cartGroupItems;
-    const isItemExist = cartGroupItems?.find((i) => (i.product_id || i.data.product_id) === productId);
-
+    const isItemExist = cartGroupItems?.find(
+      (i) => (i.product_id || i.data.product_id) === productId
+    );
 
     const cartUpdateInfo = {
       key: `${isItemExist?.data?.id}`,
       quantity: `${quantity}`,
     };
 
-    console.log(cartUpdateInfo);
-    
+    // console.log(cartUpdateInfo);
 
     if (isItemExist) {
       const token = localStorage.getItem("token");
@@ -86,13 +84,14 @@ export const updateItemsToCart =
         config
       );
 
+      // console.log(data)
+
       dispatch({
         type: "UPDATE_CART",
         payload: data,
       });
     }
   };
-
 
 // add to cart with login.
 export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
@@ -104,7 +103,7 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
 
   cartItemList.forEach((element) => {
     let product = {};
-    let choiceOption = element.defaultChoices
+    let choiceOption = element.defaultChoices;
 
     product.id = element.product.id;
     product.quantity = element.quantity;
@@ -115,7 +114,6 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
     // console.log(bulk)
     bulk.push(product);
   });
-
 
   try {
     dispatch({ type: "ADD_TO_CART_WITH_LOGIN_REQUEST" });
@@ -139,12 +137,9 @@ export const addItemsToCartWithLogin = () => async (dispatch, getState) => {
   }
 };
 
-
-
 // add to cart after login.
 export const addItemsToCartAfterLogin =
   (addItemToCartAfterLoginData) => async (dispatch, getState) => {
-
     // console.log(addItemToCartAfterLoginData)
     try {
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_REQUEST" });
@@ -157,8 +152,15 @@ export const addItemsToCartAfterLogin =
         config
       );
 
-      dispatch(getCartData());
+      console.log(data.status)
+
+      const cartGroupItems = getState().cartGroup.cartGroupItems;
+      // const isItemExist = cartGroupItems?.find((i) => (i.product_id || i.data.product_id) === productId);
+
+      // console.log(cartGroupItems);
+
       dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
+      dispatch(getCartData());
 
       localStorage.setItem(
         "cartGroupItems",
@@ -172,8 +174,6 @@ export const addItemsToCartAfterLogin =
     }
   };
 
-
-
 // get cart data.
 export const getCartData = () => async (dispatch, getState) => {
   try {
@@ -186,10 +186,9 @@ export const getCartData = () => async (dispatch, getState) => {
     console.log(data)
     // dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
 
-    dispatch({ type: "GET_CART_SUCCESS", payload: data });
+    // dispatch({ type: "GET_CART_SUCCESS", payload: data });
 
-    localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
-    
+    // localStorage.setItem("cartGroupItems", JSON.stringify(getState().cartGroup.cartGroupItems));
   } catch (error) {
     dispatch({ type: "GET_CART_FAIL", payload: error.response.data.message });
   }
@@ -197,10 +196,8 @@ export const getCartData = () => async (dispatch, getState) => {
 
 
 // REMOVE FROM CART
-export const removeItemsFromCart = (productId) => async (dispatch, getState) => {
-  
-  //  console.log(productId)
-
+export const removeItemsFromCart =
+  (productId) => async (dispatch, getState) => {
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: productId,
@@ -211,13 +208,13 @@ export const removeItemsFromCart = (productId) => async (dispatch, getState) => 
     );
 
     const cartGroupItem = getState().cartGroup.cartGroupItems;
-    const isItemExist = cartGroupItem?.find((i) => (i?.product_id || i.data.product_id) == productId);
+    const isItemExist = cartGroupItem?.find(
+      (i) => (i?.product_id || i.data.product_id) === productId
+    );
     const cartId = { key: `${isItemExist?.data?.id}` };
 
-    // console.log(cartGroupItem)
-
     if (isItemExist) {
-      dispatch({type: "REMOVE_ITEM_FROM_CART_REQUEST"} )
+      dispatch({ type: "REMOVE_ITEM_FROM_CART_REQUEST" });
       const token = localStorage.getItem("token");
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -226,15 +223,26 @@ export const removeItemsFromCart = (productId) => async (dispatch, getState) => 
         cartId,
         config
       );
-      // console.log(data)
-      dispatch({
-        type: "REMOVE_ITEM_FROM_CART_SUCCESS",
-        payload: productId,
-      });
-    
+
+      // if(data.status === "Success"){
+        dispatch({
+          type: "REMOVE_ITEM_FROM_CART_SUCCESS",
+          payload: productId,
+        });
+      // }
+
+      console.log(data)
     }
+
+    localStorage.setItem(
+      "cartGroupItems",
+      JSON.stringify(getState().cartGroup.cartGroupItems)
+    );
+
+    
     dispatch(getCartData());
   };
+
 
 // CLEAR CART
 export const ClearCart = () => async (dispatch, getState) => {
