@@ -629,6 +629,7 @@ const TopRatedProductDetails = () => {
                         <i className="bi bi-cart-plus"></i> Added to Cart
                       </button>
                     ) : (
+                      productDetail?.current_stock > 0 ?
                       <button
                         className="btn_before_add_cart"
                         onClick={() =>
@@ -636,6 +637,10 @@ const TopRatedProductDetails = () => {
                         }
                       >
                         <i className="bi bi-cart-plus"></i> Add To Cart
+                      </button>
+                      :
+                      <button className="btn_before_add_cart_stockOut">
+                        <i class="bi bi-cart-x"></i> Stock Out
                       </button>
                     )}
                     <button className="addWishListBtn">

@@ -66,13 +66,20 @@ export const addItemsToCartAfterLogin =
 
       // console.log(cartGroupItems);
 
-      dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
+      if(data.status === "success"){
+        dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
+        localStorage.setItem(
+          "cartGroupItems",
+          JSON.stringify(getState().cartGroup.cartGroupItems)
+        );
+
+      }else{
+        dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_FAIL"
+       });
+      }
       dispatch(getCartData());
 
-      localStorage.setItem(
-        "cartGroupItems",
-        JSON.stringify(getState().cartGroup.cartGroupItems)
-      );
+      
     } catch (error) {
       dispatch({
         type: "ADD_TO_CART_AFTER_LOGIN_FAIL",
@@ -92,6 +99,7 @@ export const addItemsToCart =
     const token = localStorage.getItem("token");
 
     if (token) {
+      
       const cartUpdateInfo = {
         key: `${isItemExist?.data?.id}`,
         quantity: `${quantity}`,
@@ -124,6 +132,19 @@ export const addItemsToCart =
           type: "UPDATE_CART",
           payload: data,
         });
+      }else{
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: {
+            product,
+            quantity,
+            defaultChoices,
+          },
+        });
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().cart.cartItems)
+        );
       }
     } else {
       dispatch({
@@ -227,7 +248,7 @@ export const getCartData = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${baseUrl}/cart`, config);
 
-    console.log(data);
+    // console.log(data);
     // dispatch({ type: "ADD_TO_CART_AFTER_LOGIN_SUCCESS", payload: data });
 
     // dispatch({ type: "GET_CART_SUCCESS", payload: data });

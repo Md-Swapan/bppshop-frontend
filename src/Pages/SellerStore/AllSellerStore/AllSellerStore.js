@@ -4,6 +4,7 @@ import { baseUrl } from "../../../BaseUrl/BaseUrl";
 import { useRef } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "../SellerStore.css";
+import { Link } from "react-router-dom";
 
 const AllSellerStore = () => {
   const [allSellerStore, setAllSellerStore] = useState([]);
@@ -75,7 +76,7 @@ const AllSellerStore = () => {
           ) : (
             allSellerStore &&
             allSellerStore.map((sellerStore) => (
-              // <Link key={brand?.id} to={`/brands/${brand?.name}/${brand?.id}`}>
+              <Link key={sellerStore?.id} to={`/brands/${sellerStore?.name}/${sellerStore?.id}`}>
               <div className="seller-store-content">
                 <div className="seller-store-banner">
                   <img
@@ -96,7 +97,7 @@ const AllSellerStore = () => {
                   </div>
                 </div>
               </div>
-              // </Link>
+              </Link>
             ))
           )}
         </SkeletonTheme>

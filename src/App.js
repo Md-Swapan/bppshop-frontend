@@ -54,6 +54,7 @@ import SearchProductDetails from "./Pages/Search/SearchProductDetails";
 import AdminLandOnBehalfCustomer from "./Pages/AdminLand/AdminLandOnBehalfCustomer";
 import Modal from "react-modal";
 import AllSellerStore from "./Pages/SellerStore/AllSellerStore/AllSellerStore";
+import SellerStoreProduct from './Pages/SellerStore/SellerStoreProduct/SellerStoreProduct';
 
 
 
@@ -120,6 +121,7 @@ function App() {
           <Route path="/search" element={<Search/>} />
           <Route path="/search/:id" element={<SearchProductDetails/>} />
           <Route path="/sellers-store" element={<AllSellerStore/>} />
+          <Route path="/sellers-store/:sellersStoreName/:sellerId" element={<SellerStoreProduct/>} />
           <Route path="/brands" element={<Brands/>} />
           <Route path="/brands/:brandName/:brandId" element={<BrandsProducts/>} />
           <Route path="/brand/:name/:brandId/:id" element={<BrandProductDetails/>} />

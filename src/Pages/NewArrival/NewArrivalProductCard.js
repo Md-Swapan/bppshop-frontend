@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { RatingStar } from "rating-star";
 
-
 const NewArrivalProductCard = ({ product }) => {
   const token = localStorage.getItem("token");
 
@@ -132,147 +131,93 @@ const NewArrivalProductCard = ({ product }) => {
     <>
       <div className="product_card_content">
         <div className="product-card">
-          {current_stock > 0 ? (
-            <>
-              <div className=" product-card-body">
-                <div className="productImg_container">
-                  {thumbnail ? (
-                    <img
-                      src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                      className="card-img-top"
-                      alt=""
-                    />
+          {/* ( */}
+          <>
+            <div className=" product-card-body">
+              <div className="productImg_container">
+                {thumbnail ? (
+                  <img
+                    src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                    className="card-img-top"
+                    alt=""
+                  />
+                ) : (
+                  <img src={defaultProImg} alt="" />
+                )}
+              </div>
+              <div className="product-card-body-content">
+                
+                <small>{name.toString().substring(0, 26)}...</small>
+                <br />
+                <small>
+                  {newChoiceOption && (
+                    <span className="unitPrice_view">
+                      {newChoiceOption?.options[0]} : {newChoiceOption?.title}
+                    </span>
+                  )}
+                </small>
+                <div className="product-card-body-content-unit-price">
+                  {discount ? (
+                    <span>
+                      <b> &#2547; {unit_price - discount} </b>
+                      <del>
+                        <b className="text-danger ms-2">
+                          {" "}
+                          &#2547; {unit_price}
+                        </b>
+                      </del>
+                    </span>
                   ) : (
-                    <img src={defaultProImg} alt="" />
+                    <b> &#2547; {unit_price}</b>
                   )}
                 </div>
-                <div className="product-card-body-content">
-                  <small>
-                    {name.toString().substring(0, 26)}...
-                    {/* {newChoiceOption && (
-                      <span className="unitPrice_view">
-                        {newChoiceOption?.options[0]} : {newChoiceOption?.title}
-                      </span>
-                    )} */}
-                  </small>
-                  <br/>
-                  <small>
-                  {newChoiceOption && (
-                      <span className="unitPrice_view">
-                        {newChoiceOption?.options[0]} : {newChoiceOption?.title}
-                      </span>
-                    )}
-                  </small>
-                  {/* <br /> */}
-                  <div className="product-card-body-content-unit-price">
-                    {/* {newChoiceOption && (
-                      <span className="unitPrice_view">
-                        {newChoiceOption?.title} : {newChoiceOption?.options[0]}
-                      </span>
-                    )} */}
-                    {/* <br /> */}
-                    {discount ? (
-                      <span>
-                        <b> &#2547; {unit_price - discount} </b>
-                        <del>
-                          <b className="text-danger ms-2">
-                            {" "}
-                            &#2547; {unit_price}
-                          </b>
-                        </del>
-                      </span>
-                    ) : (
-                      <b> &#2547; {unit_price}</b>
-                    )}
-                  </div>
-                  <RatingStar
-                    id={id}
-                    rating={rating?.map((r) => r?.average)}
-                    size={14}
-                  />{" "}
-                  <small>({reviews_count})</small>
-                </div>
-
-                <Link
-                  to={
-                    (`/new-arrival/${id}`)
-                  }
-                  addedItemId={addedItemId}
-                >
-                  <div
-                    className="quickView_AddToCart_overlay"
-                    onClick={scrollTop}
-                  >
-                    <div className="overlayViewCartBtn">
-                      <span>
-                        <i className="bi bi-eye-fill"></i> <br /> View Details
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              
+                <RatingStar
+                  id={id}
+                  rating={rating?.map((r) => r?.average)}
+                  size={14}
+                />{" "}
+                <small>({reviews_count})</small>
               </div>
-              <div className="card-footer product-card-footer">
-                {addedItemId ? (
-                  <div className="cardFooterBtn">
-                    <button disabled className="btn_after_added_cart">
-                      <i className="bi bi-cart-plus"></i> Product in Cart
-                    </button>
 
-                    {/* <span onClick={() => productDetailsView(id)}> */}
-                    {/* <button onClick={openModal} className="quickViewBtn">
-                        <i className="bi bi bi-eye"></i>
-                      </button>
-                      <Link
-                        to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
-                        addedItemId={addedItemId}
-                      >
-                        <button className="detailsViewBtn">
-                          <i className="bi bi bi-eye"></i>
-                        </button>
-                      </Link> */}
-
-                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                        <button className="quickViewBtn">
-                          <i className="bi bi bi-eye"></i> View Details
-                        </button>
-                      </Link> */}
-                    {/* </span> */}
+              <Link to={`/new-arrival/${id}`} addedItemId={addedItemId}>
+                <div
+                  className="quickView_AddToCart_overlay"
+                  onClick={scrollTop}
+                >
+                  <div className="overlayViewCartBtn">
+                    <span>
+                      <i className="bi bi-eye-fill"></i> <br /> View Details
+                    </span>
                   </div>
-                ) : (
-                  <div className="cardFooterBtn">
+                </div>
+              </Link>
+            </div>
+            <div className="card-footer product-card-footer">
+              {addedItemId ? (
+                <div className="cardFooterBtn">
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Product in Cart
+                  </button>
+                </div>
+              ) : (
+                <div className="cardFooterBtn">
+                  {current_stock > 0 ? (
                     <button
                       className="btn_before_add_cart"
                       onClick={() => addToCartHandler(product, quantity)}
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
-                    {/* <span onClick={() => productDetailsView(id)}> */}
-                    {/* <button className="quickViewBtn" onClick={openModal}> */}
-                    {/* <button onClick={openModal} className="quickViewBtn">
-                        <i className="bi bi bi-eye"></i>
-                      </button> */}
-
-                    {/* <Link
-                        to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
-                        addedItemId={addedItemId}
-                      >
-                        <button className="detailsViewBtn">
-                          <i className="bi bi bi-eye"></i>
-                        </button>
-                      </Link> */}
-
-                    {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                  <button className="quickViewBtn">
-                    <i className="bi bi bi-eye"></i> View Details
-                  </button>
-                </Link> */}
-                    {/* </span> */}
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
+                  ) : (
+                    <button className="btn_before_add_cart_stockOut">
+                      <i class="bi bi-cart-x"></i> Stock Out
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          </>
+          {/* ) : (
             <div>
               <div className="product-card-body">
                 <img
@@ -298,18 +243,6 @@ const NewArrivalProductCard = ({ product }) => {
                 <button className="btn_before_add_cart">
                   <i className="bi bi-cart-plus"></i> Stock Out
                 </button>
-                {/* <span onClick={() => productDetailsView(id)}> */}
-                {/* <button className="quickViewBtn" onClick={openModal}> */}
-                {/* <button onClick={openModal} className="btn_before_add_cart">
-                    <i className="bi bi bi-eye"></i>
-                  </button> */}
-
-                {/* <Link to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}>
-                  <button className="quickViewBtn">
-                    <i className="bi bi bi-eye"></i> View Details
-                  </button>
-                </Link> */}
-                {/* </span> */}
               </div>
               <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
                 <h3 className="text-center">
@@ -317,10 +250,9 @@ const NewArrivalProductCard = ({ product }) => {
                 </h3>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
-      
     </>
   );
 };
