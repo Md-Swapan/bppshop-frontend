@@ -15,12 +15,12 @@ const AllSellerStore = () => {
   const [lastList, setLastList] = useState(false);
 
   useEffect(() => {
-    let limit = 20;
+    let limit = 25;
     const fetchData = async () => {
       const response = await axios.get(
         `${baseUrl}/seller/all?limit=${limit}&offset=${currPage}`
       );
-      console.log(response.data.data);
+      // console.log(response.data.data);
       response && setLoading(false);
       if (!response?.data?.data?.length) {
         setLastList(true);
@@ -48,7 +48,7 @@ const AllSellerStore = () => {
       <div
         onScroll={onScroll}
         ref={listInnerRef}
-        style={{ height: "80vh", overflowY: "auto" }}
+        style={{ height: "70vh", overflowY: "auto" }}
         className="all-seller-store-container mt-4 pb-5"
       >
         <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
@@ -76,27 +76,28 @@ const AllSellerStore = () => {
           ) : (
             allSellerStore &&
             allSellerStore.map((sellerStore) => (
-              <Link key={sellerStore?.id} to={`/brands/${sellerStore?.name}/${sellerStore?.id}`}>
-              <div className="seller-store-content">
-                <div className="seller-store-banner">
-                  <img
-                    src={`https://backend.bppshop.com.bd/storage/shop/banner/${sellerStore?.banner}`}
-                    alt=""
-                  />
-                </div>
-
-                <div className="seller-store-profile-container">
-                  <div className="">
-                  <div className="seller-profile-image">
+              <Link
+                key={sellerStore?.id}
+                to={`/sellers-store/${sellerStore?.name}/${sellerStore?.id}`}
+              >
+                <div className="seller-store-content">
+                  <div className="seller-store-banner">
                     <img
-                      src={`https://backend.bppshop.com.bd/storage/shop/${sellerStore?.image}`}
+                      src={`https://backend.bppshop.com.bd/storage/shop/banner/${sellerStore?.banner}`}
                       alt=""
                     />
-                  </div>
-                    <p>{sellerStore?.name}</p>
+
+                    <div className="seller-store-profile-container">
+                      <div className="seller-profile-image">
+                        <img
+                          src={`https://backend.bppshop.com.bd/storage/shop/${sellerStore?.image}`}
+                          alt=""
+                        />
+                      </div>
+                      <p className="sellerName">{sellerStore?.name}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
               </Link>
             ))
           )}

@@ -31,7 +31,7 @@ const Product = ({ allCategory, isLoading }) => {
       });
   }, [subSubCategories?.id]);
 
-  // console.log(subSubCategories?.id);
+  console.log(products);
 
   useEffect(() => {
     if (!isLoading && !subSubCategories) {

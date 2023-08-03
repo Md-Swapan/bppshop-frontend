@@ -248,7 +248,8 @@ const ProductCard = ({ product }) => {
               </div>
 
               <Link
-                to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                to={`/${slug}/${subSlug}/${subSubSlug}/${product.slug}`}
+                // to={`/products/${product.slug}`}
                 addedItemId={addedItemId}
               >
                 <div

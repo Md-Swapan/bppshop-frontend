@@ -1,12 +1,9 @@
+
 import React, { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./ProductDetailsPage.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+// import "./ProductDetailsPage.css";
 import { useParams } from "react-router-dom";
-import {
-  baseUrl,
-  imgBaseUrl,
-  imgThumbnailBaseUrl,
-} from "./../../BaseUrl/BaseUrl";
+import { baseUrl, imgBaseUrl } from "./../../BaseUrl/BaseUrl";
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -20,37 +17,35 @@ import { getPriceVariant } from "./../../Redux/Actions/PriceVariantAction";
 import ProductReview from "./../../Components/ProductReview/ProductReview";
 import ReactImageMagnify from "react-image-magnify";
 import toast from "react-hot-toast";
-import defaultProImg from "../../Assets/Images/defaultImg.jpg";
-import ModalVideo from "react-modal-video";
-import "react-modal-video/scss/modal-video.scss";
+import { IoCloseOutline } from "react-icons/io5";
+import { AiOutlineYoutube } from "react-icons/ai";
+import { BiLoaderAlt } from "react-icons/bi";
 
-// import { IoCloseOutline } from "react-icons/io5";
-import { AiOutlineYoutube, AiFillPlayCircle } from "react-icons/ai";
-// import { BiLoaderAlt } from "react-icons/bi";
+const SellerStoreProductDetails = () => {
+  const { sellersStoreName, sellerId, id } = useParams();
 
-const ProductDetailsPage = () => {
-  const { slug, subSlug, subSubSlug, id } = useParams();
+  const location = useLocation();
 
-  // console.log(slug, subSlug, subSubSlug)
+  const newLocation = location.pathname.split("/");
+  const brandName = newLocation[2];
+
   let newId = parseInt(id);
+
   const [productDetail, setProductDetail] = useState([]);
   const [quantityCount, setQuantityCount] = useState(1);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [variantRes, setVariantRes] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
 
-  // Product Details............................
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
-      // setLoading(false);
       setProductDetail(res.data.data);
+      setLoading(false);
     });
   }, [id]);
-
-  console.log(productDetail);
 
   // Customer Audit log.........................
   const auditLog = {
@@ -65,7 +60,7 @@ const ProductDetailsPage = () => {
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
   const isItemExist = cartItems.find((i) => i?.product?.id === addedItemId);
-  const paramId = subSubSlug;
+  const paramId = id;
   const productDetailsPathId = productDetail?.id?.toString();
   const productDetailsPath = productDetailsPathId === paramId;
   const choiceOptions = productDetail?.choice_options?.map(
@@ -77,6 +72,7 @@ const ProductDetailsPage = () => {
   const defaultOptionName = productDetail?.choice_options?.map(
     (list) => list?.name
   );
+
   const defaultOption = choiceOptions?.map((option) => option[0]);
   const choices = defaultOptionName?.map((name, index) => ({
     name,
@@ -126,6 +122,7 @@ const ProductDetailsPage = () => {
         },
       });
     }
+
     const priceVariantDefaultOptionData = {
       product_id: `${id}`,
       color: `${colors[0]}`,
@@ -217,16 +214,14 @@ const ProductDetailsPage = () => {
   };
 
   // 404 function...................................
-  // useEffect(() => {
-  //   if ( !productDetailsPath) {
-  //     navigate("/404", { replace: true });
-  //   }
-  // }, [productDetailsPath, navigate]);
+  useEffect(() => {
+    if (!loading && !productDetailsPath) {
+      navigate("/404", { replace: true });
+    }
+  }, [productDetailsPath, loading, navigate]);
 
   // cart item increase decrease function..............................
   const increaseQuantity = (id, quantity, stock, defaultChoices) => {
-    // console.log(defaultChoices);
-
     const newQty = quantity + 1;
     if (stock <= quantity) {
       toast.error("Stock Limited.", {
@@ -265,7 +260,7 @@ const ProductDetailsPage = () => {
 
     defaultChoices &&
       defaultChoices.forEach((element) => {
-        addItemsToCartDataWithColor[element.name] = `${element.options}`.trim();
+        addItemsToCartDataWithColor[element.name] = `${element.options}`;
       });
 
     const addItemsToCartDataWithoutColor = {
@@ -304,65 +299,50 @@ const ProductDetailsPage = () => {
     });
   };
 
-  const [isOpen, setOpen] = useState(false);
-
-  // const [modal, setModal] = useState(false);
-  // const [videoLoading, setVideoLoading] = useState(true);
-
-  // const openModal = () => {
-  //   setModal(!modal);
-  // };
-
-  // const spinner = () => {
-  //   setVideoLoading(!videoLoading);
-  // };
-
   // youtube video embed code split function............
 
   let embed_video_url;
 
   const youtube_url = () => {
     var video_url = productDetail.video_url;
-
-    if (video_url.includes("shorts")) {
-      var split_shorts_video_url = video_url.split("/");
-      embed_video_url = split_shorts_video_url[4];
-    }
-    if (video_url.includes("watch")) {
-      var split_video_url = video_url.split("=");
-      embed_video_url = split_video_url[1];
-    }
+    var split_video_url = video_url.split("=");
+    embed_video_url = split_video_url[1];
   };
 
   if (productDetail.video_url) {
     youtube_url();
   }
 
+  const [modal, setModal] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
+
+  const openModal = () => {
+    setModal(!modal);
+  };
+
+  const spinner = () => {
+    setVideoLoading(!videoLoading);
+  };
+
   return (
     <>
-      {/* <div className="row">
-        <div className="col-md-9"> */}
+      <h4>Brand Products:</h4>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
-          <li className="breadcrumb-item">
-            <Link to="/">Home</Link>
+          <li className="breadcrumb-item" aria-current="page">
+            <Link to="/sellers-store">Seller Store</Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            <Link to={`/${slug}`}>{slug}</Link>
+          <li className="breadcrumb-item" aria-current="page">
+            <Link to={`/sellers-store/${brandName}/${sellerId}`}>{sellersStoreName}</Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            <Link to={`/${slug}/${subSlug}`}>{subSlug}</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            <Link to={`/${slug}/${subSlug}/${subSubSlug}`}>{subSubSlug}</Link>
-          </li>
+
           <li className="breadcrumb-item active" aria-current="page">
             {productDetail?.name}
           </li>
         </ol>
       </nav>
       <br />
-      {/* {productDetailsPath === true && ( */}
+      {productDetailsPath === true && (
         <div className="product_details_page_container">
           <div className="container-fluid">
             <div className="row">
@@ -398,71 +378,53 @@ const ProductDetailsPage = () => {
                           />
                         )}
 
-                        {/* {productDetail.video_url && <div className="video_modal_btn">
-                          <button onClick={openModal} >
-                            <AiFillPlayCircle className="videoPlayerIcon"/>
-                            {modal ? (
-                              <section className="modal__bg">
-                                <div className="modal__align">
-                                  <div className="modal__content" modal={modal}>
-                                    <IoCloseOutline
-                                      className="modal__close"
-                                      arial-label="Close modal"
-                                      onClick={setModal}
-                                    />
-                                    <div className="modal__video-align">
-                                      {videoLoading ? (
-                                        <div className="modal__spinner">
-                                          <BiLoaderAlt
-                                            className="modal__spinner-style"
-                                            fadeIn="none"
-                                          />
-                                        </div>
-                                      ) : null}
-                                      <iframe
-                                        className="modal__video-style"
-                                        onLoad={spinner}
-                                        loading="lazy"
-                                        width="800"
-                                        height="500"
-                                        src={`https://www.youtube.com/embed/${embed_video_url}`}
-                                        title="YouTube video player"
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen
-                                      ></iframe>
+                        {productDetail.video_url && (
+                          <div className="video_modal_btn">
+                            <button onClick={openModal}>
+                              <AiOutlineYoutube className="videoPlayerIcon" />
+                              {modal ? (
+                                <section className="modal__bg">
+                                  <div className="modal__align">
+                                    <div
+                                      className="modal__content"
+                                      modal={modal}
+                                    >
+                                      <IoCloseOutline
+                                        className="modal__close"
+                                        arial-label="Close modal"
+                                        onClick={setModal}
+                                      />
+                                      <div className="modal__video-align">
+                                        {videoLoading ? (
+                                          <div className="modal__spinner">
+                                            <BiLoaderAlt
+                                              className="modal__spinner-style"
+                                              fadeIn="none"
+                                            />
+                                          </div>
+                                        ) : null}
+                                        <iframe
+                                          className="modal__video-style"
+                                          onLoad={spinner}
+                                          loading="lazy"
+                                          width="800"
+                                          height="500"
+                                          src={`https://www.youtube.com/embed/${embed_video_url}`}
+                                          title="YouTube video player"
+                                          frameBorder="0"
+                                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                          allowfullscreen
+                                        ></iframe>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </section>
-                            ) : null}
-                          </button>
-                        </div>} */}
-                      </div>
-
-                      <div className="left_1" id="productImgGallery">
-                        <ModalVideo
-                          channel="youtube"
-                          autoplay
-                          allowFullScreen="true"
-                          isOpen={isOpen}
-                          videoId={`${embed_video_url}`}
-                          onClose={() => setOpen(false)}
-                        />
-
-                        {productDetail.video_url && (
-                          <button
-                            onClick={() => setOpen(true)}
-                            className="video_player_btn"
-                          >
-                            <img
-                              src={`https://backend.bppshop.com.bd/storage/product/thumbnail/${productDetail.thumbnail}`}
-                              alt=""
-                            />
-                            <AiFillPlayCircle className="videoPlayerIcon" />
-                          </button>
+                                </section>
+                              ) : null}
+                            </button>
+                          </div>
                         )}
-
+                      </div>
+                      <div className="left_1">
                         {productDetail?.images?.map((image, i) => (
                           <div
                             className={i === 0 ? "img_wrap active" : "img_wrap"}
@@ -481,7 +443,7 @@ const ProductDetailsPage = () => {
                   )}
                 </div>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-8">
                 <div className="product_details_page_content">
                   <h2>{productDetail?.name}</h2>
                   <p>
@@ -501,16 +463,14 @@ const ProductDetailsPage = () => {
                   <div className="product_details_page_price">
                     {productDetail?.discount ? (
                       <h5 className="prices">
-                        &#2547;{" "}
-                        {productDetail?.unit_price - productDetail?.discount}{" "}
+                        ৳{productDetail?.unit_price - productDetail?.discount}{" "}
                         <del className="text-danger">
-                          &#2547; {productDetail?.unit_price}
+                          {" "}
+                          {productDetail?.unit_price}
                         </del>
                       </h5>
                     ) : (
-                      <h5 className="prices">
-                        &#2547; {productDetail?.unit_price}
-                      </h5>
+                      <h5 className="prices">৳{productDetail?.unit_price}</h5>
                     )}
                   </div>
                   <div className="product_details_page_pc_size_color">
@@ -562,7 +522,7 @@ const ProductDetailsPage = () => {
                                 margin: "0px 2px",
                                 cursor: "pointer",
                               }}
-                              className="colorBox"
+                              className="color1"
                               id={
                                 index[0]
                                   ? "activatedColor"
@@ -586,7 +546,6 @@ const ProductDetailsPage = () => {
                               productDetail,
                               isItemExist?.quantity,
                               defaultChoices
-                              // productDetail?.choice_options
                             )
                           }
                           className="detailsViewMinusBtn"
@@ -623,7 +582,6 @@ const ProductDetailsPage = () => {
                               isItemExist?.quantity,
                               productDetail?.current_stock,
                               defaultChoices
-                              // productDetail?.choice_options
                             )
                           }
                           className="detailsViewPlusBtn"
@@ -655,14 +613,14 @@ const ProductDetailsPage = () => {
                         <h5>
                           {productDetail?.discount > 0 ? (
                             <span className="mx-2 text-end">
-                              &#2547;{" "}
+                              ৳
                               {isItemExist?.quantity *
                                 (productDetail?.unit_price -
                                   productDetail?.discount)}
                             </span>
                           ) : (
                             <span className="mx-2 text-end">
-                              &#2547;{" "}
+                              ৳
                               {isItemExist?.quantity *
                                 productDetail?.unit_price}
                             </span>
@@ -670,7 +628,7 @@ const ProductDetailsPage = () => {
                         </h5>
                       ) : (
                         <h5>
-                          Total Price: &#2547;{" "}
+                          Total Price: ৳
                           {variantRes?.price
                             ? variantRes?.price
                             : quantityCount *
@@ -713,76 +671,12 @@ const ProductDetailsPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-3">
-                {productDetail?.seller && (
-                  <div className="seller-product-suggestion-container">
-                    <div className="seller-store-content">
-                      <div className="seller-store-banner">
-                        <img
-                          src={`https://backend.bppshop.com.bd/storage/shop/banner/${productDetail?.seller?.banner}`}
-                          alt=""
-                        />
-
-                        <div className="seller-store-profile-container">
-                          <div className="seller-profile-image">
-                            <img
-                              src={`https://backend.bppshop.com.bd/storage/shop/${productDetail?.seller?.image}`}
-                              alt=""
-                            />
-                          </div>
-                          <p className="sellerName">
-                            {productDetail?.seller?.shop_name}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <h4 className="seller-product-view-title mt-3">
-                      Seller Products
-                    </h4>
-                    <div className="seller-product-view-container ">
-                      {productDetail?.seller?.product?.map((item) => (
-                        <Link to={`/${slug}/${subSlug}/${subSubSlug}/${item.id}`}>
-                          <div className="seller_product_item">
-                            <div>
-                              {item.thumbnail ? (
-                                <img
-                                  src={
-                                    imgThumbnailBaseUrl + `/${item.thumbnail}`
-                                  }
-                                  className="card-img-top"
-                                  alt=""
-                                />
-                              ) : (
-                                <img src={defaultProImg} alt="" />
-                              )}
-                            </div>
-                            <div>
-                              <small>
-                                {item?.name?.toString().substring(0, 35)}...
-                              </small>
-                              <br />
-                              <small className="seller_product_unit_price">
-                                &#2547; {item?.unit_price}
-                              </small>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         </div>
-      {/* )} */}
-      {/* </div>
-        
-      </div> */}
-
+      )}
       <ProductReview productDetail={productDetail} />
     </>
   );
 };
-export default ProductDetailsPage;
+export default SellerStoreProductDetails;

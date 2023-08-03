@@ -190,7 +190,7 @@
 }
 
 .left_2 {
-  width: 380px;
+  width: 400px;
   border: 1px solid gainsboro;
 }
 .left_2 img {
@@ -310,7 +310,29 @@
 
 .seller-product-suggestion-container{
   width: 100%;
+  /* border: 1px solid gainsboro; */
+}
+.seller-product-view-container{
+  height: 44vh;
+  overflow-y: scroll;
+}
+.seller-product-view-title{
+  border-bottom: 1px solid gainsboro;
+}
+.seller_product_item{
+  height: 70px;
   border: 1px solid gainsboro;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: gray;
+}
+.seller_product_item img{
+  width: 60px;
+}
+.seller_product_unit_price{
+  font-weight: 600;
 }
 
 @keyframes spin {

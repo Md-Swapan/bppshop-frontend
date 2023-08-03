@@ -55,6 +55,7 @@ import AdminLandOnBehalfCustomer from "./Pages/AdminLand/AdminLandOnBehalfCustom
 import Modal from "react-modal";
 import AllSellerStore from "./Pages/SellerStore/AllSellerStore/AllSellerStore";
 import SellerStoreProduct from './Pages/SellerStore/SellerStoreProduct/SellerStoreProduct';
+import SellerStoreProductDetails from "./Pages/SellerStore/SellerStoreProductDetails";
 
 
 
@@ -118,10 +119,12 @@ function App() {
           <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
           <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
           <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
+          {/* <Route path="/products/:productSlug" element={<ProductDetailsPage allCategory={allCategory}/>} /> */}
           <Route path="/search" element={<Search/>} />
           <Route path="/search/:id" element={<SearchProductDetails/>} />
           <Route path="/sellers-store" element={<AllSellerStore/>} />
           <Route path="/sellers-store/:sellersStoreName/:sellerId" element={<SellerStoreProduct/>} />
+          <Route path="/sellers-store/:sellersStoreName/:sellerId/:id" element={<SellerStoreProductDetails/>} />
           <Route path="/brands" element={<Brands/>} />
           <Route path="/brands/:brandName/:brandId" element={<BrandsProducts/>} />
           <Route path="/brand/:name/:brandId/:id" element={<BrandProductDetails/>} />
