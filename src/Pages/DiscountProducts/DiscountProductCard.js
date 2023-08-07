@@ -179,16 +179,24 @@ const DiscountProductCard = ({ product }) => {
               </div>
 
               <Link to={`/discount-products/${id}`} addedItemId={addedItemId}>
-                <div
-                  className="quickView_AddToCart_overlay"
-                  onClick={scrollTop}
-                >
-                  <div className="overlayViewCartBtn">
-                    <span>
-                      <i class="bi bi-eye-fill"></i> <br /> View Details
-                    </span>
+                {current_stock > 0 ? (
+                  <div
+                    className="quickView_AddToCart_overlay"
+                    onClick={scrollTop}
+                  >
+                    <div className="overlayViewCartBtn">
+                      <span>
+                        <i class="bi bi-eye-fill"></i> <br /> View Details
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
+                    <h3 className="text-center">
+                      Stock <br /> Out
+                    </h3>
+                  </div>
+                )}
               </Link>
             </div>
             <div className="card-footer product-card-footer">

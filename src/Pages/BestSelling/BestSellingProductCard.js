@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { RatingStar } from "rating-star";
 
-
 const BestSellingProductCard = ({ product }) => {
   const token = localStorage.getItem("token");
 
@@ -132,60 +131,54 @@ const BestSellingProductCard = ({ product }) => {
     <>
       <div className="product_card_content">
         <div className="product-card">
-            <>
-              <div className=" product-card-body">
-                <div className="productImg_container">
-                  {thumbnail ? (
-                    <img
-                      src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                      className="card-img-top"
-                      alt=""
-                    />
+          <>
+            <div className=" product-card-body">
+              <div className="productImg_container">
+                {thumbnail ? (
+                  <img
+                    src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                    className="card-img-top"
+                    alt=""
+                  />
+                ) : (
+                  <img src={defaultProImg} alt="" />
+                )}
+              </div>
+              <div className="product-card-body-content">
+                <small>{name.toString().substring(0, 26)}...</small>
+                <br />
+                <small>
+                  {newChoiceOption && (
+                    <span className="unitPrice_view">
+                      {newChoiceOption?.options[0]} : {newChoiceOption?.title}
+                    </span>
+                  )}
+                </small>
+                <div className="product-card-body-content-unit-price">
+                  {discount ? (
+                    <span>
+                      <b> &#2547; {unit_price - discount} </b>
+                      <del>
+                        <b className="text-danger ms-2">
+                          {" "}
+                          &#2547; {unit_price}
+                        </b>
+                      </del>
+                    </span>
                   ) : (
-                    <img src={defaultProImg} alt="" />
+                    <b> &#2547; {unit_price}</b>
                   )}
                 </div>
-                <div className="product-card-body-content">
-                  <small>
-                    {name.toString().substring(0, 26)}...
-                  </small>
-                  <br/>
-                  <small>
-                  {newChoiceOption && (
-                      <span className="unitPrice_view">
-                        {newChoiceOption?.options[0]} : {newChoiceOption?.title}
-                      </span>
-                    )}
-                  </small>
-                  <div className="product-card-body-content-unit-price">
-                    {discount ? (
-                      <span>
-                        <b> &#2547; {unit_price - discount} </b>
-                        <del>
-                          <b className="text-danger ms-2">
-                            {" "}
-                            &#2547; {unit_price}
-                          </b>
-                        </del>
-                      </span>
-                    ) : (
-                      <b> &#2547; {unit_price}</b>
-                    )}
-                  </div>
-                  <RatingStar
-                    id={id}
-                    rating={rating?.map((r) => r?.average)}
-                    size={14}
-                  />{" "}
-                  <small>({reviews_count})</small>
-                </div>
+                <RatingStar
+                  id={id}
+                  rating={rating?.map((r) => r?.average)}
+                  size={14}
+                />{" "}
+                <small>({reviews_count})</small>
+              </div>
 
-                <Link
-                  to={
-                    (`/best-selling/${id}`)
-                  }
-                  addedItemId={addedItemId}
-                >
+              <Link to={`/best-selling/${id}`} addedItemId={addedItemId}>
+                {current_stock > 0 ? (
                   <div
                     className="quickView_AddToCart_overlay"
                     onClick={scrollTop}
@@ -196,36 +189,41 @@ const BestSellingProductCard = ({ product }) => {
                       </span>
                     </div>
                   </div>
-                </Link>
-              
-              </div>
-              <div className="card-footer product-card-footer">
-                {addedItemId ? (
-                  <div className="cardFooterBtn">
-                    <button disabled className="btn_after_added_cart">
-                      <i className="bi bi-cart-plus"></i> Product in Cart
-                    </button>
-                  </div>
                 ) : (
-                  <div className="cardFooterBtn">
-                    {current_stock > 0 ?
+                  <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
+                    <h3 className="text-center">
+                      Stock <br /> Out
+                    </h3>
+                  </div>
+                )}
+              </Link>
+            </div>
+            <div className="card-footer product-card-footer">
+              {addedItemId ? (
+                <div className="cardFooterBtn">
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Product in Cart
+                  </button>
+                </div>
+              ) : (
+                <div className="cardFooterBtn">
+                  {current_stock > 0 ? (
                     <button
                       className="btn_before_add_cart"
                       onClick={() => addToCartHandler(product, quantity)}
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
-                    : 
+                  ) : (
                     <button className="btn_before_add_cart_stockOut">
                       <i class="bi bi-cart-x"></i> Stock Out
                     </button>
-                    
-                    }
-                  </div>
-                )}
-              </div>
-            </>
-            {/* <div>
+                  )}
+                </div>
+              )}
+            </div>
+          </>
+          {/* <div>
               <div className="product-card-body">
                 <img
                   src={imgThumbnailBaseUrl + `/${thumbnail}`}
@@ -259,7 +257,6 @@ const BestSellingProductCard = ({ product }) => {
             </div> */}
         </div>
       </div>
-      
     </>
   );
 };

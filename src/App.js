@@ -123,11 +123,11 @@ function App() {
           <Route path="/search" element={<Search/>} />
           <Route path="/search/:id" element={<SearchProductDetails/>} />
           <Route path="/sellers-store" element={<AllSellerStore/>} />
-          <Route path="/sellers-store/:sellersStoreName/:sellerId" element={<SellerStoreProduct/>} />
-          <Route path="/sellers-store/:sellersStoreName/:sellerId/:id" element={<SellerStoreProductDetails/>} />
+          <Route path="/sellers-store/:sellerId" element={<SellerStoreProduct/>} />
+          <Route path="/sellers-store/:sellerId/:id" element={<SellerStoreProductDetails/>} />
           <Route path="/brands" element={<Brands/>} />
-          <Route path="/brands/:brandName/:brandId" element={<BrandsProducts/>} />
-          <Route path="/brand/:name/:brandId/:id" element={<BrandProductDetails/>} />
+          <Route path="/brands/:brandId" element={<BrandsProducts/>} />
+          <Route path="/brand/:brandId/:id" element={<BrandProductDetails/>} />
           <Route path="/discount-products" element={<DiscountProducts/>} />
           <Route path="/discount-products/:id" element={<DiscountProductDetails/>} />
           <Route path="/flash-sale" element={<FlashSale/>} />

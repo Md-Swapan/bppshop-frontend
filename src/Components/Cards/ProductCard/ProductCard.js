@@ -196,10 +196,8 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
-      {/* <p className="loader"></p> */}
       <div className="product_card_content">
         <div className="product-card">
-          {/* {current_stock > 0 ? ( */}
           <>
             <div className=" product-card-body">
               <div className="productImg_container">
@@ -248,20 +246,29 @@ const ProductCard = ({ product }) => {
               </div>
 
               <Link
-                to={`/${slug}/${subSlug}/${subSubSlug}/${product.slug}`}
+                to={`/${slug}/${subSlug}/${subSubSlug}/${id}`}
+                // to={`/${slug}/${subSlug}/${subSubSlug}/${product.slug}`}
                 // to={`/products/${product.slug}`}
                 addedItemId={addedItemId}
               >
-                <div
-                  className="quickView_AddToCart_overlay"
-                  onClick={scrollTop}
-                >
-                  <div className="overlayViewCartBtn">
-                    <span>
-                      <i class="bi bi-eye-fill"></i> <br /> View Details
-                    </span>
+                {current_stock > 0 ? (
+                  <div
+                    className="quickView_AddToCart_overlay"
+                    onClick={scrollTop}
+                  >
+                    <div className="overlayViewCartBtn">
+                      <span>
+                        <i class="bi bi-eye-fill"></i> <br /> View Details
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
+                    <h3 className="text-center">
+                      Stock <br /> Out
+                    </h3>
+                  </div>
+                )}
               </Link>
             </div>
             <div className="card-footer product-card-footer">
@@ -290,40 +297,6 @@ const ProductCard = ({ product }) => {
               )}
             </div>
           </>
-          {/* ) : ( */}
-          {/* <div>
-              <div className="product-card-body">
-                <img
-                  src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                  className="card-img-top"
-                  alt=""
-                />
-                <div className="product-card-body-content">
-                  <small>{name?.toString().substring(0, 20)}...</small>
-                  <br />
-                  <div className="product-card-body-content-unit-price">
-                    {newChoiceOption && (
-                      <span>
-                        {newChoiceOption?.title} : {newChoiceOption?.options[0]}
-                      </span>
-                    )}
-                    <br />
-                    <strong> &#2547; {unit_price}</strong>
-                  </div>
-                </div>
-              </div>
-              <div className="card-footer product-card-footer">
-                <button className="btn_before_add_cart">
-                  <i className="bi bi-cart-plus"></i> Stock Out
-                </button>
-              </div>
-              <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
-                <h3 className="text-center">
-                  Stock <br /> Out
-                </h3>
-              </div>
-            </div> */}
-          {/* )} */}
         </div>
       </div>
       {/* <Modal

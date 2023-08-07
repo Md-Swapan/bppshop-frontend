@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import defaultProImg from "../../Assets/Images/defaultImg.jpg";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +10,9 @@ import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { RatingStar } from "rating-star";
 
-
-const BrandsProductsCard = ({product}) => {
+const BrandsProductsCard = ({ product }) => {
   const token = localStorage.getItem("token");
-  const {brandName, brandId} = useParams()
-
+  const { brandName, brandId } = useParams();
 
   const {
     id,
@@ -137,99 +134,99 @@ const BrandsProductsCard = ({product}) => {
     <>
       <div className="product_card_content">
         <div className="product-card">
-            <>
-              <div className=" product-card-body">
-                <div className="productImg_container">
-                  {thumbnail ? (
-                    <img
-                      src={imgThumbnailBaseUrl + `/${thumbnail}`}
-                      className="card-img-top"
-                      alt=""
-                    />
+          <>
+            <div className=" product-card-body">
+              <div className="productImg_container">
+                {thumbnail ? (
+                  <img
+                    src={imgThumbnailBaseUrl + `/${thumbnail}`}
+                    className="card-img-top"
+                    alt=""
+                  />
+                ) : (
+                  <img src={defaultProImg} alt="" />
+                )}
+              </div>
+              <div className="product-card-body-content">
+                <small>{name.toString().substring(0, 26)}...</small>
+                <br />
+                <small>
+                  {newChoiceOption && (
+                    <span className="unitPrice_view">
+                      {newChoiceOption?.options[0]} : {newChoiceOption?.title}
+                    </span>
+                  )}
+                </small>
+                <div className="product-card-body-content-unit-price">
+                  {discount ? (
+                    <span>
+                      <b> &#2547; {unit_price - discount} </b>
+                      <del>
+                        <b className="text-danger ms-2">
+                          {" "}
+                          &#2547; {unit_price}
+                        </b>
+                      </del>
+                    </span>
                   ) : (
-                    <img src={defaultProImg} alt="" />
+                    <b> &#2547; {unit_price}</b>
                   )}
                 </div>
-                <div className="product-card-body-content">
-                  <small>
-                    {name.toString().substring(0, 26)}...
-                  </small>
-                  <br/>
-                  <small>
-                  {newChoiceOption && (
-                      <span className="unitPrice_view">
-                        {newChoiceOption?.options[0]} : {newChoiceOption?.title}
-                      </span>
-                    )}
-                  </small>
-                  <div className="product-card-body-content-unit-price">
-                    {discount ? (
-                      <span>
-                        <b> &#2547; {unit_price - discount} </b>
-                        <del>
-                          <b className="text-danger ms-2">
-                            {" "}
-                            &#2547; {unit_price}
-                          </b>
-                        </del>
-                      </span>
-                    ) : (
-                      <b> &#2547; {unit_price}</b>
-                    )}
-                  </div>
-                  <RatingStar
-                    id={id}
-                    rating={rating?.map((r) => r?.average)}
-                    size={14}
-                  />{" "}
-                  <small>({reviews_count})</small>
-                </div>
+                <RatingStar
+                  id={id}
+                  rating={rating?.map((r) => r?.average)}
+                  size={14}
+                />{" "}
+                <small>({reviews_count})</small>
+              </div>
 
-                <Link
-                  to={
-                    (`/brand/${brandName}/${brandId}/${id}`)
-                  }
-                  addedItemId={addedItemId}
-                >
+              <Link to={`/brand/${brandId}/${id}`} addedItemId={addedItemId}>
+                {current_stock > 0 ? (
                   <div
                     className="quickView_AddToCart_overlay"
                     onClick={scrollTop}
                   >
                     <div className="overlayViewCartBtn">
                       <span>
-                        <i className="bi bi-eye-fill"></i> <br /> View Details
+                        <i class="bi bi-eye-fill"></i> <br /> View Details
                       </span>
                     </div>
                   </div>
-                </Link>
-              
-              </div>
-              <div className="card-footer product-card-footer">
-                {addedItemId ? (
-                  <div className="cardFooterBtn">
-                    <button disabled className="btn_after_added_cart">
-                      <i className="bi bi-cart-plus"></i> Product in Cart
-                    </button>
-                  </div>
                 ) : (
-                  <div className="cardFooterBtn">
-                    {current_stock > 0 ? 
+                  <div className="product_stock_out_overlay d-flex justify-content-center align-items-center">
+                    <h3 className="text-center">
+                      Stock <br /> Out
+                    </h3>
+                  </div>
+                )}
+              </Link>
+            </div>
+            <div className="card-footer product-card-footer">
+              {addedItemId ? (
+                <div className="cardFooterBtn">
+                  <button disabled className="btn_after_added_cart">
+                    <i className="bi bi-cart-plus"></i> Product in Cart
+                  </button>
+                </div>
+              ) : (
+                <div className="cardFooterBtn">
+                  {current_stock > 0 ? (
                     <button
                       className="btn_before_add_cart"
                       onClick={() => addToCartHandler(product, quantity)}
                     >
                       <i className="bi bi-cart-plus"></i> Add To Cart
                     </button>
-                    : 
+                  ) : (
                     <button className="btn_before_add_cart_stockOut">
                       <i class="bi bi-cart-x"></i> Stock Out
-                    </button> 
-                    }
-                  </div>
-                )}
-              </div>
-            </>
-            {/* <div>
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          </>
+          {/* <div>
               <div className="product-card-body">
                 <img
                   src={imgThumbnailBaseUrl + `/${thumbnail}`}
@@ -263,7 +260,6 @@ const BrandsProductsCard = ({product}) => {
             </div> */}
         </div>
       </div>
-      
     </>
   );
 };

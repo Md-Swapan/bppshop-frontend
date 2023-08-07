@@ -9,9 +9,11 @@ import axios from "axios";
 import { baseUrl } from "../../../BaseUrl/BaseUrl";
 
 const SellerStoreProduct = () => {
-  const { sellersStoreName, sellerId } = useParams();
+  const { sellerId } = useParams();
   const [sellerProducts, setSellerProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const sellerName =  localStorage.getItem("sellerName")
 
   useEffect(() => {
     axios
@@ -23,7 +25,7 @@ const SellerStoreProduct = () => {
 
   return (
     <>
-      <h4>{sellersStoreName} Products :</h4>
+      <h4>{sellerName} Products :</h4>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb my-4">
           <li className="breadcrumb-item" aria-current="page">
@@ -31,7 +33,7 @@ const SellerStoreProduct = () => {
           </li>
 
           <li className="breadcrumb-item active" aria-current="page">
-            {sellersStoreName}
+            {sellerName}
           </li>
         </ol>
       </nav>

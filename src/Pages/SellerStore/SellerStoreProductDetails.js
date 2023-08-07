@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // import "./ProductDetailsPage.css";
 import { useParams } from "react-router-dom";
-import { baseUrl, imgBaseUrl } from "./../../BaseUrl/BaseUrl";
+import { baseUrl, imgBaseUrl, imgThumbnailBaseUrl } from "./../../BaseUrl/BaseUrl";
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -20,10 +20,11 @@ import toast from "react-hot-toast";
 import { IoCloseOutline } from "react-icons/io5";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { BiLoaderAlt } from "react-icons/bi";
+import defaultProImg from "../../Assets/Images/defaultImg.jpg";
 
 const SellerStoreProductDetails = () => {
   const { sellersStoreName, sellerId, id } = useParams();
-
+  const sellerName =  localStorage.getItem("sellerName")
   const location = useLocation();
 
   const newLocation = location.pathname.split("/");
@@ -43,7 +44,7 @@ const SellerStoreProductDetails = () => {
   useEffect(() => {
     axios.get(`${baseUrl}/products/details/${id}`).then((res) => {
       setProductDetail(res.data.data);
-      setLoading(false);
+      // setLoading(false);
     });
   }, [id]);
 
@@ -214,11 +215,11 @@ const SellerStoreProductDetails = () => {
   };
 
   // 404 function...................................
-  useEffect(() => {
-    if (!loading && !productDetailsPath) {
-      navigate("/404", { replace: true });
-    }
-  }, [productDetailsPath, loading, navigate]);
+  // useEffect(() => {
+  //   if (!loading && !productDetailsPath) {
+  //     navigate("/404", { replace: true });
+  //   }
+  // }, [productDetailsPath, loading, navigate]);
 
   // cart item increase decrease function..............................
   const increaseQuantity = (id, quantity, stock, defaultChoices) => {
@@ -333,7 +334,7 @@ const SellerStoreProductDetails = () => {
             <Link to="/sellers-store">Seller Store</Link>
           </li>
           <li className="breadcrumb-item" aria-current="page">
-            <Link to={`/sellers-store/${brandName}/${sellerId}`}>{sellersStoreName}</Link>
+            <Link to={`/sellers-store/${sellerId}`}>{sellerName}</Link>
           </li>
 
           <li className="breadcrumb-item active" aria-current="page">
@@ -342,7 +343,7 @@ const SellerStoreProductDetails = () => {
         </ol>
       </nav>
       <br />
-      {productDetailsPath === true && (
+      {/* {productDetailsPath === true && ( */}
         <div className="product_details_page_container">
           <div className="container-fluid">
             <div className="row">
@@ -443,7 +444,7 @@ const SellerStoreProductDetails = () => {
                   )}
                 </div>
               </div>
-              <div className="col-md-8">
+              <div className="col-md-5">
                 <div className="product_details_page_content">
                   <h2>{productDetail?.name}</h2>
                   <p>
@@ -463,14 +464,13 @@ const SellerStoreProductDetails = () => {
                   <div className="product_details_page_price">
                     {productDetail?.discount ? (
                       <h5 className="prices">
-                        ৳{productDetail?.unit_price - productDetail?.discount}{" "}
+                        &#2547; {productDetail?.unit_price - productDetail?.discount}{" "}
                         <del className="text-danger">
-                          {" "}
-                          {productDetail?.unit_price}
+                        &#2547; {productDetail?.unit_price}
                         </del>
                       </h5>
                     ) : (
-                      <h5 className="prices">৳{productDetail?.unit_price}</h5>
+                      <h5 className="prices">&#2547; {productDetail?.unit_price}</h5>
                     )}
                   </div>
                   <div className="product_details_page_pc_size_color">
@@ -671,10 +671,70 @@ const SellerStoreProductDetails = () => {
                   </div>
                 </div>
               </div>
+              <div className="col-md-3">
+                {productDetail?.seller && (
+                  <div className="seller-product-suggestion-container">
+                    <div className="seller-store-content">
+                      <div className="seller-store-banner">
+                        <img
+                          src={`https://backend.bppshop.com.bd/storage/shop/banner/${productDetail?.seller?.banner}`}
+                          alt=""
+                        />
+
+                        <div className="seller-store-profile-container">
+                          <div className="seller-profile-image">
+                            <img
+                              src={`https://backend.bppshop.com.bd/storage/shop/${productDetail?.seller?.image}`}
+                              alt=""
+                            />
+                          </div>
+                          <p className="sellerName">
+                            {productDetail?.seller?.shop_name}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h4 className="seller-product-view-title mt-3">
+                      Seller Products
+                    </h4>
+                    <div className="seller-product-view-container ">
+                      {productDetail?.seller?.product?.map((item) => (
+                        <Link to={`/sellers-store/${sellerId}/${item.id}`}>
+                          <div className="seller_product_item">
+                            <div>
+                              {item.thumbnail ? (
+                                <img
+                                  src={
+                                    imgThumbnailBaseUrl + `/${item.thumbnail}`
+                                  }
+                                  className="card-img-top"
+                                  alt=""
+                                />
+                              ) : (
+                                <img src={defaultProImg} alt="" />
+                              )}
+                            </div>
+                            <div>
+                              <small>
+                                {item?.name?.toString().substring(0, 35)}...
+                              </small>
+                              <br />
+                              <small className="seller_product_unit_price">
+                                &#2547; {item?.unit_price}
+                              </small>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      )}
+      {/* )} */}
       <ProductReview productDetail={productDetail} />
     </>
   );

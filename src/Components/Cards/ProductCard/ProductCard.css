@@ -183,7 +183,7 @@
   display: none;
   color: white;
   display: block;
-  cursor: default;
+  cursor: pointer;
 }
 
 .cardFooterBtn {

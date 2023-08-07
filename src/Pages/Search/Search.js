@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ProductCard from "./../../Components/Cards/ProductCard/ProductCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import SearchProductCard from "./SearchProductCard";
+import loadingGif from "../../Assets/Images/loading.gif"
 
 const Search = () => {
   const { searchProducts, loading } = useSelector(
@@ -42,7 +43,8 @@ const Search = () => {
         ) : (
           !loading && (
             <div className="d-flex justify-content-center align-items-center">
-              <h2 className="text-danger mt-5">Product Not Found!</h2>
+              {/* <h2 className="text-danger mt-5">Product Searching.............</h2> */}
+              <img className="mt-5" width={80} src={loadingGif} alt=""/>
             </div>
           )
         )}

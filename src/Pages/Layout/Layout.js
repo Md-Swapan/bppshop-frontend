@@ -7,11 +7,6 @@ import Cart from "../../Components/Cart/Cart";
 import CartDetailsView from "./../../Components/Cart/CartDetailsView/CartDetailsView";
 import { Toaster } from "react-hot-toast";
 
-
-
-
-
-
 // const notify = () => toast('Here is your toast.');
 
 const searchSuggestionCloseHandler = () => {
@@ -66,7 +61,6 @@ const CartDetailsCloseHandler = () => {
 // })
 
 const Layout = ({ children }) => {
-
   return (
     <div>
       <Nav />

@@ -9,9 +9,10 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import BrandsProductsCard from "../BrandsProductsCard";
 
 const BrandsProducts = () => {
-  const { brandId, brandName } = useParams();
+  const { brandId } = useParams();
   const [brandProducts, setBrandProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const brandName =  localStorage.getItem("brandName")
 
   useEffect(() => {
     axios

@@ -42,6 +42,11 @@ const AllSellerStore = () => {
       }
     }
   };
+
+  const SellerNameSave = (sellerName) => {
+    localStorage.setItem("sellerName", sellerName)
+  };
+
   return (
     <>
       <h4>All Seller Store:</h4>
@@ -78,7 +83,8 @@ const AllSellerStore = () => {
             allSellerStore.map((sellerStore) => (
               <Link
                 key={sellerStore?.id}
-                to={`/sellers-store/${sellerStore?.name}/${sellerStore?.id}`}
+                to={`/sellers-store/${sellerStore?.id}`}
+                onClick={(e) => {SellerNameSave(sellerStore.name)}}
               >
                 <div className="seller-store-content">
                   <div className="seller-store-banner">

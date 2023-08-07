@@ -89,6 +89,21 @@ const SubCategory = ({ allCategory, loading }) => {
             title="Buy Best Sports Products Online Store - Bpp Shop"
             description="Buy Sports Products Online at a affordable price. We provide best quality sports, accessories, gym equipment, jersey, sports equipment etc in Bangladesh."
           />
+        ) : slug === "home-appliance-decorate" ? (
+          <MetaData
+            title="Buy Home & Kitchen Appliance Online at Reasonable Price"
+            description="Buy All Branded Home & kitchen appliances Low Price in across Bangladesh. Bpp Shop Provide Best Quality Home Appliance Decorate Products."
+          />
+        ) : slug === "hardware-cables-sanitary" ? (
+          <MetaData
+            title="Buy Hardware Cables & Sanitary Products Online at Low Price"
+            description="Bpp Shop offer wide range of highest quality Hardware Cables & Sanitary products online. get fist home delivery."
+          />
+        ) : slug === "vehicle" ? (
+          <MetaData
+            title="Find the best deals on Vehicles online at Bpp Shop"
+            description="Buy Vehicle online at Bpp Shop.  largest collection of Vehicles from top brands and latest models in Bangladesh."
+          />
         ) : ""}
 
         <nav aria-label="breadcrumb">
