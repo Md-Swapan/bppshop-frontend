@@ -662,6 +662,7 @@ const TopRatedProductDetails = () => {
                 {productDetail?.seller && (
                   <div className="seller-product-suggestion-container">
                     <div className="seller-store-content">
+                    <Link to={`/sellers-store/${productDetail?.seller?.id}`}>
                       <div className="seller-store-banner">
                         <img
                           src={`https://backend.bppshop.com.bd/storage/shop/banner/${productDetail?.seller?.banner}`}
@@ -680,6 +681,7 @@ const TopRatedProductDetails = () => {
                           </p>
                         </div>
                       </div>
+                      </Link>
                     </div>
 
                     <h4 className="seller-product-view-title mt-3">

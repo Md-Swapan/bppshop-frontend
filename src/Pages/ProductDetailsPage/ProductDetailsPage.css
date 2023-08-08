@@ -219,6 +219,7 @@
   background: #00000088;
   position: relative;
 }
+
 .video_player_btn img {
   width: 100%;
   height: 100%;
@@ -311,9 +312,10 @@
   width: 100%;
   /* border: 1px solid gainsboro; */
 }
+
 .seller-product-view-container{
-  height: 44vh;
-  overflow-y: scroll;
+  /* height: 44vh;
+  overflow-y: scroll; */
 }
 .seller-product-view-title{
   border-bottom: 1px solid gainsboro;

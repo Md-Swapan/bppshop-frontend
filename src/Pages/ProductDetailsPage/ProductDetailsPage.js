@@ -42,6 +42,7 @@ const ProductDetailsPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = localStorage.getItem("token");
+  const sellerId = localStorage.getItem("sellerId");
 
   // Product Details............................
   useEffect(() => {
@@ -716,65 +717,65 @@ const ProductDetailsPage = () => {
               </div>
             </div>
             <div className="col-md-3">
-                {productDetail?.seller && (
-                  <div className="seller-product-suggestion-container">
-                    <div className="seller-store-content">
-                      <div className="seller-store-banner">
-                        <img
-                          src={`https://backend.bppshop.com.bd/storage/shop/banner/${productDetail?.seller?.banner}`}
-                          alt=""
-                        />
+              {productDetail?.seller && (
+                <div className="seller-product-suggestion-container">
+                  <div className="seller-store-content">
+                    <Link to={`/sellers-store/${productDetail?.seller?.id}`}>
+                    <div className="seller-store-banner">
+                      <img
+                        src={`https://backend.bppshop.com.bd/storage/shop/banner/${productDetail?.seller?.banner}`}
+                        alt=""
+                      />
 
-                        <div className="seller-store-profile-container">
-                          <div className="seller-profile-image">
-                            <img
-                              src={`https://backend.bppshop.com.bd/storage/shop/${productDetail?.seller?.image}`}
-                              alt=""
-                            />
-                          </div>
-                          <p className="sellerName">
-                            {productDetail?.seller?.shop_name}
-                          </p>
+                      <div className="seller-store-profile-container">
+                        <div className="seller-profile-image">
+                          <img
+                            src={`https://backend.bppshop.com.bd/storage/shop/${productDetail?.seller?.image}`}
+                            alt=""
+                          />
                         </div>
+                        <p className="sellerName">
+                          {productDetail?.seller?.shop_name}
+                        </p>
                       </div>
                     </div>
-
-                    <h4 className="seller-product-view-title mt-3">
-                      Seller Products
-                    </h4>
-                    <div className="seller-product-view-container ">
-                      {productDetail?.seller?.product?.map((item) => (
-                        <Link to={`/${slug}/${subSlug}/${subSubSlug}/${item.id}`}>
-                          <div className="seller_product_item">
-                            <div>
-                              {item.thumbnail ? (
-                                <img
-                                  src={
-                                    imgThumbnailBaseUrl + `/${item.thumbnail}`
-                                  }
-                                  className="card-img-top"
-                                  alt=""
-                                />
-                              ) : (
-                                <img src={defaultProImg} alt="" />
-                              )}
-                            </div>
-                            <div>
-                              <small>
-                                {item?.name?.toString().substring(0, 35)}...
-                              </small>
-                              <br />
-                              <small className="seller_product_unit_price">
-                                &#2547; {item?.unit_price}
-                              </small>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+                    </Link>
                   </div>
-                )}
-              </div>
+
+                  <h4 className="seller-product-view-title mt-3">
+                    Seller Products
+                  </h4>
+                  <div className="seller-product-view-container ">
+                    {productDetail?.seller?.product?.map((item) => (
+                      <Link to={`/${slug}/${subSlug}/${subSubSlug}/${item.id}`}>
+                        <div className="seller_product_item">
+                          <div>
+                            {item.thumbnail ? (
+                              <img
+                                src={imgThumbnailBaseUrl + `/${item.thumbnail}`}
+                                className="card-img-top"
+                                alt=""
+                              />
+                            ) : (
+                              <img src={defaultProImg} alt="" />
+                            )}
+                          </div>
+                          <div>
+                            <small>
+                              {item?.name?.toString().substring(0, 35)}...
+                            </small>
+                            <br />
+                            <small className="seller_product_unit_price">
+                              &#2547; {item?.unit_price}
+                            </small>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

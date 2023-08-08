@@ -84,7 +84,7 @@ const AllSellerStore = () => {
               <Link
                 key={sellerStore?.id}
                 to={`/sellers-store/${sellerStore?.id}`}
-                onClick={(e) => {SellerNameSave(sellerStore.name)}}
+                onClick={(e) => {SellerNameSave(sellerStore?.name)}}
               >
                 <div className="seller-store-content">
                   <div className="seller-store-banner">
