@@ -170,12 +170,13 @@
 }
 .left_1::-webkit-scrollbar {
   display: block;
-  height: 3px;
+  height: 5px;
 }
 .img_wrap {
   height: 85px;
   border: 1px solid #eee;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .img_wrap img {

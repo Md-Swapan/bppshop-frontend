@@ -316,6 +316,12 @@ const DiscountProductDetails = () => {
     setVideoLoading(!videoLoading);
   };
 
+  const SellerNameSave = (sellerName) => {
+    localStorage.setItem("sellerName", sellerName)
+  };
+
+  
+
   return (
     <>
       <h4>Discount Products:</h4>
@@ -670,7 +676,9 @@ const DiscountProductDetails = () => {
                 {productDetail?.seller && (
                   <div className="seller-product-suggestion-container">
                     <div className="seller-store-content">
-                    <Link to={`/sellers-store/${productDetail?.seller?.id}`}>
+                    <Link to={`/sellers-store/${productDetail?.seller?.id}`}
+                    onClick={(e) => {SellerNameSave(productDetail?.seller?.shop_name)}}
+                    >
                       <div className="seller-store-banner">
                         <img
                           src={`https://backend.bppshop.com.bd/storage/shop/banner/${productDetail?.seller?.banner}`}

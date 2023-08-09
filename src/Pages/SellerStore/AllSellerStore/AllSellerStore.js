@@ -15,7 +15,7 @@ const AllSellerStore = () => {
   const [lastList, setLastList] = useState(false);
 
   useEffect(() => {
-    let limit = 25;
+    let limit = 30;
     const fetchData = async () => {
       const response = await axios.get(
         `${baseUrl}/seller/all?limit=${limit}&offset=${currPage}`
@@ -53,7 +53,7 @@ const AllSellerStore = () => {
       <div
         onScroll={onScroll}
         ref={listInnerRef}
-        style={{ height: "70vh", overflowY: "auto" }}
+        style={{ height: "80vh", overflowY: "auto" }}
         className="all-seller-store-container mt-4 pb-5"
       >
         <SkeletonTheme baseColor="#DDDDDD" highlightColor="#e3e3e3">
@@ -83,7 +83,7 @@ const AllSellerStore = () => {
             allSellerStore.map((sellerStore) => (
               <Link
                 key={sellerStore?.id}
-                to={`/sellers-store/${sellerStore?.id}`}
+                to={`/sellers-store/${sellerStore?.seller_id}`}
                 onClick={(e) => {SellerNameSave(sellerStore?.name)}}
               >
                 <div className="seller-store-content">

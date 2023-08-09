@@ -16,6 +16,8 @@ import OptionImg1 from "../../../Assets/Images/bankLogo/Bkash-logo.png";
 import OptionImg2 from "../../../Assets/Images/bankLogo/Nagad-Logo.wine.png";
 import OptionImg3 from "../../../Assets/Images/bankLogo/rocket (1).png";
 import OptionImg22 from "../../../Assets/Images/bankLogo/download (1).png";
+import proccedordergif from "../../../Assets/Images/udorderloader.gif"
+
 
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
@@ -26,31 +28,40 @@ const CheckoutPayment = () => {
   const navigate = useNavigate();
 
   const handleCheckoutConfirm = (id) => {
+    const proccedordergifContainer = document.querySelector(".proccedordergif-container");
+    const paymentMethodContainer = document.querySelector(".payment_method_container");
+    paymentMethodContainer.style.display ="none"
+    proccedordergifContainer.style.display ="block"
+
     const agent_checkout = {
       address_id: id,
-      agent_id: agentId
+      agent_id: agentId,
     };
 
     if (agentId) {
-      axios.post(`${baseUrl}/cart/checkout`, agent_checkout, config)
+      axios
+        .post(`${baseUrl}/cart/checkout`, agent_checkout, config)
         .then((res) => {
           if (res.data.status === "success") {
             dispatch(ClearCart());
             // dispatch(clearShippingAddress());
             dispatch(ClearCartGroupItems());
             navigate("/checkout-complete");
+            proccedordergifContainer.style.display ="none"
           }
-        })
+        });
     } else {
-      axios.post(`${baseUrl}/cart/checkout`, {address_id: id}, config)
-      .then((res) => {
-        if (res.data.status === "success") {
-          dispatch(ClearCart());
-          // dispatch(clearShippingAddress());
-          dispatch(ClearCartGroupItems());
-          navigate("/checkout-complete");
-        }
-      });
+      axios
+        .post(`${baseUrl}/cart/checkout`, { address_id: id }, config)
+        .then((res) => {
+          if (res.data.status === "success") {
+            dispatch(ClearCart());
+            // dispatch(clearShippingAddress());
+            dispatch(ClearCartGroupItems());
+            navigate("/checkout-complete");
+            proccedordergifContainer.style.display ="none"
+          }
+        });
     }
   };
 
@@ -63,15 +74,14 @@ const CheckoutPayment = () => {
   const isRadioSelected = (value) => paymentType === value;
   const handleRadioClick = (event) => setPaymentType(event.target.value);
 
-
   // let cashOnDeliveryPayment = false;
 
-  const [cashOnDeliveryPayment, setCashOnDeliveryPayment] = useState(0)
+  const [cashOnDeliveryPayment, setCashOnDeliveryPayment] = useState(0);
 
   const cashOnDeliveryHandler = () => {
     const codBtn = document.querySelector(".cashOnDelivery_content");
     const cODelivery = document.querySelector("#cashOnDelivery").checked;
-   
+
     const paymentOptionWayContent = document.querySelector(
       ".payment-option-way"
     );
@@ -101,9 +111,7 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
-    const mobilePayment = document.querySelector(
-      "#mobilePayment"
-    ).checked;
+    const mobilePayment = document.querySelector("#mobilePayment").checked;
     const codBtn = document.querySelector(".cashOnDelivery_content");
     paymentOptionWayContent.style.display = "block";
     codBtn.style.display = "none";
@@ -125,9 +133,7 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
-    const bankPayment = document.querySelector(
-      "#bankPayment"
-    ).checked;
+    const bankPayment = document.querySelector("#bankPayment").checked;
     bankPaymentOptionWay.style.display = "block";
     codBtn.style.display = "none";
     paymentOptionWayContent.style.display = "none";
@@ -147,7 +153,9 @@ const CheckoutPayment = () => {
     const cashOnDeliveryNextBtn = document.querySelector(
       "#cashOnDeliveryNextBtn"
     );
-    const agentWalletPayment = document.querySelector("#agentWalletPayment").checked;
+    const agentWalletPayment = document.querySelector(
+      "#agentWalletPayment"
+    ).checked;
 
     bankPaymentOptionWay.style.display = "none";
     codBtn.style.display = "none";
@@ -155,7 +163,6 @@ const CheckoutPayment = () => {
     // cashOnDeliveryNextBtn.style.display = "none";
     setCashOnDeliveryPayment(0);
 
-    
     if (agentId) {
       NavigateAgentWallet();
     } else {
@@ -192,7 +199,9 @@ const CheckoutPayment = () => {
                   onClick={cashOnDeliveryHandler}
                   id="cashOnDelivery"
                 />
-                <label onClick={cashOnDeliveryHandler} htmlFor="cashOnDelivery">Cash On Delivery</label>
+                <label onClick={cashOnDeliveryHandler} htmlFor="cashOnDelivery">
+                  Cash On Delivery
+                </label>
               </div>
 
               <div className="cashOnDelivery_content">
@@ -268,7 +277,12 @@ const CheckoutPayment = () => {
                   onClick={AgentWalletPaymentHandler}
                   id="agentWalletPayment"
                 />
-                <label  onClick={AgentWalletPaymentHandler} htmlFor="agentWalletPayment">Agent Wallet</label>
+                <label
+                  onClick={AgentWalletPaymentHandler}
+                  htmlFor="agentWalletPayment"
+                >
+                  Agent Wallet
+                </label>
               </div>
               <p className="paymentErrorMessage"></p>
               <div className="payment-option-way"></div>
@@ -278,11 +292,14 @@ const CheckoutPayment = () => {
 
         <div className="payment_bottom_Btn">
           {/* <div className="d-flex flex-wrap"> */}
-            <Link to="/shipping-address">
-              <button className="back_to_shipping">Back to Shipping</button>
-            </Link>
+          <Link to="/shipping-address">
+            <button className="back_to_shipping">Back to Shipping</button>
+          </Link>
 
-            {cashOnDeliveryPayment == 0 ? "" : <button
+          {cashOnDeliveryPayment == 0 ? (
+            ""
+          ) : (
+            <button
               onClick={() =>
                 handleCheckoutConfirm(shippingAddressInfo?.data?.id)
               }
@@ -296,9 +313,13 @@ const CheckoutPayment = () => {
               paymentType === "agentWalletPayment"
                 ? "Next"
                 : "Confirm Order"}
-            </button> }
+            </button>
+          )}
           {/* </div> */}
         </div>
+      </div>
+      <div className="proccedordergif-container">
+        <img src={proccedordergif} alt=""/>
       </div>
     </>
   );

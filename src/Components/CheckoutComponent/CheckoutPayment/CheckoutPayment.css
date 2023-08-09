@@ -103,6 +103,9 @@
 .paymentErrorMessage{
   color: red;
 }
+.proccedordergif-container{
+  display: none;
+}
 
 @media screen and (max-width:768px) {
   .payment_bottom_Btn {
