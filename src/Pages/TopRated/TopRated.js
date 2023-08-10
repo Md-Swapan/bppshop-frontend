@@ -50,7 +50,7 @@ const TopRated = () => {
         <div
           onScroll={onScroll}
           ref={listInnerRef}
-          style={{ height: "100vh", overflowY: "auto" }}
+          style={{ height: "70vh", overflowY: "auto" }}
           className="product-container mt-4"
         >
           {/* <div className="product-content"> */}

@@ -16,8 +16,7 @@ import OptionImg1 from "../../../Assets/Images/bankLogo/Bkash-logo.png";
 import OptionImg2 from "../../../Assets/Images/bankLogo/Nagad-Logo.wine.png";
 import OptionImg3 from "../../../Assets/Images/bankLogo/rocket (1).png";
 import OptionImg22 from "../../../Assets/Images/bankLogo/download (1).png";
-import proccedordergif from "../../../Assets/Images/udorderloader.gif"
-
+import proccedordergif from "../../../Assets/Images/udorderloader.gif";
 
 const CheckoutPayment = () => {
   const { shippingAddressInfo } = useSelector((state) => state?.shippingInfo);
@@ -28,10 +27,14 @@ const CheckoutPayment = () => {
   const navigate = useNavigate();
 
   const handleCheckoutConfirm = (id) => {
-    const proccedordergifContainer = document.querySelector(".proccedordergif-container");
-    const paymentMethodContainer = document.querySelector(".payment_method_container");
-    paymentMethodContainer.style.display ="none"
-    proccedordergifContainer.style.display ="block"
+    const proccedordergifContainer = document.querySelector(
+      ".proccedordergif-container"
+    );
+    const paymentMethodContainer = document.querySelector(
+      ".payment_method_container"
+    );
+    paymentMethodContainer.style.display = "none";
+    proccedordergifContainer.style.display = "block";
 
     const agent_checkout = {
       address_id: id,
@@ -47,7 +50,7 @@ const CheckoutPayment = () => {
             // dispatch(clearShippingAddress());
             dispatch(ClearCartGroupItems());
             navigate("/checkout-complete");
-            proccedordergifContainer.style.display ="none"
+            proccedordergifContainer.style.display = "none";
           }
         });
     } else {
@@ -59,7 +62,7 @@ const CheckoutPayment = () => {
             // dispatch(clearShippingAddress());
             dispatch(ClearCartGroupItems());
             navigate("/checkout-complete");
-            proccedordergifContainer.style.display ="none"
+            proccedordergifContainer.style.display = "none";
           }
         });
     }
@@ -318,8 +321,10 @@ const CheckoutPayment = () => {
           {/* </div> */}
         </div>
       </div>
-      <div className="proccedordergif-container">
-        <img src={proccedordergif} alt=""/>
+      <div className="proccedordergif-container ">
+        <div className="d-flex justify-content-center mt-5">
+          <img src={proccedordergif} alt="" />
+        </div>
       </div>
     </>
   );

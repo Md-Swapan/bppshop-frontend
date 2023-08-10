@@ -47,9 +47,9 @@ const BestSellingProductDetails = () => {
   };
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  useEffect(() => {
-    token && axios.post(`${baseUrl}/customer/audit-log`, auditLog, config);
-  }, []);
+  // useEffect(() => {
+  //   token && axios.post(`${baseUrl}/customer/audit-log`, auditLog, config);
+  // }, []);
 
   const cartItemsId = cartItems.map((i) => i?.product?.id);
   const addedItemId = cartItemsId.find((i) => i === newId);
