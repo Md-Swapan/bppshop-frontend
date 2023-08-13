@@ -32,7 +32,7 @@ const SellerStoreProduct = () => {
         `${baseUrl}/seller/${sellerId}/products?limit=${limit}&offset=${currPage}`
       );
       // setLoading(false);
-      console.log(response.data);
+      // console.log(response.data);
       response && setLoading(false);
       if (!response?.data?.products?.length) {
         setLastList(true);

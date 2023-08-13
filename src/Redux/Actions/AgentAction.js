@@ -2,16 +2,18 @@ import axios from "axios";
 import { baseUrl } from "./../../BaseUrl/BaseUrl";
 import { loadUser } from './UserAction';
 
-// Login
+// Agent Login
 export const AgentLogin = (agentToken) => async (dispatch, getState) => {
   try {
     dispatch({ type: 'AGENT_LOGIN_REQUEST' });
     const { data } = await axios.get(
       `${baseUrl}/auth/agent-login/?token=`+agentToken
     );
+
     // console.log(data)
 
     if (data.status === "success") {
+      dispatch(AgentInfo(data));
       dispatch({ type: 'AGENT_LOGIN_SUCCESS', payload: data });
       localStorage.setItem("token", data.token);
     }else{

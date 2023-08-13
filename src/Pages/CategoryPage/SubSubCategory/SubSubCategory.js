@@ -4,10 +4,13 @@ import SubSubCategoryCard from "./../../../Components/Cards/SubSubCategoryCard/S
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import MetaData from "./../../Layout/MetaData";
+import { useSelector } from "react-redux";
 
-const SubSubCategory = ({ allCategory, loading }) => {
+const SubSubCategory = () => {
+  const allCategories = useSelector((state) => state.allCategories.categories.data);
+  const loading = useSelector((state) => state.allCategories.loading);
   const { slug, subSlug } = useParams();
-  const subCategories = allCategory.find((item) => item.slug === slug);
+  const subCategories = allCategories.find((item) => item.slug === slug);
   const subSubCategories = subCategories?.childes?.find(
     (item) => item.slug === subSlug
   );

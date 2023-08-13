@@ -22,7 +22,7 @@ const ProfileHome = () => {
       });
   };
 
-  console.log(user)
+  // console.log(user)
   return (
     <>
       <div className="profile_right_content">

@@ -8,18 +8,18 @@ const ProtectedRoute = ({children }) => {
   const {isAuthenticated} = useSelector((state) => state.user);
   
 
-  const isLoggedIn = () => {
-    const token = localStorage.getItem("token");
+  // const isLoggedIn = () => {
+      const token = localStorage.getItem("token");
 
-    if (!token) {
-      return false;
-    }
-    const decodedToken = jwt_decode(token);
-    const currentTime = new Date().getTime() / 1000;
-    return decodedToken.exp > currentTime;
-  };
+  //   if (!token) {
+  //     return false;
+  //   }
+  //   const decodedToken = jwt_decode(token);
+  //   const currentTime = new Date().getTime() / 1000;
+  //   return decodedToken.exp > currentTime;
+  // };
 
-  if (isAuthenticated === false && !isLoggedIn()) {
+  if (!isAuthenticated && !token) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

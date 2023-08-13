@@ -10,32 +10,38 @@ import {
   ClearCart,
   ClearCartGroupItems,
 } from "./../../../Redux/Actions/CartAction";
-import { clearAllShippingAddress, clearShippingAddress } from "../../../Redux/Actions/ShippingAddressAction";
+import {
+  clearAllShippingAddress,
+  clearShippingAddress,
+} from "../../../Redux/Actions/ShippingAddressAction";
 import axios from "axios";
 import { baseUrl } from "./../../../BaseUrl/BaseUrl";
 import { ClearDeliveryCharge } from "../../../Redux/Actions/DeliveryChargeAction";
 import toast from "react-hot-toast";
 import { logout } from "./../../../Redux/Actions/UserAction";
-import { searchProduct, searchProductByCategory } from "../../../Redux/Actions/SearchAction";
+import {
+  searchProduct,
+  searchProductByCategory,
+} from "../../../Redux/Actions/SearchAction";
 import { useState } from "react";
 import { clearUserOrders } from "../../../Redux/Actions/UserOrderAction";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [allCategory, setAllCategory] = useState([]);
+
+  const user = useSelector((state) => state.user.user);
+  const allCategories = useSelector(
+    (state) => state.allCategories.categories.data
+  );
   const [SuggestedCategory, setSuggestedCategory] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${baseUrl}/categories`).then((res) => {
-      setAllCategory(res.data.data);
-    });
-  }, [token]);
+  // console.log(user)
 
-  // search Suggestion......
-  const [suggestion, setSuggestion] = useState("")
+  // search Suggestion..................................
+  const [suggestion, setSuggestion] = useState("");
+
   let categoryList = [];
 
   function keepAllCategoryInAList(data) {
@@ -47,9 +53,10 @@ const Nav = () => {
       categoryList.push(data);
     }
   }
-  allCategory.forEach(function (element) {
-    keepAllCategoryInAList(element);
-  });
+  allCategories &&
+    allCategories.forEach(function (element) {
+      keepAllCategoryInAList(element);
+    });
 
   //search functionality.......
   // const [loading,setloading]=useState(true)
@@ -88,15 +95,15 @@ const Nav = () => {
     const suggestedItemContainer = document.querySelector(
       ".suggested_item_container"
     );
-  
+
     suggestedItemContainer.style.display = "none";
   };
 
   const onClickSearchBySuggestion = (id, name) => {
     setSuggestion(name);
-    dispatch(searchProductByCategory( id));
+    dispatch(searchProductByCategory(id));
 
-    searchSuggestionCloseHandler()
+    searchSuggestionCloseHandler();
   };
 
   //Logout functionality........
@@ -104,8 +111,6 @@ const Nav = () => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
     axios.get(`${baseUrl}/customer/logout`, config).then((res) => {
       if (res.data.status === "success") {
-        
-        
         dispatch(logout());
         dispatch(ClearCart());
         dispatch(clearShippingAddress());
@@ -121,7 +126,7 @@ const Nav = () => {
         navigate("/");
 
         window.location.reload();
-        
+
         // toaster
         toast.success(`Logout Successfull`, {
           duration: 3000,
@@ -134,16 +139,10 @@ const Nav = () => {
       }
     });
   };
- 
 
   return (
     <>
       <div className="navbar-section">
-      {/* <div className='topBar_container'>
-        <p>
-          <i className="bi bi-telephone-fill"></i> +8809610970706
-        </p>
-      </div> */}
         <nav className="nav">
           <Sidebar />
           <div className="nav-content">
@@ -188,7 +187,10 @@ const Nav = () => {
                     <div className="search_item_show">
                       <p
                         onClick={() =>
-                          onClickSearchBySuggestion(suggestItem?.id, suggestItem?.name)
+                          onClickSearchBySuggestion(
+                            suggestItem?.id,
+                            suggestItem?.name
+                          )
                         }
                       >
                         <i className="bi bi-search"></i> {suggestItem?.name}
@@ -219,7 +221,7 @@ const Nav = () => {
                 <img src={defaultAvatar} alt="profile" />
                 {/* )}  */}
               </div>
-              {user ? (
+              {token ? (
                 <div className="dropdown-menu profile_dropdown">
                   <div
                     className="d-flex mx-3"
@@ -230,13 +232,13 @@ const Nav = () => {
                     }}
                   >
                     {/* {agent.image ? (
-                    <img
-                      width="30"
-                      height="100%"
-                      src={`https://agentapi.bppshop.com.bd/${agent.image}`}
-                      alt="profile"
-                    />
-                  ) : ( */}
+                      <img
+                        width="30"
+                        height="100%"
+                        src={`https://agentapi.bppshop.com.bd/${agent.image}`}
+                        alt="profile"
+                      />
+                    ) : ( */}
                     <img
                       width="30"
                       height="100%"

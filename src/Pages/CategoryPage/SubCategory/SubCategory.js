@@ -5,10 +5,13 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import MetaData from "./../../Layout/MetaData";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const SubCategory = ({ allCategory, loading }) => {
+const SubCategory = () => {
+  const allCategories = useSelector((state) => state.allCategories.categories.data);
+  const loading = useSelector((state) => state.allCategories.loading);
   const { slug } = useParams();
-  const subCategories = allCategory.find((item) => item.slug === slug);
+  const subCategories = allCategories.find((item) => item.slug === slug);
   const navigate = useNavigate();
 
   useEffect(() => {

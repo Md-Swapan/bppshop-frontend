@@ -6,18 +6,18 @@ import {
 } from "../Constants/CategoryConstants";
 
 
-const CategoryReducers = (state = { category: [] }, action) => {
+const CategoryReducers = (state = { categories: [] }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case ALL_CATEGORY_REQUEST:
       return {
         loading: true,
-        product: [],
+        categories: [],
       };
     case ALL_CATEGORY_SUCCESS:
       return {
         loading: false,
-        product: action.payload.products,
+        categories: action.payload,
       };
     case ALL_CATEGORY_FAIL:
       return {

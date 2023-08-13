@@ -7,11 +7,16 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { baseUrl } from "../../BaseUrl/BaseUrl";
 import MetaData from "./../Layout/MetaData";
+import { useSelector } from "react-redux";
 
-const Product = ({ allCategory, isLoading }) => {
+const Product = () => {
+  const allCategories = useSelector((state) => state.allCategories.categories.data);
+  const isLoading = useSelector((state) => state.allCategories.loading);
+
+  
   const { slug, subSlug, subSubSlug } = useParams();
   const navigate = useNavigate();
-  const categories = allCategory.find((item) => item.slug === slug);
+  const categories = allCategories.find((item) => item.slug === slug);
   const subCategories = categories?.childes?.find(
     (item) => item.slug === subSlug
   );

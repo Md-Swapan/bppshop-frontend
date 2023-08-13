@@ -3,20 +3,22 @@ import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { baseUrl, categoryBaseUrl } from "./../../../BaseUrl/BaseUrl";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const [allCategory, setAllCategory] = useState([]);
+  const allCategory = useSelector((state) => state.allCategories.categories.data);
+  // const [allCategory, setAllCategory] = useState([]);
   // const [subCategory, setSubCategory] = useState([]);
   // const [categorySlugName, setCategorySlugName] = useState([]);
   // const [subCategorySlugName, setSubCategorySlugName] = useState([]);
 
   // console.log(subCategory);
 
-  useEffect(() => {
-    axios.get(`${baseUrl}/categories`).then((res) => {
-      setAllCategory(res?.data?.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${baseUrl}/categories`).then((res) => {
+  //     setAllCategory(res?.data?.data);
+  //   });
+  // }, []);
 
   // const subMenuHandler = (slug, index) => {
   //   setCategorySlugName(slug);

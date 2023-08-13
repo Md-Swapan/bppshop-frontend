@@ -15,9 +15,11 @@ import searchProductReducer from "./Reducers/SearchReducers";
 import { signUpResReducer } from "./Reducers/SignUpResponse";
 import { AgentInfoReducer } from "./Reducers/AgentReducers";
 import { SignupRedirectReducer } from "./Reducers/SignupRedirectReducer";
+import CategoryReducers from "./Reducers/CategoryReducers";
 
 
 const rootReducer = combineReducers({
+  allCategories: CategoryReducers,
   searchProducts:searchProductReducer,
   cart: CartReducers,
   cartGroup: CartGroupReducers,

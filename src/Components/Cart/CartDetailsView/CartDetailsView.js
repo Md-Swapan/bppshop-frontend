@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CartDetailsView.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   addItemsToCart,
   updateItemsToCart,
@@ -14,6 +14,7 @@ import { SignupRedirectAction } from "../../../Redux/Actions/SignUpRedirectActio
 const CartDetailsView = () => {
   const [quantityCount, setQuantityCount] = useState(1);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cartItems = useSelector((state) => {
     return state.cart.cartItems;
@@ -98,7 +99,6 @@ const CartDetailsView = () => {
   };
 
   const CartDetailsCloseHandlerAfterPlaceOrder = () => {
-    dispatch(SignupRedirectAction(true));
 
     const cartDetailsViewSectionOverlay = document.querySelector(
       ".cartDetailsView_section_overlay"
@@ -115,6 +115,9 @@ const CartDetailsView = () => {
     //onclick placeorder go to top of the page
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+
+    // navigate("/shipping-address")
+    dispatch(SignupRedirectAction(true));
   };
 
   const CartEmptyAlert = () => {

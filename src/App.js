@@ -6,8 +6,6 @@ import Layout from "./Pages/Layout/Layout";
 import SubCategory from "./Pages/CategoryPage/SubCategory/SubCategory";
 import SubSubCategory from "./Pages/CategoryPage/SubSubCategory/SubSubCategory";
 import Product from "./Pages/ProductPage/Product";
-import axios from "axios";
-import { baseUrl } from "./BaseUrl/BaseUrl";
 import Profile from "./Pages/Profile/Profile";
 import Login from './Pages/User/Login/Login';
 import ForgetPassWord from "./Pages/ForgetPassword/ForgetPassWord";
@@ -52,47 +50,41 @@ import BrandProductDetails from "./Pages/Brand/BrandProductDetails";
 import FlashSaleProductDetails from "./Pages/FlashSale/FlashSaleProductDetails";
 import SearchProductDetails from "./Pages/Search/SearchProductDetails";
 import AdminLandOnBehalfCustomer from "./Pages/AdminLand/AdminLandOnBehalfCustomer";
-import Modal from "react-modal";
 import AllSellerStore from "./Pages/SellerStore/AllSellerStore/AllSellerStore";
 import SellerStoreProduct from './Pages/SellerStore/SellerStoreProduct/SellerStoreProduct';
 import SellerStoreProductDetails from "./Pages/SellerStore/SellerStoreProductDetails";
+import { getCategories } from "./Redux/Actions/CategoriesAction";
+// import Modal from "react-modal";
 
 
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
-const customStyles = {
-  content: {
-    width: "550px",
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "0px",
-    paddingBottom: "20px",
-  },
-};
+// const customStyles = {
+//   content: {
+//     width: "550px",
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     borderRadius: "0px",
+//     paddingBottom: "20px",
+//   },
+// };
 
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [allCategory, setAllCategory] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    store.dispatch(loadUser());
-    store.dispatch(loadUserOrders())
-    axios.get(`${baseUrl}/categories`).then((res) => {
-      setAllCategory(res.data.data);
-      setLoading(false);
-
-      // setTimeout(() => {
-        
-      // }, 5000);
-      openModal()
-    });
+    store.dispatch(getCategories())
+    
+    if(token){
+      store.dispatch(loadUser());
+      store.dispatch(loadUserOrders())
+    }
     
     if (token==="undefined" || token===null || token==="") {
       localStorage.removeItem("token")
@@ -100,26 +92,26 @@ function App() {
   }, [token]);
 
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // const [modalIsOpen, setIsOpen] = React.useState(false);
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
 
   return (
     <div className="App">
       <Layout>
         <Routes>
-          <Route path="/" element={<Home allCategory={allCategory} loading={loading} />}/>
+          <Route path="/" element={<Home />}/>
           
-          <Route path="/:slug" element={ <SubCategory allCategory={allCategory} loading={loading} />}/>
-          <Route path="/:slug/:subSlug" element={ <SubSubCategory allCategory={allCategory} loading={loading} />}/>
-          <Route path="/:slug/:subSlug/:subSubSlug" element={<Product allCategory={allCategory} isLoading={loading}/>} />
-          <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage allCategory={allCategory}/>} />
-          {/* <Route path="/products/:productSlug" element={<ProductDetailsPage allCategory={allCategory}/>} /> */}
+          <Route path="/:slug" element={ <SubCategory />}/>
+          <Route path="/:slug/:subSlug" element={ <SubSubCategory />}/>
+          <Route path="/:slug/:subSlug/:subSubSlug" element={<Product />} />
+          <Route path="/:slug/:subSlug/:subSubSlug/:id" element={<ProductDetailsPage/>} />
+          {/* <Route path="/products/:productSlug" element={<ProductDetailsPage/>} /> */}
           <Route path="/search" element={<Search/>} />
           <Route path="/search/:id" element={<SearchProductDetails/>} />
           <Route path="/sellers-store" element={<AllSellerStore/>} />
