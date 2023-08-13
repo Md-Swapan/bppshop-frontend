@@ -6,11 +6,10 @@ import jwt_decode from "jwt-decode";
 const ProtectedRoute = ({children }) => {
   const location = useLocation();
   const {isAuthenticated} = useSelector((state) => state.user);
+  const token = localStorage.getItem("token");
   
 
   // const isLoggedIn = () => {
-      const token = localStorage.getItem("token");
-
   //   if (!token) {
   //     return false;
   //   }
@@ -18,6 +17,7 @@ const ProtectedRoute = ({children }) => {
   //   const currentTime = new Date().getTime() / 1000;
   //   return decodedToken.exp > currentTime;
   // };
+  
 
   if (!isAuthenticated && !token) {
     return <Navigate to="/login" state={{ from: location }} replace />;
