@@ -16,6 +16,7 @@ import { signUpResReducer } from "./Reducers/SignUpResponse";
 import { AgentInfoReducer } from "./Reducers/AgentReducers";
 import { SignupRedirectReducer } from "./Reducers/SignupRedirectReducer";
 import CategoryReducers from "./Reducers/CategoryReducers";
+import { AdminInfoReducer } from "./Reducers/AdminReducers";
 
 
 const rootReducer = combineReducers({
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   productDetails: productDetailsReducers,
   deliveryCharge:deliveryChargeReducers,
   agentInfo: AgentInfoReducer,
+  adminInfo: AdminInfoReducer,
   signupRedirect: SignupRedirectReducer
 });
 

@@ -36,11 +36,11 @@ const Product = () => {
       });
   }, [subSubCategories?.id]);
 
-  useEffect(() => {
-    if (!isLoading && !subSubCategories) {
-      navigate("/404", { replace: true });
-    }
-  }, [subSubCategories, isLoading, navigate]);
+  // useEffect(() => {
+  //   if (!isLoading && !subSubCategories) {
+  //     navigate("/404", { replace: true });
+  //   }
+  // }, [subSubCategories, isLoading, navigate]);
 
   return (
     <div className="categoryView-section productView-section">
