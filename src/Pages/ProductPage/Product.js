@@ -16,9 +16,9 @@ const Product = () => {
   
   const { slug, subSlug, subSubSlug } = useParams();
   const navigate = useNavigate();
-  const categories = allCategories.find((item) => item.slug === slug);
+  const categories = allCategories?.find((item) => item?.slug === slug);
   const subCategories = categories?.childes?.find(
-    (item) => item.slug === subSlug
+    (item) => item?.slug === subSlug
   );
   const subSubCategories = subCategories?.childes?.find(
     (item) => item.slug === subSubSlug
