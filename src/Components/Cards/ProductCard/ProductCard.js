@@ -72,8 +72,6 @@ const ProductCard = ({ product }) => {
   const cartItemsId = cartItems.map((i) => i.product.id);
   const addedItemId = cartItemsId.find((i) => i === id);
 
-  // console.log(addedItemId)
-
   const [loading, setLoading] = useState(true);
 
   const addToCartHandler = (product, quantity) => {

@@ -52,6 +52,12 @@ const CheckoutPayment = () => {
             navigate("/checkout-complete");
             proccedordergifContainer.style.display = "none";
           }
+
+          if (res.data.status === "failed") {
+            document.querySelector(
+              "order-failed-content"
+            ).innerHTML = `${res.data.message}`;
+          }
         });
     } else {
       axios
@@ -326,6 +332,7 @@ const CheckoutPayment = () => {
           <img src={proccedordergif} alt="" />
         </div>
       </div>
+      <div className="order-failed-content text-center mt-5 text-danger"></div>
     </>
   );
 };
